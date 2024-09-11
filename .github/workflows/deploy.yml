@@ -35,9 +35,10 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git clone --branch gh-pages git@github.com:${{ github.repository }} gh-pages
-          rsync -av --delete out/ gh-pages/
+          git clone git@github.com:${{ github.repository }} gh-pages
           cd gh-pages
+          git checkout gh-pages || git checkout -b gh-pages
+          rsync -av --delete ../out/ .
           git add .
           git commit -m "Deploy to GitHub Pages"
           git push origin gh-pages
