@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { getAssetUrl } from '../utils'; // Adjust the path as necessary
 
 export default function FancyBoxes({ data }) {
   const containerRef = useRef(null);
@@ -76,8 +77,7 @@ export default function FancyBoxes({ data }) {
     };
   }, [data]);
 
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-  const backgroundImageUrl = `${basePath}/images/lppi-bg.svg`;
+  const backgroundImageUrl = getAssetUrl('/images/lppi-bg.svg');
 
   return (
     <div ref={containerRef} className="degree-prod relative bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>

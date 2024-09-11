@@ -5,6 +5,7 @@ import { csv } from 'd3-fetch';
 import { Link } from 'react-scroll';
 import FancyBoxes from './FancyBoxes';
 import MapComponent from './MapComponent';
+import { getAssetUrl } from '../utils'; // Adjust the path as necessary
 import '../styles/globals.css'; // Adjust the path to your CSS file
 
 export default function Dashboard() {
@@ -13,8 +14,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Fetch data
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-    const csvPath = `${basePath}/data/summaryData.csv`;
+    const csvPath = getAssetUrl('/data/summaryData.csv');
 
     csv(csvPath)
       .then(data => {
