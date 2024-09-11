@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import { json } from 'd3-fetch';
+import { getAssetUrl } from '../utils'; // Adjust the path as necessary
 
 export default function MapComponent() {
   const mapContainerRef = useRef(null);
@@ -22,7 +23,8 @@ export default function MapComponent() {
       console.log('Map loaded successfully');
 
       // Add counties layer
-      json('/data/ca_counties_simplified.geojson')
+      const geojsonPath = getAssetUrl('/data/ca_counties_simplified.geojson');
+      json(geojsonPath)
         .then(geojson => {
           console.log('GeoJSON loaded successfully', geojson);
 
