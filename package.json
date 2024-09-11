@@ -3,11 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-	  "dev": "next dev",
-	  "build": "next build",
-	  "start": "next start",
-	  "lint": "next lint",
-	  "deploy": "cross-env NEXT_PUBLIC_BASE_PATH='/lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && gh-pages -d .next"
+	"dev": "next dev",
+	"build": "next build",
+	"start": "next start",
+	"lint": "next lint",
+	"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='/lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && gh-pages -d .next"
 	},
 	"dependencies": {
 	  "axios": "^1.7.7",
@@ -25,4 +25,4 @@
 	  "tailwindcss": "^3.4.1",
 	  "cross-env": "^7.0.3"
 	}
-  }
+}
