@@ -1,4 +1,4 @@
-// next.config.mjs
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -8,4 +8,4 @@ const nextConfig = {
 	output: 'export', // Enable static export
   };
   
-  export default nextConfig;
+  module.exports = nextConfig;
