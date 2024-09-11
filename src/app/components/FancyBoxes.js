@@ -85,7 +85,7 @@ export default function FancyBoxes({ data }) {
       <div className="container mx-auto py-4 relative z-10">
         <h2 className="headline headline--medium t-center">California Latino <strong>Wellness Summary Statistics</strong></h2>
       </div>
-      <div className="flex justify-around container mx-auto py-8 relative z-10">
+      <div className="flex justify-around container mx-auto py-8 relative z-10 responsive-container">
         {summaryStatistics.map((item, index) => (
           <div key={index} className="box flex-1 p-4 m-2 border border-gray-300 bg-white shadow-lg text-center">
             <div className="desc no-margin" style={{ fontSize: '1.5rem' }}>{item.label}</div>

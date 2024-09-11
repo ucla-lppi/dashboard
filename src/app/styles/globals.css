@@ -67,3 +67,10 @@ body {
     text-align: center;
   }
 }
+
+/* Add this CSS to your stylesheet */
+@media (max-width: 768px) {
+	.responsive-container {
+	  flex-direction: column;
+	}
+  }
