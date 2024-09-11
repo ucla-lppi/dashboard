@@ -25,6 +25,9 @@ jobs:
       - name: Build the project
         run: yarn build
 
+      - name: Export the project
+        run: yarn export
+
       - name: Deploy to GitHub Pages
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
@@ -36,7 +39,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git clone --branch gh-pages git@github.com:${{ github.repository }} gh-pages
-          rsync -av --delete .next/ gh-pages/
+          rsync -av --delete out/ gh-pages/
           cd gh-pages
           git add .
           git commit -m "Deploy to GitHub Pages"
