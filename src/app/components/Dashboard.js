@@ -7,6 +7,7 @@ import FancyBoxes from './FancyBoxes';
 import MapComponent from './MapComponent';
 import { getAssetUrl } from '../utils'; // Adjust the path as necessary
 import '../styles/globals.css'; // Adjust the path to your CSS file
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
@@ -44,13 +45,15 @@ export default function Dashboard() {
         <Link to="map" smooth={true} duration={800} className="cursor-pointer">Map</Link>
         <Link to="charts" smooth={true} duration={800} className="cursor-pointer">Charts</Link>
         <button onClick={() => setDarkMode(!darkMode)} className="cursor-pointer">
-          {darkMode ? 'Light Mode' : 'Dark Mode'}
+          <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'}`}></i>
         </button>
       </nav>
-      <div id="overview">
+      <div id="overview" className="relative z-10">
         <FancyBoxes data={data} />
       </div>
-      <MapComponent />
+      <div id="map" className="relative z-0">
+        <MapComponent />
+      </div>
       <div id="charts" className="w-full h-1/2 flex justify-around"></div>
     </div>
   );

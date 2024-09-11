@@ -67,6 +67,11 @@ body {
     text-align: center;
   }
 }
+#map {
+  height: 50vh; /* Fixed height */
+/*  margin-top: 64px; Adjust as needed */
+  position: relative;
+}
 
 /* Add this CSS to your stylesheet */
 @media (max-width: 768px) {
