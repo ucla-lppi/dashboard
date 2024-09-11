@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --bg-gray-800: #333333;
+  --bg-white: #ffffff;
+  --border-gray-300: #dfdfdf;
+  --text-blue-800: #0988c9;
+  --text-white: #ffffff;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --bg-gray-800: #333333;
+  --bg-white: #444444;
+  --border-gray-300: #555555;
+  --text-blue-800: #90cdf4;
+  --text-white: #ffffff;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg-gray-800 {
+  background-color: var(--bg-gray-800);
+}
+
+.bg-white {
+  background-color: var(--bg-white);
+}
+
+.border-gray-300 {
+  border-color: var(--border-gray-300);
+}
+
+.text-blue-800 {
+  color: var(--text-blue-800);
+}
+
+.text-white {
+  color: var(--text-white);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .headline {
+    font-weight: bold;
+    text-align: center;
+    color: var(--text-white); /* Make the font color white */
+  }
+
+  .headline--medium {
+    font-size: 2rem; /* Adjust as needed */
+  }
+
+  .t-center {
+    text-align: center;
+  }
+}
