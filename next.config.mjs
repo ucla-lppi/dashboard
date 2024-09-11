@@ -9,15 +9,6 @@ const nextConfig = {
 	basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 	assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || '',
 	trailingSlash: true,
-	exportPathMap: async function (
-	  defaultPathMap,
-	  { dev, dir, outDir, distDir, buildId }
-	) {
-	  return {
-		'/': { page: '/' },
-		'/es': { page: '/', query: { locale: 'es' } },
-	  }
-	},
   };
   
   export default nextConfig;
