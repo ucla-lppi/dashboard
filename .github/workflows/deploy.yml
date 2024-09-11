@@ -25,9 +25,6 @@ jobs:
       - name: Build the project
         run: yarn build
 
-      - name: Export the project
-        run: yarn export
-
       - name: Deploy to GitHub Pages
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
