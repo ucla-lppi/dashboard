@@ -13,7 +13,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Fetch data
-    csv('/data/summaryData.csv')
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    const csvPath = `${basePath}/data/summaryData.csv`;
+
+    csv(csvPath)
       .then(data => {
         // Ensure count values are parsed as numbers
         const parsedData = data.map(d => ({

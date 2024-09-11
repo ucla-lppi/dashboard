@@ -76,8 +76,11 @@ export default function FancyBoxes({ data }) {
     };
   }, [data]);
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const backgroundImageUrl = `${basePath}/images/lppi-bg.svg`;
+
   return (
-    <div ref={containerRef} className="degree-prod relative bg-cover bg-center" style={{ backgroundImage: 'url(/images/lppi-bg.svg)' }}>
+    <div ref={containerRef} className="degree-prod relative bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
       <div className="absolute inset-0 bg-primary opacity-95 dark:opacity-95"></div> {/* Overlay */}
       <div className="container mx-auto py-4 relative z-10">
         <h2 className="headline headline--medium t-center">California Latino <strong>Wellness Summary Statistics</strong></h2>
