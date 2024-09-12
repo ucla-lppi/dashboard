@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import { json } from 'd3-fetch';
 import { getAssetUrl } from '../utils'; // Adjust the path as necessary
@@ -6,8 +6,13 @@ import { getAssetUrl } from '../utils'; // Adjust the path as necessary
 export default function MapComponent() {
   const mapContainerRef = useRef(null);
   const popupRef = useRef(null);
+  const [themeClass, setThemeClass] = useState('');
 
   useEffect(() => {
+    // Check for dark mode and set the theme class
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    setThemeClass(isDarkMode ? 'dark-mode' : '');
+
     // Initialize MapLibre GL map
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
@@ -177,7 +182,7 @@ export default function MapComponent() {
         <div className="text-xl text-gray-600">Click to view California County Wellness Profiles</div>
       </div>
       <div ref={mapContainerRef} id="map" className="w-full" style={{ height: '50vh', marginTop: '16px', position: 'relative' }}>
-        <div ref={popupRef} id="popup" style={{ display: 'none', position: 'absolute', backgroundColor: 'white', border: '1px solid black', padding: '5px', pointerEvents: 'none' }}></div>
+        <div ref={popupRef} id="popup" className={themeClass}></div>
       </div>
     </div>
   );

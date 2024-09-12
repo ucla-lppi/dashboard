@@ -8,8 +8,15 @@ const USE_GOOGLE_SHEETS = true; // Set to true to use Google Sheets
 export default function FancyBoxes() {
   const containerRef = useRef(null);
   const [data, setData] = useState([]);
+  const [themeClass, setThemeClass] = useState('');
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [boxHeights, setBoxHeights] = useState({});
 
   useEffect(() => {
+    // Check for dark mode and set the theme class
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    setThemeClass(isDarkMode ? 'dark-mode' : '');
+
     // Fetch and parse CSV data
     const fetchData = async () => {
       let csvText;
@@ -24,6 +31,7 @@ export default function FancyBoxes() {
         header: true,
         complete: (results) => {
           setData(results.data);
+          setIsDataLoaded(true); // Set data loaded flag to true
         },
       });
     };
@@ -112,6 +120,24 @@ export default function FancyBoxes() {
     };
   }, [data]);
 
+  useEffect(() => {
+    if (isDataLoaded) {
+      document.querySelectorAll('.ticker, .discrepancy, .comparison').forEach(element => {
+        element.classList.add('fade-in');
+      });
+    }
+  }, [isDataLoaded]);
+
+  useEffect(() => {
+    if (isDataLoaded) {
+      const newBoxHeights = {};
+      document.querySelectorAll('.box').forEach((box, index) => {
+        newBoxHeights[index] = box.offsetHeight;
+      });
+      setBoxHeights(newBoxHeights);
+    }
+  }, [isDataLoaded]);
+
   const backgroundImageUrl = getAssetUrl('/images/lppi-bg.svg');
 
   const getHeaderText = (headerIntro, headerIndicator) => {
@@ -124,31 +150,39 @@ export default function FancyBoxes() {
   };
 
   return (
-    <div ref={containerRef} className="degree-prod relative bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
+    <div ref={containerRef} className={`fancy-box relative bg-cover bg-center ${themeClass}`} style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
       <div className="absolute inset-0 bg-primary opacity-95 dark:opacity-95"></div> {/* Overlay */}
       <div className="container mx-auto py-4 relative z-10">
         <h2 className="headline headline--medium t-center">California Latino <strong>Wellness Summary Statistics</strong></h2>
       </div>
       <div className="flex flex-wrap justify-around container mx-auto py-8 relative z-10 responsive-container">
         {summaryStatistics.map((item, index) => (
-          <div key={index} className="box flex-1 p-4 m-2 border border-gray-300 bg-white shadow-lg text-center">
-            <h3 className="desc no-margin" style={{ fontSize: '1.25rem', color: '#555' }}>{getHeaderText(item.headerIntro, item.headerIndicator)}</h3>
-            <h2 className="latino-count" style={{ fontSize: '3rem', marginTop: '0.5rem', color: 'black' }}>
-              <strong>
-                <span className="ticker c-blue--darker" data-count={item.latinoValue}>{item.latinoValue}</span>
-              </strong>
-            </h2>
-            <h4 className="discrepancy" style={{ fontSize: '1.25rem', marginTop: '0.5rem', color: '#2774AE' }}>
-              <strong>
-                <span>{item.formattedDiscrepancyPercentage}%</span>
-                <span className="triangle" style={{ display: 'inline', marginLeft: '0.5rem' }}>
-                  {item.discrepancy >= 0 ? '▲' : '▼'}
-                </span>
-              </strong>
-            </h4>
-            <h6 className="comparison" style={{ fontSize: '0.875rem', marginTop: '0.5rem', color: '#555' }}>
-              <span>(Latino {item.latinoValue} vs White {item.whiteValue})</span>
-            </h6>
+          <div key={index} className={`box flex-1 p-4 m-2 border border-gray-300 shadow-lg text-center ${themeClass === 'dark-mode' ? 'dark-box' : ''}`} style={{ minHeight: isDataLoaded ? 'auto' : `${boxHeights[index] || 200}px` }}>
+            {isDataLoaded ? (
+              <>
+                <h3 className={`desc no-margin ${themeClass === 'dark-mode' ? 'dark-desc' : ''}`} style={{ fontSize: '1.25rem' }}>{getHeaderText(item.headerIntro, item.headerIndicator)}</h3>
+                <h2 className={`latino-count ${themeClass === 'dark-mode' ? 'dark-latino-count' : ''}`} style={{ fontSize: '3rem', marginTop: '0.5rem' }}>
+                  <strong>
+                    <span className="ticker c-blue--darker" data-count={item.latinoValue}>{item.latinoValue}</span>
+                  </strong>
+                </h2>
+                <h4 className={`discrepancy ${themeClass === 'dark-mode' ? 'dark-discrepancy' : ''}`} style={{ fontSize: '1.25rem', marginTop: '0.5rem' }}>
+                  <strong>
+                    <span>{item.formattedDiscrepancyPercentage}%</span>
+                    <span className="triangle" style={{ display: 'inline', marginLeft: '0.5rem' }}>
+                      {item.discrepancy >= 0 ? '▲' : '▼'}
+                    </span>
+                  </strong>
+                </h4>
+                <h6 className={`comparison ${themeClass === 'dark-mode' ? 'dark-comparison' : ''}`} style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
+                  <span>(Latino {item.latinoValue.toLocaleString()} vs White {item.whiteValue.toLocaleString()})</span>
+                </h6>
+              </>
+            ) : (
+              <div className="loading-spinner-container">
+                <div className="loading-spinner"></div>
+              </div>
+            )}
           </div>
         ))}
       </div>

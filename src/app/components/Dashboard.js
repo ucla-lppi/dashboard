@@ -39,7 +39,7 @@ export default function Dashboard() {
   }, [darkMode]);
 
   return (
-    <div>
+    <div className={darkMode ? 'dark' : ''}>
       <nav className="sticky top-0 z-50 flex justify-around bg-gray-800 text-white p-4">
         <Link to="overview" smooth={true} duration={800} className="cursor-pointer">Overview</Link>
         <Link to="map" smooth={true} duration={800} className="cursor-pointer">Map</Link>
@@ -49,7 +49,7 @@ export default function Dashboard() {
         </button>
       </nav>
       <div id="overview" className="relative z-10">
-        <FancyBoxes data={data} />
+        <FancyBoxes data={data} darkMode={darkMode} />
       </div>
       <div id="map" className="relative z-0">
         <MapComponent />
