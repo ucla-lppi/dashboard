@@ -76,71 +76,71 @@ body {
 /* Add this to your CSS file */
 
 #popup {
-	display: none;
-	position: absolute;
-	background-color: white;
-	border: 1px solid black;
-	padding: 5px;
-	pointer-events: none;
-	color: black; /* Default text color */
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    pointer-events: none;
+    color: black; /* Default text color */
   }
   
   #popup.dark-mode {
-	background-color: black;
-	color: white; /* Text color for dark mode */
-	border: 1px solid white;
+    background-color: black;
+    color: white; /* Text color for dark mode */
+    border: 1px solid white;
   }
 
   /* Add this to your CSS file */
 
 /* Default light mode styles */
 .box {
-	background-color: white;
-	color: #333;
+    background-color: white;
+    color: #333;
   }
   
   .desc {
-	color: #333;
+    color: #333;
   }
   
   .latino-count {
-	color: #333;
+    color: #333;
   }
   
   .discrepancy {
-	color: #0988c9;
+    color: #0988c9;
   }
   
   .comparison {
-	color: #333;
+    color: #333;
   }
   
   /* Dark mode styles */
   .dark-mode .box {
-	background-color: white;
-	color: black;
+    background-color: white;
+    color: black;
   }
   
   .dark-mode .desc {
-	color: #555;
+    color: #555;
   }
   
   .dark-mode .latino-count {
-	color: black;
+    color: black;
   }
   
   .dark-mode .discrepancy {
-	color: #2774AE;
+    color: #2774AE;
   }
   
   .dark-mode .comparison {
-	color: #555;
+    color: #555;
   }
 /* Add this CSS to your stylesheet */
 @media (max-width: 768px) {
-	.responsive-container {
-	  flex-direction: column;
-	}
+    .responsive-container {
+      flex-direction: column;
+    }
   }
 
 .ticker, .discrepancy,.comparison {
@@ -159,32 +159,42 @@ body {
 
 /* Loading spinner styles */
 .loading-spinner {
-	border: 8px solid rgba(0, 0, 0, 0.1);
-	border-top: 8px solid #3498db;
-	border-radius: 50%;
-	width: 60px;
-	height: 60px;
-	animation: spin 1s linear infinite;
-	margin: 0 auto;
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
   }
   
   /* Center the loading spinner in the middle of the box */
 .loading-spinner-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
   
   @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   /* Fixed height for the box while loading */
 .loading-box {
-	min-height: 200px; /* Adjust the height as necessary */
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    min-height: 200px; /* Adjust the height as necessary */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+/* Ensure vertical centering on mobile screens */
+@media (max-width: 768px) {
+  .loading-spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height for vertical centering */
+  }
+}
