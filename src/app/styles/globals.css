@@ -198,3 +198,17 @@ body {
     height: 100vh; /* Full viewport height for vertical centering */
   }
 }
+
+/* Global Color Styling for low medium and high */
+
+.low {
+	color: green;
+  }
+  
+  .medium {
+	color: orange;
+  }
+  
+  .high {
+	color: red;
+  }

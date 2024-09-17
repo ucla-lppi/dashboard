@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import { json } from 'd3-fetch';
 import { getAssetUrl } from '../utils'; // Adjust the path as necessary
+import { assignIndicatorSummary } from '../utils/indicatorSummary'; // Import the utility function
+import popupConfig from '../config/popupConfig'; // Import the popup configuration
 
 export default function MapComponent() {
   const mapContainerRef = useRef(null);
@@ -39,6 +41,9 @@ export default function MapComponent() {
               feature.id = feature.properties.ansi || feature.properties.abcode || index;
             }
           });
+
+          // Assign indicator summary data
+          geojson.features = assignIndicatorSummary(geojson.features);
 
           map.addSource('counties', {
             type: 'geojson',
@@ -92,34 +97,31 @@ export default function MapComponent() {
               map.getCanvas().style.cursor = 'pointer';
               const coordinates = e.lngLat;
               const countyName = feature.properties.name;
-              const indicatorSummary = 'Indicator summary (can be high, low)'; // Placeholder for indicator summary
-              const countyUrl = 'https://dashboard.myfuturenc.org/wp-content/uploads/county-profiles/Jackson_County.pdf'; // Placeholder for county URL
 
               console.log('County hovered:', countyName);
 
               // Set the popup content and position
               const popup = popupRef.current;
-              popup.innerHTML = `
-                <strong>${countyName}</strong><br>
-                index indicator: ${indicatorSummary}<br>
-                <span class="c-blue"><strong>Click county for more details</strong></span>
-              `;
+              let popupContent = `<strong>${countyName}</strong><br>`;
+
+              // Iterate over the properties and dynamically generate the content
+              Object.keys(popupConfig).forEach(key => {
+                if (feature.properties[key] !== undefined) {
+                  const config = popupConfig[key];
+                  const value = feature.properties[key];
+                  const valueClass = config.class ? value : ''; // Add class if specified in config
+                  const suffix = config.suffix || ''; // Add suffix if specified in config
+                  const label = config.label ? `${config.label}: ` : ''; // Add label and colon if label is not blank
+                  popupContent += `${label}<span class="${valueClass}">${value}${suffix}</span><br>`;
+                }
+              });
+
+              popupContent += `<span class="c-blue"><strong>Click county for more details</strong></span>`;
+
+              popup.innerHTML = popupContent;
               popup.style.display = 'block';
               popup.style.left = `${e.point.x + 10}px`;
               popup.style.top = `${e.point.y + 10}px`;
-
-              // Highlight the hovered county
-              if (hoveredStateId !== null) {
-                map.setFeatureState(
-                  { source: 'counties', id: hoveredStateId },
-                  { hover: false }
-                );
-              }
-              hoveredStateId = feature.id;
-              map.setFeatureState(
-                { source: 'counties', id: hoveredStateId },
-                { hover: true }
-              );
             }
           });
 
