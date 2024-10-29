@@ -1,0 +1,27 @@
+name: Test Deploy to EC2
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+  
+
+jobs:
+  test-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Test Deploy to EC2
+      env:
+        PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        HOST: ${{ secrets.EC2_HOST }}
+        USER: ${{ secrets.EC2_USER }}
+      run: |
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
+          echo "Connected to EC2 instance" &&
+          ls && git --version && echo "Connection and commands work!"
+        '

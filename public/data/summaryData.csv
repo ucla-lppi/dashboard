@@ -1,7 +1,7 @@
-type,count,year
-Demographics,45000,2022
-Demographics,44000,2019
-Extreme Heat,2,2022
-Extreme Heat,1.8,2021
-Exposure to Pollution Burden,12,2022
-Exposure to Pollution Burden,11,2021
+type,category,count
+Demographics,Latino,15000
+Demographics,White,13200
+Extreme Heat,High Impact Latino,10
+Extreme Heat,High Impact White,5
+Exposure to Pollution Burden,High Impact Latino,20
+Exposure to Pollution Burden,High Impact White,10

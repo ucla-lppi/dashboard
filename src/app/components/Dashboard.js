@@ -5,7 +5,9 @@ import { csv } from 'd3-fetch';
 import { Link } from 'react-scroll';
 import FancyBoxes from './FancyBoxes';
 import MapComponent from './MapComponent';
+import { getAssetUrl } from '../utils'; // Adjust the path as necessary
 import '../styles/globals.css'; // Adjust the path to your CSS file
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
@@ -13,7 +15,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Fetch data
-    csv('/data/summaryData.csv')
+    const csvPath = getAssetUrl('/data/summaryData.csv');
+
+    csv(csvPath)
       .then(data => {
         // Ensure count values are parsed as numbers
         const parsedData = data.map(d => ({
@@ -35,19 +39,21 @@ export default function Dashboard() {
   }, [darkMode]);
 
   return (
-    <div>
+    <div className={darkMode ? 'dark' : ''}>
       <nav className="sticky top-0 z-50 flex justify-around bg-gray-800 text-white p-4">
         <Link to="overview" smooth={true} duration={800} className="cursor-pointer">Overview</Link>
         <Link to="map" smooth={true} duration={800} className="cursor-pointer">Map</Link>
         <Link to="charts" smooth={true} duration={800} className="cursor-pointer">Charts</Link>
         <button onClick={() => setDarkMode(!darkMode)} className="cursor-pointer">
-          {darkMode ? 'Light Mode' : 'Dark Mode'}
+          <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'}`}></i>
         </button>
       </nav>
-      <div id="overview">
-        <FancyBoxes data={data} />
+      <div id="overview" className="relative z-10">
+        <FancyBoxes data={data} darkMode={darkMode} />
       </div>
-      <MapComponent />
+      <div id="map" className="relative z-0">
+        <MapComponent />
+      </div>
       <div id="charts" className="w-full h-1/2 flex justify-around"></div>
     </div>
   );
