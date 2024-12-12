@@ -1,9 +1,9 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Dev)
 
 on:
   push:
     branches:
-      - main
+      - dev
   workflow_dispatch:
 
 jobs:
@@ -24,8 +24,8 @@ jobs:
 
       - name: Build the project
         env:
-          NEXT_PUBLIC_BASE_PATH: '/dashboard'
-          NEXT_PUBLIC_ASSET_PREFIX: '/dashboard'
+          NEXT_PUBLIC_BASE_PATH: '/dev'
+          NEXT_PUBLIC_ASSET_PREFIX: '/dev'
         run: yarn build
 
       - name: Deploy to GitHub Pages
@@ -33,3 +33,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
+          publish_branch: dev

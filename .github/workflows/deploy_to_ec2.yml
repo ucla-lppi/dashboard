@@ -1,9 +1,9 @@
-name: Deploy to EC2
+name: Deploy to EC2 (Production)
 
 on:
-  push:
+  pull_request:
     branches:
-      - main  # or your default branch
+      - main
 
 jobs:
   deploy:
@@ -12,15 +12,27 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Deploy to EC2
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: yarn install
+    
+    - name: Build the project
+      run: yarn build
+    
+    - name: Deploy to EC2 (Production)
       env:
-        PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+        PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         HOST: ${{ secrets.EC2_HOST }}
         USER: ${{ secrets.EC2_USER }}
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        scp -o StrictHostKeyChecking=no -i private_key -r .next ${USER}@${HOST}:/var/www/html
         ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
-          cd /path/to/your/project &&
-          git pull origin main &&
-          # Add any additional deployment commands here
+          cd /var/www/html &&
+          yarn install --production &&
+          pm2 restart all
         '

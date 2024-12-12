@@ -1,11 +1,17 @@
 // next.config.mjs
+import mdx from '@next/mdx';
+
+const withMDX = mdx({
+  extension: /\.(md|mdx)$/,
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-	basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-	assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || '',
-	trailingSlash: true,
-	output: 'export', // Enable static export
-  };
-  
-  export default nextConfig;
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || '',
+  trailingSlash: true,
+  // Other Next.js config options here
+};
+
+export default withMDX(nextConfig);

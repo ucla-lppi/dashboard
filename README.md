@@ -41,6 +41,8 @@ This project includes the following directories and files:
   │   └── globals.css
   ├── /data
   │   └── ca_counties_simplified.geojson
+  ├── /content
+  │   └── example.md
   ├── .gitignore
   ├── package.json
   ├── README.md
@@ -53,6 +55,7 @@ This project includes the following directories and files:
 - `/public` - Contains static files like images and JSON data.
 - `/styles` - Contains global styles.
 - `/data` - Contains data files like GeoJSON.
+- `/content` - Contains markdown files for content.
 - `.gitignore` - Specifies intentionally untracked files to ignore.
 - `package.json` - Contains project metadata and dependencies.
 - `README.md` - Contains project documentation.

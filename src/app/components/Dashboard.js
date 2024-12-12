@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react';
 import { csv } from 'd3-fetch';
 import { Link } from 'react-scroll';
+
+import Header from './Header';
+
 import FancyBoxes from './FancyBoxes';
 import MapComponent from './MapComponent';
 import { getAssetUrl } from '../utils'; // Adjust the path as necessary
@@ -40,13 +43,11 @@ export default function Dashboard() {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
       <nav className="sticky top-0 z-50 flex justify-around bg-gray-800 text-white p-4">
         <Link to="overview" smooth={true} duration={800} className="cursor-pointer">Overview</Link>
         <Link to="map" smooth={true} duration={800} className="cursor-pointer">Map</Link>
         <Link to="charts" smooth={true} duration={800} className="cursor-pointer">Charts</Link>
-        <button onClick={() => setDarkMode(!darkMode)} className="cursor-pointer">
-          <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'}`}></i>
-        </button>
       </nav>
       <div id="overview" className="relative z-10">
         <FancyBoxes data={data} darkMode={darkMode} />
