@@ -11,7 +11,15 @@ const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || '',
   trailingSlash: true,
-  // Other Next.js config options here
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return {
+      '/': { page: '/' },
+      // Add other pages here
+    }
+  },
 };
 
 export default withMDX(nextConfig);
