@@ -22,10 +22,10 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build the project
+      - name: Build and Export the project
         env:
-          NEXT_PUBLIC_BASE_PATH: '/dev'
-          NEXT_PUBLIC_ASSET_PREFIX: '/dev'
+          NEXT_PUBLIC_BASE_PATH: '/lppi-dashboard'
+          NEXT_PUBLIC_ASSET_PREFIX: '/lppi-dashboard'
         run: yarn build && yarn export
 
       - name: Deploy to GitHub Pages

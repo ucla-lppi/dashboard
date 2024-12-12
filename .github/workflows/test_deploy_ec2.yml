@@ -21,8 +21,11 @@ jobs:
     - name: Install dependencies
       run: yarn install
     
-    - name: Build the project
-      run: yarn build
+    - name: Build and Export the project
+      env:
+        NEXT_PUBLIC_BASE_PATH: '/lppi-dashboard'
+        NEXT_PUBLIC_ASSET_PREFIX: '/lppi-dashboard'
+      run: yarn build && yarn export
     
     - name: Deploy to EC2 (Staging)
       env:
@@ -31,11 +34,10 @@ jobs:
         USER: ${{ secrets.EC2_USER }}
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        scp -o StrictHostKeyChecking=no -i private_key -r .next ${USER}@${HOST}:/var/www/html-staging
+        scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:/var/www/html-staging
         ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
-          cd /var/www/html-staging &&
-          yarn install --production &&
-          pm2 restart staging-app --name staging-app &&
+          sudo chown -R www-data:www-data /var/www/html-staging &&
+          sudo systemctl restart apache2 &&
           echo "Staging deployment successful!" &&
           curl -I http://localhost/staging
         '
