@@ -1,0 +1,69 @@
+/* components/HorizontalScroll.module.css */
+.wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+  }
+  
+  .scrollContainer {
+	display: flex;
+	overflow-x: auto;
+	padding: 10px;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+  
+  .scrollItem {
+	flex: 0 0 auto;
+	margin: 0 10px;
+	scroll-snap-align: start;
+  }
+  
+  .scrollItem img {
+	max-width: 100%;
+	height: auto;
+  }
+  
+  .scrollContainer::-webkit-scrollbar {
+	display: none; /* Hide scrollbar for WebKit browsers */
+  }
+  
+  .scrollContainer {
+	-ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+	scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  }
+  
+  .scrollButton {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .scrollButton:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+	opacity: 1;
+  }
+  
+  .scrollButton.left {
+	left: 0;
+  }
+  
+  .scrollButton.right {
+	right: 0;
+  }
+  
+  .wrapper:hover .scrollButton {
+	opacity: 1;
+  }
