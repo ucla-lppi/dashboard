@@ -1,0 +1,7 @@
+type,category,count
+Demographics,Latino,15000
+Demographics,White,13200
+Extreme Heat,High Impact Latino,10
+Extreme Heat,High Impact White,5
+Exposure to Pollution Burden,High Impact Latino,20
+Exposure to Pollution Burden,High Impact White,10
