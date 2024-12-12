@@ -22,11 +22,11 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build and Export the project
+      - name: Build the project
         env:
           NEXT_PUBLIC_BASE_PATH: '/lppi-dashboard'
           NEXT_PUBLIC_ASSET_PREFIX: '/lppi-dashboard'
-        run: yarn build && yarn export
+        run: yarn build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
