@@ -8,7 +8,7 @@
 		"export": "next export",
 		"start": "next start",
 		"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='/lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && yarn export && gh-pages -d out"
-	  },
+	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.6.0",
 		"@mdx-js/loader": "^3.1.0",
@@ -24,7 +24,8 @@
 		"papaparse": "^5.4.1",
 		"react": "^18",
 		"react-dom": "^18",
-		"react-scroll": "^1.9.0"
+		"react-scroll": "^1.9.0",
+		"remark-gfm": "^4.0.0"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.3",

@@ -1,8 +1,12 @@
 // next.config.mjs
 import mdx from '@next/mdx';
+import remarkGfm from 'remark-gfm';
 
 const withMDX = mdx({
   extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: [remarkGfm],
+  },
 });
 
 /** @type {import('next').NextConfig} */
@@ -11,7 +15,7 @@ const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || '',
   trailingSlash: true,
-  output: 'export', // Add this line to enable static export
+  output: 'export',
 };
 
 export default withMDX(nextConfig);
