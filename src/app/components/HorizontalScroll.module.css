@@ -1,8 +1,9 @@
-/* components/HorizontalScroll.module.css */
+/* src/app/components/HorizontalScroll.module.css */
 .wrapper {
 	position: relative;
 	display: flex;
 	align-items: center;
+	width: 100%;
   }
   
   .scrollContainer {
@@ -11,6 +12,8 @@
 	padding: 10px;
 	scroll-snap-type: x mandatory;
 	-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+	width: 100%;
+	max-width: none; /* Ensure no max-width is applied */
   }
   
   .scrollItem {

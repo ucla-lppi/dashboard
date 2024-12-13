@@ -1,4 +1,4 @@
-// components/HorizontalScrollWithCSV.js
+// src/app/components/HorizontalScrollWithCSV.js
 import React, { useEffect, useState, useRef } from 'react';
 import Papa from 'papaparse';
 import styles from './HorizontalScroll.module.css';
