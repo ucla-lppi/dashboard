@@ -5,6 +5,10 @@ import styles from '../styles/Header.module.css'; // Import the CSS module
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
 
 const Header = ({ darkMode, setDarkMode }) => {
+  return;
+};
+
+const RealHeader = ({ darkMode, setDarkMode }) => {
   return (
     <header className={`${styles.header} p-4 bg-gray-800 text-white`}>
       <nav className="flex justify-between items-center">
