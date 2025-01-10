@@ -1,0 +1,43 @@
+name: Deploy to EC2 (Production)
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build the project for EC2
+        env:
+          BASE_PATH: ''                          # No basePath for root deployment
+          ASSET_PREFIX: ''                       # No assetPrefix for root deployment
+        run: yarn build
+
+      - name: Deploy to EC2 (Production)
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.EC2_USER }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:/var/www/lppi-dashboard
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
+            sudo chown -R apache:apache /var/www/lppi-dashboard &&
+            sudo systemctl restart httpd
+          '

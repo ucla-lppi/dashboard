@@ -1,0 +1,43 @@
+name: Test Deploy to EC2 (Staging)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  test-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: yarn install
+    
+    - name: Build and Export the project
+      env:
+        NEXT_PUBLIC_BASE_PATH: '/lppi-dashboard'
+        NEXT_PUBLIC_ASSET_PREFIX: '/lppi-dashboard'
+      run: yarn build && yarn export
+    
+    - name: Deploy to EC2 (Staging)
+      env:
+        PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        HOST: ${{ secrets.EC2_HOST }}
+        USER: ${{ secrets.EC2_USER }}
+      run: |
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:/var/www/html-staging
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
+          sudo chown -R www-data:www-data /var/www/html-staging &&
+          sudo systemctl restart apache2 &&
+          echo "Staging deployment successful!" &&
+          curl -I http://localhost/staging
+        '

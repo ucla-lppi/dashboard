@@ -5,21 +5,27 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
+		"export": "next export",
 		"start": "next start",
-		"lint": "next lint",
-		"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='/lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && gh-pages -d out"
+		"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='/lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && yarn export && gh-pages -d out"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.6.0",
+		"@mdx-js/loader": "^3.1.0",
+		"@mdx-js/react": "^3.1.0",
+		"@next/mdx": "^15.1.0",
+		"@tailwindcss/typography": "^0.5.15",
 		"axios": "^1.7.7",
 		"d3": "^7.9.0",
 		"d3-fetch": "^3.0.1",
+		"gray-matter": "^4.0.3",
 		"maplibre-gl": "^4.7.0",
 		"next": "14.2.10",
 		"papaparse": "^5.4.1",
 		"react": "^18",
 		"react-dom": "^18",
-		"react-scroll": "^1.9.0"
+		"react-scroll": "^1.9.0",
+		"remark-gfm": "^4.0.0"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.3",

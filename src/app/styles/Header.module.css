@@ -1,0 +1,47 @@
+/* src/styles/Header.module.css */
+
+.header {
+	background-color: #333;
+	padding: 1rem;
+  }
+  
+  .nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .navList {
+	list-style: none;
+	display: flex;
+	gap: 2rem;
+	margin: 0;
+	padding: 0;
+  }
+  
+  .navItem {
+	font-size: 1.2rem;
+  }
+  
+  .navItem a {
+	color: white;
+	text-decoration: none;
+	transition: color 0.3s ease;
+  }
+  
+  .navItem a:hover {
+	color: #0988c9; /* Change to your preferred hover color */
+  }
+  
+  .darkModeToggle {
+	background: none;
+	border: none;
+	color: white;
+	cursor: pointer;
+	font-size: 1.5rem;
+	transition: color 0.3s ease;
+  }
+  
+  .darkModeToggle:hover {
+	color: #0988c9; /* Change to your preferred hover color */
+  }

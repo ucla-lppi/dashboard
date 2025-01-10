@@ -212,3 +212,18 @@ body {
   .high {
 	color: red;
   }
+
+  
+  /* src/app/styles/globals.css or relevant CSS file */
+/* src/app/styles/globals.css */
+.impact-content {
+	width: 100%; /* Ensure full width */
+	max-width: none; /* Remove max-width constraints */
+	/* Add any additional necessary styles */
+  }
+
+/* src/app/styles/globals.css */
+.impact-content .horizontal-scroll-wrapper {
+	width: 100%;
+	max-width: none;
+  }
