@@ -153,7 +153,7 @@ export default function FancyBoxes() {
     <div ref={containerRef} className={`fancy-box relative bg-cover bg-center ${themeClass}`} style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
       <div className="absolute inset-0 bg-primary opacity-95 dark:opacity-95"></div> {/* Overlay */}
       <div className="container mx-auto py-4 relative z-10">
-        <h2 className="headline headline--medium t-center">Latino Climate and Health <strong>Dashboard </strong><br></br>Coming soon.</h2>
+        <h2 className="headline headline--medium t-center">Latino Climate and Health Dashboard<br></br>Coming soon.</h2>
       </div>
     </div>
   );
