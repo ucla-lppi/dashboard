@@ -24,8 +24,8 @@ jobs:
 
       - name: Build the project for EC2
         env:
-          BASE_PATH: ''                          # No basePath for root deployment
-          ASSET_PREFIX: ''                       # No assetPrefix for root deployment
+          BASE_PATH: ''                    # No basePath for root deployment
+          ASSET_PREFIX: ''                 # No assetPrefix for root deployment
         run: yarn build
 
       - name: Deploy to EC2 (Production)
@@ -34,10 +34,27 @@ jobs:
           HOST: ${{ secrets.EC2_HOST }}
           USER: ${{ secrets.EC2_USER }}
         run: |
+          # Store the private key securely
           echo "$PRIVATE_KEY" > private_key
           chmod 600 private_key
-          scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:/var/www/lppi-dashboard
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
-            sudo chown -R apache:apache /var/www/lppi-dashboard &&
+
+          # Define temporary deployment directory
+          TEMP_DIR="/home/${USER}/lppi-dashboard-temp"
+
+          # Create temporary directory on EC2
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} "mkdir -p $TEMP_DIR"
+
+          # Copy build files to temporary directory
+          scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:$TEMP_DIR
+
+          # Move files to the target directory with proper ownership
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} "
+            sudo rm -rf /var/www/lppi-dashboard/*
+            sudo cp -r $TEMP_DIR/* /var/www/lppi-dashboard/
+            sudo chown -R apache:apache /var/www/lppi-dashboard
             sudo systemctl restart httpd
-          '
+            sudo rm -rf $TEMP_DIR
+          "
+
+          # Cleanup private key file
+          rm private_key
