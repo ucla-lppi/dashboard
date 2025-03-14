@@ -1,15 +1,22 @@
-import localFont from "next/font/local";
-import "./styles/globals.css"; // Adjusted the path to the correct location
+import { Lexend_Deca, Lexend_Zetta, La_Belle_Aurore } from 'next/font/google';
+import './styles/globals.css';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const lexendDeca = Lexend_Deca({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  variable: '--font-lexend-deca',
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const lexendZetta = Lexend_Zetta({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-lexend-zetta',
+});
+
+const laBelleAurore = La_Belle_Aurore({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-la-belle-aurore',
 });
 
 export const metadata = {
@@ -20,9 +27,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>{/* ...existing head elements... */}</head>
+      <body className={`${lexendDeca.className} ${lexendZetta.className} antialiased`}>
         {children}
       </body>
     </html>

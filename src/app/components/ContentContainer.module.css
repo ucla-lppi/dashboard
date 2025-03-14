@@ -1,0 +1,14 @@
+.container {
+  @apply relative w-full h-auto min-h-screen z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden;
+}
+
+/* Use responsive widths and offsets for scaling and positioning */
+.topLeftCircle {
+  /* Now relative to the sidebar container */
+  @apply absolute top-[50px] left-[-200px];
+  /* Now the circle will be fixed 300px to the left */
+}
+
+.bottomRightCircle {
+  @apply absolute bottom-[-350px] right-[-250px];
+}
