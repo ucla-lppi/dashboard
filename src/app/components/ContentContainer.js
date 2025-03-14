@@ -5,7 +5,7 @@ export default function ContentContainer() {
   return (
     <div className={styles.container}>
       <img 
-        src="/static/img/bg_circle_top_left.svg" 
+        src="./static/img/bg_circle_top_left.svg" 
         alt="Top left circle" 
         className={styles.topLeftCircle}
       />

@@ -28,22 +28,22 @@ const SideNavigation = () => {
         <div className={styles.socialIcons}>
           {/* Wrap icon in circle container */}
           <div className={styles.iconCircle}>
-            <img src="/static/img/fb_sidebar.svg" alt="Facebook" className={styles.socialIconImage} />
+            <img src="./static/img/fb_sidebar.svg" alt="Facebook" className={styles.socialIconImage} />
           </div>
           <div className={styles.iconCircle}>
-            <img src="/static/img/yt_sidebar.svg" alt="YouTube" className={styles.socialIconImage} />
+            <img src="./static/img/yt_sidebar.svg" alt="YouTube" className={styles.socialIconImage} />
           </div>
           <div className={styles.iconCircle}>
-            <img src="/static/img/ig_sidebar.svg" alt="Instagram" className={styles.socialIconImage} />
+            <img src="./static/img/ig_sidebar.svg" alt="Instagram" className={styles.socialIconImage} />
           </div>
           <div className={styles.iconCircle}>
-            <img src="/static/img/twitter_sidebar.svg" alt="Twitter" className={styles.socialIconImage} />
+            <img src="./static/img/twitter_sidebar.svg" alt="Twitter" className={styles.socialIconImage} />
           </div>
           <div className={styles.iconCircle}>
-            <img src="/static/img/linkedin_sidebar.svg" alt="LinkedIn" className={styles.socialIconImage} />
+            <img src="./static/img/linkedin_sidebar.svg" alt="LinkedIn" className={styles.socialIconImage} />
           </div>
           <div className={styles.iconCircle}>
-            <img src="/static/img/email_sidebar.svg" alt="Email" className={styles.socialIconImage} />
+            <img src="./static/img/email_sidebar.svg" alt="Email" className={styles.socialIconImage} />
           </div>
           {/* Add additional icons as needed */}
         </div>
