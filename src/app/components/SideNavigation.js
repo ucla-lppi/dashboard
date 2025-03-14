@@ -8,7 +8,16 @@ const SideNavigation = () => {
       <div className={styles.logoSection}>
         <div className={styles.logoTop}>
           <span className={styles.logoCA}>CA</span>
-          <span className={styles.logoLatino}>LATINO</span>
+          {/* Moved background image inline */}
+          <span 
+            className={styles.logoLatino}
+            style={{
+              background: "url('./static/img/logo_background_circle.png') no-repeat center",
+              backgroundSize: "contain"
+            }}
+          >
+            LATINO
+          </span>
         </div>
         <div className={styles.logoMiddle}>climate &amp; health</div>
         <div className={styles.logoBottom}>dashboard</div>
@@ -16,7 +25,22 @@ const SideNavigation = () => {
 
       {/* Menu Section */}
       <div className={styles.menuSection}>
-        <div className={`${styles.menuItem} ${styles.menuItemActive}`}>HOME</div>
+        <div className={`${styles.menuItem} ${styles.menuItemActive}`}>
+          {/* Inline replacement for pseudo-element */}
+          <div
+            style={{
+              position: "absolute",
+              left: "-30px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: "30px",
+              height: "10px",
+              background: "url('./static/img/selector-rectangle.png') no-repeat center",
+              backgroundSize: "contain"
+            }}
+          />
+          HOME
+        </div>
         <div className={styles.menuItem}>IMPACT</div>
         <div className={styles.menuItem}>ABOUT</div>
         <div className={styles.menuItem}>ADDITIONAL RESOURCES</div>

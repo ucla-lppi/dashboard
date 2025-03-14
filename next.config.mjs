@@ -13,7 +13,7 @@ const withMDX = mdx({
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   basePath: process.env.BASE_PATH || '',
-  assetPrefix: process.env.ASSET_PREFIX || './', // Relative asset paths by default
+  assetPrefix: process.env.ASSET_PREFIX || '', // Relative asset paths by default
   trailingSlash: true,
   output: 'export',
 };

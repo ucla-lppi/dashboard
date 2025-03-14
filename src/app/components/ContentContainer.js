@@ -10,7 +10,7 @@ export default function ContentContainer() {
         className={styles.topLeftCircle}
       />
       <img 
-        src="/static/img/bg_circle_bottom_right.svg" 
+        src="./static/img/bg_circle_bottom_right.svg" 
         alt="Bottom right circle" 
         className={styles.bottomRightCircle}
       />

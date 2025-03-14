@@ -31,7 +31,7 @@
   @apply text-2xl font-bold text-pink-700 relative inline-flex items-center justify-center;
   /* Use Lexend Zetta font for LATINO */
   font-family: 'Lexend Zetta', sans-serif;
-  background: url('/static/img/logo_background_circle.png') no-repeat center;
+  /* Using a relative path for the background image */
   background-size: contain;
   color: white;
   padding-left: 10px;
@@ -78,7 +78,7 @@
   transform: translateY(-50%);
   width: 30px;
   height: 10px;
-  background: url('/static/img/selector-rectangle.png') no-repeat center;
+  /* Using a relative path – ensure your build output allows this resolution */
   background-size: contain;
 }
 
