@@ -30,7 +30,7 @@ export default function MapComponent() {
       console.log('Map loaded successfully');
 
       // Add counties layer
-      const geojsonPath = getAssetUrl('/data/ca_counties_simplified.geojson');
+      const geojsonPath = getAssetUrl('./data/ca_counties_simplified.geojson');
       json(geojsonPath)
         .then(geojson => {
           console.log('GeoJSON loaded successfully', geojson);
