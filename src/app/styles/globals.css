@@ -227,3 +227,37 @@ body {
 	width: 100%;
 	max-width: none;
   }
+
+@media (max-height: 626px) {
+  .footer {
+    padding: 0.5rem; /* smaller footer */
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-height: 626px) {
+  .footer {
+    padding: 1rem; /* default styling */
+    font-size: 1rem;
+    height: 189px !important;
+  }
+}
+
+.footer {
+  @apply p-4 text-lg;
+  height: 64px; /* default style for viewport H between 482px and 587px */
+}
+
+@media (max-height: 504px) {
+  .footer {
+    height: 48px;
+    @apply p-2 text-sm;
+  }
+}
+
+@media (min-height: 620px) {
+  .footer {
+    height: 189px;
+    @apply p-4 text-lg;
+  }
+}

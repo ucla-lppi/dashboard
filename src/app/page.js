@@ -3,6 +3,7 @@ import { metadata } from './metadata';
 import SideNavigation from './components/SideNavigation';
 import ContentContainer from './components/ContentContainer';
 import MainContent from './components/MainContent';
+import Footer from './components/Footer'; // new import
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
@@ -34,9 +35,7 @@ export default function Home({ children }) {
       </div>
 
       {/* Footer spanning both columns */}
-      <footer className="col-span-2 bg-brandPink text-white p-4 text-center">
-        Footer content goes here.
-      </footer>
+      <Footer /> {/* replaced inline footer */}
     </div>
   );
 }

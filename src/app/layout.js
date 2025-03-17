@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>{/* ...existing head elements... */}</head>
-      <body className={`${lexendDeca.className} ${lexendZetta.className} antialiased`}>
+      <body>
         {children}
       </body>
     </html>

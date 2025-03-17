@@ -1,14 +1,15 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import styles from './SideNavigation.module.css';
 
 const SideNavigation = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav className={styles.sideNavContainer}>
       {/* Logo Section */}
       <div className={styles.logoSection}>
         <div className={styles.logoTop}>
           <span className={styles.logoCA}>CA</span>
-          {/* Moved background image inline */}
           <span 
             className={styles.logoLatino}
             style={{
@@ -23,10 +24,17 @@ const SideNavigation = () => {
         <div className={styles.logoBottom}>dashboard</div>
       </div>
 
+      {/* Hamburger for small screens */}
+      <button 
+        className={styles.hamburgerBtn}
+        onClick={() => setMenuOpen(prev => !prev)}
+      >
+        <span className={styles.hamburgerIcon}>&#9776;</span>
+      </button>
+
       {/* Menu Section */}
-      <div className={styles.menuSection}>
+      <div className={`${styles.menuSection} ${menuOpen ? styles.menuOpen : ''}`}>
         <div className={`${styles.menuItem} ${styles.menuItemActive}`}>
-          {/* Inline replacement for pseudo-element */}
           <div
             style={{
               position: "absolute",
@@ -50,7 +58,6 @@ const SideNavigation = () => {
       <div className={styles.socialSection}>
         <div className={styles.connectText}>Connect with us!</div>
         <div className={styles.socialIcons}>
-          {/* Wrap icon in circle container */}
           <div className={styles.iconCircle}>
             <img src="./static/img/fb_sidebar.svg" alt="Facebook" className={styles.socialIconImage} />
           </div>
@@ -69,7 +76,6 @@ const SideNavigation = () => {
           <div className={styles.iconCircle}>
             <img src="./static/img/email_sidebar.svg" alt="Email" className={styles.socialIconImage} />
           </div>
-          {/* Add additional icons as needed */}
         </div>
       </div>
     </nav>

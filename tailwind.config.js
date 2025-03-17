@@ -43,6 +43,9 @@ module.exports = {
           },
         }),
       },
+      screens: {
+        'max-h-620': { raw: '(max-height: 620px)' },
+      },
     },
     plugins: [require('@tailwindcss/typography')],
 };
