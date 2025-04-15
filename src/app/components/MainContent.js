@@ -1,29 +1,37 @@
 "use client";
 import React from "react";
 import { Card } from "flowbite-react";
-import HomePage from "../components/HomePage"; // Adjust the path if necessary
 
-// Dynamically read all MDX files from the content folder using require.context
-// Changed '@content' to the relative path from this file: ../../../content
-const mdxContext = require.context("../../../content", false, /\.mdx$/);
-const dynamicComponents = mdxContext.keys().reduce((acc, key) => {
-  // key format is "./FileName.mdx"
-  const mod = mdxContext(key);
-  const name = key.replace("./", "").replace(".mdx", "");
-  acc[name] = mod.default || mod.MDXContent; // Use MDXContent if default is unavailable
-  return acc;
-}, {});
+// Import MDX components via the @content alias
+import HomePage from "../components/HomePage";
 
-// Merge dynamic MDX components then override "Home" with HomePage
+import Research from "@content/Research.mdx";
+import AdditionalResources from "@content/AdditionalResources.mdx";
+import Contact from "@content/Contact.mdx";
+import PressCoverage from "@content/PressCoverage.mdx";
+import TechnicalDocumentation from "@content/TechnicalDocumentation.mdx";
+import OurData from "@content/OurData.mdx";
+import OurTeam from "@content/OurTeam.mdx";
+import FAQ from "@content/FAQ.mdx";
+
+// Fixed mapping: include Home and additional MDX pages
 const components = {
-  ...dynamicComponents,
-  Home: HomePage, // For Home, load homepage.js component
+  Home:HomePage,
+  Research,
+  AdditionalResources,
+  Contact,
+  PressCoverage,
+  TechnicalDocumentation,
+  OurData,
+  OurTeam,
+  FAQ,
 };
 
 export default function MainContent({ activeItem }) {
   const ContentComponent =
     components[activeItem] || (() => <div>Page not found.</div>);
   const isMDX = activeItem !== "Home";
+
   return (
     <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
       {isMDX ? (
