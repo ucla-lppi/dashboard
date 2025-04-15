@@ -5,7 +5,7 @@ import Papa from 'papaparse';
 // Configuration flag to switch between Google Sheets and local CSV
 const USE_GOOGLE_SHEETS = true; // Set to true to use Google Sheets
 
-export default function FancyBoxes() {
+export default function FancyBoxes({ onLoaded }) {
   const containerRef = useRef(null);
   const [data, setData] = useState([]);
   const [themeClass, setThemeClass] = useState('');
@@ -32,12 +32,15 @@ export default function FancyBoxes() {
         complete: (results) => {
           setData(results.data);
           setIsDataLoaded(true); // Set data loaded flag to true
+          if (onLoaded) {
+            onLoaded(); // Notify parent that FancyBoxes has finished loading
+          }
         },
       });
     };
 
     fetchData();
-  }, []);
+  }, [onLoaded]);
 
   // Define the top-level categories and their subcategories
   const categories = {
@@ -150,37 +153,29 @@ export default function FancyBoxes() {
   };
 
   return (
-    <div ref={containerRef} className={`fancy-box relative bg-cover bg-center ${themeClass}`} style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
-      <div className="absolute inset-0 bg-primary opacity-95 dark:opacity-95"></div> {/* Overlay */}
-      <div className="container mx-auto py-4 relative z-10">
-        <h2 className="headline headline--medium t-center">California Latino <strong>Wellness Summary Statistics</strong></h2>
-      </div>
-      <div className="flex flex-wrap justify-around container mx-auto py-8 relative z-10 responsive-container">
+    <div ref={containerRef} className="container mx-auto py-8">
+
+      <div className="flex flex-col items-center space-y-6">
         {summaryStatistics.map((item, index) => (
-          <div key={index} className={`box flex-1 p-4 m-2 border border-gray-300 shadow-lg text-center ${themeClass === 'dark-mode' ? 'dark-box' : ''}`} style={{ minHeight: isDataLoaded ? 'auto' : `${boxHeights[index] || 200}px` }}>
+          <div
+            key={index}
+            className={`card p-6 shadow-[6px_6px_0px_var(--quaternary-color)] border border-primary rounded-lg bg-white w-full max-w-md ${themeClass === 'dark-mode' ? 'dark:bg-gray-800 dark:border-primary' : ''}`}
+          >
             {isDataLoaded ? (
               <>
-                <h3 className={`desc no-margin ${themeClass === 'dark-mode' ? 'dark-desc' : ''}`} style={{ fontSize: '1.25rem' }}>{getHeaderText(item.headerIntro, item.headerIndicator)}</h3>
-                <h2 className={`latino-count ${themeClass === 'dark-mode' ? 'dark-latino-count' : ''}`} style={{ fontSize: '3rem', marginTop: '0.5rem' }}>
-                  <strong>
-                    <span className="ticker c-blue--darker" data-count={item.latinoValue}>{item.latinoValue}</span>
-                  </strong>
+                <h3 className="text-lg font-semibold mb-2 text-center">
+                  {getHeaderText(item.headerIntro, item.headerIndicator)}
+                </h3>
+                <h2 className="text-3xl font-bold text-primary mb-2 text-center">
+                  <span className="ticker" data-count={item.latinoValue}>
+                    {item.latinoValue}
+                  </span>
                 </h2>
-                <h4 className={`discrepancy ${themeClass === 'dark-mode' ? 'dark-discrepancy' : ''}`} style={{ fontSize: '1.25rem', marginTop: '0.5rem' }}>
-                  <strong>
-                    <span>{item.formattedDiscrepancyPercentage}%</span>
-                    <span className="triangle" style={{ display: 'inline', marginLeft: '0.5rem' }}>
-                      {item.discrepancy >= 0 ? '▲' : '▼'}
-                    </span>
-                  </strong>
-                </h4>
-                <h6 className={`comparison ${themeClass === 'dark-mode' ? 'dark-comparison' : ''}`} style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
-                  <span>(Latino {item.latinoValue.toLocaleString()} vs White {item.whiteValue.toLocaleString()})</span>
-                </h6>
+
               </>
             ) : (
-              <div className="loading-spinner-container">
-                <div className="loading-spinner"></div>
+              <div className="flex justify-center items-center h-24">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
               </div>
             )}
           </div>
@@ -189,3 +184,16 @@ export default function FancyBoxes() {
     </div>
   );
 }
+
+// old code for descripency and triangle
+{/* <h4 className="text-lg font-medium text-gray-600 mb-2 text-center">
+<strong>
+  <span>{item.formattedDiscrepancyPercentage}%</span>
+  <span className="triangle ml-2">
+	{item.discrepancy >= 0 ? '▲' : '▼'}
+  </span>
+</strong>
+</h4>
+<h6 className="text-sm text-gray-500 text-center">
+(Latino {item.latinoValue.toLocaleString()} vs White {item.whiteValue.toLocaleString()})
+</h6> */}

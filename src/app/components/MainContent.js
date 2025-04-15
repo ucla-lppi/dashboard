@@ -1,17 +1,37 @@
 "use client";
-import React from 'react';
-import styles from './MainContent.module.css';
-import MapComponent from './MapComponent';  // Changed from named import to default import
+import React from "react";
+import { Card } from "flowbite-react";
+import HomePage from "../components/HomePage"; // Adjust the path if necessary
 
-export default function MainContent() {
+// Dynamically read all MDX files from the content folder using require.context
+// Changed '@content' to the relative path from this file: ../../../content
+const mdxContext = require.context("../../../content", false, /\.mdx$/);
+const dynamicComponents = mdxContext.keys().reduce((acc, key) => {
+  // key format is "./FileName.mdx"
+  const name = key.replace("./", "").replace(".mdx", "");
+  acc[name] = mdxContext(key).default;
+  return acc;
+}, {});
+
+// Merge dynamic MDX components then override "Home" with HomePage
+const components = {
+  ...dynamicComponents,
+  Home: HomePage, // For Home, load homepage.js component
+};
+
+export default function MainContent({ activeItem }) {
+  const ContentComponent =
+    components[activeItem] || (() => <div>Page not found.</div>);
+  const isMDX = activeItem !== "Home";
   return (
-    <div className={`${styles.container} bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_#ae8e3b]`}>
-      {/* Test content can go here */}
-      <h1 className="text-center text-2xl font-bold mt-4">The Latino Climate and Health Dashboard provides an evidence base to foster policy change that enhances economic opportunity, health, and environmental justice outcomes for Latinos in California. </h1>
-      <p className="text-center mt-2"></p>
-		<div id="map" className="relative z-0">
-			<MapComponent />
-		</div>
-    </div>
+    <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
+      {isMDX ? (
+        <article className="prose lg:prose-xl">
+          <ContentComponent />
+        </article>
+      ) : (
+        <ContentComponent />
+      )}
+    </Card>
   );
 }

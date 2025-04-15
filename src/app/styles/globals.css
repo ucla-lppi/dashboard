@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css');
+
+colors{
+	primary: #28666E;
+	secondary: #0c4865;
+	tertiary: #B5B682;
+	quaternary: #7C9885;
+}
+
 :root {
+
   --background: #ffffff;
   --foreground: #171717;
   --bg-gray-800: #333333;
@@ -12,7 +24,7 @@
   --text-white: #ffffff;
 }
 
-.dark {
+/* .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
   --bg-gray-800: #333333;
@@ -20,244 +32,19 @@
   --border-gray-300: #555555;
   --text-blue-800: #90cdf4;
   --text-white: #ffffff;
-}
+} */
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.bg-gray-800 {
-  background-color: var(--bg-gray-800);
-}
-
-.bg-white {
-  background-color: var(--bg-white);
-}
-
-.border-gray-300 {
-  border-color: var(--border-gray-300);
-}
-
-.text-blue-800 {
-  color: var(--text-blue-800);
-}
-
-.text-white {
-  color: var(--text-white);
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  
-  .headline {
-    font-weight: bold;
-    text-align: center;
-    color: var(--text-white); /* Make the font color white */
-  }
-
-  .headline--medium {
-    font-size: 2rem; /* Adjust as needed */
-  }
-
-  .t-center {
-    text-align: center;
-  }
-}
-#map {
-  height: 50vh; /* Fixed height */
-/*  margin-top: 64px; Adjust as needed */
-  position: relative;
-}
-
-/* Add this to your CSS file */
-
-#popup {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border: 1px solid black;
-    padding: 5px;
-    pointer-events: none;
-    color: black; /* Default text color */
-  }
-  
-  #popup.dark-mode {
-    background-color: black;
-    color: white; /* Text color for dark mode */
-    border: 1px solid white;
-  }
-
-  /* Add this to your CSS file */
-
-/* Default light mode styles */
-.box {
-    background-color: white;
-    color: #333;
-  }
-  
-  .desc {
-    color: #333;
-  }
-  
-  .latino-count {
-    color: #333;
-  }
-  
-  .discrepancy {
-    color: #0988c9;
-  }
-  
-  .comparison {
-    color: #333;
-  }
-  
-  /* Dark mode styles */
-  .dark-mode .box {
-    background-color: white;
-    color: black;
-  }
-  
-  .dark-mode .desc {
-    color: #555;
-  }
-  
-  .dark-mode .latino-count {
-    color: black;
-  }
-  
-  .dark-mode .discrepancy {
-    color: #2774AE;
-  }
-  
-  .dark-mode .comparison {
-    color: #555;
-  }
-/* Add this CSS to your stylesheet */
-@media (max-width: 768px) {
-    .responsive-container {
-      flex-direction: column;
-    }
-  }
-
-.ticker, .discrepancy,.comparison {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.fade-in {
-  opacity: 1;
-}
-
-/* Add this to your CSS file */
-
-/* Loading spinner styles */
-/* Add this to your CSS file */
-
-/* Loading spinner styles */
-.loading-spinner {
-    border: 8px solid rgba(0, 0, 0, 0.1);
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-    margin: 0 auto;
-  }
-  
-  /* Center the loading spinner in the middle of the box */
-.loading-spinner-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  /* Fixed height for the box while loading */
-.loading-box {
-    min-height: 200px; /* Adjust the height as necessary */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-/* Ensure vertical centering on mobile screens */
-@media (max-width: 768px) {
-  .loading-spinner-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Full viewport height for vertical centering */
-  }
-}
-
-/* Global Color Styling for low medium and high */
-
-.low {
-	color: green;
-  }
-  
-  .medium {
-	color: orange;
-  }
-  
-  .high {
-	color: red;
-  }
-
-  
-  /* src/app/styles/globals.css or relevant CSS file */
-/* src/app/styles/globals.css */
-.impact-content {
-	width: 100%; /* Ensure full width */
-	max-width: none; /* Remove max-width constraints */
-	/* Add any additional necessary styles */
-  }
-
-/* src/app/styles/globals.css */
-.impact-content .horizontal-scroll-wrapper {
-	width: 100%;
-	max-width: none;
-  }
-
-@media (max-height: 626px) {
-  .footer {
-    padding: 0.5rem; /* smaller footer */
-    font-size: 0.875rem;
-  }
-}
-
-@media (min-height: 626px) {
-  .footer {
-    padding: 1rem; /* default styling */
-    font-size: 1rem;
-    height: 189px !important;
-  }
-}
-
-.footer {
-  @apply p-4 text-lg;
-  height: 64px; /* default style for viewport H between 482px and 587px */
-}
-
-@media (max-height: 504px) {
-  .footer {
-    height: 48px;
-    @apply p-2 text-sm;
-  }
-}
-
-@media (min-height: 620px) {
-  .footer {
-    height: 189px;
-    @apply p-4 text-lg;
+@media (min-width: 540px) {
+  .mobile-header {
+    display: none !important;
   }
 }

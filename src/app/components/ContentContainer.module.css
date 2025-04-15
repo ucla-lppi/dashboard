@@ -1,5 +1,5 @@
 .container {
-  @apply relative w-full h-auto min-h-screen z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden;
+  @apply absolute top-0 left-0 w-full h-full z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden;
 }
 
 /* Use responsive widths and offsets for scaling and positioning */

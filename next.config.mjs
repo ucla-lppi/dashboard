@@ -1,11 +1,20 @@
-// next.config.mjs
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 import mdx from '@next/mdx';
 import remarkGfm from 'remark-gfm';
+
+// Inline plugin to remove YAML front matter nodes from the AST
+function removeYaml() {
+  return (tree) => {
+    tree.children = tree.children.filter(child => child.type !== 'yaml');
+  };
+}
 
 const withMDX = mdx({
   extension: /\.(md|mdx)$/,
   options: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, removeYaml],
   },
 });
 
@@ -13,9 +22,14 @@ const withMDX = mdx({
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   basePath: process.env.BASE_PATH || '',
-  assetPrefix: process.env.ASSET_PREFIX || '', // Relative asset paths by default
+  assetPrefix: process.env.ASSET_PREFIX || '',
   trailingSlash: true,
   output: 'export',
+  webpack: (config, { isServer }) => {
+    // Alias tailwindcss/version.js to tailwindcss/package.json
+    config.resolve.alias['tailwindcss/version.js'] = require.resolve('tailwindcss/package.json');
+    return config;
+  },
 };
 
 export default withMDX(nextConfig);

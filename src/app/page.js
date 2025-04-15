@@ -1,9 +1,5 @@
-import { Lexend_Deca, Lexend_Zetta } from 'next/font/google';
-import { metadata } from './metadata';
-import SideNavigation from './components/SideNavigation';
-import ContentContainer from './components/ContentContainer';
-import MainContent from './components/MainContent';
-import Footer from './components/Footer'; // new import
+"use client";
+import { Lexend_Deca } from 'next/font/google';
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
@@ -11,31 +7,11 @@ const lexendDeca = Lexend_Deca({
   variable: '--font-lexend-deca',
 });
 
-export { metadata };
-
 export default function Home({ children }) {
   return (
-    <div className={`${lexendDeca.className} min-h-screen grid grid-cols-[250px_1fr] grid-rows-[calc(100vh-150px)_150px]`}>
-      {/* Left Sidebar */}
-      <div>
-        <SideNavigation />
-      </div>
-
-      {/* Content area (right column) */}
-      <div className="relative">
-        <ContentContainer />
-        <div className="absolute inset-0 flex items-center justify-center z-10 text-center">
-          <div>
-            <MainContent />
-            <main>
-              {children}
-            </main>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer spanning both columns */}
-      <Footer /> {/* replaced inline footer */}
-    </div>
+    <main className={`${lexendDeca.className}`}>
+      {/* ...page-specific content... */}
+      {children}
+    </main>
   );
 }
