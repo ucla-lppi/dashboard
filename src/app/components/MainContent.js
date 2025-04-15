@@ -8,8 +8,9 @@ import HomePage from "../components/HomePage"; // Adjust the path if necessary
 const mdxContext = require.context("../../../content", false, /\.mdx$/);
 const dynamicComponents = mdxContext.keys().reduce((acc, key) => {
   // key format is "./FileName.mdx"
+  const mod = mdxContext(key);
   const name = key.replace("./", "").replace(".mdx", "");
-  acc[name] = mdxContext(key).default;
+  acc[name] = mod.default || mod.MDXContent; // Use MDXContent if default is unavailable
   return acc;
 }, {});
 
