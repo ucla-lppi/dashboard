@@ -2,7 +2,7 @@
 const flowbite = require("flowbite-react/plugin");
 module.exports = {
     content: [
-      './pages/**/*.{js,ts,jsx,tsx,mdx}',
+      './content/**/*.{js,ts,jsx,tsx,mdx}',
       './components/**/*.{js,ts,jsx,tsx,mdx}',
       './src/**/*.{js,ts,jsx,tsx,mdx}',
       "./node_modules/flowbite-react/**/*.js"
