@@ -13,7 +13,7 @@ import TechnicalDocumentation from "@content/TechnicalDocumentation.mdx";
 import OurData from "@content/OurData.mdx";
 import OurTeam from "@content/OurTeam.mdx";
 import FAQ from "@content/FAQ.mdx";
-
+import FAQsFromCSV from '../components/FAQsFromCSV';
 // Fixed mapping: include Home and additional MDX pages
 const components = {
   Home:HomePage,
