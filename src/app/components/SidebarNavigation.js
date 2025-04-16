@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./SidebarNavigation.module.css";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-export default function SidebarNavigation({ sidebarOpen, activeItem, setActiveItem }) {
-  // Added local state for collapsible sections
+export default function SidebarNavigation({ sidebarOpen }) {
+  const pathname = usePathname();
+  const segments = pathname.split('/').filter(Boolean);
+  const current = segments[0] || '';
   const [impactOpen, setImpactOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-
-  const handleNavigation = (item) => {
-    setActiveItem(item);
-  };
 
   return (
     <aside
@@ -21,211 +21,133 @@ export default function SidebarNavigation({ sidebarOpen, activeItem, setActiveIt
       aria-label="Sidebar"
     >
       <div className="h-full px-3 py-4 overflow-y-hidden bg-white">
-        <a
-          href="https://latinoclimatehealth.org/"
-          className="flex items-center ps-2.5 mb-5"
-          onClick={() => handleNavigation("Home")}
-        >
-            <img
-              src="./static/img/ucla_lppi_dashboard_logo.svg"
-              alt="UCLA Luskin"
-              className="w-[798px] h-auto object-cover mb-4"
-            />
+        <Link href="/" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2`}>
+          <img
+            src="/images/ucla_lppi_dashboard_logo.svg"
+            alt="UCLA Luskin"
+            className="w-[798px] h-auto object-cover mb-4"
+          />
           <span className="self-center text-xl font-bold whitespace-nowrap uppercase"></span>
-        </a>
+        </Link>
         <ul className="space-y-2 font-medium">
           {/* Home */}
           <li>
-            <a
-              href="#"
-              onClick={() => handleNavigation("Home")}
-              className={`${styles.menuItem} ${
-                activeItem === "Home" ? styles.menuItemActive : ""
-              } text-xl font-bold uppercase`}
+            <Link
+              href="/"
+              className={`${styles.menuItem} ${(current === '' || current === 'home') ? styles.menuItemActive : ''} text-xl font-bold uppercase flex items-center w-full p-2`}
             >
-              <span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group">HOME</span>
-            </a>
+              HOME
+            </Link>
           </li>
-		{/* Impact Section */}
-		<li>
-		  <button
-			type="button"
-			onClick={() => { setImpactOpen((prev) => !prev); setAboutOpen(false); }}
-			className={`${styles.menuItem} ${
-			  activeItem === "Impact" ? styles.menuItemActive : ""
-			} text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group`}
-		  >
-			<span className="flex-1 ms-0 text-left whitespace-nowrap">IMPACT</span>
-			<svg
-			  className={`w-3 h-3 transform transition-transform duration-300 ${
-				impactOpen ? "rotate-0" : "rotate-180"
-			  }`}
-			  aria-hidden="true"
-			  xmlns="http://www.w3.org/2000/svg"
-			  fill="none"
-			  viewBox="0 0 10 6"
-			>
-			  <path
-				stroke="currentColor"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth="2"
-				d="m1 1 4 4 4-4"
-			  />
-			</svg>
-		  </button>
-		  <ul
-			id="impact-menu"
-			className={`${impactOpen ? "block" : "hidden"} py-2 space-y-2`}
-		  >
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("Research"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  Research
-				</span>
-			  </a>
-			</li>
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("PressCoverage"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  PRESS COVERAGE
-				</span>
-			  </a>
-			</li>
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("Partners"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  PARTNERS
-				</span>
-			  </a>
-			</li>
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("PolicyToolkit"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  POLICY TOOLKIT
-				</span>
-			  </a>
-			</li>
-		  </ul>
-		</li>
-		{/* About Section */}
-		<li>
-		  <button
-			type="button"
-			onClick={() => { setAboutOpen((prev) => !prev); setImpactOpen(false); }}
-			className={`${styles.menuItem} ${
-			  activeItem === "About" ? styles.menuItemActive : ""
-			} text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group`}
-		  >
-			<span className="flex-1 ms-0 text-left whitespace-nowrap">ABOUT</span>
-			<svg
-			  className={`w-3 h-3 transform transition-transform duration-300 ${
-				aboutOpen ? "rotate-0" : "rotate-180"
-			  }`}
-			  aria-hidden="true"
-			  xmlns="http://www.w3.org/2000/svg"
-			  fill="none"
-			  viewBox="0 0 10 6"
-			>
-			  <path
-				stroke="currentColor"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth="2"
-				d="m1 1 4 4 4-4"
-			  />
-			</svg>
-		  </button>
-		  <ul
-			id="about-menu"
-			className={`${aboutOpen ? "block" : "hidden"} py-2 space-y-2`}
-		  >
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("FAQ"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  FAQ
-				</span>
-			  </a>
-			</li>
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("OurData"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  OUR DATA
-				</span>
-			  </a>
-			</li>
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("TechnicalDocumentation"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  TECHNICAL DOCUMENTATION
-				</span>
-			  </a>
-			</li>
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("OurTeam"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  OUR TEAM
-				</span>
-			  </a>
-			</li>
-			<li>
-			  <a
-				href="#"
-				onClick={() => { handleNavigation("Contact"); }}
-				className={`${styles.menuItem} text-lg font-bold uppercase`}
-			  >
-				<span className="text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group pl-3">
-				  CONTACT
-				</span>
-			  </a>
-			</li>
-		  </ul>
-		</li>
+          {/* Impact Section */}
+          <li>
+            <button
+              type="button"
+              onClick={() => { setImpactOpen((prev) => !prev); setAboutOpen(false); }}
+              className={`${styles.menuItem} text-xl font-bold uppercase flex items-center justify-between w-full p-2`}
+            >
+              IMPACT
+              <svg
+                className={`w-3 h-3 transform transition-transform duration-300 ${
+                  impactOpen ? "rotate-0" : "rotate-180"
+                }`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+            <ul className={`${impactOpen ? "block" : "hidden"} py-2 space-y-2`}>
+              <li>
+                <Link href="/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'research' ? styles.menuItemActive : ''}`}>
+                  Research
+                </Link>
+              </li>
+              <li>
+                <Link href="/press-coverage" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'press-coverage' ? styles.menuItemActive : ''}`}>
+                  PRESS COVERAGE
+                </Link>
+              </li>
+              <li>
+                <Link href="/partners" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'partners' ? styles.menuItemActive : ''}`}>
+                  PARTNERS
+                </Link>
+              </li>
+              <li>
+                <Link href="/policy-toolkit" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'policy-toolkit' ? styles.menuItemActive : ''}`}>
+                  POLICY TOOLKIT
+                </Link>
+              </li>
+            </ul>
+          </li>
+          {/* About Section */}
+          <li>
+            <button
+              type="button"
+              onClick={() => { setAboutOpen((prev) => !prev); setImpactOpen(false); }}
+              className={`${styles.menuItem} text-xl font-bold uppercase flex items-center justify-between w-full p-2`}
+            >
+              ABOUT
+              <svg
+                className={`w-3 h-3 transform transition-transform duration-300 ${
+                  aboutOpen ? "rotate-0" : "rotate-180"
+                }`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+            <ul className={`${aboutOpen ? "block" : "hidden"} py-2 space-y-2 pl-3`}>
+              <li>
+                <Link href="/faqs" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'faqs' ? styles.menuItemActive : ''}`}>
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/our-data" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'our-data' ? styles.menuItemActive : ''}`}>
+                  OUR DATA
+                </Link>
+              </li>
+              <li>
+                <Link href="/technical-documentation" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'technical-documentation' ? styles.menuItemActive : ''}`}>
+                  TECHNICAL DOCUMENTATION
+                </Link>
+              </li>
+              <li>
+                <Link href="/our-team" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'our-team' ? styles.menuItemActive : ''}`}>
+                  OUR TEAM
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'contact' ? styles.menuItemActive : ''}`}>
+                  CONTACT
+                </Link>
+              </li>
+            </ul>
+          </li>
           {/* Additional Resources */}
-			<li>
-			<a
-				href="#"
-				onClick={() => handleNavigation("Additional Resources")}
-				className={`${styles.menuItem} ${
-				activeItem === "Additional Resources" ? styles.menuItemActive : ""
-				} text-xl font-bold uppercase flex items-center w-full p-2 rounded-none group`}
-			>
-				ADDITIONAL RESOURCES
-			</a>
-			</li>
-          {/* ...other menu items... */}
+          <li>
+            <Link href="/additional-resources" className={`${styles.menuItem} ${current === 'additional-resources' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
+              ADDITIONAL RESOURCES
+            </Link>
+          </li>
         </ul>
       </div>
 
@@ -234,22 +156,22 @@ export default function SidebarNavigation({ sidebarOpen, activeItem, setActiveIt
         <div className="text-center text-sm font-bold mb-2">Connect with us!</div>
         <div className="flex justify-center space-x-2">
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./static/img/fb_sidebar.svg" alt="Facebook" className="w-5 h-5" />
+            <img src="/images/fb_sidebar.svg" alt="Facebook" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./static/img/yt_sidebar.svg" alt="YouTube" className="w-5 h-5" />
+            <img src="/images/yt_sidebar.svg" alt="YouTube" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./static/img/ig_sidebar.svg" alt="Instagram" className="w-5 h-5" />
+            <img src="/images/ig_sidebar.svg" alt="Instagram" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./static/img/twitter_sidebar.svg" alt="Twitter" className="w-5 h-5" />
+            <img src="/images/twitter_sidebar.svg" alt="Twitter" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./static/img/linkedin_sidebar.svg" alt="LinkedIn" className="w-5 h-5" />
+            <img src="/images/linkedin_sidebar.svg" alt="LinkedIn" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./static/img/email_sidebar.svg" alt="Email" className="w-5 h-5" />
+            <img src="/images/email_sidebar.svg" alt="Email" className="w-5 h-5" />
           </div>
         </div>
       </div>

@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Lexend_Deca, Lexend_Zetta, La_Belle_Aurore } from 'next/font/google';
 import { ThemeModeScript } from 'flowbite-react';
-import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import SidebarNavigation from './components/SidebarNavigation';
 import './styles/globals.css';
@@ -28,7 +27,6 @@ export default function RootLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   // New state to detect mobile devices below 540px
   const [isMobile, setIsMobile] = useState(false);
-  const [activeItem, setActiveItem] = useState("Home");
 
   const mainContentRef = useRef(null);
   const sidebarRef = useRef(null);
@@ -98,7 +96,7 @@ export default function RootLayout({ children }) {
 			</button>
 			<a href="/" className="flex items-center">
 			<img
-				src="static/img/lppi-dashboard-logo.svg"
+				src="/images/lppi-dashboard-logo.svg"
 				alt="LPPI Dashboard Logo"
 				className="h-8" // increased from h-6 to h-8
 			/>
@@ -109,29 +107,24 @@ export default function RootLayout({ children }) {
 
           <div className="grid grid-cols-[auto] min-h-screen">
             {/* Sidebar Navigation Component */}
-            <SidebarNavigation
-              sidebarOpen={sidebarOpen}
-              activeItem={activeItem}
-              setActiveItem={setActiveItem}
-            />
+            <SidebarNavigation sidebarOpen={sidebarOpen} />
 
             {/* Main Content Section */}
             <div className={`relative p-4 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"}`}>
               {/* Background Layer */}
               <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden pointer-events-none">
                 <img
-                  src="/static/img/bg_circle_top_left.svg"
+                  src="/images/bg_circle_top_left.svg"
                   alt="Top left circle"
                   className="absolute top-[50px] left-[-200px]"
                 />
                 <img
-                  src="/static/img/bg_circle_bottom_right.svg"
+                  src="/images/bg_circle_bottom_right.svg"
                   alt="Bottom right circle"
                   className="absolute bottom-[-350px] right-[-250px]"
                 />
               </div>
               {/* Main Content and Children */}
-              <MainContent activeItem={activeItem} />
               {children}
             </div>
           </div>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 
-const FAQsFromCSV = ({ csvUrl }) => {
-  const [faqs, setFaqs] = useState([]);
+const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
+  const [faqs, setFaqs] = useState(initialData);
   const [openIdx, setOpenIdx] = useState(null);
 
   useEffect(() => {
+    // Only fetch if no initial data provided
+    if (initialData.length > 0) return;
     const fetchData = async () => {
       try {
         const response = await fetch(csvUrl);
@@ -39,7 +41,29 @@ const FAQsFromCSV = ({ csvUrl }) => {
       }
     };
     fetchData();
-  }, [csvUrl]);
+  }, [csvUrl, initialData]);
+
+  useEffect(() => {
+    // If faqs loaded and there's a hash, open that item
+    if (faqs.length === 0) return;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    // Helper to generate slug from question text
+    const generateSlug = (text) =>
+      text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    const idx = faqs.findIndex(
+      (faq) => generateSlug(faq.question) === hash
+    );
+    if (idx !== -1) {
+      setOpenIdx(idx);
+      // Scroll to the anchor element
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [faqs]);
 
   return (
     <section className="max-w-2xl mx-auto my-8">
