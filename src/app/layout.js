@@ -96,7 +96,7 @@ export default function RootLayout({ children }) {
 			</button>
 			<a href="/" className="flex items-center">
 			<img
-				src="/images/lppi-dashboard-logo.svg"
+				src="./images/lppi-dashboard-logo.svg"
 				alt="LPPI Dashboard Logo"
 				className="h-8" // increased from h-6 to h-8
 			/>
@@ -114,12 +114,12 @@ export default function RootLayout({ children }) {
               {/* Background Layer */}
               <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden pointer-events-none">
                 <img
-                  src="/images/bg_circle_top_left.svg"
+                  src="./images/bg_circle_top_left.svg"
                   alt="Top left circle"
                   className="absolute top-[50px] left-[-200px]"
                 />
                 <img
-                  src="/images/bg_circle_bottom_right.svg"
+                  src="./images/bg_circle_bottom_right.svg"
                   alt="Bottom right circle"
                   className="absolute bottom-[-350px] right-[-250px]"
                 />

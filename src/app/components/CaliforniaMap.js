@@ -117,7 +117,7 @@ export default function CaliforniaMap() {
       <div className="absolute top-4 right-1 bg-white p-4 rounded-lg shadow-[3px_3px_0px_var(--quaternary-color)] border border-primary">
         <div className="flex items-center mb-2">
           <img
-            src="/images/extremeheaticon.svg"
+            src="./images/extremeheaticon.svg"
             alt="Extreme Heat Icon"
             width="27"
             height="23"
@@ -127,7 +127,7 @@ export default function CaliforniaMap() {
         </div>
         <div className="flex items-center">
           <img
-            src="/images/airpollutionicon.svg"
+            src="./images/airpollutionicon.svg"
             alt="Air Pollution Icon"
             width="27"
             height="23"

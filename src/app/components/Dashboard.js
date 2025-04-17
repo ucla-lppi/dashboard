@@ -56,7 +56,7 @@ export default function Dashboard() {
             className="inline-block transform hover:scale-105 transition-transform duration-200"
           >
             <img
-              src="/images/Bxd_Blk_LatinoPolicy_Luskin_A.png"
+              src="./images/Bxd_Blk_LatinoPolicy_Luskin_A.png"
               alt="Latino Policy Logo"
               className="h-12 w-auto mx-auto"
             />
