@@ -3,16 +3,16 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="relative z-50 bg-tertiary text-black">
+    <footer className="relative z-10 bg-tertiary text-black">
       <div className="mx-auto max-w-screen-lg py-8 px-4">
-        <div className="grid grid-cols-[12rem_auto_auto_auto] gap-x-8 items-stretch">
+        <div className="grid grid-cols-[16rem_auto_auto_auto] gap-x-8 items-stretch">
           {/* Spacer column matching sidebar (w-64 = 16rem) */}
           <div></div>
           
           {/* Column 1: UCLA Logo, Quote, Social Icons */}
           <div className="flex flex-col items-start justify-self-center">
             <img
-              src="./static/img/ucla_lppi_dashboard_logo.svg"
+              src="/images/ucla_lppi_dashboard_logo.svg"
               alt="UCLA Climate and Health Dashboard"
               className="w-[350px] sm:w-[400px] md:w-[450px] lg:w-[600px] xl:w-[789px] h-auto object-cover mb-4"
             />
@@ -21,32 +21,32 @@ export default function Footer() {
             </p>
             <div className="flex justify-start items-center space-x-4">
               <img
-                src="./static/img/fb_footer.svg"
+                src="/images/fb_footer.svg"
                 alt="Facebook"
                 className="w-[12px] h-[20px]"
               />
               <img
-                src="./static/img/yt_footer.svg"
+                src="/images/yt_footer.svg"
                 alt="YouTube"
                 className="w-[21px] h-[14px]"
               />
               <img
-                src="./static/img/ig_footer.svg"
+                src="/images/ig_footer.svg"
                 alt="Instagram"
                 className="w-[21px] h-[20px]"
               />
               <img
-                src="./static/img/twitter_footer.svg"
+                src="/images/twitter_footer.svg"
                 alt="X"
                 className="w-[21px] h-[19px]"
               />
               <img
-                src="./static/img/linkedin_footer.svg"
+                src="/images/linkedin_footer.svg"
                 alt="LinkedIn"
                 className="w-[21px] h-[21px]"
               />
               <img
-                src="./static/img/email_footer.svg"
+                src="/images/email_footer.svg"
                 alt="Email"
                 className="w-[21px] h-[14px]"
               />
@@ -56,7 +56,7 @@ export default function Footer() {
           {/* Divider Column */}
           <div className="h-full flex items-center justify-center mx-2 md:mx-4 justify-self-center">
             <img 
-              src="./static/img/line-31.svg" 
+              src="/images/line-31.svg" 
               alt="Divider" 
               className="w-[1px] h-[141px] object-cover"
             />

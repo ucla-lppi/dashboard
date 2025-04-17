@@ -82,7 +82,7 @@ export default function RootLayout({ children }) {
       <head>
         <ThemeModeScript />
       </head>
-      <body className={lexendDeca.className}>
+      <body className={`${lexendDeca.className} overflow-x-hidden`}>
         <div className="flex flex-col">
           {/* Mobile Header: only rendered when device width is less than 540px */}
 		{isMobile && (

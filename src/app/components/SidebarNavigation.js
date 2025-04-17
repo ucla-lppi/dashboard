@@ -14,13 +14,13 @@ export default function SidebarNavigation({ sidebarOpen }) {
   return (
     <aside
       id="logo-sidebar"
-      className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white shadow-[4px_0px_0px_rgba(25,73,88,0.50)]
+      className={`fixed top-0 left-0 z-[9999] w-64 min-h-screen bg-white shadow-[4px_0px_0px_rgba(25,73,88,0.50)]
         flex flex-col justify-between transition-transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:static sm:translate-x-0`}
+        }`}
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 py-4 overflow-y-hidden bg-white">
+      <div className="px-3 py-4 bg-white">
         <Link href="/" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2`}>
           <img
             src="/images/ucla_lppi_dashboard_logo.svg"
