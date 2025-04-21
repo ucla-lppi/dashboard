@@ -23,9 +23,11 @@ jobs:
 
       - name: Build the project for GitHub Pages
         env:
-          BASE_PATH: '/dashboard'          # Replace with your GitHub repository name
-          ASSET_PREFIX: '/dashboard/'
-        run: yarn build
+          BASE_PATH: '/dashboard'          # GitHub Pages subpath for this repo
+          ASSET_PREFIX: '/dashboard'
+        run: |
+          yarn build
+          yarn export
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
