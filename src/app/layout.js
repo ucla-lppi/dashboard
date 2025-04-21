@@ -79,9 +79,6 @@ export default function RootLayout({ children }) {
       className={`${lexendDeca.variable} ${lexendZetta.variable} ${laBelleAurore.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <ThemeModeScript />
-      </head>
       <body className={`${lexendDeca.className}`}>
         <div className="flex flex-col">
           {/* Mobile Header: only rendered when device width is less than 540px */}
