@@ -81,8 +81,6 @@ export default function RootLayout({ children }) {
     >
       <head>
         <ThemeModeScript />
-        {/* Use base tag so relative src="./..." paths resolve from root or basePath */}
-        <base href={`${process.env.NEXT_PUBLIC_BASE_PATH ? `/${process.env.NEXT_PUBLIC_BASE_PATH}/` : '/'}`} />
       </head>
       <body className={`${lexendDeca.className}`}>
         <div className="flex flex-col">

@@ -25,9 +25,6 @@ const nextConfig = {
   assetPrefix: process.env.ASSET_PREFIX || '',
   trailingSlash: true,
   output: 'export',
-  env: {
-    NEXT_PUBLIC_BASE_PATH: process.env.BASE_PATH || ''
-  },
   webpack: (config, { isServer }) => {
     // Alias tailwindcss/version.js to tailwindcss/package.json
     config.resolve.alias['tailwindcss/version.js'] = require.resolve('tailwindcss/package.json');
