@@ -46,7 +46,7 @@ export default function MainContent({ activeItem }) {
   const isMDX = activeItem !== "Home";
 
   return (
-    <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
+    <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0 p-4 sm:p-6">
       {isMDX ? (
         <MDXProvider components={mdxComponents}>
           <article className="prose lg:prose-xl">

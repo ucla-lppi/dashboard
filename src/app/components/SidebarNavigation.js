@@ -4,7 +4,7 @@ import styles from "./SidebarNavigation.module.css";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function SidebarNavigation({ sidebarOpen }) {
+export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobile }) {
   const pathname = usePathname();
   const segments = pathname.split('/').filter(Boolean);
   const current = segments[0] || '';
@@ -15,19 +15,27 @@ export default function SidebarNavigation({ sidebarOpen }) {
     <aside
       id="logo-sidebar"
       className={`fixed top-0 left-0 z-[9999] w-64 min-h-screen bg-white shadow-[4px_0px_0px_rgba(25,73,88,0.50)]
-        flex flex-col justify-between transition-transform ${
+        flex flex-col justify-between transition-transform duration-300 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        } sm:translate-x-0`}
       aria-label="Sidebar"
     >
       <div className="px-3 py-4 bg-white">
-        <Link href="/" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2`}>
+        {isMobile && (
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="absolute top-4 right-4 p-2 bg-gray-200 rounded-full"
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+        )}
+        <Link href="/" className="text-xl font-bold uppercase block w-full p-2">
           <img
             src="./images/ucla_lppi_dashboard_logo.svg"
             alt="UCLA Luskin"
-            className="w-[798px] h-auto object-cover mb-4"
+            className="w-[798px] h-auto object-cover mb-4 pointer-events-none"
           />
-          <span className="self-center text-xl font-bold whitespace-nowrap uppercase"></span>
         </Link>
         <ul className="space-y-2 font-medium">
           {/* Home */}

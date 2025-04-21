@@ -81,6 +81,8 @@ export default function RootLayout({ children }) {
     >
       <head>
         <ThemeModeScript />
+        {/* Use base tag so relative src="./..." paths resolve from root or basePath */}
+        <base href={`${process.env.NEXT_PUBLIC_BASE_PATH ? `/${process.env.NEXT_PUBLIC_BASE_PATH}/` : '/'}`} />
       </head>
       <body className={`${lexendDeca.className}`}>
         <div className="flex flex-col">
@@ -98,19 +100,19 @@ export default function RootLayout({ children }) {
 			<img
 				src="./images/lppi-dashboard-logo.svg"
 				alt="LPPI Dashboard Logo"
-				className="h-8" // increased from h-6 to h-8
+				className="h-8 pointer-events-none"
 			/>
 			<span className="ml-2 text-xl font-bold text-black"></span>
 			</a>
 		</header>
 		)}
 
-          <div className="grid grid-cols-[auto] min-h-screen">
+          <div className="grid grid-cols-1 sm:grid-cols-[auto] min-h-screen">
             {/* Sidebar Navigation Component */}
-            <SidebarNavigation sidebarOpen={sidebarOpen} />
+            <SidebarNavigation sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isMobile={isMobile} />
 
             {/* Main Content Section */}
-            <div className={`relative p-4 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"}`}>
+            <div className={`relative p-4 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"} sm:ml-0`}>
               {/* Background Layer */}
               <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden pointer-events-none">
                 <img
