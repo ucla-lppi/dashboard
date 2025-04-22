@@ -2,6 +2,7 @@
 import React from 'react';
 
 export default function Footer() {
+  const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
   return (
     <footer className="relative z-10 bg-tertiary text-black">
       <div className="mx-auto max-w-screen-lg py-8 px-4">
@@ -12,7 +13,7 @@ export default function Footer() {
           {/* Column 1: UCLA Logo, Quote, Social Icons */}
           <div className="flex flex-col items-start justify-self-center">
             <img
-              src="/images/ucla_lppi_dashboard_logo.svg"
+              src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
               alt="UCLA Climate and Health Dashboard"
               className="w-[350px] sm:w-[400px] md:w-[450px] lg:w-[600px] xl:w-[789px] h-auto object-cover mb-4"
             />
@@ -21,32 +22,32 @@ export default function Footer() {
             </p>
             <div className="flex justify-start items-center space-x-4">
               <img
-                src="/images/fb_footer.svg"
+                src={`${prefix}/images/fb_footer.svg`}
                 alt="Facebook"
                 className="w-[12px] h-[20px]"
               />
               <img
-                src="/images/yt_footer.svg"
+                src={`${prefix}/images/yt_footer.svg`}
                 alt="YouTube"
                 className="w-[21px] h-[14px]"
               />
               <img
-                src="/images/ig_footer.svg"
+                src={`${prefix}/images/ig_footer.svg`}
                 alt="Instagram"
                 className="w-[21px] h-[20px]"
               />
               <img
-                src="/images/twitter_footer.svg"
+                src={`${prefix}/images/twitter_footer.svg`}
                 alt="X"
                 className="w-[21px] h-[19px]"
               />
               <img
-                src="/images/linkedin_footer.svg"
+                src={`${prefix}/images/linkedin_footer.svg`}
                 alt="LinkedIn"
                 className="w-[21px] h-[21px]"
               />
               <img
-                src="/images/email_footer.svg"
+                src={`${prefix}/images/email_footer.svg`}
                 alt="Email"
                 className="w-[21px] h-[14px]"
               />
@@ -56,7 +57,7 @@ export default function Footer() {
           {/* Divider Column */}
           <div className="h-full flex items-center justify-center mx-2 md:mx-4 justify-self-center">
             <img 
-              src="/images/line-31.svg" 
+              src={`${prefix}/images/line-31.svg`} 
               alt="Divider" 
               className="w-[1px] h-[141px] object-cover"
             />
