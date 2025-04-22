@@ -18,11 +18,17 @@ const withMDX = mdx({
   },
 });
 
+// Normalize BASE_PATH to always start with '/'
+const rawBase = process.env.BASE_PATH || '';
+const cleanedBase = rawBase.replace(/^\/+|\/+$/g, '');
+const basePath = cleanedBase ? `/${cleanedBase}` : '';
+const assetPrefix = process.env.ASSET_PREFIX || basePath;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  basePath: process.env.BASE_PATH || '',
-  assetPrefix: process.env.ASSET_PREFIX || '',
+  basePath,
+  assetPrefix,
   trailingSlash: true,
   output: 'export',
   env: {
