@@ -28,6 +28,11 @@ export default function RootLayout({ children }) {
   // New state to detect mobile devices below 540px
   const [isMobile, setIsMobile] = useState(false);
 
+  // Compute base href for relative assets
+  const rawPath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const baseClean = rawPath.replace(/^\/+|\/+$/g, '');
+  const baseHref = baseClean ? `/${baseClean}/` : '/';
+
   const mainContentRef = useRef(null);
   const sidebarRef = useRef(null);
 
@@ -93,7 +98,7 @@ export default function RootLayout({ children }) {
 			</button>
 			<a href="/" className="flex items-center">
 			<img
-				src="./images/lppi-dashboard-logo.svg"
+				src="/images/lppi-dashboard-logo.svg"
 				alt="LPPI Dashboard Logo"
 				className="h-8 pointer-events-none"
 			/>
@@ -111,12 +116,12 @@ export default function RootLayout({ children }) {
               {/* Background Layer */}
               <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden pointer-events-none">
                 <img
-                  src="./images/bg_circle_top_left.svg"
+                  src="/images/bg_circle_top_left.svg"
                   alt="Top left circle"
                   className="absolute top-[50px] left-[-200px]"
                 />
                 <img
-                  src="./images/bg_circle_bottom_right.svg"
+                  src="/images/bg_circle_bottom_right.svg"
                   alt="Bottom right circle"
                   className="absolute bottom-[-350px] right-[-250px]"
                 />

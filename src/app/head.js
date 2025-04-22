@@ -1,6 +1,7 @@
 export default function Head() {
-  // Determine base href from env (dashboard on GitHub Pages, root on production)
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  // Normalize BASE_PATH env (strip leading/trailing slashes)
+  const raw = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const basePath = raw.replace(/^\/+|\/+$/g, '');
   const href = basePath ? `/${basePath}/` : '/';
   return (
     <>

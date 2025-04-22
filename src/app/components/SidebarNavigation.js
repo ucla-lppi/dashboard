@@ -32,7 +32,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
         )}
         <Link href="/" className="text-xl font-bold uppercase block w-full p-2">
           <img
-            src="./images/ucla_lppi_dashboard_logo.svg"
+            src="/images/ucla_lppi_dashboard_logo.svg"
             alt="UCLA Luskin"
             className="w-[798px] h-auto object-cover mb-4 pointer-events-none"
           />
@@ -164,22 +164,22 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
         <div className="text-center text-sm font-bold mb-2">Connect with us!</div>
         <div className="flex justify-center space-x-2">
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./images/fb_sidebar.svg" alt="Facebook" className="w-5 h-5" />
+            <img src="/images/fb_sidebar.svg" alt="Facebook" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./images/yt_sidebar.svg" alt="YouTube" className="w-5 h-5" />
+            <img src="/images/yt_sidebar.svg" alt="YouTube" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./images/ig_sidebar.svg" alt="Instagram" className="w-5 h-5" />
+            <img src="/images/ig_sidebar.svg" alt="Instagram" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./images/twitter_sidebar.svg" alt="Twitter" className="w-5 h-5" />
+            <img src="/images/twitter_sidebar.svg" alt="Twitter" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./images/linkedin_sidebar.svg" alt="LinkedIn" className="w-5 h-5" />
+            <img src="/images/linkedin_sidebar.svg" alt="LinkedIn" className="w-5 h-5" />
           </div>
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src="./images/email_sidebar.svg" alt="Email" className="w-5 h-5" />
+            <img src="/images/email_sidebar.svg" alt="Email" className="w-5 h-5" />
           </div>
         </div>
       </div>
