@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-const geoJsonUrl = "./static/data/ca_counties.geojson"; // Serve from public static folder
+// Compute prefix for asset paths
+const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
+// GeoJSON asset URL with prefix
+const geoJsonUrl = `${prefix}/static/data/ca_counties.geojson`; // Serve from public static folder
 const options = {
 	mapHeight: '551'
 }
