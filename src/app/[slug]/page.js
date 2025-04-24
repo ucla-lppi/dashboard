@@ -1,11 +1,12 @@
 import SlugClient from './SlugClient';
 import Papa from 'papaparse';
+import { notFound } from 'next/navigation';
+import SlugClientRenderer from './SlugClientRenderer';
 
 // Define all valid slug keys for pre-rendering
 const slugs = [
   'home',
   'impact',
-  'research',
   'press-coverage',
   'additional-resources',
   'contact',
@@ -20,7 +21,8 @@ export function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-  const { slug } = await params;
+  const { slug } = params;
+  // Render FAQ via SlugClient
   let initialData = [];
   let csvUrl = '';
   if (slug === 'faqs') {
@@ -36,6 +38,13 @@ export default async function Page({ params }) {
         id: item.id?.trim() || item.ID?.trim() || "",
       }))
       .filter(item => item.draft?.toLowerCase() !== 'yes' && item.question && item.answer);
+    return <SlugClient slug={slug} csvUrl={csvUrl} initialData={initialData} />;
   }
-  return <SlugClient slug={slug} csvUrl={csvUrl} initialData={initialData} />;
+  // Delegate remaining slugs to the client renderer (MDX content uses React context)
+  const valid = ['home','impact','press-coverage','additional-resources','contact','technical-documentation','our-data','our-team'];
+  if (valid.includes(slug)) {
+    return <SlugClientRenderer slug={slug} />;
+  }
+  // Unknown slug → 404
+  notFound();
 }

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./SidebarNavigation.module.css";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ResearchSection from './ResearchSection';
 
 export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobile }) {
   // Determine asset prefix (e.g. '/dashboard')
@@ -77,7 +78,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
             </button>
             <ul className={`${impactOpen ? "block" : "hidden"} py-2 space-y-2`}>
               <li>
-                <Link href="/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'research' ? styles.menuItemActive : ''}`}>
+                <Link href="/impact/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'research' ? styles.menuItemActive : ''}`}>
                   Research
                 </Link>
               </li>
