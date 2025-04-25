@@ -83,13 +83,13 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                 </Link>
               </li>
               <li>
-                <Link href="/press-coverage" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'press-coverage' ? styles.menuItemActive : ''}`}>
-                  PRESS COVERAGE
+                <Link href="/impact/newsroom" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'newsroom' ? styles.menuItemActive : ''}`}>
+                  Newsroom
                 </Link>
               </li>
               <li>
-                <Link href="/partners" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'partners' ? styles.menuItemActive : ''}`}>
-                  PARTNERS
+                <Link href="/impact/partners" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'partners' ? styles.menuItemActive : ''}`}>
+                  Partners
                 </Link>
               </li>
               <li>
@@ -137,13 +137,13 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                 </Link>
               </li>
               <li>
-                <Link href="/technical-documentation" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'technical-documentation' ? styles.menuItemActive : ''}`}>
-                  TECHNICAL DOCUMENTATION
-                </Link>
-              </li>
-              <li>
                 <Link href="/our-team" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'our-team' ? styles.menuItemActive : ''}`}>
                   OUR TEAM
+                </Link>
+              </li>
+			  <li>
+                <Link href="/technical-documentation" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'technical-documentation' ? styles.menuItemActive : ''}`}>
+                  TECHNICAL DOCUMENTATION
                 </Link>
               </li>
               <li>

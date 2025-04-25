@@ -1,12 +1,18 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react';
 import Papa from 'papaparse';
-import { Spinner } from 'flowbite-react';
 
-export default function ResearchSection({ csvUrl }) {
+export default function ResearchSection({ csvUrl, mainHeading = 'Research', initialCategory = 'data_for_action', showInitialHeading = true }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Category labels
+  const labelMap = {
+    data_for_action: 'Data for Action',
+    press_coverage: 'Press Coverage',
+    partners: 'Partners',
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -67,15 +73,12 @@ export default function ResearchSection({ csvUrl }) {
     const displayItems = showAll ? items : items.slice(0, 4);
     return (
       <div className="mb-12 relative pb-16">
-        {/* Header */}
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold text-gray-900">{label}</h3>
-        </div>
+        {/* Section content (heading rendered externally) */}
         {/* Mobile carousel */}
         <div className="block md:hidden relative group">
           <div ref={carouselRef} className="flex space-x-6 overflow-x-auto pb-4">
             {displayItems.map(item => (
-              <article key={item.id} className="inline-block w-64 p-1 pb-10 bg-white overflow-hidden relative">
+              <article key={item.id} className="inline-block w-64 p-1 pb-10 bg-white rounded-lg overflow-hidden relative flex flex-col min-h-[28rem]">
                 <a href={item.link} className="block hover:shadow-lg transition-shadow">
                   <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
                   <h4 className="text-lg text-gray-900 mb-2 break-words">{item.title}</h4>
@@ -99,7 +102,7 @@ export default function ResearchSection({ csvUrl }) {
         {/* Desktop grid */}
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
           {displayItems.map(item => (
-            <article key={item.id} className="p-1 pb-10 bg-white overflow-hidden hover:shadow-lg transition-shadow relative flex flex-col h-full">
+            <article key={item.id} className="p-1 pb-10 bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative flex flex-col h-full min-h-[28rem]">
               <a href={item.link}>
                 <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
                 <h4 className="text-lg font-bold text-gray-900 mb-2 break-words">{item.title}</h4>
@@ -130,34 +133,69 @@ export default function ResearchSection({ csvUrl }) {
     <aside className="py-8 bg-white">
       <div className="container px-4 mx-auto max-w-7xl">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Research</h2>
+          <h2 className="text-3xl font-bold text-gray-900">{mainHeading}</h2>
         </div>
-        {loading && (
-          <div className="flex justify-center py-8">
-            <Spinner aria-label="Loading articles" />
-          </div>
+
+        {/* Initial category section */}
+        {showInitialHeading && (
+          <h3 className="text-xl font-semibold mb-6 text-gray-900">{labelMap[initialCategory]}</h3>
         )}
-        {error && <p role="alert" className="text-center text-red-600">{error}</p>}
+        {loading && (
+          <>
+            {/* Mobile skeleton carousel */}
+            <div className="block md:hidden flex space-x-6 overflow-x-auto pb-4">
+              {[...Array(4)].map((_, idx) => (
+                <article key={idx} className="inline-block w-64 p-1 pb-10 bg-white rounded-lg overflow-hidden relative animate-pulse min-h-[28rem]">
+                  {/* image placeholder */}
+                  <div className="w-full h-48 bg-gray-300 rounded-lg mb-4"></div>
+                  {/* title/text placeholders */}
+                  <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-2 w-1/2"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  {/* 3px gray underline */}
+                  <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
+                </article>
+              ))}
+            </div>
+            {/* Desktop skeleton grid */}
+            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
+              {[...Array(4)].map((_, idx) => (
+                <article key={idx} className="p-1 pb-10 bg-white overflow-hidden relative flex flex-col h-full animate-pulse min-h-[28rem]">
+                  <div className="flex-1">
+                    <div className="w-full h-48 bg-gray-300 mb-4"></div>
+                    <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2 w-1/2"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                  </div>
+                  {/* 3px gray underline */}
+                  <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Initial category content */}
+        {!loading && !error && (
+          <CategorySection
+            label={labelMap[initialCategory]}
+            items={articles.filter(item => item.subcategory === initialCategory)}
+          />
+        )}
+
+        {/* Other categories */}
         {!loading && !error &&
           Object.entries(
             articles.reduce((acc, item) => {
-              (acc[item.subcategory] ||= []).push(item);
+              if (item.subcategory !== initialCategory) (acc[item.subcategory] ||= []).push(item);
               return acc;
             }, {})
-          ).map(([key, items]) => {
-            const labelMap = {
-              data_for_action: 'Data for Action',
-              press_coverage: 'Press Coverage',
-              partners: 'Partners',
-            };
-            return (
-              <CategorySection
-                key={key}
-                label={labelMap[key] || key}
-                items={items}
-              />
-            );
-          })
+          ).map(([key, items]) => (
+            <div key={key}>
+              <h3 className="text-xl font-semibold mb-6 text-gray-900">{labelMap[key] || key}</h3>
+              <CategorySection label={labelMap[key] || key} items={items} />
+            </div>
+          ))
         }
       </div>
     </aside>

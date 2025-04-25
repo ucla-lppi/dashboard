@@ -9,7 +9,7 @@ import HomePage from "../components/HomePage";
 import Research from "@content/Research.mdx";
 import AdditionalResources from "@content/AdditionalResources.mdx";
 import Contact from "@content/Contact.mdx";
-import PressCoverage from "@content/PressCoverage.mdx";
+import Newsroom from "@content/Newsroom.mdx";
 import TechnicalDocumentation from "@content/TechnicalDocumentation.mdx";
 import OurData from "@content/OurData.mdx";
 import OurTeam from "@content/OurTeam.mdx";
@@ -22,7 +22,7 @@ const components = {
   Research,
   AdditionalResources,
   Contact,
-  PressCoverage,
+  Newsroom,
   TechnicalDocumentation,
   OurData,
   OurTeam,

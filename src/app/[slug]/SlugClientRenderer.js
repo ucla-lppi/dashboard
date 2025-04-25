@@ -3,7 +3,7 @@
 import React from 'react';
 import Home from '@content/Home.mdx';
 import Impact from '@content/Impact.mdx';
-import PressCoverage from '@content/PressCoverage.mdx';
+import Newsroom from '@content/Newsroom.mdx';
 import AdditionalResources from '@content/AdditionalResources.mdx';
 import Contact from '@content/Contact.mdx';
 import TechnicalDocumentation from '@content/TechnicalDocumentation.mdx';
@@ -14,7 +14,7 @@ export default function SlugClientRenderer({ slug }) {
   const pages = {
     home: Home,
     impact: Impact,
-    'press-coverage': PressCoverage,
+    'newsroom': Newsroom,
     'additional-resources': AdditionalResources,
     contact: Contact,
     'technical-documentation': TechnicalDocumentation,

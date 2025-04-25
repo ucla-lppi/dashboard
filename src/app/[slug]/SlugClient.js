@@ -4,7 +4,7 @@ import { Card } from 'flowbite-react';
 
 import Impact from '@content/Impact.mdx';
 import Research from '@content/Research.mdx';
-import PressCoverage from '@content/PressCoverage.mdx';
+import Newsroom from '@content/Newsroom.mdx';
 import AdditionalResources from '@content/AdditionalResources.mdx';
 import Contact from '@content/Contact.mdx';
 import TechnicalDocumentation from '@content/TechnicalDocumentation.mdx';
@@ -17,7 +17,7 @@ const components = {
   home: HomePage,
   impact: Impact,
   research: Research,
-  'press-coverage': PressCoverage,
+  'newsroom': Newsroom,
   'additional-resources': AdditionalResources,
   contact: Contact,
   'technical-documentation': TechnicalDocumentation,

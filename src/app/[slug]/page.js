@@ -7,7 +7,7 @@ import SlugClientRenderer from './SlugClientRenderer';
 const slugs = [
   'home',
   'impact',
-  'press-coverage',
+  'newsroom',
   'additional-resources',
   'contact',
   'technical-documentation',
@@ -41,7 +41,7 @@ export default async function Page({ params }) {
     return <SlugClient slug={slug} csvUrl={csvUrl} initialData={initialData} />;
   }
   // Delegate remaining slugs to the client renderer (MDX content uses React context)
-  const valid = ['home','impact','press-coverage','additional-resources','contact','technical-documentation','our-data','our-team'];
+  const valid = ['home','impact','newsroom','additional-resources','contact','technical-documentation','our-data','our-team'];
   if (valid.includes(slug)) {
     return <SlugClientRenderer slug={slug} />;
   }
