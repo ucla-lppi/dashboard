@@ -1,11 +1,14 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react';
 import Papa from 'papaparse';
+import { useDataContext } from '@/app/context/DataContext';
+import Link from 'next/link';
 
 export default function ResearchSection({ csvUrl, mainHeading = 'Research', initialCategory = 'data_for_action', showInitialHeading = true }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { getDataForUrl, setDataForUrl } = useDataContext();
 
   // Category labels
   const labelMap = {
@@ -15,53 +18,60 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
   };
 
   useEffect(() => {
-    setLoading(true);
-    fetch(csvUrl)
-      .then(res => {
-        if (!res.ok) throw new Error(`Failed to load CSV (${res.status})`);
-        return res.text();
-      })
-      .then(text => {
-        Papa.parse(text, {
-          header: true,
-          complete: ({ data, errors }) => {
-            if (errors.length) {
-              setError('Error parsing data');
-              setLoading(false);
-              return;
-            }
-            // Map rows to expected fields (include File and Title columns)
-            const mapped = data
-              .map((item, idx) => ({
-                id: item.id || item.ID || idx,
-                title: item.Title || item.title || '',
-                description: item.Description || item.description || '',
-                imageUrl: item.File || item.file || item.imageUrl || item.Image || '',
-                date: item.date ? new Date(item.date) : new Date(),
-                subcategory: item.subcategory || item.Subcategory || '',
-                link: item.link || item.Link || '#',
-                readTime: item.readTime || item['Read time'] || item.ReadTime || ''
-              }))
-              // Filter out rows missing a title or image
-              .filter(item => item.title && item.imageUrl);
-            // Sort by date descending
-            const sorted = mapped.sort((a, b) => b.date - a.date);
-            setArticles(sorted);
-            setLoading(false);
-          }
-        });
-      })
-      .catch(err => {
-        setError(err.message);
+    const loadData = async () => {
+      setLoading(true);
+      const cached = getDataForUrl(csvUrl);
+      const process = (data) => {
+        if (!data) { setLoading(false); return; }
+        const mapped = data
+          .map((item, idx) => ({
+            id: item.id || item.ID || idx,
+            title: item.Title || item.title || '',
+            description: item.Description || item.description || '',
+            imageUrl: item.File || item.file || item.imageUrl || item.Image || '',
+            date: item.date ? new Date(item.date) : new Date(),
+            subcategory: item.subcategory || item.Subcategory || '',
+            link: item.link || item.Link || '#',
+            readTime: item.readTime || item['Read time'] || item.ReadTime || ''
+          }))
+          .filter(item => item.title && item.imageUrl)
+          .sort((a, b) => b.date - a.date);
+        setArticles(mapped);
         setLoading(false);
-      });
+      };
+      if (cached) {
+        process(cached);
+      } else {
+        try {
+          const res = await fetch(csvUrl);
+          if (!res.ok) throw new Error(`Failed to load CSV (${res.status})`);
+          const text = await res.text();
+          Papa.parse(text, {
+            header: true,
+            complete: ({ data, errors }) => {
+              if (errors.length) {
+                setError('Error parsing data');
+                setLoading(false);
+                return;
+              }
+              setDataForUrl(csvUrl, data);
+              process(data);
+            }
+          });
+        } catch (err) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
+    };
+    loadData();
   }, [csvUrl]);
 
   // Subcomponent to render each subcategory with its header, toggle, and layout
-  function CategorySection({ label, items }) {
-    const [showAll, setShowAll] = useState(false);
+  function CategorySection({ label, items, slugKey }) {
+    // Display only first 4 items, navigation instead of toggle
+    const displayItems = items.slice(0, 4);
     const carouselRef = useRef(null);
-    // Check overflow to show nav arrows
     const [overflow, setOverflow] = useState(false);
     useEffect(() => {
       const el = carouselRef.current;
@@ -70,7 +80,6 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
       window.addEventListener('resize', handle);
       return () => window.removeEventListener('resize', handle);
     }, [items]);
-    const displayItems = showAll ? items : items.slice(0, 4);
     return (
       <div className="mb-12 relative pb-16">
         {/* Section content (heading rendered externally) */}
@@ -78,14 +87,17 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
         <div className="block md:hidden relative group">
           <div ref={carouselRef} className="flex space-x-6 overflow-x-auto pb-4">
             {displayItems.map(item => (
-              <article key={item.id} className="inline-block w-64 p-1 pb-10 bg-white rounded-lg overflow-hidden relative flex flex-col min-h-[28rem]">
-                <a href={item.link} className="block hover:shadow-lg transition-shadow">
+              <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="inline-block w-64 p-1 pb-10 bg-white overflow-hidden relative flex flex-col min-h-[28rem] transform transition-transform duration-200 hover:-translate-y-[5px]">
+                <article className="h-full">
                   <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
-                  <h4 className="text-lg text-gray-900 mb-2 break-words">{item.title}</h4>
-                </a>
-                {/* 3px gray underline */}
-                <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
-              </article>
+                  <div className="relative mb-2">
+                    <h4 className="text-lg text-gray-900 break-words pr-6">{item.title}</h4>
+                    <img src="/images/external_link.svg" alt="External link" className="w-4 h-4 absolute top-0 right-0" />
+                  </div>
+                  {/* 3px gray underline */}
+                  <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
+                </article>
+              </Link>
             ))}
           </div>
           {overflow && (
@@ -102,28 +114,33 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
         {/* Desktop grid */}
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
           {displayItems.map(item => (
-            <article key={item.id} className="p-1 pb-10 bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative flex flex-col h-full min-h-[28rem]">
-              <a href={item.link}>
+            <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="p-1 pb-10 bg-white overflow-hidden transform transition-transform duration-200 hover:-translate-y-[5px] relative flex flex-col h-full min-h-[28rem]">
+              <article className="h-full">
                 <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
-                <h4 className="text-lg font-bold text-gray-900 mb-2 break-words">{item.title}</h4>
-              </a>
-              {/* 3px gray underline */}
-              <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
-            </article>
+                <div className="relative mb-2">
+                  <h4 className="text-lg font-bold text-gray-900 break-words pr-6">{item.title}</h4>
+                  <img src="/images/external_link.svg" alt="External link" className="w-4 h-4 absolute top-0 right-0" />
+                </div>
+                {/* 3px gray underline */}
+                <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
+              </article>
+            </Link>
           ))}
         </div>
-        {/* absolute bottom-right toggle */}
+        {/* absolute bottom-right 'See all' with circular arrow button */}
         {items.length > 4 && (
-          <div className="absolute bottom-10 right-0 flex flex-col items-end space-y-1">
-            <span className="text-primary font-medium">{showAll ? 'See less' : 'See all'}</span>
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-              aria-label={showAll ? 'See less items' : 'See all items'}
-            >
-              <span className="text-lg">{showAll ? '←' : '→'}</span>
-            </button>
-          </div>
+          <Link
+            href={`/${slugKey}`}
+            aria-label={`View all ${label} items`}
+            className="absolute bottom-10 right-0 inline-flex items-center space-x-2 text-primary font-medium hover:underline cursor-pointer"
+          >
+            <span>See all</span>
+            <span className="inline-flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </span>
+          </Link>
         )}
       </div>
     );
@@ -180,6 +197,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
           <CategorySection
             label={labelMap[initialCategory]}
             items={articles.filter(item => item.subcategory === initialCategory)}
+            slugKey={initialCategory.replace(/_/g, '-')}
           />
         )}
 
@@ -193,7 +211,11 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
           ).map(([key, items]) => (
             <div key={key}>
               <h3 className="text-xl font-semibold mb-6 text-gray-900">{labelMap[key] || key}</h3>
-              <CategorySection label={labelMap[key] || key} items={items} />
+              <CategorySection
+                label={labelMap[key] || key}
+                items={items}
+                slugKey={key.replace(/_/g, '-')}
+              />
             </div>
           ))
         }

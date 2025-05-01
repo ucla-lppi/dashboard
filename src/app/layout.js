@@ -5,6 +5,7 @@ import { ThemeModeScript } from 'flowbite-react';
 import Footer from './components/Footer';
 import SidebarNavigation from './components/SidebarNavigation';
 import './styles/globals.css';
+import { DataProvider } from './context/DataContext';
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
@@ -85,6 +86,7 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body className={`${lexendDeca.className}`}>
+        <DataProvider>
         <div className="flex flex-col">
           {/* Mobile Header: only rendered when device width is less than 540px */}
 		{isMobile && (
@@ -131,8 +133,9 @@ export default function RootLayout({ children }) {
               {children}
             </div>
           </div>
-          <Footer />
         </div>
+        </DataProvider>
+        <Footer />
       </body>
     </html>
   );

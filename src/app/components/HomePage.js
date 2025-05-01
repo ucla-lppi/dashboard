@@ -36,11 +36,11 @@ export default function HomePage() {
         {/* Title */}
         <div className="flex items-center h-16 justify-end"> {/* Ensure consistent height */}
           <h2 className="headline headline--medium t-right font-bold">
-            California<br />
+            <br />
             <span className="text-primary text-3xl leading-tight">
-              Latino Wellness
+              California Latino
             </span><br />
-            Summary Statistics
+            Neighborhood Statistics
           </h2>
         </div>
 

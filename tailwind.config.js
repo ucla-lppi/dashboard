@@ -25,6 +25,7 @@ module.exports = {
           Lexend_Deca: ['var(--font-lexend-deca)', 'sans-serif'],
           Lexend_Zetta: ['"Lexend Zetta"', 'sans-serif'],
           laBelleAurore: ['"La Belle Aurore"', 'cursive'],
+          lexendLite: ['"Lexend Lite"', 'sans-serif'],
         },
         typography: (theme) => ({
           DEFAULT: {
