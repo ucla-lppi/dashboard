@@ -4,6 +4,8 @@ import Papa from 'papaparse';
 import { useDataContext } from '@/app/context/DataContext';
 import Link from 'next/link';
 
+const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
+
 export default function ResearchSection({ csvUrl, mainHeading = 'Research', initialCategory = 'data_for_action', showInitialHeading = true }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -92,7 +94,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
                   <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
                   <div className="relative mb-2">
                     <h4 className="text-lg text-gray-900 break-words pr-6">{item.title}</h4>
-                    <img src="/images/external_link.svg" alt="External link" className="w-4 h-4 absolute top-0 right-0" />
+                    <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                   </div>
                   {/* 3px gray underline */}
                   <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
@@ -119,7 +121,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
                 <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
                 <div className="relative mb-2">
                   <h4 className="text-lg font-bold text-gray-900 break-words pr-6">{item.title}</h4>
-                  <img src="/images/external_link.svg" alt="External link" className="w-4 h-4 absolute top-0 right-0" />
+                  <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                 </div>
                 {/* 3px gray underline */}
                 <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
@@ -127,20 +129,26 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             </Link>
           ))}
         </div>
-        {/* absolute bottom-right 'See all' with circular arrow button */}
+        {/* absolute bottom-right 'See all' with arrow button stacked */}
         {items.length > 4 && (
-          <Link
-            href={`/${slugKey}`}
-            aria-label={`View all ${label} items`}
-            className="absolute bottom-10 right-0 inline-flex items-center space-x-2 text-primary font-medium hover:underline cursor-pointer"
-          >
-            <span>See all</span>
-            <span className="inline-flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring">
+          <div className="absolute bottom-10 right-0 text-center">
+            <Link
+              href={`/${slugKey}`}
+              aria-label={`View all ${label} items`}
+              className="text-primary font-medium hover:underline block"
+            >
+              See all
+            </Link>
+            <Link
+              href={`/${slugKey}`}
+              aria-label={`View all ${label} items`}
+              className="mt-2 inline-flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-            </span>
-          </Link>
+            </Link>
+          </div>
         )}
       </div>
     );

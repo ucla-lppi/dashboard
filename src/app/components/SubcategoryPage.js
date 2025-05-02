@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import { useDataContext } from '@/app/context/DataContext';
+const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
 // Helper to normalize keys for comparison
 const normalizeKey = str => str?.toString().toLowerCase().replace(/[-\s]/g, '_');
@@ -102,7 +103,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                 className="flex-1 pl-4 pr-2 py-2 text-base font-lexendLite placeholder-[#005587]/80 text-[#005587] bg-transparent rounded-l-full focus:outline-none"
               />
               <span className="flex items-center justify-center w-10 h-10 bg-primary rounded-r-full">
-                <img src="/images/search_icon.svg" alt="Search" className="w-4 h-4" />
+                <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
               </span>
             </div>
           </div>
@@ -115,7 +116,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
               <span className="flex-1 px-4 py-2 text-base font-normal text-center">Filter</span>
               <span className="flex items-center justify-center w-10 h-10 bg-[#005587] rounded-r-full">
                 <img
-                  src="/images/descending.svg"
+                  src={`${prefix}/images/descending.svg`}
                   alt="Sort"
                   className={`w-4 h-4 transform ${sortAsc ? 'rotate-180' : ''}`}
                 />
@@ -173,7 +174,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                     ))}
                   </div>
                 {/* External link icon */}
-                <img src="/images/external_link.svg" alt="External link" className="w-4 h-4 absolute bottom-2 right-2" />
+                <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute bottom-2 right-2" />
                 </div>
               </article>
             ))}
