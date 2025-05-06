@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import SidebarNavigation from './components/SidebarNavigation';
 import './styles/globals.css';
 import { DataProvider } from './context/DataContext';
+import "@fontsource/montserrat/400.css"; // Regular
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],

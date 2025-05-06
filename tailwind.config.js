@@ -26,6 +26,7 @@ module.exports = {
           Lexend_Zetta: ['"Lexend Zetta"', 'sans-serif'],
           laBelleAurore: ['"La Belle Aurore"', 'cursive'],
           lexendLite: ['"Lexend Lite"', 'sans-serif'],
+          montserrat: ['Montserrat', 'sans-serif'],
         },
         typography: (theme) => ({
           DEFAULT: {

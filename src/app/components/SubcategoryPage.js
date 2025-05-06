@@ -91,7 +91,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
         </div>
         {/* Subcategory and controls row: 25%/1fr/15% */}
         <div className="grid grid-cols-[25%_1fr_15%] items-center gap-x-6 mb-6">
-          <h3 className="text-[20pt] font-bold text-gray-900">{displaySub}</h3>
+          <h3 className="self-center text-[20pt] font-bold text-gray-900">{displaySub}</h3>
           {/* Search cell */}
           <div className="flex justify-end">
             <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-[22rem]">
@@ -144,9 +144,11 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
         ) : (
           <div className="space-y-6">
             {displayItems.map(item => (
-              <article key={item.id} className="relative shadow border border-gray-200 p-4 pt-12 flex items-start transform transition-transform duration-200 hover:-translate-y-[5px]">
-                {/* Date top-right */}
-                <span className="absolute top-2 right-2 bg-primary text-white px-2 py-1 text-base font-normal">{item.date.toISOString().split('T')[0]}</span>
+              <article key={item.id} className="relative shadow border border-gray-200 pt-4 pb-8 pl-4 pr-12 flex items-start transform transition-transform duration-200 hover:-translate-y-[5px]">
+                {/* Date badge absolute top-right */}
+                <span className="absolute top-4 right-0 bg-primary text-white px-2 py-1 text-base font-normal">
+                  {`${item.date.getMonth() + 1}/${item.date.getDate()}/${item.date.getFullYear()}`}
+                </span>
                 {/* Image */}
                 <img
                   src={item.imageUrl || '/images/placeholder.png'}
@@ -156,8 +158,10 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                 {/* Content */}
                 <div className="flex-1">
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
-                    <h3 className="text-base font-bold text-gray-900">{item.title}</h3>
-                    {item.summary && <p className="text-base font-normal text-gray-700 mt-2">{item.summary}</p>}
+                    <div className="flex items-center mb-6 pr-16">
+                      <h3 className="flex-1 text-base font-bold text-gray-900">{item.title}</h3>
+                    </div>
+                    {item.summary && <p className="text-base font-normal text-gray-700 mt-4">{item.summary}</p>}
                   </a>
                   {/* Keyword tags as text links */}
                   <div className="mt-4 flex flex-wrap gap-2">

@@ -10,6 +10,7 @@
 		"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && gh-pages -d out"
 	},
 	"dependencies": {
+		"@fontsource/montserrat": "^5.2.5",
 		"@fortawesome/fontawesome-free": "^6.6.0",
 		"@mdx-js/loader": "^3.1.0",
 		"@mdx-js/react": "^3.1.0",
