@@ -137,11 +137,11 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             <span
               href={`/${slugKey}`}
               aria-label={`View all ${label} items`}
-              className="text-primary font-medium"
+              className="text-primary font-medium pr-2"
             >
               See all
-			</span>
-            <span
+            </span>
+            <Link
               href={`/${slugKey}`}
               aria-label={`View all ${label} items`}
               className="mt-2 inline-flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring"
@@ -149,7 +149,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-            </span>
+            </Link>
           </div>
         )}
       </div>
