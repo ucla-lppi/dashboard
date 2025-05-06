@@ -24,10 +24,17 @@ export default function ImpactPartnersPage() {
   }, []);
   return (
 	<main className="bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0 p-4 sm:p-6 max-w-screen-xl mx-auto px-4 py-8">
-	<div className="flex flex-col gap-4">
-		<h1 className="text-2xl font-bold text-primary">Partners</h1>
-		<div className="mb-4 text-1xl tracking-tight font-bold text-gray-900">Advisory Committee</div>
+    <aside className="py-8 bg-white">
 
+	<div className="container px-4 mx-auto max-w-7xl">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-primary">Partners</h2>
+        </div>
+
+        {/* Initial category section */}
+        { (
+          <h3 className="text-xl font-semibold mb-6 text-gray-900">Advisory Committee</h3>
+        )}
 	  </div>
 	  <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
@@ -41,19 +48,20 @@ export default function ImpactPartnersPage() {
                 {/* SVG boundary overlay */}
                 <img src={`${prefix}/images/partners_icon_boundary.svg`} alt="frame" className="absolute inset-0 w-full h-full" />
               </div>
-              <h3 className="mb-1 text-[24px] font-semibold font-montserrat text-primary">
+              <h3 className="mb-1 text-xl font-semibold font-Lexend_Deca text-primary">
                 {m.first_name} {m.last_name}
               </h3>
-              <p className="text-[18px] font-medium font-montserrat text-gray-700">
+              <p className="text-base font-medium font-montserrat text-gray-700">
                 {m.position}
               </p>
-              <p className="text-[18px] font-montserrat text-gray-500">
+              <p className="text-base font-montserrat text-gray-500">
                 {m.organization}
               </p>
             </div>
           ))}
         </div>
       </div>
+	  </aside>
 	</main>
   );
 }

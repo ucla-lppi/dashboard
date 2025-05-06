@@ -17,6 +17,8 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
     data_for_action: 'Data for Action',
     press_coverage: 'Press Coverage',
     partners: 'Partners',
+    policy_recommendations: 'Policy Recommendations',
+    talking_points_messaging: 'Talking Points & Messaging Guides',
   };
 
   useEffect(() => {
@@ -132,14 +134,14 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
         {/* absolute bottom-right 'See all' with arrow button stacked */}
         {items.length > 4 && (
           <div className="absolute bottom-10 right-0 text-center">
-            <Link
+            <span
               href={`/${slugKey}`}
               aria-label={`View all ${label} items`}
-              className="text-primary font-medium hover:underline block"
+              className="text-primary font-medium"
             >
               See all
-            </Link>
-            <Link
+			</span>
+            <span
               href={`/${slugKey}`}
               aria-label={`View all ${label} items`}
               className="mt-2 inline-flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring"
@@ -147,7 +149,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-            </Link>
+            </span>
           </div>
         )}
       </div>
@@ -200,8 +202,14 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
           </>
         )}
 
+        {!loading && !error && articles.length === 0 && (
+          <div className="py-12 text-center">
+            <p className="text-lg font-medium text-gray-700">Coming Soon</p>
+          </div>
+        )}
+
         {/* Initial category content */}
-        {!loading && !error && (
+        {!loading && !error && articles.length > 0 && (
           <CategorySection
             label={labelMap[initialCategory]}
             items={articles.filter(item => item.subcategory === initialCategory)}
@@ -210,7 +218,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
         )}
 
         {/* Other categories */}
-        {!loading && !error &&
+        {!loading && !error && articles.length > 0 &&
           Object.entries(
             articles.reduce((acc, item) => {
               if (item.subcategory !== initialCategory) (acc[item.subcategory] ||= []).push(item);
