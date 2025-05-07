@@ -117,7 +117,7 @@ export default function RootLayout({ children }) {
             {/* Main Content Section */}
             <div className={`relative p-4 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"} sm:ml-0`}>
               {/* Background Layer */}
-              <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#3B94AE] to-[#194957] overflow-hidden pointer-events-none">
+              <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#004266] to-[#002E45] overflow-hidden pointer-events-none">
 				{/* Removed background circles */}
                 {/* <img
                   src="/images/bg_circle_top_left.svg"

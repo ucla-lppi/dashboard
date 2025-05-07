@@ -31,7 +31,12 @@ export default function SlugClient({ slug, csvUrl, initialData }) {
   if (slug === 'faqs') {
     return (
       <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
-        <FAQsFromCSV csvUrl={csvUrl} initialData={initialData} />
+		  <h1 className="text-2xl font-bold">Frequently Asked Questions</h1>
+		  <p>Here is a list of common questions and answers you may have as you explore the Latino Climate and Health Dashboard. Many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard can be found here or in the “Our Data” [LINK] section. Please refer to the technical report [LINK] for detailed information on our methods and data sources. 
+			<br/> <br/>	
+		  If you have suggestions for indicators or areas we should include—or are interested in supporting or collaborating on this work—please contact us at latino@luskin.ucla.edu. 
+		  </p>
+		<FAQsFromCSV csvUrl={csvUrl} initialData={initialData} />
       </Card>
     );
   }

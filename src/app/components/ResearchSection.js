@@ -91,16 +91,14 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
         <div className="block md:hidden relative group">
           <div ref={carouselRef} className="flex space-x-6 overflow-x-auto pb-4">
             {displayItems.map(item => (
-              <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="inline-block w-64 p-1 pb-10 bg-white overflow-hidden relative flex flex-col min-h-[28rem] transform transition-transform duration-200 hover:-translate-y-[5px]">
-                <article className="h-full">
-                  <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
+              <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="inline-block w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col min-h-[269px] transform transition duration-200 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_5px_0_#c5c5c5]">
+                <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" />
+                <div className="p-4 flex-1 flex flex-col">
                   <div className="relative mb-2">
                     <h4 className="text-lg text-gray-900 break-words pr-6">{item.title}</h4>
                     <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                   </div>
-                  {/* 3px gray underline */}
-                  <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
-                </article>
+                </div>
               </Link>
             ))}
           </div>
@@ -118,16 +116,14 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
         {/* Desktop grid */}
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
           {displayItems.map(item => (
-            <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="p-1 pb-10 bg-white overflow-hidden transform transition-transform duration-200 hover:-translate-y-[5px] relative flex flex-col h-full min-h-[28rem]">
-              <article className="h-full">
-                <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover mb-4" />
+            <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col min-h-[269px] transform transition duration-200 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_5px_0_#c5c5c5]">
+              <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" />
+              <div className="p-4 flex-1 flex flex-col">
                 <div className="relative mb-2">
                   <h4 className="text-lg font-bold text-gray-900 break-words pr-6">{item.title}</h4>
                   <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                 </div>
-                {/* 3px gray underline */}
-                <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
-              </article>
+              </div>
             </Link>
           ))}
         </div>
@@ -137,14 +133,14 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             <span
               href={`/${slugKey}`}
               aria-label={`View all ${label} items`}
-              className="text-primary font-medium pr-2"
+              className="text-black font-medium pr-2"
             >
-              See all
+              see all
             </span>
             <Link
               href={`/${slugKey}`}
               aria-label={`View all ${label} items`}
-              className="mt-2 inline-flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring"
+              className="mt-2 inline-flex items-center justify-center w-10 h-10 bg-accents text-white rounded-full hover:bg-accents/90 focus:outline-none focus:ring"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M13 5l7 7-7 7" />
@@ -172,30 +168,27 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             {/* Mobile skeleton carousel */}
             <div className="block md:hidden flex space-x-6 overflow-x-auto pb-4">
               {[...Array(4)].map((_, idx) => (
-                <article key={idx} className="inline-block w-64 p-1 pb-10 bg-white rounded-lg overflow-hidden relative animate-pulse min-h-[28rem]">
-                  {/* image placeholder */}
-                  <div className="w-full h-48 bg-gray-300 rounded-lg mb-4"></div>
+                <article key={idx} className="inline-block w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col animate-pulse min-h-[269px]">
+                  <div className="w-full h-48 bg-gray-300"></div>
                   {/* title/text placeholders */}
-                  <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-2 w-1/2"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  {/* 3px gray underline */}
-                  <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
+                  <div className="p-4 flex-1 flex flex-col">
+                    <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2 w-1/2"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  </div>
                 </article>
               ))}
             </div>
             {/* Desktop skeleton grid */}
             <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
               {[...Array(4)].map((_, idx) => (
-                <article key={idx} className="p-1 pb-10 bg-white overflow-hidden relative flex flex-col h-full animate-pulse min-h-[28rem]">
-                  <div className="flex-1">
-                    <div className="w-full h-48 bg-gray-300 mb-4"></div>
+                <article key={idx} className="w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col animate-pulse min-h-[269px]">
+                  <div className="w-full h-48 bg-gray-300"></div>
+                  <div className="p-4 flex-1 flex flex-col">
                     <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
                     <div className="h-4 bg-gray-200 rounded mb-2 w-1/2"></div>
                     <div className="h-4 bg-gray-200 rounded"></div>
                   </div>
-                  {/* 3px gray underline */}
-                  <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gray-200"></div>
                 </article>
               ))}
             </div>

@@ -67,7 +67,7 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
 
   return (
     <section className="max-w-2xl mx-auto my-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+      {/* <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2> */}
       <div id="faq-accordion" className="divide-y divide-gray-200 rounded-lg shadow bg-white">
         {faqs.map((faq, idx) => {
           // Generate a slug for the anchor (fallback to idx if no question)

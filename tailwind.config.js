@@ -18,8 +18,9 @@ module.exports = {
           },
           brandColor: "#005587",
           secondary: "#338F87", // Used for the shadows
-          tertiary: "#daf3f0",  // Used for the footer
+          tertiary: "#AEC8C3",  // Used for the footer
 		  quaternary: "#338F87",
+		  accents: "#1B3F60", // Used for buttons
         },
         fontFamily: {
           Lexend_Deca: ['var(--font-lexend-deca)', 'sans-serif'],
@@ -64,6 +65,8 @@ module.exports = {
             "--secondary-color": theme("colors.secondary"),
             "--tertiary-color": theme("colors.tertiary"),
 			"--quaternary-color": theme("colors.quaternary"),
+            // full URL for selector rectangle, uses asset prefix
+            "--selector-rectangle-url": `url('${process.env.NEXT_PUBLIC_ASSET_PREFIX || ''}/static/img/selector-rectangle.png')`,
           },
         });
       },

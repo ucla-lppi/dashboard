@@ -19,8 +19,8 @@
 	left: -30px;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 30px;
-	height: 10px;
-	background: url('/static/img/selector-rectangle.png') no-repeat center;
+	background: var(--selector-rectangle-url) no-repeat center;
 	background-size: contain;
+	width: 30px;
+	height: 30px;
   }
