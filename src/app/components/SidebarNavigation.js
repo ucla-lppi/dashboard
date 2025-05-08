@@ -10,9 +10,12 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
   const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
   const pathname = usePathname();
   const segments = pathname.split('/').filter(Boolean);
-  const current = segments[0] || '';
-  const [impactOpen, setImpactOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
+  const section = segments[0] || '';
+  const subSection = segments[1] || '';
+  const [impactOpen, setImpactOpen] = useState(section === 'impact');
+  const [aboutOpen, setAboutOpen] = useState(
+    ['faqs','our-data','our-team','technical-documentation','contact','additional-resources'].includes(section)
+  );
 
   return (
     <aside
@@ -45,7 +48,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
           <li>
             <Link
               href="/"
-              className={`${styles.menuItem} ${(current === '' || current === 'home') ? styles.menuItemActive : ''} text-xl font-bold uppercase flex items-center w-full p-2`}
+              className={`${styles.menuItem} ${(!section || section === 'home') ? styles.menuItemActive : ''} text-xl font-bold uppercase flex items-center w-full p-2`}
             >
               HOME
             </Link>
@@ -78,22 +81,22 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
             </button>
             <ul className={`${impactOpen ? "block" : "hidden"} py-2 space-y-2`}>
               <li>
-                <Link href="/impact/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'research' ? styles.menuItemActive : ''}`}>
+                <Link href="/impact/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${subSection === 'research' ? styles.menuItemActive : ''}`}>
                   Research
                 </Link>
               </li>
               <li>
-                <Link href="/impact/newsroom" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'newsroom' ? styles.menuItemActive : ''}`}>
+                <Link href="/impact/newsroom" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${subSection === 'newsroom' ? styles.menuItemActive : ''}`}>
                   Newsroom
                 </Link>
               </li>
               <li>
-                <Link href="/impact/partners" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'partners' ? styles.menuItemActive : ''}`}>
+                <Link href="/impact/partners" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${subSection === 'partners' ? styles.menuItemActive : ''}`}>
                   Partners
                 </Link>
               </li>
               <li>
-                <Link href="/policy-toolkit" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'policy-toolkit' ? styles.menuItemActive : ''}`}>
+                <Link href="/policy-toolkit" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'policy-toolkit' ? styles.menuItemActive : ''}`}>
                   POLICY TOOLKIT
                 </Link>
               </li>
@@ -127,27 +130,27 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
             </button>
             <ul className={`${aboutOpen ? "block" : "hidden"} py-2 space-y-2 pl-3`}>
               <li>
-                <Link href="/faqs" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'faqs' ? styles.menuItemActive : ''}`}>
+                <Link href="/faqs" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'faqs' ? styles.menuItemActive : ''}`}>
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/our-data" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'our-data' ? styles.menuItemActive : ''}`}>
+                <Link href="/our-data" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'our-data' ? styles.menuItemActive : ''}`}>
                   OUR DATA
                 </Link>
               </li>
               <li>
-                <Link href="/our-team" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'our-team' ? styles.menuItemActive : ''}`}>
+                <Link href="/our-team" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'our-team' ? styles.menuItemActive : ''}`}>
                   OUR TEAM
                 </Link>
               </li>
 			  <li>
-                <Link href="/technical-documentation" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'technical-documentation' ? styles.menuItemActive : ''}`}>
+                <Link href="/technical-documentation" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'technical-documentation' ? styles.menuItemActive : ''}`}>
                   TECHNICAL DOCUMENTATION
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${current === 'contact' ? styles.menuItemActive : ''}`}>
+                <Link href="/contact" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'contact' ? styles.menuItemActive : ''}`}>
                   CONTACT
                 </Link>
               </li>
@@ -155,7 +158,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
           </li>
           {/* Additional Resources */}
           <li>
-            <Link href="/additional-resources" className={`${styles.menuItem} ${current === 'additional-resources' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
+            <Link href="/additional-resources" className={`${styles.menuItem} ${section === 'additional-resources' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
               ADDITIONAL RESOURCES
             </Link>
           </li>

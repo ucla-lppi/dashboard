@@ -80,18 +80,27 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
   const displayItems = filteredItems;
 
   // Human-readable subcategory label
-  const displaySub = subcategory.replace(/[_-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  const lowercaseWords = ['and','or','for','of','in','to','with','a','an','the'];
+  const displaySub = subcategory
+    .replace(/[_-]/g, ' ')
+    .split(' ')
+    .map((word, idx) => {
+      const lower = word.toLowerCase();
+      if (idx > 0 && lowercaseWords.includes(lower)) return lower;
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+    })
+    .join(' ');
 
   return (
     <aside className="py-8 bg-white">
-      <div className="container px-4 mx-auto max-w-4xl pb-8">
+      <div className="container px-4 mx-auto max-w-7xl">
         {/* Main page heading */}
-        <div className="mb-4">
-          <h2 className="text-[28px] font-bold text-primary">{mainHeading}</h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
         </div>
         {/* Subcategory and controls row: 25%/1fr/15% */}
         <div className="grid grid-cols-[25%_1fr_15%] items-center gap-x-6 mb-6">
-          <h3 className="self-center text-xl font-bold text-gray-900">{displaySub}</h3>
+          <h3 className="text-xl font-semibold mb-6 text-gray-900">{displaySub}</h3>
 
           {/* Search cell */}
           <div className="flex justify-end">

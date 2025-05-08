@@ -85,7 +85,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
       return () => window.removeEventListener('resize', handle);
     }, [items]);
     return (
-      <div className="mb-6 relative pb-16">
+      <div className="mb-6 pb-8">
         {/* Section content (heading rendered externally) */}
         {/* Mobile carousel */}
         <div className="block md:hidden relative group">
@@ -127,22 +127,13 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             </Link>
           ))}
         </div>
-        {/* absolute bottom-right 'See all' with arrow button stacked */}
         {items.length > 4 && (
-          <div className="absolute bottom-10 right-0 text-center">
-            <span
-              href={`/${slugKey}`}
-              aria-label={`View all ${label} items`}
-              className="text-black font-medium pr-2"
-            >
+          <div className="mt-4 flex justify-end items-center space-x-2">
+            <span href={`/${slugKey}`} aria-label={`View all ${label} items`} className="text-black font-medium">
               see all
             </span>
-            <Link
-              href={`/${slugKey}`}
-              aria-label={`View all ${label} items`}
-              className="mt-2 inline-flex items-center justify-center w-10 h-10 bg-accents text-white rounded-full hover:bg-accents/90 focus:outline-none focus:ring"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+            <Link href={`/${slugKey}`} aria-label={`View all ${label} items`} className="inline-flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full hover:bg-primary/90 focus:outline-none focus:ring">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 25 24" aria-hidden="true">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </Link>
