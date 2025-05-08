@@ -12,7 +12,11 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
   const segments = pathname.split('/').filter(Boolean);
   const section = segments[0] || '';
   const subSection = segments[1] || '';
-  const [impactOpen, setImpactOpen] = useState(section === 'impact');
+  // Highlight Research main link when viewing its subcategory pages
+  const researchSubs = ['data-for-action','community-research','policy-focused'];
+  const isResearchSub = researchSubs.includes(section);
+
+  const [impactOpen, setImpactOpen] = useState(section === 'impact' || isResearchSub);
   const [aboutOpen, setAboutOpen] = useState(
     ['faqs','our-data','our-team','technical-documentation','contact','additional-resources'].includes(section)
   );
@@ -81,7 +85,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
             </button>
             <ul className={`${impactOpen ? "block" : "hidden"} py-2 space-y-2`}>
               <li>
-                <Link href="/impact/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${subSection === 'research' ? styles.menuItemActive : ''}`}>
+                <Link href="/impact/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${(subSection === 'research' || isResearchSub) ? styles.menuItemActive : ''}`}>
                   Research
                 </Link>
               </li>
