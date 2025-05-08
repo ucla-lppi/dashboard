@@ -85,7 +85,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
       return () => window.removeEventListener('resize', handle);
     }, [items]);
     return (
-      <div className="mb-12 relative pb-16">
+      <div className="mb-6 relative pb-16">
         {/* Section content (heading rendered externally) */}
         {/* Mobile carousel */}
         <div className="block md:hidden relative group">
@@ -155,7 +155,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
   return (
     <aside className="py-8 bg-white">
       <div className="container px-4 mx-auto max-w-7xl">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
         </div>
 

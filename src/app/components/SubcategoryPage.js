@@ -91,7 +91,8 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
         </div>
         {/* Subcategory and controls row: 25%/1fr/15% */}
         <div className="grid grid-cols-[25%_1fr_15%] items-center gap-x-6 mb-6">
-          <h3 className="self-center text-[20pt] font-bold text-gray-900">{displaySub}</h3>
+          <h3 className="self-center text-xl font-bold text-gray-900">{displaySub}</h3>
+
           {/* Search cell */}
           <div className="flex justify-end">
             <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-[22rem]">
@@ -100,7 +101,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                 placeholder="Search for title, tag, or keyword"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="flex-1 pl-4 pr-2 py-2 text-base font-lexendLite placeholder-[#005587]/80 text-[#005587] bg-transparent rounded-l-full focus:outline-none"
+                className="flex-1 pl-4 pr-2 py-2 text-base font-lexend-lite placeholder-[#005587]/80 text-[#005587] bg-transparent rounded-l-full focus:outline-none"
               />
               <span className="flex items-center justify-center w-10 h-10 bg-primary rounded-r-full">
                 <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
@@ -144,9 +145,9 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
         ) : (
           <div className="space-y-6">
             {displayItems.map(item => (
-              <article key={item.id} className="relative shadow border border-gray-200 pt-4 pb-8 pl-4 pr-12 flex items-start transform transition duration-200 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+              <article key={item.id} className="relative shadow border border-gray-200 pt-4 pb-8 pl-4 pr-12 flex items-start transform transition-transform duration-200 hover:-translate-y-[5px]">
                 {/* Date badge absolute top-right */}
-                <span className="absolute top-4 right-0 bg-primary text-white px-2 py-1 text-base font-normal">
+                <span className="absolute top-0 right-0 bg-primary text-white px-2 py-1 text-base font-normal">
                   {`${item.date.getMonth() + 1}/${item.date.getDate()}/${item.date.getFullYear()}`}
                 </span>
                 {/* Image */}

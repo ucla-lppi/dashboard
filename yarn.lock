@@ -67,6 +67,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.9.tgz#50dea3616bc8191fb8e112283b49eaff03e78429"
   integrity sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==
 
+"@fontsource/lexend@^5.2.7":
+  version "5.2.7"
+  resolved "https://registry.yarnpkg.com/@fontsource/lexend/-/lexend-5.2.7.tgz#5d33a73e9e0e8a81a6db29455ece03b47fbdc9ea"
+  integrity sha512-LvhJCaFlpR3/5msAzvIGJqVlvcVIN/Je9niM+pCFUazGeeb0ygOu0TlyAAJCi1TpN3te6tVqnDVMW+1fSFNQ9w==
+
 "@fontsource/montserrat@^5.2.5":
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.2.5.tgz#1095d286c156a42a864ade432e2b094acfde3b0b"
