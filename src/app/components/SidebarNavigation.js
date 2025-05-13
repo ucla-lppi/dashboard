@@ -18,7 +18,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
 
   const [impactOpen, setImpactOpen] = useState(section === 'impact' || isResearchSub);
   const [aboutOpen, setAboutOpen] = useState(
-    ['faqs','our-data','our-team','technical-documentation','contact','additional-resources'].includes(section)
+    ['faqs','our-data','our-team','technical-documentation','resource-bank'].includes(section)
   );
 
   return (
@@ -153,17 +153,12 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                   TECHNICAL DOCUMENTATION
                 </Link>
               </li>
-              <li>
-                <Link href="/contact" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'contact' ? styles.menuItemActive : ''}`}>
-                  CONTACT
-                </Link>
-              </li>
             </ul>
           </li>
-          {/* Additional Resources */}
+          {/* RESOURCE BANK */}
           <li>
-            <Link href="/additional-resources" className={`${styles.menuItem} ${section === 'additional-resources' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
-              ADDITIONAL RESOURCES
+            <Link href="/resource-bank" className={`${styles.menuItem} ${section === 'resource-bank' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
+              RESOURCE BANK
             </Link>
           </li>
         </ul>

@@ -30,7 +30,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
               id: item.id || item.ID || idx,
               title: item.Title || item.title || '',
               summary: item.summary || item.Summary || item.Description || item.description || '',
-              imageUrl: item.File || item.file || item.imageUrl || item.Image || '',
+              image_link: item.File || item.file || item.image_link || item.Image || '',
               date: item.date ? new Date(item.date) : new Date(),
               subcategory: normalizeKey(rawSub),
               link: item.link || item.Link || '#',
@@ -38,7 +38,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
               keywords: (item.keywords || item.Keywords || '').split(',').map(k=>k.trim()).filter(Boolean)
             });
           })
-          .filter(i => i.title && i.imageUrl && normalizeKey(subcategory) === i.subcategory)
+          .filter(i => i.title && i.image_link && normalizeKey(subcategory) === i.subcategory)
           .sort((a, b) => sortAsc ? a.date - b.date : b.date - a.date);
         setItems(mapped);
         setFilteredItems(mapped);
@@ -161,7 +161,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                 </span>
                 {/* Image */}
                 <img
-                  src={item.imageUrl || '/images/placeholder.png'}
+                  src={item.image_link || '/images/placeholder.png'}
                   alt={item.title || 'Image'}
                   className="w-[200px] h-[150px] object-cover mr-4 flex-shrink-0"
                 />

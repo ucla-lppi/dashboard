@@ -18,7 +18,7 @@ export default function ImpactPartnersPage() {
       .then(res => res.text())
       .then(text => {
         Papa.parse(text, { header: true, complete: ({ data }) => {
-          setMembers(data.filter(r => r.imageUrl));
+          setMembers(data.filter(r => r.image_link));
         }});
       });
   }, []);
@@ -44,7 +44,7 @@ export default function ImpactPartnersPage() {
             <div key={i} className="w-[220px] text-center text-gray-900">
               <div className="mx-auto mb-4 w-[220px] h-[220px] relative rounded-full overflow-hidden">
                 {/* Partner image absolute inside circular boundary */}
-                <img src={m.imageUrl} alt={`${m.first_name} ${m.last_name}`} className="absolute inset-0 w-full h-full object-cover" />
+                <img src={m.image_link} alt={`${m.first_name} ${m.last_name}`} className="absolute inset-0 w-full h-full object-cover" />
                 {/* SVG boundary overlay */}
                 <img src={`${prefix}/images/partners_icon_boundary.svg`} alt="frame" className="absolute inset-0 w-full h-full" />
               </div>

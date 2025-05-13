@@ -32,13 +32,13 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             id: item.id || item.ID || idx,
             title: item.Title || item.title || '',
             description: item.Description || item.description || '',
-            imageUrl: item.File || item.file || item.imageUrl || item.Image || '',
+            image_link: item.File || item.file || item.image_link || item.Image || '',
             date: item.date ? new Date(item.date) : new Date(),
             subcategory: item.subcategory || item.Subcategory || '',
             link: item.link || item.Link || '#',
             readTime: item.readTime || item['Read time'] || item.ReadTime || ''
           }))
-          .filter(item => item.title && item.imageUrl)
+          .filter(item => item.title && item.image_link)
           .sort((a, b) => b.date - a.date);
         setArticles(mapped);
         setLoading(false);
@@ -85,14 +85,14 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
       return () => window.removeEventListener('resize', handle);
     }, [items]);
     return (
-      <div className="mb-6 pb-8">
+      <div className="mb-8 pb-8">
         {/* Section content (heading rendered externally) */}
         {/* Mobile carousel */}
         <div className="block md:hidden relative group">
           <div ref={carouselRef} className="flex space-x-6 overflow-x-auto pb-4">
             {displayItems.map(item => (
               <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="inline-block w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col min-h-[269px] transform transition duration-200 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_5px_0_#c5c5c5]">
-                <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" />
+                <img src={item.image_link} alt={item.title} className="w-full h-48 object-cover" />
                 <div className="p-4 flex-1 flex flex-col">
                   <div className="relative mb-2">
                     <h4 className="text-lg text-gray-900 break-words pr-6">{item.title}</h4>
@@ -117,7 +117,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
           {displayItems.map(item => (
             <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col min-h-[269px] transform transition duration-200 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_5px_0_#c5c5c5]">
-              <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" />
+              <img src={item.image_link} alt={item.title} className="w-full h-48 object-cover" />
               <div className="p-4 flex-1 flex flex-col">
                 <div className="relative mb-2">
                   <h4 className="text-lg font-bold text-gray-900 break-words pr-6">{item.title}</h4>
@@ -146,13 +146,13 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
   return (
     <aside className="py-8 bg-white">
       <div className="container px-4 mx-auto max-w-7xl">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
         </div>
 
         {/* Initial category section */}
         {showInitialHeading && (
-          <h3 className="text-xl font-semibold mb-6 text-gray-900">{labelMap[initialCategory]}</h3>
+          <h3 className="text-xl font-semibold mb-8 text-gray-900">{labelMap[initialCategory]}</h3>
         )}
         {loading && (
           <>
@@ -210,7 +210,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             }, {})
           ).map(([key, items]) => (
             <div key={key}>
-              <h3 className="text-xl font-semibold mb-6 text-gray-900">{labelMap[key] || key}</h3>
+              <h3 className="text-xl font-semibold mb-8 text-gray-900">{labelMap[key] || key}</h3>
               <CategorySection
                 label={labelMap[key] || key}
                 items={items}

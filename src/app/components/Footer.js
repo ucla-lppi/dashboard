@@ -72,22 +72,22 @@ export default function Footer() {
                 <span className="font-bold">Impact</span>
               </p>
               <p className="underline font-light">
-                Research<br />Press Coverage<br />Partners<br />Policy Toolkit
+                Research<br />Newsroom<br />Partners<br />Policy Toolkit
               </p>
             </div>
             {/* Site Map SubColumn 2 */}
             <div>
               <p className="font-bold">About</p>
               <p className="underline font-light">
-                FAQ<br />Our Data<br />Our Team<br />Contact<br /><br />
+                FAQ<br />Our Data<br />Our Team<br /><br />
               </p>
-              <p className="font-bold">Additional Resources</p>
+              <p className="font-bold">Resource Bank</p>
             </div>
             {/* Site Map SubColumn 3 */}
             <div>
               <p className="font-bold">Contact</p>
               <p className="font-light">
-                3250 Public Affairs Building<br />Los Angeles, CA 90065<br />(310) 206-8431<br /><br />
+                3250 Public Affairs Building<br />Los Angeles, CA 90065<br /><br />
                 <a href="mailto:latino@luskin.ucla.edu" className="underline">
                   latino@luskin.ucla.edu
                 </a>
