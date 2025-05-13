@@ -144,7 +144,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                 </Link>
               </li>
               <li>
-                <Link href="/our-team" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'our-team' ? styles.menuItemActive : ''}`}>
+                <Link href="/about/our-team" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${(section === 'about' && subSection === 'our-team') ? styles.menuItemActive : ''}`}>
                   OUR TEAM
                 </Link>
               </li>

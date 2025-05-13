@@ -7,7 +7,6 @@ import Research from '@content/Research.mdx';
 import Newsroom from '@content/Newsroom.mdx';
 import AdditionalResources from '@content/AdditionalResources.mdx';
 import Contact from '@content/Contact.mdx';
-import TechnicalDocumentation from '@content/TechnicalDocumentation.mdx';
 import OurData from '@content/OurData.mdx';
 import OurTeam from '@content/OurTeam.mdx';
 import FAQsFromCSV from '../components/FAQsFromCSV';
@@ -20,7 +19,6 @@ const components = {
   'newsroom': Newsroom,
   'additional-resources': AdditionalResources,
   contact: Contact,
-  'technical-documentation': TechnicalDocumentation,
   'our-data': OurData,
   'our-team': OurTeam,
   faqs: ({}) => <FAQsFromCSV csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1166232289&single=true&output=csv" />,

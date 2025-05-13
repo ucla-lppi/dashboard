@@ -10,7 +10,6 @@ import Research from "@content/Research.mdx";
 import AdditionalResources from "@content/AdditionalResources.mdx";
 import Contact from "@content/Contact.mdx";
 import Newsroom from "@content/Newsroom.mdx";
-import TechnicalDocumentation from "@content/TechnicalDocumentation.mdx";
 import OurData from "@content/OurData.mdx";
 import OurTeam from "@content/OurTeam.mdx";
 import FAQ from "@content/FAQ.mdx";
@@ -23,7 +22,6 @@ const components = {
   AdditionalResources,
   Contact,
   Newsroom,
-  TechnicalDocumentation,
   OurData,
   OurTeam,
   FAQ,
