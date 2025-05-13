@@ -5,12 +5,12 @@
   
   .menuItem:hover {
 	@apply bg-primary text-white;
-	background-color: var(--primary-color) !important;
-	color: white !important;
+	background: none !important;
+	color: inherit !important;
   }
   
   .menuItemActive {
-	@apply relative bg-brandColor text-white rounded-none uppercase;
+	@apply relative text-primary;  /* Primary blue text */
   }
   
   .menuItemActive::before {
@@ -24,3 +24,10 @@
 	width: 30px;
 	height: 30px;
   }
+
+  .submenuItemActive {
+	@apply relative text-black; /* Black text */
+	text-decoration: underline !important;
+  }
+  
+  /* removed submenu selector rectangle */

@@ -62,7 +62,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
             <button
               type="button"
               onClick={() => { setImpactOpen((prev) => !prev); setAboutOpen(false); }}
-              className={`${styles.menuItem} text-xl font-bold uppercase flex items-center justify-between w-full p-2`}
+              className={`${styles.menuItem} text-xl font-bold uppercase flex items-center justify-between w-full p-2 ${section === 'impact' ? styles.menuItemActive : ''}`}
             >
               IMPACT
               <svg
@@ -83,35 +83,38 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                 />
               </svg>
             </button>
-            <ul className={`${impactOpen ? "block" : "hidden"} py-2 space-y-2`}>
-              <li>
-                <Link href="/impact/research" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${(subSection === 'research' || isResearchSub) ? styles.menuItemActive : ''}`}>
-                  Research
-                </Link>
-              </li>
-              <li>
-                <Link href="/impact/newsroom" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${subSection === 'newsroom' ? styles.menuItemActive : ''}`}>
-                  Newsroom
-                </Link>
-              </li>
-              <li>
-                <Link href="/impact/partners" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${subSection === 'partners' ? styles.menuItemActive : ''}`}>
-                  Partners
-                </Link>
-              </li>
-              <li>
-                <Link href="/policy-toolkit" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'policy-toolkit' ? styles.menuItemActive : ''}`}>
-                  POLICY TOOLKIT
-                </Link>
-              </li>
-            </ul>
+            <div className={`${impactOpen ? "block relative py-2 pl-8" : "hidden"}`}>  
+              <div className="absolute left-3 top-2 bottom-2 w-px bg-primary" aria-hidden="true" />
+              <ul className="space-y-2">  
+                <li>
+                  <Link href="/impact/research" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${(subSection === 'research' || isResearchSub) ? styles.submenuItemActive : ''}`}>
+                    Research
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/impact/newsroom" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${subSection === 'newsroom' ? styles.submenuItemActive : ''}`}>
+                    Newsroom
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/impact/partners" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${subSection === 'partners' ? styles.submenuItemActive : ''}`}>
+                    Partners
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/policy-toolkit" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'policy-toolkit' ? styles.submenuItemActive : ''}`}>
+                    POLICY TOOLKIT
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </li>
           {/* About Section */}
           <li>
             <button
               type="button"
               onClick={() => { setAboutOpen((prev) => !prev); setImpactOpen(false); }}
-              className={`${styles.menuItem} text-xl font-bold uppercase flex items-center justify-between w-full p-2`}
+              className={`${styles.menuItem} text-xl font-bold uppercase flex items-center justify-between w-full p-2 ${aboutOpen ? styles.menuItemActive : ''}`}
             >
               ABOUT
               <svg
@@ -132,28 +135,31 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                 />
               </svg>
             </button>
-            <ul className={`${aboutOpen ? "block" : "hidden"} py-2 space-y-2 pl-3`}>
-              <li>
-                <Link href="/faqs" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'faqs' ? styles.menuItemActive : ''}`}>
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/our-data" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'our-data' ? styles.menuItemActive : ''}`}>
-                  OUR DATA
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/our-team" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${(section === 'about' && subSection === 'our-team') ? styles.menuItemActive : ''}`}>
-                  OUR TEAM
-                </Link>
-              </li>
-			  <li>
-                <Link href="/technical-documentation" className={`${styles.menuItem} text-lg font-bold uppercase block w-full p-2 pl-3 ${section === 'technical-documentation' ? styles.menuItemActive : ''}`}>
-                  TECHNICAL DOCUMENTATION
-                </Link>
-              </li>
-            </ul>
+            <div className={`${aboutOpen ? "block relative py-2 pl-8" : "hidden"}`}>  
+              <div className="absolute left-3 top-2 bottom-2 w-px bg-primary" aria-hidden="true" />
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/faqs" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'faqs' ? styles.submenuItemActive : ''}`}>
+                    FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/our-data" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'our-data' ? styles.submenuItemActive : ''}`}>
+                    OUR DATA
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about/our-team" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${(section === 'about' && subSection === 'our-team') ? styles.submenuItemActive : ''}`}>
+                    OUR TEAM
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/technical-documentation" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'technical-documentation' ? styles.submenuItemActive : ''}`}>
+                    TECHNICAL DOCUMENTATION
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </li>
           {/* RESOURCE BANK */}
           <li>
