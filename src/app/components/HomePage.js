@@ -47,6 +47,8 @@ export default function HomePage() {
         {/* Fancy Boxes */}
         <FancyBoxes onLoaded={handleFancyBoxesLoaded} />
       </div>
+
+	  {/* California County Profile Section */}
     </div>
   );
 }
