@@ -84,7 +84,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
               </svg>
             </button>
             <div className={`${impactOpen ? "block relative py-2 pl-8" : "hidden"}`}>  
-              <div className="absolute left-3 top-2 bottom-2 w-px bg-primary" aria-hidden="true" />
+              <div className="absolute left-3 top-4 bottom-2 w-px bg-primary" aria-hidden="true" />
               <ul className="space-y-2">  
                 <li>
                   <Link href="/impact/research" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${(subSection === 'research' || isResearchSub) ? styles.submenuItemActive : ''}`}>
@@ -136,7 +136,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
               </svg>
             </button>
             <div className={`${aboutOpen ? "block relative py-2 pl-8" : "hidden"}`}>  
-              <div className="absolute left-3 top-2 bottom-2 w-px bg-primary" aria-hidden="true" />
+              <div className="absolute left-3 top-4 bottom-2 w-px bg-primary" aria-hidden="true" />
               <ul className="space-y-2">
                 <li>
                   <Link href="/faqs" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'faqs' ? styles.submenuItemActive : ''}`}>

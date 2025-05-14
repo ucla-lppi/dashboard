@@ -32,7 +32,6 @@ export default function OurTeamPage() {
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-3xl font-bold text-primary">Our Team</h2>
           </div>
-          <h3 className="text-xl font-semibold mb-6 text-gray-900">Team Members</h3>
         </div>
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
           <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16"></div>
