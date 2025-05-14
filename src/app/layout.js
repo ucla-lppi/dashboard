@@ -110,7 +110,7 @@ export default function RootLayout({ children }) {
 		</header>
 		)}
 
-          <div className="grid grid-cols-1 sm:grid-cols-[auto] min-h-screen">
+          <div className="grid grid-cols-1 sm:grid-cols-[auto] flex-grow h-full">
             {/* Sidebar Navigation Component */}
             <SidebarNavigation sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isMobile={isMobile} />
 

@@ -52,6 +52,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
           <li>
             <Link
               href="/"
+              onClick={() => { setAboutOpen(false); setImpactOpen(false); }}
               className={`${styles.menuItem} ${(!section || section === 'home') ? styles.menuItemActive : ''} text-xl font-bold uppercase flex items-center w-full p-2`}
             >
               HOME

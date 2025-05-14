@@ -23,10 +23,10 @@ export default function ImpactPartnersPage() {
       });
   }, []);
   return (
-	<main className="bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0 p-4 sm:p-6 max-w-screen-xl mx-auto px-4 py-8">
+	<main className="bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0 p-4 sm:p-6 max-w-screen-xl px-4 py-8">
     <aside className="py-8 bg-white">
 
-	<div className="container px-4 mx-auto max-w-7xl">
+	<div className="container px-4 max-w-7xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold text-primary">Partners</h2>
         </div>

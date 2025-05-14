@@ -145,7 +145,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
 
   return (
     <aside className="py-8 bg-white">
-      <div className="container px-4 mx-auto max-w-7xl">
+      <div className="container px-4 max-w-7xl">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
         </div>

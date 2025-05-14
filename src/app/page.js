@@ -11,8 +11,8 @@ const lexendDeca = Lexend_Deca({
 
 export default function Home({ children }) {
   return (
-    <main className={`${lexendDeca.className}`}>      
-      <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
+    <main className={`${lexendDeca.className} flex flex-col min-h-screen`}>      
+      <Card className="flex-grow bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-full border-0">
         <HomePage />
       </Card>
     </main>

@@ -28,17 +28,17 @@ export default function OurTeamPage() {
   return (
     <main className="bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0 p-4 sm:p-6 max-w-screen-xl mx-auto px-4 py-8">
       <aside className="py-8 bg-white">
-        <div className="container px-4 mx-auto max-w-7xl">
+        <div className="container px-4 max-w-7xl">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-3xl font-bold text-primary">Our Team</h2>
           </div>
         </div>
-        <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
-          <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16"></div>
+        <div className="py-8 px-4 max-w-screen-xl text-center lg:py-16 lg:px-6">
+          <div className="mb-8 max-w-screen-sm lg:mb-16"></div>
           <div className="flex flex-wrap justify-center gap-12 bg-white">
             {members.map((m,i) => (
               <div key={i} className="w-[220px] text-center text-gray-900">
-                <div className="mx-auto mb-4" style={{width:220, height:220}}>
+                <div className="mb-4" style={{width:220, height:220}}>
                   <CircleImage
                     src={m.image_link}
                     alt={`${m.first_name || ''} ${m.last_name || ''}`}

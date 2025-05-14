@@ -93,7 +93,7 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
 
   return (
     <aside className="py-8 bg-white">
-      <div className="container px-4 mx-auto max-w-7xl">
+      <div className="container px-4 max-w-7xl">
         {/* Main page heading */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
