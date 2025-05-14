@@ -47,7 +47,7 @@ export default function OurTeamPage() {
                   />
                 </div>
                 <h3 className="mb-1 text-xl font-semibold font-Lexend_Deca text-primary">
-                  {(m.Title ? `${m.Title} ` : '') + (m.first_name || '') + (m.last_name ? ' ' + m.last_name : '')}
+                  {(m.title ? `${m.title} ` : '') + (m.first_name || '') + (m.last_name ? ' ' + m.last_name : '')}
                 </h3>
                 <p className="text-base font-medium font-montserrat text-gray-700">
                   {m.role || ''}
