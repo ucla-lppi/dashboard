@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useMemo } from 'react';
+import SimpleBar from 'simplebar-react';
+import 'simplebar-react/dist/simplebar.min.css';
 import Divider from './Divider';
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
@@ -57,10 +59,10 @@ export default function CaliforniaCountyProfiles() {
           </div>
 
           {/* Counties List */}
-          <div className="rounded max-h-[400px] overflow-y-auto custom-scrollbar">
-			<Divider />
-            {filtered.map((county, idx) => (
-              <React.Fragment key={county}>
+          <SimpleBar autoHide={false} forceVisible="y" className="rounded w-full max-h-[400px] county-scrollbar overflow-x-hidden" contentClassName="px-4" style={{ maxHeight: 400 }}>
+             <Divider />
+             {filtered.map((county, idx) => (
+               <React.Fragment key={county}>
                 <div className="flex justify-center items-center px-4 py-2">
                   <div className="flex justify-between items-center w-full max-w-[600px] gap-6">
                     <span className="text-gray-900 pl-1">{county}</span>
@@ -87,7 +89,7 @@ export default function CaliforniaCountyProfiles() {
                 {idx < filtered.length - 1 && <Divider />}
               </React.Fragment>
             ))}
-          </div>
+          </SimpleBar>
 
 
         </div>

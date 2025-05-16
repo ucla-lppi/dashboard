@@ -39,7 +39,7 @@ export default function ImpactPartnersPage() {
 	  <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
         </div>
-        <div className="flex flex-wrap justify-center gap-12 bg-white">
+        <div className="flex flex-wrap justify-center gap-12 bg-white mx-auto max-w-[1024px]">
           {members.map((m,i) => (
             <div key={i} className="w-[220px] text-center text-gray-900">
               <div className="mx-auto mb-4 w-[220px] h-[220px] relative rounded-full overflow-hidden">

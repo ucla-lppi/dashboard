@@ -53,18 +53,169 @@ body {
 
 /* Custom scrollbar using primary brand color */
 .custom-scrollbar {
+  /* Firefox */
   scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) #ffffff;
+  scrollbar-color: var(--primary, #28666E) #ffffff;
 }
 .custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  /* WebKit */
+  width: 10px;
+  height: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #ffffff;
-  border-radius: 9999px !important;
+  border-radius: 9999px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color) !important;
-  border-radius: 9999px !important;
+  background-color: var(--primary, #28666E);
+  border-radius: 9999px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #1f4f5a;
+}
+
+/* Pseudo-scrollbar: only rounded primary thumb on transparent track */
+.pseudo-scrollbar {
+  /* Firefox: thin thumb only using primary-color */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color, #005587) transparent;
+}
+.pseudo-scrollbar::-webkit-scrollbar {
+  /* WebKit: small thin scrollbar */
+  width: 6px;
+  height: 6px;
+}
+.pseudo-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.pseudo-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color, #005587);
+  border-radius: 9999px;
+}
+.pseudo-scrollbar::-webkit-scrollbar-thumb:hover {
+  /* Hover color fallback to a darker shade */
+  background-color: var(--primary-color, #005587);
+}
+
+/* Cross-browser county-specific scrollbar */
+.county-scrollbar {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color, #005587) transparent;
+}
+.county-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.county-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.county-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color, #005587);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.county-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 85, 135, 0.8);
+}
+
+/* SimpleBar customizations for county-scrollbar */
+.county-scrollbar .simplebar-track.simplebar-vertical {
+  width: 8px !important;
+}
+.county-scrollbar .simplebar-scrollbar:before {
+  background-color: var(--primary-color, #005587) !important;
+  border-radius: 4px !important;
+}
+.county-scrollbar .simplebar-track {
+  background: transparent !important;
+}
+
+/* Ensure SimpleBar scrollbars always visible and thumb colored primary blue */
+.county-scrollbar .simplebar-track.simplebar-vertical,
+.county-scrollbar .simplebar-track.simplebar-horizontal {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.county-scrollbar .simplebar-scrollbar:before {
+  background-color: var(--primary-color, #005587) !important;
+  border-radius: 4px !important;
+}
+.county-scrollbar .simplebar-scrollbar {
+  background: transparent !important;
+  width: 8px !important;
+  height: 68px !important;
+}
+
+/* Always visible and thicker SimpleBar scrollbars for county-scrollbar */
+.county-scrollbar .simplebar-track.simplebar-vertical {
+  width: 12px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.county-scrollbar .simplebar-scrollbar:before,
+.county-scrollbar .simplebar-scrollbar {
+  background-color: var(--primary-color, #005587) !important;
+  border-radius: 6px !important;
+}
+
+/* Add white track background for SimpleBar county-scrollbar */
+.county-scrollbar .simplebar-track.simplebar-vertical {
+  background: rgba(255,255,255,0.8) !important;
+}
+.county-scrollbar .simplebar-track.simplebar-horizontal {
+  background: rgba(255,255,255,0.8) !important;
+}
+
+/* Add mask offset inside county-scrollbar for SimpleBar */
+.county-scrollbar .simplebar-mask {
+  right: 6px !important;
+}
+
+/* Hide SimpleBar's vertical and horizontal tracks */
+.county-scrollbar .simplebar-track.simplebar-vertical,
+.county-scrollbar .simplebar-track.simplebar-horizontal {
+  display: none !important;
+}
+
+/* Container position for custom track line */
+.county-scrollbar {
+  position: relative;
+  overflow-x: hidden;
+}
+/* Remove custom track border */
+.county-scrollbar::after {
+  display: none !important;
+}
+/* Ensure SimpleBar vertical track remains for thumb but transparent */
+.county-scrollbar .simplebar-track.simplebar-vertical {
+  display: block !important;
+  background: transparent !important;
+  width: 12px !important;
+}
+/* Hide horizontal track to avoid clutter */
+.county-scrollbar .simplebar-track.simplebar-horizontal {
+  display: none !important;
+}
+
+/* Centered white track line for county-scrollbar */
+.county-scrollbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 6px;
+  left: auto;
+  transform: none;
+  width: 3px;
+  background-color: #ffffff;
+  z-index: 0;
+}
+/* Ensure thumb sits above the pseudo-track */
+.county-scrollbar .simplebar-scrollbar:before,
+.county-scrollbar .simplebar-scrollbar {
+  z-index: 1;
 }

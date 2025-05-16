@@ -58,6 +58,7 @@ module.exports = {
     plugins: [
       require("@tailwindcss/typography"),
       flowbite,
+      require('tailwind-scrollbar'),
       // Custom plugin to output your theme colors as CSS variables
       function ({ addBase, theme }) {
         addBase({
