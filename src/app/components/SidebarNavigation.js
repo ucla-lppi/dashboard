@@ -162,10 +162,10 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
               </ul>
             </div>
           </li>
-          {/* RESOURCE BANK */}
+          {/* RESOURCE DIRECTORY */}
           <li>
-            <Link href="/resource-bank" className={`${styles.menuItem} ${section === 'resource-bank' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
-              RESOURCE BANK
+            <Link href="/resource-directory" className={`${styles.menuItem} ${section === 'resource-directory' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
+              RESOURCE DIRECTORY
             </Link>
           </li>
         </ul>
