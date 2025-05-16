@@ -4,6 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 @import "@fontsource/lexend/300.css";        /* Lexend Light */
+@import "@fontsource/lexend/200.css";        /* Lexend Extra Light */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css');
 
@@ -48,4 +49,22 @@ body {
   .mobile-header {
     display: none !important;
   }
+}
+
+/* Custom scrollbar using primary brand color */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) #ffffff;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 9999px !important;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color) !important;
+  border-radius: 9999px !important;
 }
