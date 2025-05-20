@@ -28,7 +28,7 @@ export default function CaliforniaCountyProfiles() {
           <p className="text-base text-gray-900 mb-4">
             The Latino Climate and Health Dashboard equips advocates and decision-makers with strategic data on climate and health risks in Latino neighborhoods to support healthier, more resilient communities in California.
             <br/><br/>
-            Currently, fact sheets are available for 23 California counties. This is placeholder text.
+            {/* Currently, fact sheets are available for 23 California counties. */}
           </p>
 		  <Divider />
 			<div className="flex flex-col gap-4 mb-4 p-4">
