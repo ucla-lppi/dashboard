@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 
 const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
   const [faqs, setFaqs] = useState(initialData);
-  const [openIdx, setOpenIdx] = useState(null);
+  const [openIdxs, setOpenIdxs] = useState([]); // allow multiple open
 
   useEffect(() => {
     // Only fetch if no initial data provided
@@ -58,7 +58,7 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
       (faq) => generateSlug(faq.question) === hash
     );
     if (idx !== -1) {
-      setOpenIdx(idx);
+      setOpenIdxs((prev) => prev.includes(idx) ? prev : [...prev, idx]);
       // Scroll to the anchor element
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -83,15 +83,21 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
               <button
                 type="button"
                 className={`flex justify-between items-center w-full py-4 px-4 text-lg font-medium text-left text-gray-900 focus:outline-none transition-colors ${
-                  openIdx === idx ? "bg-primary-50 text-primary-700" : "hover:bg-gray-50"
+                  openIdxs.includes(idx) ? "bg-primary-50 text-primary-700" : "hover:bg-gray-50"
                 }`}
-                aria-expanded={openIdx === idx}
+                aria-expanded={openIdxs.includes(idx)}
                 aria-controls={`faq-answer-${idx}`}
-                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                onClick={() =>
+                  setOpenIdxs((prev) =>
+                    prev.includes(idx)
+                      ? prev.filter((i) => i !== idx)
+                      : [...prev, idx]
+                  )
+                }
               >
                 <span>{faq.question}</span>
                 <svg
-                  className={`w-5 h-5 ml-2 transition-transform duration-200 ${openIdx === idx ? "rotate-180 text-primary-600" : "rotate-0 text-gray-400"}`}
+                  className={`w-5 h-5 ml-2 transition-transform duration-200 ${openIdxs.includes(idx) ? "rotate-180 text-primary-600" : "rotate-0 text-gray-400"}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -101,7 +107,7 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
               </button>
               <div
                 id={`faq-answer-${idx}`}
-                className={`px-4 pb-4 text-gray-700 transition-all duration-200 ${openIdx === idx ? "block" : "hidden"}`}
+                className={`px-4 pb-4 text-gray-700 transition-all duration-200 ${openIdxs.includes(idx) ? "block" : "hidden"}`}
               >
                 {faq.answer}
               </div>

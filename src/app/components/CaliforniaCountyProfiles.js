@@ -82,7 +82,7 @@ export default function CaliforniaCountyProfiles() {
                <React.Fragment key={county}>
                 <div className="flex justify-center items-center px-4 py-2">
                   <div className="flex justify-between items-center w-full max-w-[600px] gap-6">
-                    <span className="text-gray-900 pl-1">{county}</span>
+                    <span className="text-gray-900 pl-1 text-bold">{county}</span>
                     <div className="flex gap-2">
                       <button className="relative w-[180px] h-6">
                         <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
