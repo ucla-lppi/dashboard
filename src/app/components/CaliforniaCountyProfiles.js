@@ -6,12 +6,29 @@ import Divider from './Divider';
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
 const allCounties = [
-  "Alameda","Alpine","Amador","Butte","Calaveras","Colusa","Contra Costa","Del Norte","El Dorado","Fresno",
-  "Glenn","Humboldt","Imperial","Inyo","Kern","Kings","Lake","Lassen","Los Angeles","Madera",
-  "Marin","Mariposa","Mendocino","Merced","Modoc","Monterey","Napa","Nevada","Orange","Placer",
-  "Plumas","Riverside","Sacramento","San Benito","San Bernardino","San Diego","San Francisco","San Joaquin","San Luis Obispo","San Mateo",
-  "Santa Barbara","Santa Clara","Santa Cruz","Shasta","Sierra","Siskiyou","Solano","Sonoma","Stanislaus","Sutter",
-  "Tehama","Trinity","Tulare","Tuolumne","Ventura","Yolo","Yuba"
+  "Alameda",
+  "Contra Costa",
+  "Fresno",
+  "Imperial",
+  "Kern",
+  "Kings",
+  "Los Angeles",
+  "Madera",
+  "Merced",
+  "Monterey",
+  "Orange",
+  "Riverside",
+  "Sacramento",
+  "San Bernardino",
+  "San Diego",
+  "San Joaquin",
+  "San Mateo",
+  "Santa Barbara",
+  "Santa Clara",
+  "Santa Cruz",
+  "Stanislaus",
+  "Tulare",
+  "Ventura"
 ];
 
 export default function CaliforniaCountyProfiles() {
@@ -59,7 +76,7 @@ export default function CaliforniaCountyProfiles() {
           </div>
 
           {/* Counties List */}
-          <SimpleBar autoHide={false} forceVisible="y" className="rounded w-full max-h-[400px] county-scrollbar overflow-x-hidden" contentClassName="px-4" style={{ maxHeight: 400 }}>
+          <SimpleBar autoHide={false} forceVisible="y" className="rounded w-full max-h-[275px] county-scrollbar overflow-x-hidden" contentClassName="px-4" style={{ maxHeight: 275 }}>
              <Divider />
              {filtered.map((county, idx) => (
                <React.Fragment key={county}>
