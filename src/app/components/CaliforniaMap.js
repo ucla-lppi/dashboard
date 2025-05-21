@@ -10,7 +10,7 @@ const options = {
 }
 
 // Tooltip component for displaying county information
-function MapTooltip({ county, x, y, hasFactSheet, sticky, onClose }) {
+function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave }) {
   return (
     <div
       className={
@@ -18,7 +18,9 @@ function MapTooltip({ county, x, y, hasFactSheet, sticky, onClose }) {
           ? 'absolute z-50 w-[257px] h-[96px] rounded-[10px] shadow-[2px_2px_0px_#30303080] border border-[#005587] bg-white flex flex-col items-center justify-start pt-2 pb-3 overflow-visible'
           : 'absolute z-50 w-[257px] h-54 bg-white rounded-[0px_10px_10px_10px] border border-solid border-[#005587] shadow-[2px_2px_0px_#30303080] text-black flex flex-col items-center justify-start pt-2 pb-3 overflow-visible'
       }
-      style={{ left: x, top: y, pointerEvents: sticky ? 'auto' : 'none' }}
+      style={{ left: x, top: y, pointerEvents: 'auto', position: 'absolute' }}
+      onMouseEnter={onTooltipEnter}
+      onMouseLeave={onTooltipLeave}
     >
       {/* Blue triangle accent (SVG or CSS) */}
       <div className="absolute left-0 top-0 w-10 h-3 pointer-events-none">
@@ -26,16 +28,6 @@ function MapTooltip({ county, x, y, hasFactSheet, sticky, onClose }) {
           <polygon points="0,0 39,0 0,12" fill="#005587" />
         </svg>
       </div>
-      {/* Close button for sticky mode */}
-      {sticky && (
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-[#005587] text-xl font-bold focus:outline-none z-10 bg-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-gray-100"
-          style={{ lineHeight: 1 }}
-        >
-          ×
-        </button>
-      )}
       {/* County name row */}
       <div className="w-full flex flex-col items-center mt-2">
         <span className="font-Lexend_Deca font-bold text-lg text-[#2f2f2f] text-center block whitespace-nowrap overflow-hidden text-ellipsis">
@@ -56,7 +48,7 @@ function MapTooltip({ county, x, y, hasFactSheet, sticky, onClose }) {
       ) : (
         <div className="flex flex-col items-center w-full mt-1">
           <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">No fact sheet available.</div>
-          <a href="#" className="flex items-center bg-[#005587] rounded-[15px] px-8 py-2 shadow-[2px_2px_0px_#30303080] focus:outline-none mt-3">
+          <a href="#" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-0 shadow-[2px_2px_0px_#30303080] focus:outline-none mt-3">
             <span className="text-white text-lg font-medium font-Lexend_Deca">FAQ</span>
             <svg className="w-6 h-[19px] ml-2" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -71,10 +63,10 @@ export default function CaliforniaMap() {
   const svgRef = useRef(null); // Keep a reference to the SVG element
   const tooltipRef = useRef(null); // Keep a reference to the tooltip
   const [isMapLoaded, setIsMapLoaded] = React.useState(false);
-  // Tooltip state
-  const [tooltip, setTooltip] = React.useState({ show: false, county: '', x: 0, y: 0, hasFactSheet: false, sticky: false });
-  // State to hold counties with fact sheets
+  const [tooltip, setTooltip] = React.useState({ show: false, county: '', x: 0, y: 0, hasFactSheet: false });
   const [countiesWithFactSheets, setCountiesWithFactSheets] = React.useState([]);
+  const [hovered, setHovered] = React.useState(false); // Track if mouse is over map or tooltip
+  const [tooltipHovered, setTooltipHovered] = React.useState(false); // Track if mouse is over tooltip
 
   // Fetch and parse the CSV on mount
   useEffect(() => {
@@ -147,46 +139,32 @@ export default function CaliforniaMap() {
           .attr("fill", "#ccc")
           .attr("stroke", "white")
           .attr("stroke-width", 0.5)
-          .on("mouseover", (event, d) => {
-            if (tooltip.sticky) return; // Ignore all mouse events if sticky
-            setTooltip((tt) => {
-              d3.select(event.target).attr("fill", "#aaa");
-              const countyName = d.properties.name;
-              const hasFactSheet = countiesWithFactSheets.includes(countyName);
-              return {
-                show: true,
-                county: countyName,
-                x: event.offsetX + 20,
-                y: event.offsetY - 10,
-                hasFactSheet,
-                sticky: false
-              };
-            });
-          })
-          .on("mousemove", (event) => {
-            if (tooltip.sticky) return;
-            setTooltip((tt) => {
-              return { ...tt, x: event.offsetX + 20, y: event.offsetY - 10 };
-            });
-          })
-          .on("mouseout", (event) => {
-            if (tooltip.sticky) return;
-            setTooltip((tt) => {
-              d3.select(event.target).attr("fill", "#ccc");
-              return { ...tt, show: false };
-            });
-          })
-          .on("click", (event, d) => {
+          .on("mouseenter", (event, d) => {
+            setHovered(true);
             const countyName = d.properties.name;
             const hasFactSheet = countiesWithFactSheets.includes(countyName);
+            // Use bounding rect for tooltip position relative to map container
+            const containerRect = mapRef.current.getBoundingClientRect();
+            const x = event.clientX - containerRect.left + 20;
+            const y = event.clientY - containerRect.top - 10;
             setTooltip({
               show: true,
               county: countyName,
-              x: event.offsetX + 20,
-              y: event.offsetY - 10,
+              x,
+              y,
               hasFactSheet,
-              sticky: true
+              // Store the fixed position so it doesn't update on mousemove
+              fixedX: x,
+              fixedY: y
             });
+            d3.select(event.target).attr("fill", "#aaa");
+          })
+          .on("mousemove", (event) => {
+            // Do not update tooltip position on mousemove
+          })
+          .on("mouseleave", (event) => {
+            setHovered(false);
+            d3.select(event.target).attr("fill", "#ccc");
           });
         setIsMapLoaded(true); // Set map loaded after rendering
       });
@@ -206,7 +184,14 @@ export default function CaliforniaMap() {
         tooltipRef.current = null;
       }
     };
-  }, [tooltip.sticky, countiesWithFactSheets]); // Rerun effect if tooltip sticky state or countiesWithFactSheets changes
+  }, [countiesWithFactSheets, tooltipHovered]);
+
+  // Tooltip close on leave logic
+  useEffect(() => {
+    if (!hovered && !tooltipHovered) {
+      setTooltip((tt) => ({ ...tt, show: false }));
+    }
+  }, [hovered, tooltipHovered]);
 
   return (
     <div
@@ -214,11 +199,14 @@ export default function CaliforniaMap() {
       style={{ height: `${options.mapHeight}px` }}
     >
       {/* Map Container */}
-      <div ref={mapRef} className="w-full h-full">
+      <div ref={mapRef} className="w-full h-full relative">
         {tooltip.show && (
           <MapTooltip
             {...tooltip}
-            onClose={() => setTooltip((tt) => ({ ...tt, show: false, sticky: false }))}
+            x={tooltip.fixedX}
+            y={tooltip.fixedY}
+            onTooltipEnter={() => setTooltipHovered(true)}
+            onTooltipLeave={() => setTooltipHovered(false)}
           />
         )}
       </div>
