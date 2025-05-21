@@ -15,8 +15,8 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
     <div
       className={
         hasFactSheet
-          ? 'absolute z-50 w-[257px] h-[96px] rounded-[10px] shadow-[2px_2px_0px_#30303080] border border-[#005587] bg-white flex flex-col items-center justify-start pt-2 pb-3 overflow-visible'
-          : 'absolute z-50 w-[257px] h-54 bg-white rounded-[0px_10px_10px_10px] border border-solid border-[#005587] shadow-[2px_2px_0px_#30303080] text-black flex flex-col items-center justify-start pt-2 pb-3 overflow-visible'
+          ? 'absolute z-50 w-[257px] h-[96px] rounded-[10px] shadow-[2px_2px_0px_#30303080] border border-[#005587] bg-white flex flex-col items-center justify-start pt-2 pb-3 overflow-visible select-none'
+          : 'absolute z-50 w-[257px] h-54 bg-white rounded-[0px_10px_10px_10px] border border-solid border-[#005587] shadow-[2px_2px_0px_#30303080] text-black flex flex-col items-center justify-start pt-2 pb-3 overflow-visible select-none'
       }
       style={{ left: x, top: y, pointerEvents: 'auto', position: 'absolute' }}
       onMouseEnter={onTooltipEnter}
@@ -143,17 +143,27 @@ export default function CaliforniaMap() {
             setHovered(true);
             const countyName = d.properties.name;
             const hasFactSheet = countiesWithFactSheets.includes(countyName);
-            // Use bounding rect for tooltip position relative to map container
+            // Get centroid in SVG coordinates
+            const centroid = path.centroid(d);
+            // Get SVG and map container bounding rects
+            const svgNode = svgRef.current.node();
+            const svgRect = svgNode.getBoundingClientRect();
             const containerRect = mapRef.current.getBoundingClientRect();
-            const x = event.clientX - containerRect.left + 20;
-            const y = event.clientY - containerRect.top - 10;
+            // Calculate scale factors (SVG may be scaled to fit container)
+            const scaleX = svgRect.width / +svgNode.getAttribute('width');
+            const scaleY = svgRect.height / +svgNode.getAttribute('height');
+            // Offset so the arrow (top left) points to the centroid
+            // Adjust these values as needed for best visual alignment
+            const arrowOffsetX = 0; // px right from centroid
+            const arrowOffsetY = 0; // px down from centroid
+            const x = centroid[0] * scaleX + (svgRect.left - containerRect.left) + arrowOffsetX;
+            const y = centroid[1] * scaleY + (svgRect.top - containerRect.top) + arrowOffsetY;
             setTooltip({
               show: true,
               county: countyName,
               x,
               y,
               hasFactSheet,
-              // Store the fixed position so it doesn't update on mousemove
               fixedX: x,
               fixedY: y
             });
