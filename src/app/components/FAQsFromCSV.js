@@ -6,42 +6,34 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
   const [openIdxs, setOpenIdxs] = useState([]); // allow multiple open
 
   useEffect(() => {
-    // Only fetch if no initial data provided
-    if (initialData.length > 0) return;
-    const fetchData = async () => {
-      try {
-        const response = await fetch(csvUrl);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const csvText = await response.text();
-        Papa.parse(csvText, {
-          header: true,
-          delimiter: ",",
-          skipEmptyLines: true,
-          complete: (results) => {
-            // If your CSV has columns: question, answer, draft, id
-            const filtered = results.data
-              .map(item => ({
-                question: item.question?.trim() || item.Question?.trim() || item.Title?.trim() || "",
-                answer: item.answer?.trim() || item.Answer?.trim() || item.File?.trim() || "",
-                draft: item.draft?.trim() || item.Draft?.trim() || "",
-                id: item.id?.trim() || item.ID?.trim() || "",
-              }))
-              .filter(
-                (item) =>
-                  item.draft?.toLowerCase() !== 'yes' &&
-                  item.question &&
-                  item.answer
-              );
-            setFaqs(filtered);
-          },
-          error: (error) => console.error('Error parsing CSV:', error),
-        });
-      } catch (error) {
-        console.error('Error fetching CSV:', error);
-      }
-    };
-    fetchData();
-  }, [csvUrl, initialData]);
+    // Always fetch latest FAQs data from CSV
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        const filtered = results.data
+          .map(item => ({
+            question: item.question?.trim() || item.Question?.trim() || item.Title?.trim() || "",
+            answer: item.answer?.trim() || item.Answer?.trim() || item.File?.trim() || "",
+            draft: item.draft?.trim() || item.Draft?.trim() || "",
+            id: item.id?.trim() || item.ID?.trim() || "",
+          }))
+          .filter(item => item.draft?.toLowerCase() !== 'yes' && item.question && item.answer);
+        // Sort by numeric id ascending
+        filtered.sort((a, b) => Number(a.id) - Number(b.id));
+        setFaqs(filtered);
+      },
+      error: (error) => console.error('Error parsing CSV:', error),
+    });
+  }, [csvUrl]);
+
+  // If initialData provided, sort and set them immediately
+  useEffect(() => {
+    if (initialData.length > 0) {
+      setFaqs([...initialData].sort((a, b) => Number(a.id) - Number(b.id)));
+    }
+  }, [initialData]);
 
   useEffect(() => {
     // If faqs loaded and there's a hash, open that item

@@ -69,7 +69,7 @@ export default async function Page({ params }) {
   let csvUrl = '';
   if (slug === 'faqs') {
     csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1166232289&single=true&output=csv";
-    const res = await fetch(csvUrl, { cache: 'force-cache' });
+    const res = await fetch(csvUrl, { cache: 'no-store' }); // always fetch latest data
     const csvText = await res.text();
     const results = Papa.parse(csvText, { header: true, skipEmptyLines: true });
     initialData = results.data
@@ -79,7 +79,9 @@ export default async function Page({ params }) {
         draft: item.draft?.trim() || item.Draft?.trim() || "",
         id: item.id?.trim() || item.ID?.trim() || "",
       }))
-      .filter(item => item.draft?.toLowerCase() !== 'yes' && item.question && item.answer);
+      .filter(item => item.draft?.toLowerCase() !== 'yes' && item.question && item.answer)
+      // sort by numeric id ascending
+      .sort((a, b) => Number(a.id) - Number(b.id));
     return <SlugClient slug={slug} csvUrl={csvUrl} initialData={initialData} />;
   }
   // Delegate remaining slugs to the client renderer (MDX content uses React context)
