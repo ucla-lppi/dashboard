@@ -1,5 +1,9 @@
+"use client";
+
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
   const [faqs, setFaqs] = useState(initialData);
@@ -57,26 +61,6 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
     }
   }, [faqs]);
 
-  // Utility to convert [text](url) to <a href="url">text</a>, \n to <br/>, and lines starting with - or * to <ul><li>...</li></ul>
-  function parseFaqAnswer(answer) {
-    if (!answer) return null;
-    let html = answer;
-    // Convert [text](url) to <a href="url">text</a>
-    html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary underline">$1</a>');
-    // Convert triple-backtick code blocks to <pre><code>
-    html = html.replace(/```([\s\S]*?)```/g, (match, code) => `<pre class="bg-gray-100 rounded p-2 my-2"><code>${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`);
-    // Convert lines starting with - or * to <ul><li>...</li></ul>
-    if (/^\s*[-*] /m.test(html)) {
-      html = html.replace(/(^|\n)([-*] .*(?:\n[-*] .*)*)/g, (m, p1, p2) => {
-        const items = p2.split(/\n/).map(line => line.replace(/^[-*] /, '').trim());
-        return `<ul class="list-disc ml-6">${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
-      });
-    }
-    // Convert newlines to <br/>, but not inside <ul> or <pre>
-    html = html.replace(/\n/g, '<br/>');
-    return html;
-  }
-
   return (
     <section className="max-w-2xl mx-auto my-8">
       {/* <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2> */}
@@ -120,8 +104,28 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
               <div
                 id={`faq-answer-${idx}`}
                 className={`px-4 pb-4 text-gray-700 transition-all duration-200 ${openIdxs.includes(idx) ? "block" : "hidden"}`}
-                dangerouslySetInnerHTML={{ __html: parseFaqAnswer(faq.answer) }}
-              />
+              >
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a {...props} target="_blank" rel="noopener noreferrer" className="text-primary underline" />
+                    ),
+                    code: ({ node, inline, className, children, ...props }) =>
+                      inline ? (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      ) : (
+                        <pre className="bg-gray-100 rounded p-2 my-2">
+                          <code {...props}>{children}</code>
+                        </pre>
+                      ),
+                  }}
+                >
+                  {faq.answer}
+                </ReactMarkdown>
+              </div>
             </div>
           );
         })}
