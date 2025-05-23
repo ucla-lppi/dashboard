@@ -61,6 +61,33 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
     }
   }, [faqs]);
 
+  // Utility to parse markdown-like text into HTML paragraphs and lists
+  function parseFaqAnswer(answer) {
+    if (!answer) return '';
+    // Normalize line endings
+    const text = answer.trim();
+    // Split into blocks separated by blank lines
+    const blocks = text.split(/\n{2,}/g);
+    const html = blocks
+      .map(block => {
+        const lines = block.split(/\n/);
+        // List block
+        if (lines.every(l => /^[-*]\s+/.test(l))) {
+          const items = lines.map(l => l.replace(/^[-*]\s+/, '').trim());
+          return `<ul class="list-disc ml-6">${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        }
+        // Regular paragraph: convert links and preserve single-line breaks
+        let p = block
+          .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary underline">$1</a>')
+          .replace(/```([\s\S]*?)```/g, (m, code) => `<pre class="bg-gray-100 rounded p-2 my-2"><code>${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`)
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>') // bold support
+          .replace(/\n/g, '<br/>');
+        return `<p class="mb-4 text-gray-700">${p}</p>`;
+      })
+      .join('');
+    return html;
+  }
+
   return (
     <section className="max-w-2xl mx-auto my-8">
       {/* <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2> */}
@@ -103,29 +130,9 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
               </button>
               <div
                 id={`faq-answer-${idx}`}
-                className={`px-4 pb-4 text-gray-700 transition-all duration-200 whitespace-pre-wrap ${openIdxs.includes(idx) ? "block" : "hidden"}`}
-              >
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    a: ({ node, ...props }) => (
-                      <a {...props} target="_blank" rel="noopener noreferrer" className="text-primary underline" />
-                    ),
-                    code: ({ node, inline, className, children, ...props }) =>
-                      inline ? (
-                        <code className={className} {...props}>
-                          {children}
-                        </code>
-                      ) : (
-                        <pre className="bg-gray-100 rounded p-2 my-2">
-                          <code {...props}>{children}</code>
-                        </pre>
-                      ),
-                  }}
-                >
-                  {faq.answer}
-                </ReactMarkdown>
-              </div>
+                className={`px-4 pb-4 transition-all duration-200 ${openIdxs.includes(idx) ? "block" : "hidden"}`}
+                dangerouslySetInnerHTML={{ __html: parseFaqAnswer(faq.answer) }}
+              />
             </div>
           );
         })}
