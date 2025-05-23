@@ -103,7 +103,7 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
               </button>
               <div
                 id={`faq-answer-${idx}`}
-                className={`px-4 pb-4 text-gray-700 transition-all duration-200 ${openIdxs.includes(idx) ? "block" : "hidden"}`}
+                className={`px-4 pb-4 text-gray-700 transition-all duration-200 whitespace-pre-wrap ${openIdxs.includes(idx) ? "block" : "hidden"}`}
               >
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
