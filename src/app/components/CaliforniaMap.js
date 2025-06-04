@@ -136,7 +136,8 @@ export default function CaliforniaMap() {
           .enter()
           .append("path")
           .attr("d", path)
-          .attr("fill", "#ccc")
+          // Color counties with fact sheets green, others gray
+          .attr("fill", d => countiesWithFactSheets.includes(d.properties.name) ? "#338f87" : "#ccc")
           .attr("stroke", "white")
           .attr("stroke-width", 0.5)
           .on("mouseenter", (event, d) => {
@@ -167,14 +168,18 @@ export default function CaliforniaMap() {
               fixedX: x,
               fixedY: y
             });
-            d3.select(event.target).attr("fill", "#aaa");
+            // On hover, darken the base color
+            d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
           })
           .on("mousemove", (event) => {
             // Do not update tooltip position on mousemove
           })
-          .on("mouseleave", (event) => {
+          .on("mouseleave", (event, d) => {
             setHovered(false);
-            d3.select(event.target).attr("fill", "#ccc");
+            // Restore base fill
+            const countyName = d.properties.name;
+            const has = countiesWithFactSheets.includes(countyName);
+            d3.select(event.target).attr("fill", has ? "#338f87" : "#ccc");
           });
         setIsMapLoaded(true); // Set map loaded after rendering
       });
