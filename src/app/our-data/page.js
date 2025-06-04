@@ -149,12 +149,11 @@ export default function OurDataPage() {
                       <label
                         key={cat}
                         className="inline-flex items-center mb-2 space-x-2 cursor-pointer"
-                        onClick={() => toggleCat(cat)}
                       >
                         <input
                           type="checkbox"
                           checked={isActive}
-                          readOnly
+                          onChange={() => toggleCat(cat)}
                           className="h-4 w-4 text-white border-white"
                         />
                         <span
