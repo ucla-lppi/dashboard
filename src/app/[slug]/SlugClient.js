@@ -7,7 +7,7 @@ import Research from '@content/Research.mdx';
 import Newsroom from '@content/Newsroom.mdx';
 import AdditionalResources from '@content/AdditionalResources.mdx';
 import Contact from '@content/Contact.mdx';
-import OurData from '@content/OurData.mdx';
+import OurData from '../our-data/page';
 import OurTeam from '@content/OurTeam.mdx';
 import FAQsFromCSV from '../components/FAQsFromCSV';
 import HomePage from '../components/HomePage';
