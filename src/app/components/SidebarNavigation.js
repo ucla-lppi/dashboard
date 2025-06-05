@@ -145,7 +145,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                   </Link>
                 </li>
                 <li>
-                  <Link href={`${prefix}/our-data`} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'our-data' ? styles.submenuItemActive : ''}`}>
+                  <Link href={`/our-data`} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'our-data' ? styles.submenuItemActive : ''}`}>
                     OUR DATA
                   </Link>
                 </li>
