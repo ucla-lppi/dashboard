@@ -106,12 +106,15 @@ export default function OurDataPage() {
         <h2 className="pl-4 text-3xl font-bold text-primary mb-6">Our Data</h2>
         <hr className="pl-4 border-gray-200 mb-4" />
         <p className="pl-4 mb-6 text-base text-black">
-          This section and our{" "}
-          <Link href="/faqs" className="text-primary underline">
+		This section and our{" "} 
+			<Link href="/faqs" className="text-primary underline">
             Frequently Asked Questions
-          </Link>{" "}
-          answer many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard. Please refer to the technical report for more information on our methods and data sources.
-        </p>
+          </Link>{" "} 
+		  answer many common questions about the methods and indicators we used to develop the Latino Climate and Health Dashboard. Please refer to the {" "} 
+			<Link href="/faqs" className="text-primary underline">
+            Technical Report
+          </Link>{" "}  for more information.
+		  </p>
         {/* Line divider */}
         <hr className="border-[#AEC8C3] mb-4 ml-4" />
         {/* filters row */}
