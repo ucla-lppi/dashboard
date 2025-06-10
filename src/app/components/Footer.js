@@ -81,7 +81,7 @@ export default function Footer() {
               <p className="underline font-light">
                 FAQ<br />Our Data<br />Our Team<br /><br />
               </p>
-              <p className="font-bold">Resource Bank</p>
+              <a href="/resource-directory"><p className="font-bold">Resource Directory</p></a>
             </div>
             {/* Site Map SubColumn 3 */}
             <div>

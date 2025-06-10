@@ -35,14 +35,6 @@ export default function CircleImage({
           Image unavailable
         </div>
       )}
-      {overlaySrc && (
-        <img
-          src={overlaySrc}
-          alt="frame"
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          draggable={false}
-        />
-      )}
     </div>
   );
 }
