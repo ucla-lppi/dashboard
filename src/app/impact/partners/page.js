@@ -45,8 +45,6 @@ export default function ImpactPartnersPage() {
               <div className="mx-auto mb-4 w-[220px] h-[220px] relative rounded-full overflow-hidden">
                 {/* Partner image absolute inside circular boundary */}
                 <img src={m.image_link} alt={`${m.first_name || ''} ${m.last_name || ''}`} className="absolute inset-0 w-full h-full object-cover" />
-                {/* SVG boundary overlay */}
-                <img src={`${prefix}/images/partners_icon_boundary.svg`} alt="frame" className="absolute inset-0 w-full h-full" />
               </div>
               <h3 className="mb-1 text-xl font-semibold font-Lexend_Deca text-primary">
                 {(m.first_name || '') + ' ' + (m.last_name || '')}

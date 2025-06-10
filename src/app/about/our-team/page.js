@@ -43,7 +43,6 @@ export default function OurTeamPage() {
                     src={m.image_link}
                     alt={`${m.first_name || ''} ${m.last_name || ''}`}
                     size={220}
-                    overlaySrc={`${prefix}/images/partners_icon_boundary.svg`}
                   />
                 </div>
                 <h3 className="mb-1 text-xl font-semibold font-Lexend_Deca text-primary">
