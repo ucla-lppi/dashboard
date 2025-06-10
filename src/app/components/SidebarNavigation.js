@@ -163,7 +163,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                   >
                     <span className="flex-1">TECHNICAL DOCUMENTATION</span>
                     <img
-                      src={`${prefix}/images/external-link.svg`}
+                      src={`${prefix}/img/external-link.svg`}
                       alt="External link"
                       className="w-4 h-4 ml-2 flex-shrink-0"
                     />

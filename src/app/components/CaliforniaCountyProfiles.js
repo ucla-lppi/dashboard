@@ -89,7 +89,7 @@ export default function CaliforniaCountyProfiles() {
                     <span className="text-gray-900 pl-1 font-bold whitespace-nowrap" style={{ minWidth: `${maxCountyLength}ch` }}>{county}</span>
                     <div className="flex gap-2">
                       <a
-                        href={`${prefix}/factsheets/${slugCounty(county)}_extremeheat.pdf`}
+                        href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative h-6 px-3"
@@ -102,7 +102,7 @@ export default function CaliforniaCountyProfiles() {
                         </div>
                       </a>
                       <a
-                        href={`${prefix}/factsheets/${slugCounty(county)}_airpollution.pdf`}
+                        href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative h-6 px-3"
