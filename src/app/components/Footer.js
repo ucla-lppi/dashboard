@@ -67,21 +67,30 @@ export default function Footer() {
           <div className="grid grid-cols-3 gap-x-6 md:gap-x-4 text-left text-[16px] max-w-screen-md mx-auto">
             {/* Site Map SubColumn 1 */}
             <div>
-              <p className="font-bold underline">Home</p>
-              <p>
-                <span className="font-bold">Impact</span>
+              <p className="font-bold underline">
+                <a href="/" className="block">Home</a>
+              </p>
+              <p className="font-bold">
+                <a href="/impact">Impact</a>
               </p>
               <p className="underline font-light">
-                Research<br />Newsroom<br />Partners<br />Policy Toolkit
+                <a href="/impact/research">Research</a><br />
+                <a href="/impact/newsroom">Newsroom</a><br />
+                <a href="/impact/partners">Partners</a><br />
+                <a href="/policy-toolkit">Policy Toolkit</a>
               </p>
             </div>
             {/* Site Map SubColumn 2 */}
             <div>
               <p className="font-bold">About</p>
               <p className="underline font-light">
-                FAQ<br />Our Data<br />Our Team<br /><br />
+                <a href="${prefix}/faqs">FAQ</a><br />
+                <a href="${prefix}/our-data">Our Data</a><br />
+                <a href="${prefix}/about/our-team">Our Team</a>
               </p>
-              <a href="/resource-directory"><p className="font-bold">Resource Directory</p></a>
+              <p className="font-bold">
+                <a href="${prefix}/resource-directory">Resource Directory</a>
+              </p>
             </div>
             {/* Site Map SubColumn 3 */}
             <div>

@@ -61,32 +61,66 @@ const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
     }
   }, [faqs]);
 
-  // Utility to parse markdown-like text into HTML paragraphs and lists
-  function parseFaqAnswer(answer) {
-    if (!answer) return '';
-    // Normalize line endings
-    const text = answer.trim();
-    // Split into blocks separated by blank lines
-    const blocks = text.split(/\n{2,}/g);
-    const html = blocks
-      .map(block => {
-        const lines = block.split(/\n/);
-        // List block
-        if (lines.every(l => /^[-*]\s+/.test(l))) {
-          const items = lines.map(l => l.replace(/^[-*]\s+/, '').trim());
-          return `<ul class="list-disc ml-6">${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
-        }
-        // Regular paragraph: convert links and preserve single-line breaks
-        let p = block
-          .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary underline">$1</a>')
-          .replace(/```([\s\S]*?)```/g, (m, code) => `<pre class="bg-gray-100 rounded p-2 my-2"><code>${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`)
-          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>') // bold support
-          .replace(/\n/g, '<br/>');
-        return `<p class="mb-4 text-gray-700">${p}</p>`;
-      })
-      .join('');
-    return html;
-  }
+function parseFaqAnswer(answer) {
+  if (!answer) return '';
+  // inline formatting: links, bold, escapes, line-breaks
+  const parseInline = text =>
+    text
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+               '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary underline">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  
+  // normalize and split all lines
+  const lines = answer.trim().replace(/\r\n/g, '\n').split('\n');
+  
+  // collect segments: { type: 'ul'|'ol'|'p', lines: [...] }
+  const segs = [];
+  let curr = null;
+  
+  const flush = () => {
+    if (!curr) return;
+    segs.push(curr);
+    curr = null;
+  };
+  
+  lines.forEach(raw => {
+    const line = raw.trimEnd();
+    if (/^\s*[-*]\s+/.test(line)) {
+      // unordered
+      if (curr?.type !== 'ul') { flush(); curr = { type: 'ul', lines: [] }; }
+      curr.lines.push(line.replace(/^\s*[-*]\s+/, '').trim());
+    }
+    else if (/^\s*\d+\.\s+/.test(line)) {
+      // ordered
+      if (curr?.type !== 'ol') { flush(); curr = { type: 'ol', lines: [] }; }
+      curr.lines.push(line.replace(/^\s*\d+\.\s+/, '').trim());
+    }
+    else {
+      // plain text
+      flush();
+      segs.push({ type: 'p', lines: [line] });
+    }
+  });
+  flush();
+  
+  // render HTML
+  return segs.map(seg => {
+    if (seg.type === 'ul' || seg.type === 'ol') {
+      const tag = seg.type;
+      const cls = tag === 'ul' ? 'list-disc ml-6' : 'list-decimal ml-6';
+      return `<${tag} class="${cls}">` +
+        seg.lines.map(li => `<li>${parseInline(li)}</li>`).join('') +
+        `</${tag}>`;
+    }
+    // paragraphs: preserve single-line breaks inside a <p>
+    return `<p class="mb-4 text-gray-700">` +
+      seg.lines
+        .map(l => parseInline(l))
+        .join('<br/>') +
+      `</p>`;
+  }).join('');
+}
 
   return (
     <section className="max-w-2xl mx-auto my-8">

@@ -5,7 +5,7 @@ import Impact from '@content/Impact.mdx';
 import Newsroom from '@content/Newsroom.mdx';
 import AdditionalResources from '@content/AdditionalResources.mdx';
 import Contact from '@content/Contact.mdx';
-import TechnicalDocumentation from '@content/TechnicalDocumentation.mdx';
+// import TechnicalDocumentation from '@content/TechnicalDocumentation.mdx'; // now external link
 import OurData from '../our-data/page';
 import OurTeam from '@content/OurTeam.mdx';
 
@@ -16,7 +16,7 @@ export default function SlugClientRenderer({ slug }) {
     'newsroom': Newsroom,
     'additional-resources': AdditionalResources,
     contact: Contact,
-    'technical-documentation': TechnicalDocumentation,
+    // 'technical-documentation': TechnicalDocumentation, // removed, now external
     'our-data': OurData,
     'our-team': OurTeam,
   };
