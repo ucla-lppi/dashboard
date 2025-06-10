@@ -4,7 +4,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import Divider from './Divider';
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
-
+// List of all counties
 const allCounties = [
   "Alameda",
   "Contra Costa",
@@ -30,6 +30,10 @@ const allCounties = [
   "Tulare",
   "Ventura"
 ];
+// helper to build fact-sheet filenames
+const slugCounty = name => name.toLowerCase().replace(/\s+/g, '_');
+// compute the length of the longest county name
+const maxCountyLength = Math.max(...allCounties.map(c => c.length));
 
 export default function CaliforniaCountyProfiles() {
   const [search, setSearch] = useState('');
@@ -76,36 +80,46 @@ export default function CaliforniaCountyProfiles() {
           </div>
 
           {/* Counties List */}
-          <SimpleBar autoHide={false} forceVisible="y" className="rounded w-full max-h-[275px] county-scrollbar overflow-x-hidden" contentClassName="px-4" style={{ maxHeight: 275 }}>
+          <SimpleBar autoHide={false} forceVisible="y" className="rounded w-full max-h-[275px] county-scrollbar overflow-x-hidden" scrollableNodeProps={{ className: 'px-4' }} style={{ maxHeight: 275 }}>
              <Divider />
              {filtered.map((county, idx) => (
                <React.Fragment key={county}>
                 <div className="flex justify-center items-center px-4 py-2">
-                  <div className="flex justify-between items-center w-full max-w-[600px] gap-6">
-                    <span className="text-gray-900 pl-1 text-bold">{county}</span>
+                  <div className="flex justify-between items-center w-full gap-6">
+                    <span className="text-gray-900 pl-1 font-bold whitespace-nowrap" style={{ minWidth: `${maxCountyLength}ch` }}>{county}</span>
                     <div className="flex gap-2">
-                      <button className="relative w-[180px] h-6">
+                      <a
+                        href={`${prefix}/factsheets/${slugCounty(county)}_extremeheat.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative h-6 px-3"
+                      >
                         <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                         <div className="relative flex items-center justify-center h-full gap-1">
                           <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
                           <span className="text-primary text-sm font-normal">Extreme Heat</span>
                           <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                         </div>
-                      </button>
-                      <button className="relative w-[180px] h-6">
+                      </a>
+                      <a
+                        href={`${prefix}/factsheets/${slugCounty(county)}_airpollution.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative h-6 px-3"
+                      >
                         <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                         <div className="relative flex items-center justify-center h-full gap-1">
                           <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
                           <span className="text-primary text-sm font-normal">Air Pollution</span>
                           <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                         </div>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
-                {idx < filtered.length - 1 && <Divider />}
-              </React.Fragment>
-            ))}
+                 {idx < filtered.length - 1 && <Divider />}
+               </React.Fragment>
+             ))}
           </SimpleBar>
 
 
