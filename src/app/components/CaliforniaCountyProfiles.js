@@ -64,7 +64,7 @@ export default function CaliforniaCountyProfiles() {
         <div className="w-px bg-[#333333] self-stretch"></div>
         {/* Right Column (75%) */}
         <div className="w-[75%]">
-          <h2 className="text-xl font-bold text-[28px] text-gray-900 mb-4">List of California County Profiles</h2>
+          <h2 className="text-xl font-bold text-[28px] text-gray-900 mb-4">List of California County Factsheets</h2>
           {/* Search Bar */}
           <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-md mb-4">
             <input
