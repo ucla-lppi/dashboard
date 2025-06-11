@@ -10,7 +10,7 @@ const options = {
 	mapHeight: '551'
 };
 // helper to build fact-sheet filenames
-const slugCounty = name => name.toLowerCase().replace(/\s+/g, '_');
+const slugCounty = name => name.replace(/\s+/g, '_');
 
 // Tooltip component for displaying county information
 function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave }) {
