@@ -31,7 +31,7 @@ const allCounties = [
   "Ventura"
 ];
 // helper to build fact-sheet filenames
-const slugCounty = name => name.toLowerCase().replace(/\s+/g, '_');
+const slugCounty = name => name.replace(/\s+/g, '_');
 // compute the length of the longest county name
 const maxCountyLength = Math.max(...allCounties.map(c => c.length));
 
