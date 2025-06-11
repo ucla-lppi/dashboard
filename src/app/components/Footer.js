@@ -84,12 +84,12 @@ export default function Footer() {
             <div>
               <p className="font-bold">About</p>
               <p className="underline font-light">
-                <a href="${prefix}/faqs">FAQ</a><br />
-                <a href="${prefix}/our-data">Our Data</a><br />
-                <a href="${prefix}/about/our-team">Our Team</a>
+                <a href={`${prefix}/faqs`}>FAQ</a><br />
+                <a href={`${prefix}/our-data`}>Our Data</a><br />
+                <a href={`${prefix}/about/our-team`}>Our Team</a>
               </p>
               <p className="font-bold">
-                <a href="${prefix}/resource-directory">Resource Directory</a>
+                <a href={`${prefix}/resource-directory`}>Resource Directory</a>
               </p>
             </div>
             {/* Site Map SubColumn 3 */}
