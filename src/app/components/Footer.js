@@ -68,16 +68,16 @@ export default function Footer() {
             {/* Site Map SubColumn 1 */}
             <div>
               <p className="font-bold underline">
-                <a href="/" className="block">Home</a>
+                <a href={`${prefix}/`} className="block">Home</a>
               </p>
               <p className="font-bold">
-                <a href="/impact">Impact</a>
+                <a href={`${prefix}/impact`}>Impact</a>
               </p>
               <p className="underline font-light">
-                <a href="/impact/research">Research</a><br />
-                <a href="/impact/newsroom">Newsroom</a><br />
-                <a href="/impact/partners">Partners</a><br />
-                <a href="/policy-toolkit">Policy Toolkit</a>
+                <a href={`${prefix}/impact/research`}>Research</a><br />
+                <a href={`${prefix}/impact/newsroom`}>Newsroom</a><br />
+                <a href={`${prefix}/impact/partners`}>Partners</a><br />
+                <a href={`${prefix}/policy-toolkit`}>Policy Toolkit</a>
               </p>
             </div>
             {/* Site Map SubColumn 2 */}
