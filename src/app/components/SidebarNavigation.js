@@ -162,11 +162,11 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                     className={`${styles.menuItem} text-xl font-bold uppercase flex items-center w-full p-2`}
                   >
                     <span className="flex-1">TECHNICAL DOCUMENTATION</span>
-                    <img
+                    {/* <img
                       src={`${prefix}/img/external-link.svg`}
                       alt="External link"
                       className="w-4 h-4 ml-2 flex-shrink-0"
-                    />
+                    /> */}
                   </a>
                 </li>
               </ul>
