@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import Divider from './Divider';
@@ -36,6 +37,7 @@ const slugCounty = name => name.replace(/\s+/g, '_');
 const maxCountyLength = Math.max(...allCounties.map(c => c.length));
 
 export default function CaliforniaCountyProfiles() {
+  const router = useRouter();
   const [search, setSearch] = useState('');
   const filtered = useMemo(() =>
     allCounties.filter(c => c.toLowerCase().includes(search.toLowerCase())), [search]
@@ -53,12 +55,15 @@ export default function CaliforniaCountyProfiles() {
           </p>
 		  <Divider />
 			<div className="flex flex-col gap-4 mb-4 p-4">
-			  <button className="bg-white font-bold  text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]">
+			  {/* <button className="bg-white font-bold  text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]">
 				STATE FACT SHEET
-			  </button>
-			  <button className="bg-white font-bold text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]">
-				FAQS
-			  </button>
+			  </button> */}
+			  <button
+          onClick={() => router.push('/faqs')}
+          className="bg-white font-bold text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]"
+        >
+          FAQS
+        </button>
 			</div>
         </div>
         <div className="w-px bg-[#333333] self-stretch"></div>
