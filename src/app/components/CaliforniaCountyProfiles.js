@@ -62,7 +62,7 @@ export default function CaliforniaCountyProfiles() {
           onClick={() => router.push('/faqs')}
           className="bg-white font-bold text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]"
         >
-          FAQS
+          FAQ
         </button>
 			</div>
         </div>

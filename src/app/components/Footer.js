@@ -21,7 +21,7 @@ export default function Footer() {
               THERE IS NO AMERICAN AGENDA<br />WITHOUT A LATINO AGENDA
             </p>
             <div className="flex justify-start items-center space-x-4">
-              <img
+              {/* <img
                 src={`${prefix}/images/fb_footer.svg`}
                 alt="Facebook"
                 className="w-[12px] h-[20px]"
@@ -50,7 +50,7 @@ export default function Footer() {
                 src={`${prefix}/images/email_footer.svg`}
                 alt="Email"
                 className="w-[21px] h-[14px]"
-              />
+              /> */}
             </div>
           </div>
         
