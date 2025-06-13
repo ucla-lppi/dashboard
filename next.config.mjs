@@ -1,6 +1,7 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
+import mdx from '@next/mdx';
 import remarkGfm from 'remark-gfm';
 
 // Inline plugin to remove YAML front matter nodes from the AST
@@ -10,7 +11,12 @@ function removeYaml() {
   };
 }
 
-// No MDX support needed, remove MDX plugin
+const withMDX = mdx({
+  extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: [remarkGfm, removeYaml],
+  },
+});
 
 // Normalize BASE_PATH to always start with '/'
 const rawBase = process.env.BASE_PATH || '';
@@ -36,4 +42,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);
