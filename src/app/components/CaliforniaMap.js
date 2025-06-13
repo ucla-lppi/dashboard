@@ -1,13 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import Papa from 'papaparse';
+import Link from 'next/link';
 
 // Determine asset prefix (e.g. '/dashboard')
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 const geoJsonUrl = `${prefix}/data/ca_counties.geojson`;
 const options = {
 	mapHeight: '551'
-}
+};
+// helper to build fact-sheet filenames
+const slugCounty = name => name.replace(/\s+/g, '_');
 
 // Tooltip component for displaying county information
 function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave }) {
@@ -36,22 +39,22 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       </div>
       {hasFactSheet ? (
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
-          <a href="#" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a href="#" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
             <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
         </div>
       ) : (
         <div className="flex flex-col items-center w-full mt-1">
-          <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">No fact sheet available.</div>
-          <a href="#" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-0 shadow-[2px_2px_0px_#30303080] focus:outline-none mt-3">
+          <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">No factsheet available.</div>
+          <Link href="/faqs" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-0 shadow-[2px_2px_0px_#30303080] focus:outline-none mt-3">
             <span className="text-white text-lg font-medium font-Lexend_Deca">FAQ</span>
-            <svg className="w-6 h-[19px] ml-2" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-          </a>
+            <svg className="w-6 h-[19px] ml-2" fill="none" stroke="white" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </Link>
         </div>
       )}
     </div>
@@ -236,7 +239,7 @@ export default function CaliforniaMap() {
                 className="w-5 h-5"
               />
             </div>
-            <span className="text-sm font-medium">Extreme Heat Fact Sheet</span>
+            <span className="text-sm font-medium">Extreme Heat Factsheet</span>
           </div>
           <div className="flex items-center">
             <div className="flex items-center justify-center bg-primary rounded-full w-[60px] h-7 min-w-[48px] min-h-[28px] mr-2">
@@ -246,7 +249,7 @@ export default function CaliforniaMap() {
                 className="w-5 h-5"
               />
             </div>
-            <span className="text-sm font-medium">Air Pollution Fact Sheet</span>
+            <span className="text-sm font-medium">Air Pollution Factsheet</span>
           </div>
         </div>
       )}

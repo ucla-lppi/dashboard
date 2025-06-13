@@ -17,10 +17,10 @@ export default function HomePage() {
       <div className="col-span-2">
         <div className="flex flex-col items-start">
           <h1 className="text-3xl font-bold text-primary">
-            California County Profiles
+            California County Factsheets
           </h1>
           <span className="text-[#2f2f2f] text-xl font-bold font-Lexend_Deca block mt-0 mb-1">
-            Click on a county on the map to view its County Wellness Profile
+            Click on a county on the map to view its factsheets
           </span>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default function HomePage() {
               }
               className="text-m font-semibold text-black mb-1 text-center"
             >
-              jump to <br />county profiles
+              jump to <br />county factsheets
             </button>
             <button
               onClick={() =>

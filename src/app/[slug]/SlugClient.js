@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Link from 'next/link';
 import { Card } from 'flowbite-react';
 
 import Impact from '@content/Impact.mdx';
@@ -33,8 +34,22 @@ export default function SlugClient({ slug }) {
     return (
       <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
         <h1 className="text-2xl font-bold">Frequently Asked Questions</h1>
-        <p>Here is a list of common questions and answers you may have as you explore the Latino Climate and Health Dashboard. Many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard can be found here or in the “Our Data” [LINK] section. Please refer to the technical report [LINK] for detailed information on our methods and data sources. 
-			<br/> <br/>	
+        <p>
+          Here is a list of common questions and answers you may have as you explore the Latino Climate and Health Dashboard. Many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard can be found here or in the{" "}
+          <Link href="/our-data" className="text-primary underline">
+            Our Data
+          </Link>{" "}
+          section. Please refer to the{" "}
+          <a
+            href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline"
+          >
+            technical report
+          </a>{" "}
+          for detailed information on our methods and data sources.
+           <br/> <br/>	
 		  If you have suggestions for indicators or areas we should include—or are interested in supporting or collaborating on this work—please contact us at latino@luskin.ucla.edu. 
 		  </p>
 		<FAQsFromCSV csvUrl={FAQ_CSV_URL} />
