@@ -84,7 +84,7 @@ export default function Footer() {
             <div>
               <p className="font-bold">About</p>
               <p className="underline font-light">
-                <a href={`${prefix}/faqs`}>FAQ</a><br />
+                <a href={`${prefix}/faq`}>FAQ</a><br />
                 <a href={`${prefix}/our-data`}>Our Data</a><br />
                 <a href={`${prefix}/about/our-team`}>Our Team</a>
               </p>

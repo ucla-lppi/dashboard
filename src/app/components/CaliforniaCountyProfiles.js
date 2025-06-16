@@ -59,7 +59,7 @@ export default function CaliforniaCountyProfiles() {
 				STATE FACT SHEET
 			  </button> */}
 			  <button
-          onClick={() => router.push('/faqs')}
+          onClick={() => router.push('/faq')}
           className="bg-white font-bold text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]"
         >
           FAQ

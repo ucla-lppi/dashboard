@@ -39,7 +39,7 @@ const subcategorySlugs = {
 
 // Define all valid slug keys for pre-rendering, including dynamic subcategory pages
 const slugs = [
-  'home', 'impact', 'newsroom', 'additional-resources', 'contact', 'technical-documentation', 'our-data', 'our-team', 'faqs',
+  'home', 'impact', 'newsroom', 'additional-resources', 'contact', 'technical-documentation', 'our-data', 'our-team', 'faq',
   // Add dynamic subcategory slugs
   ...Object.keys(subcategorySlugs),
 ];
@@ -64,11 +64,11 @@ export default async function Page({ params }) {
     );
   }
   // Render FAQ via SlugClient (client-side fetch in component)
-  if (slug === 'faqs') {
+  if (slug === 'faq') {
     return <SlugClient slug={slug} />;
   }
   // Delegate remaining slugs to the client renderer (MDX content uses React context)
-  const valid = ['home','impact','newsroom','additional-resources','contact','technical-documentation','our-data','our-team','faqs'];
+  const valid = ['home','impact','newsroom','additional-resources','contact','technical-documentation','our-data','our-team','faq'];
   if (valid.includes(slug)) {
     return <SlugClientRenderer slug={slug} />;
   }

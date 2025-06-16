@@ -18,7 +18,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
 
   const [impactOpen, setImpactOpen] = useState(section === 'impact' || isResearchSub);
   const [aboutOpen, setAboutOpen] = useState(
-    ['faqs','our-data','our-team','technical-documentation','resource-bank'].includes(section)
+    ['faq','our-data','our-team','technical-documentation','resource-bank'].includes(section)
   );
 
   return (
@@ -140,7 +140,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
               <div className="absolute left-3 top-4 bottom-2 w-px bg-primary" aria-hidden="true" />
               <ul className="space-y-2">
                 <li>
-                  <Link href="/faqs" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'faqs' ? styles.submenuItemActive : ''}`}>
+                  <Link href="/faq" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'faq' ? styles.submenuItemActive : ''}`}>
                     FAQ
                   </Link>
                 </li>

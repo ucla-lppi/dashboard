@@ -51,7 +51,7 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       ) : (
         <div className="flex flex-col items-center w-full mt-1">
           <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">No factsheet available.</div>
-          <Link href="/faqs" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-0 shadow-[2px_2px_0px_#30303080] focus:outline-none mt-3">
+          <Link href="/faq" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-0 shadow-[2px_2px_0px_#30303080] focus:outline-none mt-3">
             <span className="text-white text-lg font-medium font-Lexend_Deca">FAQ</span>
             <svg className="w-6 h-[19px] ml-2" fill="none" stroke="white" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </Link>
