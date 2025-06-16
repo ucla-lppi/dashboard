@@ -11,6 +11,7 @@ import Contact from '@content/Contact.mdx';
 import OurData from '../our-data/page';
 import OurTeam from '@content/OurTeam.mdx';
 import HomePage from '../components/HomePage';
+import FAQsPage from '../faq/page';
 
 const components = {
   home: HomePage,
@@ -21,6 +22,7 @@ const components = {
   contact: Contact,
   'our-data': OurData,
   'our-team': OurTeam,
+  'faq': FAQsPage,
 };
 
 export default function SlugClient({ slug }) {
