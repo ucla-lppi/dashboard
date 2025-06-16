@@ -8,6 +8,7 @@ import Contact from '@content/Contact.mdx';
 // import TechnicalDocumentation from '@content/TechnicalDocumentation.mdx'; // now external link
 import OurData from '../our-data/page';
 import OurTeam from '@content/OurTeam.mdx';
+import FAQ from '../faq/page';
 
 export default function SlugClientRenderer({ slug }) {
   const pages = {
@@ -19,6 +20,7 @@ export default function SlugClientRenderer({ slug }) {
     // 'technical-documentation': TechnicalDocumentation, // removed, now external
     'our-data': OurData,
     'our-team': OurTeam,
+	'faq': FAQ,
   };
   const Content = pages[slug];
   if (!Content) return null;
