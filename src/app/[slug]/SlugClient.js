@@ -10,12 +10,8 @@ import AdditionalResources from '@content/AdditionalResources.mdx';
 import Contact from '@content/Contact.mdx';
 import OurData from '../our-data/page';
 import OurTeam from '@content/OurTeam.mdx';
-import FAQsFromCSV from '../components/FAQsFromCSV';
 import HomePage from '../components/HomePage';
 
-// Hardcoded FAQ CSV URL for client-only fetch
-const FAQ_CSV_URL =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1166232289&single=true&output=csv';
 const components = {
   home: HomePage,
   impact: Impact,
@@ -25,37 +21,9 @@ const components = {
   contact: Contact,
   'our-data': OurData,
   'our-team': OurTeam,
-  faqs: () => <FAQsFromCSV csvUrl={FAQ_CSV_URL} />,
 };
 
 export default function SlugClient({ slug }) {
-  // When FAQ, render preloaded CSV data to avoid client fetch lag
-  if (slug === 'faqs') {
-    return (
-      <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
-        <h1 className="text-2xl font-bold">Frequently Asked Questions</h1>
-        <p>
-          Here is a list of common questions and answers you may have as you explore the Latino Climate and Health Dashboard. Many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard can be found here or in the{" "}
-          <Link href="/our-data" className="text-primary underline">
-            Our Data
-          </Link>{" "}
-          section. Please refer to the{" "}
-          <a
-            href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary underline"
-          >
-            technical report
-          </a>{" "}
-          for detailed information on our methods and data sources.
-           <br/> <br/>	
-		  If you have suggestions for indicators or areas we should include—or are interested in supporting or collaborating on this work—please contact us at latino@luskin.ucla.edu. 
-		  </p>
-		<FAQsFromCSV csvUrl={FAQ_CSV_URL} />
-      </Card>
-    );
-  }
   const Component = components[slug];
   if (!Component) return <div>Page not found.</div>;
   return (

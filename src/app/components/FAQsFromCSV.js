@@ -5,6 +5,7 @@ import Papa from 'papaparse';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+
 const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
   const [faqs, setFaqs] = useState(initialData);
   const [openIdxs, setOpenIdxs] = useState([]); // allow multiple open
