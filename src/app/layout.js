@@ -101,7 +101,7 @@ export default function RootLayout({ children }) {
 			</button>
 			<a href="/" className="flex items-center">
 			<img
-				src="/images/lppi-dashboard-logo.svg"
+				src="/images/ucla_lppi_dashboard_logo.svg"
 				alt="LPPI Dashboard Logo"
 				className="h-8 pointer-events-none"
 			/>
