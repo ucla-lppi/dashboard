@@ -38,18 +38,10 @@ export default function RootLayout({ children }) {
   const mainContentRef = useRef(null);
   const sidebarRef = useRef(null);
 
+  // Toggle sidebar based on mobile detection
   useEffect(() => {
-    const updateSidebar = () => {
-      if (window.innerWidth < 640) {
-        setSidebarOpen(false);
-      } else {
-        setSidebarOpen(true);
-      }
-    };
-    updateSidebar();
-    window.addEventListener("resize", updateSidebar);
-    return () => window.removeEventListener("resize", updateSidebar);
-  }, []);
+    setSidebarOpen(!isMobile);
+  }, [isMobile]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -113,9 +105,15 @@ export default function RootLayout({ children }) {
           <div className="grid grid-cols-1 sm:grid-cols-[auto] flex-grow h-full">
             {/* Sidebar Navigation Component */}
             <SidebarNavigation sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isMobile={isMobile} />
+			{isMobile && (
+          	<div
+            	className={`fixed inset-0 bg-black z-30 transition-opacity duration-200 ease-in-out ${sidebarOpen ? 'opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            	onClick={() => setSidebarOpen(false)}
+          	/>
+        	)}
 
             {/* Main Content Section */}
-            <div className={`relative p-4 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"} sm:ml-0`}>
+            <div className={`relative p-4 transition-all duration-300 ${!isMobile && sidebarOpen ? 'ml-64' : 'ml-0'} sm:ml-0`}>
               {/* Background Layer */}
               <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#004266] to-[#002E45] overflow-hidden pointer-events-none">
 				{/* Removed background circles */}

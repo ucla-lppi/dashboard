@@ -78,7 +78,8 @@ export default function FAQsPage() {
       }
     });
     flush();
-    return segs.map(seg => {
+    return segs.map((seg, idx) => {
+      const prev = segs[idx - 1];
       if (seg.type === 'ul' || seg.type === 'ol') {
         const tag = seg.type;
         const cls = tag === 'ul' ? 'list-disc ml-6' : 'list-decimal ml-6';
@@ -86,7 +87,9 @@ export default function FAQsPage() {
           seg.lines.map(li => `<li>${parseInline(li)}</li>`).join('') +
           `</${tag}>`;
       }
-      return `<p class="mb-4 text-gray-700">` +
+      // Indent paragraphs that follow list items
+      const indentClass = prev && (prev.type === 'ul' || prev.type === 'ol') ? 'ml-8 ' : '';
+      return `<p class="${indentClass}mb-4 text-gray-700">` +
         seg.lines.map(l => parseInline(l)).join('<br/>') +
         `</p>`;
     }).join('');
@@ -116,13 +119,13 @@ export default function FAQsPage() {
         If you have suggestions for indicators or areas we should include—or are interested in supporting or collaborating on this work—please contact us at <a href="mailto:latino@luskin.ucla.edu" className="text-primary underline">latino@luskin.ucla.edu</a>.
       </p>
       <section className="w-[100%] mx-auto my-4">
-        <div id="faq-accordion">
+        <div id="faq-accordion" className="border-t border-[#84BAA6]">
           {loading ? (
             Array(5).fill().map((_, i) => (
-              <div key={i} className="border-y border-[#84BAA6] px-4 py-4">
-                <div className="h-6 bg-gray-200 animate-pulse rounded w-2/3"></div>
-              </div>
-            ))
+              <div key={i} className="border-b border-[#84BAA6] px-4 py-4">
+                 <div className="h-6 bg-gray-200 animate-pulse rounded w-2/3"></div>
+               </div>
+             ))
           ) : (
             faqs.map((faq, idx) => {
                const slug = faq.question
@@ -131,7 +134,7 @@ export default function FAQsPage() {
                  .replace(/(^-|-$)/g, '');
              const open = openIdxs.includes(idx);
             return (
-              <div key={faq.id || idx} className="border-y border-[#84BAA6]">
+              <div key={faq.id || idx} className="border-b border-[#84BAA6]">
                  <a id={slug} tabIndex={-1} aria-label={faq.question}></a>
                  <button
                    type="button"

@@ -11,7 +11,7 @@ import Contact from '@content/Contact.mdx';
 import OurData from '../our-data/page';
 import OurTeam from '@content/OurTeam.mdx';
 import HomePage from '../components/HomePage';
-import FAQsPage from '../faq/page';
+import FAQsPage from '../faqs/page';
 
 const components = {
   home: HomePage,

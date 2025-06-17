@@ -1,7 +1,7 @@
 // This layout file enables metadata generation for the Our Data page
 export function generateMetadata() {
   return {
-    title: 'Latino Climate and Health Dashboard',
+    title: 'Our Data'
   };
 }
 
