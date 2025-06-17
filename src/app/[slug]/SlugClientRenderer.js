@@ -8,7 +8,7 @@ import Contact from '@content/Contact.mdx';
 // import TechnicalDocumentation from '@content/TechnicalDocumentation.mdx'; // now external link
 import OurData from '../our-data/page';
 import OurTeam from '@content/OurTeam.mdx';
-import FAQ from '../faq/page';
+import FAQ from '../faqs/page';
 
 export default function SlugClientRenderer({ slug }) {
   const pages = {
