@@ -99,7 +99,7 @@ export default function FAQsPage() {
         Here is a list of common questions and answers you may have as you explore the Latino Climate and Health Dashboard. Many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard can be found here or in the{' '}
         <Link href="/our-data" className="text-primary underline">
           Our Data
-          <img src={`${prefix}/images/external_link_blue.svg`} alt="(external link)" className="inline ml-1 w-4 h-4 align-text-bottom" />
+          
         </Link>{' '}section. Please refer to the{' '}
         <a
           href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"

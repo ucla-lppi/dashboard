@@ -15,6 +15,14 @@ const categoryColorDict = {
   'Environmental Hazards': '#11423c',
 };
 
+// Helper to convert markdown links in CSV fields to HTML anchors
+function parseCsvLinks(text) {
+  if (!text) return '';
+  const escaped = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary underline">$1</a>');
+}
+
 export default function OurDataPage() {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1408499517&single=true&output=csv';
   const [items, setItems] = useState([]);
@@ -106,15 +114,26 @@ export default function OurDataPage() {
         <h2 className="pl-4 text-3xl font-bold text-primary mb-6">Our Data</h2>
         <hr className="pl-4 border-gray-200 mb-4" />
         <p className="pl-4 mb-6 text-base text-black">
-		This section and our{" "} 
-			<Link href="/faq" className="text-primary underline">
+          This section and our{" "}
+          <Link href="/faq" className="text-primary underline">
             Frequently Asked Questions
-          </Link>{" "} 
-		  answer many common questions about the methods and indicators we used to develop the Latino Climate and Health Dashboard. Please refer to the {" "} 
-			<Link href="/faq" className="text-primary underline">
+          </Link>{" "}
+          answer many common questions about the methods and indicators we used to develop the Latino Climate and Health Dashboard. Please refer to the{" "}
+          <Link
+            href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"
+            className="text-primary underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Technical Report
-          </Link>{" "}  for more information.
-		  </p>
+            <img
+              src={`${prefix}/images/external_link_blue.svg`}
+              alt="(external link)"
+              className="inline ml-1 w-4 h-4 align-text-bottom"
+            />
+          </Link>{" "}
+          for more information.
+        </p>
         {/* Line divider */}
         <hr className="border-[#AEC8C3] mb-4 ml-4" />
         {/* filters row */}
@@ -315,12 +334,12 @@ export default function OurDataPage() {
                     )
                   })}
                 </div>
-                <p className="mb-2"><strong>Description:</strong> {item.desc}</p>
+                <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong>Description:</strong> ${parseCsvLinks(item.desc)}`}} />
                 {item.source && (
-                  <p><strong>Source:</strong> {item.source}</p>
+                  <div dangerouslySetInnerHTML={{__html: `<strong>Source:</strong> ${parseCsvLinks(item.source)}`}} />
                 )}
-              </article>
-            ))}
+               </article>
+             ))}
           </div>
         )}
       </div>

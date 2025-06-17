@@ -6,6 +6,20 @@ export default function Head() {
   return (
     <>
       <base href={href} />
+      {/* SEO Meta Tags */}
+      <title>UCLA LPPI: Latino Health and Climate Data for California - Insights for Equity</title>
+      <meta name="description" content="Access comprehensive data on Latino health disparities and climate issues in California. Explore insights to support research, policymaking, and community health initiatives." />
+      <meta name="keywords" content="Latino health data, climate disparities in California, health equity for Latinos, environmental justice" />
+      <meta httpEquiv="content-language" content="en-us" />
+      <meta name="robots" content="index, follow" />
+      {/* Open Graph */}
+      <meta property="og:title" content="UCLA LPPI Latino Data Hub" />
+      <meta property="og:description" content="Explore data on Latino health and climate disparities in California" />
+      <meta property="og:url" content="https://latinoclimatehealth.org/" />
+      {/* Twitter Cards */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="UCLA LPPI Latino Data Hub" />
+      <meta name="twitter:description" content="Explore data on Latino health and climate disparities in California" />
       {/* Fallback hack: rewrite any img[src="./images/..."] at runtime */}
       <script
         dangerouslySetInnerHTML={{
