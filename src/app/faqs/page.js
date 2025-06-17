@@ -4,6 +4,8 @@ import Papa from 'papaparse';
 import Link from 'next/link';
 import { Card } from 'flowbite-react';
 
+const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
+
 // Hardcoded FAQ CSV URL
 const FAQ_CSV_URL =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1166232289&single=true&output=csv';
@@ -106,7 +108,7 @@ export default function FAQsPage() {
           className="text-primary underline"
         >
           technical report
-          <img src="/images/external_link_blue.svg" alt="(external link)" className="inline ml-1 w-4 h-4 align-text-bottom" />
+          <img src={`${prefix}/images/external_link_blue.svg`} alt="(external link)" className="inline ml-1 w-4 h-4 align-text-bottom" />
         </a>{' '}
         for detailed information on our methods and data sources.
       </p>
@@ -139,7 +141,7 @@ export default function FAQsPage() {
                  >
                   <span className="text-xl font-Lexend_Deca font-semibold text-primary">{faq.question}</span>
                   <img
-                    src={open ? "/images/faq_close.svg" : "/images/faq_open.svg"}
+                    src={open ? `${prefix}/images/faq_close.svg` : `${prefix}/images/faq_open.svg`}
                     alt={open ? "Close" : "Open"}
                     className="w-6 h-6 ml-2"
                   />
