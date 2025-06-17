@@ -255,7 +255,7 @@ export default function FancyBoxes({ onLoaded }) {
   );
 
   return (
-    <div ref={containerRef} className="container mx-auto py-8">
+    <div ref={containerRef} className="py-8">
       <div className="flex flex-col items-center space-y-6">
         {!isDataLoaded
           ? Array.from({ length: 3 }).map((_, i) => <FancyBoxSkeleton key={i} />)
