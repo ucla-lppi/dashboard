@@ -1,0 +1,33 @@
+.menuItem {
+	@apply relative block cursor-pointer text-black text-xl leading-7 font-semibold uppercase;
+	transition: all 300ms ease-in-out !important;
+  }
+  
+  .menuItem:hover {
+	@apply bg-primary text-white;
+	background: none !important;
+	color: inherit !important;
+  }
+  
+  .menuItemActive {
+	@apply relative text-primary;  /* Primary blue text */
+  }
+  
+  .menuItemActive::before {
+	content: "";
+	position: absolute;
+	left: -30px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: var(--selector-rectangle-url) no-repeat center;
+	background-size: contain;
+	width: 30px;
+	height: 30px;
+  }
+
+  .submenuItemActive {
+	@apply relative text-black; /* Black text */
+	text-decoration: underline !important;
+  }
+  
+  /* removed submenu selector rectangle */

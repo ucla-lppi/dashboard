@@ -1,0 +1,29 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 20px; /* Adjust padding as needed */
+  box-sizing: border-box;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  /* min-height: 100vh; */
+  /* Allows the blue background to extend beyond the white box */
+}
+
+.whiteContent {
+  position: relative;
+  background-color: #fcfcfc;
+  border-radius: 10px;
+  box-shadow: 6px 6px 0px #ae8e3b;
+  z-index: 10;
+  margin: 40px; /* Adjust spacing as needed */
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}

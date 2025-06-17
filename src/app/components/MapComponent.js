@@ -1,3 +1,9 @@
+"use client";
+import React from "react";
+import dynamic from "next/dynamic";
+import { Card } from "flowbite-react";
+import { getMdxFiles } from "@/utils/loadMdxContent";
+
 import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import { json } from 'd3-fetch';
@@ -5,7 +11,9 @@ import { getAssetUrl } from '../utils'; // Adjust the path as necessary
 import { assignIndicatorSummary } from '../utils/indicatorSummary'; // Import the utility function
 import popupConfig from '../config/popupConfig'; // Import the popup configuration
 
-export default function MapComponent() {
+const mdxFiles = getMdxFiles();
+
+export function MapComponent() {
   const mapContainerRef = useRef(null);
   const popupRef = useRef(null);
   const [themeClass, setThemeClass] = useState('');
@@ -30,7 +38,7 @@ export default function MapComponent() {
       console.log('Map loaded successfully');
 
       // Add counties layer
-      const geojsonPath = getAssetUrl('/data/ca_counties_simplified.geojson');
+      const geojsonPath = getAssetUrl('./data/ca_counties_simplified.geojson');
       json(geojsonPath)
         .then(geojson => {
           console.log('GeoJSON loaded successfully', geojson);
@@ -187,5 +195,30 @@ export default function MapComponent() {
         <div ref={popupRef} id="popup" className={themeClass}></div>
       </div>
     </div>
+  );
+}
+
+export default function MainContent({ activeItem }) {
+  const activeFile = mdxFiles.find((file) => file.slug === activeItem);
+
+  let ContentComponent = null;
+  if (activeFile?.filePath) {
+    ContentComponent = dynamic(() => import(`../../..${activeFile.filePath}`));
+  }
+
+  return (
+    <Card className="bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0">
+      {ContentComponent ? (
+        <article className="prose lg:prose-xl">
+          <ContentComponent />
+        </article>
+      ) : (
+        <div>
+          {activeFile
+            ? `Select a subcategory under ${activeFile.title}.`
+            : "Page not found."}
+        </div>
+      )}
+    </Card>
   );
 }

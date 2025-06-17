@@ -1,9 +1,6 @@
 name: Test Deploy to EC2 (Staging)
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
   
 jobs:
@@ -18,14 +15,25 @@ jobs:
       with:
         node-version: '18'
     
+    - name: Cache Node.js modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.yarn/cache
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    
     - name: Install dependencies
       run: yarn install
     
-    - name: Build and Export the project
+    - name: Disable Next.js Telemetry
+      run: npx next telemetry disable
+    
+    - name: Build the project for Staging
       env:
-        NEXT_PUBLIC_BASE_PATH: '/lppi-dashboard'
-        NEXT_PUBLIC_ASSET_PREFIX: '/lppi-dashboard'
-      run: yarn build && yarn export
+        BASE_PATH: '/lppi-dashboard'       # Corrected env var name
+        ASSET_PREFIX: '/lppi-dashboard'    # Corrected env var name
+      run: yarn build
     
     - name: Deploy to EC2 (Staging)
       env:
@@ -33,11 +41,27 @@ jobs:
         HOST: ${{ secrets.EC2_HOST }}
         USER: ${{ secrets.EC2_USER }}
       run: |
-        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:/var/www/html-staging
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} '
+        # Store the private key securely
+        echo "$PRIVATE_KEY" > private_key
+        chmod 600 private_key
+
+        # Define temporary deployment directory
+        TEMP_DIR="/home/${USER}/lppi-dashboard-temp"
+
+        # Create temporary directory on EC2
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} "mkdir -p $TEMP_DIR"
+
+        # Copy build files to temporary directory
+        scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:$TEMP_DIR
+
+        # Move files to the target directory with proper ownership
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} "
+          sudo rm -rf /var/www/html-staging/* &&
+          sudo cp -r $TEMP_DIR/* /var/www/html-staging/ &&
           sudo chown -R www-data:www-data /var/www/html-staging &&
           sudo systemctl restart apache2 &&
-          echo "Staging deployment successful!" &&
-          curl -I http://localhost/staging
-        '
+          sudo rm -rf $TEMP_DIR
+        "
+
+        # Cleanup private key file
+        rm private_key

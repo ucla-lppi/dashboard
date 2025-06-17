@@ -7,9 +7,11 @@
 		"build": "next build",
 		"export": "next export",
 		"start": "next start",
-		"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='/lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && yarn export && gh-pages -d out"
+		"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && gh-pages -d out"
 	},
 	"dependencies": {
+		"@fontsource/lexend": "^5.2.7",
+		"@fontsource/montserrat": "^5.2.5",
 		"@fortawesome/fontawesome-free": "^6.6.0",
 		"@mdx-js/loader": "^3.1.0",
 		"@mdx-js/react": "^3.1.0",
@@ -18,19 +20,31 @@
 		"axios": "^1.7.7",
 		"d3": "^7.9.0",
 		"d3-fetch": "^3.0.1",
+		"flowbite": "^3.1.2",
+		"flowbite-react": "^0.11.3",
 		"gray-matter": "^4.0.3",
 		"maplibre-gl": "^4.7.0",
-		"next": "14.2.10",
+		"next": "^15.2.4",
 		"papaparse": "^5.4.1",
 		"react": "^18",
 		"react-dom": "^18",
+		"react-markdown": "^10.1.0",
 		"react-scroll": "^1.9.0",
-		"remark-gfm": "^4.0.0"
+		"react-simple-maps": "^3.0.0",
+		"remark-breaks": "^4.0.0",
+		"remark-frontmatter": "^5.0.0",
+		"remark-gfm": "^4.0.1",
+		"simplebar": "^6.3.1",
+		"simplebar-react": "^3.3.1",
+		"slugify": "^1.6.6",
+		"styled-components": "^6.1.15",
+		"topojson-client": "^3.1.0"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.3",
 		"gh-pages": "^6.1.1",
 		"postcss": "^8",
+		"tailwind-scrollbar": "^4.0.2",
 		"tailwindcss": "^3.4.1"
 	}
 }

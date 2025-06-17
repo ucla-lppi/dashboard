@@ -23,8 +23,9 @@ jobs:
 
       - name: Build the project for GitHub Pages
         env:
-          BASE_PATH: '/dashboard'          # Replace with your GitHub repository name
-          ASSET_PREFIX: '/dashboard/'
+          BASE_PATH: dashboard           # GitHub Pages subpath (no leading slash)
+          ASSET_PREFIX: /dashboard       # Asset prefix for images and static files
+          NEXT_PUBLIC_ASSET_PREFIX: /dashboard # Ensures client-side code uses correct asset prefix
         run: yarn build
 
       - name: Deploy to GitHub Pages
