@@ -1,14 +1,21 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Footer() {
   const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Simple mobile device check via user agent
+    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
+  }, []);
+
   return (
     <footer className="relative z-10 bg-tertiary text-black">
       <div className="mx-auto max-w-screen-lg py-8 px-4">
-        <div className="grid grid-cols-[16rem_auto_auto_auto] gap-x-8 items-stretch">
+        <div className={isMobile ? 'flex flex-col gap-8' : 'grid grid-cols-[16rem_auto_auto_auto] gap-x-8 items-stretch'}>
           {/* Spacer column matching sidebar (w-64 = 16rem) */}
-          <div></div>
+          {!isMobile && <div></div> /* Spacer column hidden on mobile */}
           
           {/* Column 1: UCLA Logo, Quote, Social Icons */}
           <div className="flex flex-col items-start justify-self-center">
@@ -54,23 +61,27 @@ export default function Footer() {
             </div>
           </div>
         
-          {/* Divider Column */}
-          <div className="h-full flex items-center justify-center mx-2 md:mx-4 justify-self-center">
-            <img 
-              src={`${prefix}/images/line-31.svg`} 
-              alt="Divider" 
-              className="w-[1px] h-[141px] object-cover"
-            />
-          </div>
+          {/* Divider: image on desktop, hr on mobile */}
+          {isMobile ? (
+            <span></span>
+          ) : (
+            <div className="h-full flex items-center justify-center mx-2 md:mx-4 justify-self-center">
+              <img
+                src={`${prefix}/images/line-31.svg`}
+                alt="Divider"
+                className="w-[1px] h-[141px] object-cover"
+              />
+            </div>
+          )}
 
           {/* Site Map Section (Column 3) */}
           <div className="grid grid-cols-3 gap-x-6 md:gap-x-4 text-left text-[16px] max-w-screen-md mx-auto">
             {/* Site Map SubColumn 1 */}
             <div>
-              <p className="font-bold underline">
+              <p className="font-bold underline mb-2">
                 <a href={`${prefix}/`} className="block">Home</a>
               </p>
-              <p className="font-bold">
+              <p className="font-bold mt-2">
                 Impact
               </p>
               <p className="underline font-light">
@@ -84,11 +95,11 @@ export default function Footer() {
             <div>
               <p className="font-bold">About</p>
               <p className="underline font-light">
-                <a href={`${prefix}/faq`}>FAQ</a><br />
+                <a href={`${prefix}/faqs`}>FAQ</a><br />
                 <a href={`${prefix}/our-data`}>Our Data</a><br />
                 <a href={`${prefix}/about/our-team`}>Our Team</a>
               </p>
-              <p className="font-bold">
+              <p className="font-bold mt-2">
                 <a href={`${prefix}/resource-directory`}>Resource Directory</a>
               </p>
             </div>

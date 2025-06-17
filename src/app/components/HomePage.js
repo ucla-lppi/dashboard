@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CaliforniaMap from "./CaliforniaMap";
 import FancyBoxes from "./FancyBoxes";
+export const metadata = { title: 'Latino Climate and Health Dashboard' };
 
 export default function HomePage() {
   const [isFancyBoxesLoaded, setIsFancyBoxesLoaded] = useState(false); // Track FancyBoxes loading state
@@ -22,11 +23,26 @@ export default function HomePage() {
       <div className={isMobile ? 'col-span-1' : 'col-span-2'}>
         <div className="flex flex-col items-start">
           <h1 className="text-3xl font-bold text-primary">
-            California County Factsheets
+            {isMobile ? 'Climate and Health Dashboard' : 'California County Factsheets'}
           </h1>
-          <span className="text-[#2f2f2f] text-xl font-bold font-Lexend_Deca block mt-0 mb-1">
-            Click on a county on the map to view its factsheets
-          </span>
+          {isMobile ? (
+            <div className="flex items-center justify-center w-full mt-6 mb-6">
+              <button
+                onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })}
+                className="shadow-[0px_4px_8px_#0002] rounded-lg w-full"
+              >
+                <div className="relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-4">
+                  <span className="text-white text-xl font-semibold text-center leading-tight font-Lexend_Deca">
+                    Jump to County Factsheets
+                  </span>
+                </div>
+              </button>
+            </div>
+          ) : (
+           <span className="text-[#2f2f2f] text-xl font-bold font-Lexend_Deca block mt-2 mb-4">
+             Click on a county on the map to view its factsheets
+           </span>
+          )}
         </div>
       </div>
       {/* Conditional order: on mobile show stats before map, else map then stats */}
@@ -34,9 +50,9 @@ export default function HomePage() {
         <>
           {/* Stats and FancyBoxes Section */}
           <div className="flex flex-col text-right justify-start">
-            <div className="flex items-center justify-end mb-6 mt-0">
+            <div className={`flex items-center ${isMobile ? 'justify-center w-full' : 'justify-end'} mb-6 mt-0`}>
               <div className="shadow-[0px_4px_8px_#0002] rounded-lg">
-                <div className="relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-4 min-w-[220px]">
+                <div className={`relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-4 ${isMobile ? 'w-full' : 'min-w-[220px]'}`}>
                   <div className="text-white text-xl font-semibold text-center leading-tight font-Lexend_Deca">
                     California Latino<br />Neighborhood Statistics
                   </div>
