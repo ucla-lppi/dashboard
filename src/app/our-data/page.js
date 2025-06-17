@@ -24,6 +24,7 @@ function parseCsvLinks(text) {
 }
 
 export default function OurDataPage() {
+  const [isMobile, setIsMobile] = useState(false);
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1408499517&single=true&output=csv';
   const [items, setItems] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -65,6 +66,11 @@ export default function OurDataPage() {
           }});
         });
     }
+  }, []);
+
+  // detect mobile devices
+  useEffect(() => {
+    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
   }, []);
 
   // compute categories list
@@ -193,7 +199,7 @@ export default function OurDataPage() {
           </div>
 
           {/* Search */}
-          <div className="flex items-center w-[450px] h-[30px] bg-white border border-[#1b3f60] rounded-full">
+          <div className={`flex items-center bg-white border border-[#1b3f60] rounded-full ${isMobile ? 'w-full max-w-[12rem] h-[28px]' : 'w-[450px] h-[30px]'}`}>
             <input
               type="text"
               placeholder="Search for title, tag, or keyword"
