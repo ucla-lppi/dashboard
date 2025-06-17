@@ -71,7 +71,7 @@ export default function Footer() {
                 <a href={`${prefix}/`} className="block">Home</a>
               </p>
               <p className="font-bold">
-                <a href={`${prefix}/impact`}>Impact</a>
+                Impact
               </p>
               <p className="underline font-light">
                 <a href={`${prefix}/impact/research`}>Research</a><br />

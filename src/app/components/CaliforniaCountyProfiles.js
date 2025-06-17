@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
@@ -39,15 +39,22 @@ const maxCountyLength = Math.max(...allCounties.map(c => c.length));
 export default function CaliforniaCountyProfiles() {
   const router = useRouter();
   const [search, setSearch] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+  
   const filtered = useMemo(() =>
     allCounties.filter(c => c.toLowerCase().includes(search.toLowerCase())), [search]
   );
 
+  useEffect(() => {
+    // Simple mobile device check via user agent
+    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
+  }, []);
+
   return (
     <div className="bg-tertiary p-6 rounded">
-      <div id="county-profiles" className="flex gap-6">
-        {/* Left Column (25%) */}
-        <div className="w-[35%]">
+      <div id="county-profiles" className={`flex ${isMobile ? 'flex-col' : 'gap-6'}`}>
+        {/* Left Column (35% on desktop, full width on mobile) */}
+        <div className={isMobile ? 'w-full mb-6' : 'w-[35%]'}>
           <p className="text-base text-gray-900 mb-4">
             The Latino Climate and Health Dashboard equips advocates and decision-makers with strategic data on climate and health risks in Latino neighborhoods to support healthier, more resilient communities in California.
             <br/><br/>
@@ -66,9 +73,10 @@ export default function CaliforniaCountyProfiles() {
         </button>
 			</div>
         </div>
-        <div className="w-px bg-[#333333] self-stretch"></div>
-        {/* Right Column (75%) */}
-        <div className="w-[75%]">
+        {/* Divider - hidden on mobile */}
+        {!isMobile && <div className="w-px bg-[#333333] self-stretch"></div>}
+        {/* Right Column (75% on desktop, full width on mobile) */}
+        <div className={isMobile ? 'w-full' : 'w-[75%]'}>
           <h2 className="text-xl font-bold text-[28px] text-gray-900 mb-4">List of California County Factsheets</h2>
           {/* Search Bar */}
           <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-md mb-4">
@@ -94,7 +102,7 @@ export default function CaliforniaCountyProfiles() {
                     <span className="text-gray-900 pl-1 font-bold whitespace-nowrap" style={{ minWidth: `${maxCountyLength}ch` }}>{county}</span>
                     <div className="flex gap-2">
                       <a
-                        href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat.pdf`}
+                        href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative h-6 px-3"
@@ -107,7 +115,7 @@ export default function CaliforniaCountyProfiles() {
                         </div>
                       </a>
                       <a
-                        href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution.pdf`}
+                        href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative h-6 px-3"
