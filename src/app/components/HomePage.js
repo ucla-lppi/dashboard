@@ -65,7 +65,7 @@ export default function HomePage() {
         </div>
         {/* Stats and FancyBoxes Section */}
         <div className="flex flex-col text-right justify-start max-w-[400px]">
-          <div className={`flex items-center ${isMobile ? 'justify-center w-full' : 'justify-end'} mb-6 mt-0`}>
+          <div className={`flex items-center ${isMobile ? 'justify-center w-full' : 'justify-center'} mb-6 mt-0`}>
             <div className="shadow-[0px_4px_8px_#0002] rounded-lg">
               <div className={`relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-4 ${isMobile ? 'w-full' : 'min-w-[220px]'}`}>
                 <div className="text-white text-xl font-semibold text-center leading-tight font-Lexend_Deca">
