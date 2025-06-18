@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 540);
+      setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);

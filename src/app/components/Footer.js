@@ -6,8 +6,13 @@ export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Simple mobile device check via user agent
-    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
+    // Mobile device check via user agent or window width
+    const checkMobile = () => {
+      setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   return (
