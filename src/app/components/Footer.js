@@ -18,21 +18,21 @@ export default function Footer() {
   return (
     <footer className="relative z-10 bg-tertiary text-black">
       <div className="mx-auto max-w-screen-lg py-8 px-4">
-        <div className={isMobile ? 'flex flex-col gap-8' : 'grid grid-cols-[16rem_auto_auto_auto] gap-x-8 items-stretch'}>
+        <div className={isMobile ? 'flex flex-col gap-8' : 'grid grid-cols-[16rem_auto_auto_auto] gap-x-8 items-stretch flex-wrap'}>
           {/* Spacer column matching sidebar (w-64 = 16rem) */}
           {!isMobile && <div></div> /* Spacer column hidden on mobile */}
           
           {/* Column 1: UCLA Logo, Quote, Social Icons */}
-          <div className="flex flex-col items-start justify-self-center">
+          <div className="flex flex-col items-start justify-self-center min-w-0 break-words">
             <img
               src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
               alt="UCLA Climate and Health Dashboard"
               className="w-[350px] sm:w-[400px] md:w-[450px] lg:w-[600px] xl:w-[789px] h-auto object-cover mb-4"
             />
-            <p className="text-left font-semibold text-[20px] leading-normal mb-6">
+            <p className="text-left font-semibold text-[20px] leading-normal mb-6 break-words">
               THERE IS NO AMERICAN AGENDA<br />WITHOUT A LATINO AGENDA
             </p>
-            <div className="flex justify-start items-center space-x-4">
+            <div className="flex justify-start items-center space-x-4 flex-wrap">
               {/* <img
                 src={`${prefix}/images/fb_footer.svg`}
                 alt="Facebook"
@@ -80,9 +80,9 @@ export default function Footer() {
           )}
 
           {/* Site Map Section (Column 3) */}
-          <div className="grid grid-cols-3 gap-x-6 md:gap-x-4 text-left text-[16px] max-w-screen-md mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 md:gap-x-4 text-left text-[16px] max-w-screen-md mx-auto min-w-0 break-words">
             {/* Site Map SubColumn 1 */}
-            <div>
+            <div className="break-words min-w-0">
               <p className="font-bold underline mb-2">
                 <a href={`${prefix}/`} className="block">Home</a>
               </p>
@@ -97,7 +97,7 @@ export default function Footer() {
               </p>
             </div>
             {/* Site Map SubColumn 2 */}
-            <div>
+            <div className="break-words min-w-0">
               <p className="font-bold">About</p>
               <p className="underline font-light">
                 <a href={`${prefix}/faqs`}>FAQ</a><br />
@@ -109,7 +109,7 @@ export default function Footer() {
               </p>
             </div>
             {/* Site Map SubColumn 3 */}
-            <div>
+            <div className="break-words min-w-0">
               <p className="font-bold">Contact</p>
               <p className="font-light">
                 3250 Public Affairs Building<br />Los Angeles, CA 90065<br /><br />
@@ -119,7 +119,6 @@ export default function Footer() {
               </p>
             </div>
           </div>
-
         </div>
       </div>
     </footer>
