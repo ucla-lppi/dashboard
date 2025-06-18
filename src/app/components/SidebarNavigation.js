@@ -34,7 +34,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
         {isMobile && (
           <button
             onClick={() => setSidebarOpen(false)}
-            className="absolute top-4 right-4 p-2 bg-gray-200 rounded-full"
+            className="absolute top-4 right-4 p-2 bg-accents shadow-social rounded-full"
             aria-label="Close menu"
           >
             ✕
@@ -185,24 +185,60 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
       <div className="px-3 py-4 bg-white-100">
         <div className="text-center text-sm font-bold mb-2">Connect with us!</div>
         <div className="flex justify-center space-x-2">
-          <a href="https://www.facebook.com/UCLAlatino" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src={`${prefix}/images/fb_sidebar.svg`} alt="Facebook" className="w-5 h-5" />
-          </a>
-          <a href="https://www.youtube.com/channel/UC8EWEUYQjs8izWDyPM77hUw" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src={`${prefix}/images/yt_sidebar.svg`} alt="YouTube" className="w-5 h-5" />
-          </a>
-          <a href="https://www.instagram.com/uclalppi/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src={`${prefix}/images/ig_sidebar.svg`} alt="Instagram" className="w-5 h-5" />
-          </a>
-          <a href="https://x.com/UCLAlatino" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src={`${prefix}/images/twitter_sidebar.svg`} alt="Twitter" className="w-5 h-5" />
-          </a>
-          <a href="https://www.linkedin.com/company/uclalatino/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src={`${prefix}/images/linkedin_sidebar.svg`} alt="LinkedIn" className="w-5 h-5" />
-          </a>
-          <a href="mailto:latino@luskin.ucla.edu" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200">
-            <img src={`${prefix}/images/email_sidebar.svg`} alt="Email" className="w-5 h-5" />
-          </a>
+          <div className="relative">
+            <svg width="32" height="32" viewBox="0 0 32 32" className="absolute shadow-offset">
+              <circle cx="16" cy="16" r="16" fill="#749199" />
+            </svg>
+            
+            <a href="https://www.facebook.com/UCLAlatino" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-accents relative z-10">
+              <img src={`${prefix}/images/fb_sidebar.svg`} alt="Facebook" className="w-5 h-5" />
+            </a>
+          </div>
+          <div className="relative">
+            <svg width="32" height="32" viewBox="0 0 32 32" className="absolute shadow-offset">
+              <circle cx="16" cy="16" r="16" fill="#749199" />
+            </svg>
+            
+            <a href="https://www.youtube.com/channel/UC8EWEUYQjs8izWDyPM77hUw" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-accents relative z-10">
+              <img src={`${prefix}/images/yt_sidebar.svg`} alt="YouTube" className="w-5 h-5" />
+            </a>
+          </div>
+          <div className="relative">
+            <svg width="32" height="32" viewBox="0 0 32 32" className="absolute shadow-offset">
+              <circle cx="16" cy="16" r="16" fill="#749199" />
+            </svg>
+            
+            <a href="https://www.instagram.com/uclalppi/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-accents relative z-10">
+              <img src={`${prefix}/images/ig_sidebar.svg`} alt="Instagram" className="w-5 h-5" />
+            </a>
+          </div>
+          <div className="relative">
+            <svg width="32" height="32" viewBox="0 0 32 32" className="absolute shadow-offset">
+              <circle cx="16" cy="16" r="16" fill="#749199" />
+            </svg>
+            
+            <a href="https://x.com/UCLAlatino" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-accents relative z-10">
+              <img src={`${prefix}/images/twitter_sidebar.svg`} alt="Twitter" className="w-5 h-5" />
+            </a>
+          </div>
+          <div className="relative">
+            <svg width="32" height="32" viewBox="0 0 32 32" className="absolute shadow-offset">
+              <circle cx="16" cy="16" r="16" fill="#749199" />
+            </svg>
+            
+            <a href="https://www.linkedin.com/company/uclalatino/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-accents relative z-10">
+              <img src={`${prefix}/images/linkedin_sidebar.svg`} alt="LinkedIn" className="w-5 h-5" />
+            </a>
+          </div>
+          <div className="relative">
+            <svg width="32" height="32" viewBox="0 0 32 32" className="absolute shadow-offset">
+              <circle cx="16" cy="16" r="16" fill="#749199" />
+            </svg>
+            
+            <a href="mailto:latino@luskin.ucla.edu" className="w-8 h-8 flex items-center justify-center rounded-full bg-accents relative z-10">
+              <img src={`${prefix}/images/email_sidebar.svg`} alt="Email" className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </div>
     </aside>

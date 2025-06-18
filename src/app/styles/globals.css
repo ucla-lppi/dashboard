@@ -219,3 +219,7 @@ body {
 .county-scrollbar .simplebar-scrollbar {
   z-index: 1;
 }
+
+.shadow-offset {
+  transform: translate(4px, 4px);
+}

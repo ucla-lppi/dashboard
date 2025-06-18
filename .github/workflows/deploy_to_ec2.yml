@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Run unit tests for url checks
+        run: yarn test
+
       - name: Build the project for EC2
         env:
           BASE_PATH: ''                    # No basePath for root deployment
