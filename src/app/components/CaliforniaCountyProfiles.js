@@ -102,7 +102,7 @@ export default function CaliforniaCountyProfiles() {
                     <span className={`text-gray-900 pl-1 font-bold whitespace-nowrap ${isMobile ? 'text-sm' : ''}`} style={{ minWidth: `${maxCountyLength}ch` }}>{county}</span>
                     <div className="flex gap-2">
                       <a
-                        href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat.pdf`}
+                        href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
@@ -115,7 +115,7 @@ export default function CaliforniaCountyProfiles() {
                         </div>
                       </a>
                       <a
-                        href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution.pdf`}
+                        href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
