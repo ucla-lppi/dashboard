@@ -157,7 +157,7 @@ export default function OurDataPage() {
               "
             >
               <span className="text-base font-lexend-lite text-[#1B3F60]/80">
-                Topical Area
+                Category
               </span>
               <span className="flex items-center justify-center w-[30px] h-full bg-[#1B3F60] rounded-r-full">
                 <img
