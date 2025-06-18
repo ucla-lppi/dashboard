@@ -8,8 +8,13 @@ export default function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Simple mobile device check via user agent
-    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
+    // Mobile device check via user agent or window width
+    const checkMobile = () => {
+      setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handleFancyBoxesLoaded = () => {
@@ -54,12 +59,17 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-start space-y-2">
             <div className="flex flex-col items-center">
-              <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="text-m font-semibold text-black mb-1 text-center">
-                jump to <br />county factsheets
-              </button>
-              <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="bg-tertiary text-white p-3 rounded-full shadow-md" aria-label="Go down">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="#000" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" /></svg>
-              </button>
+              {/* Hide both buttons on mobile view */}
+              {!isMobile && (
+                <>
+                  <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="text-m font-semibold text-black mb-1 text-center">
+                    jump to <br />county factsheets
+                  </button>
+                  <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="bg-tertiary text-white p-3 rounded-full shadow-md" aria-label="Go down">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="#000" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" /></svg>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

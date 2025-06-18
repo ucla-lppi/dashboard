@@ -46,8 +46,13 @@ export default function CaliforniaCountyProfiles() {
   );
 
   useEffect(() => {
-    // Simple mobile device check via user agent
-    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
+    // Mobile device check via user agent or window width
+    const checkMobile = () => {
+      setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   return (
@@ -100,36 +105,69 @@ export default function CaliforniaCountyProfiles() {
                 <div className="flex justify-center items-center px-4 py-2">
                   <div className="flex justify-between items-center w-full gap-6">
                     <span className={`text-gray-900 pl-1 font-bold whitespace-nowrap ${isMobile ? 'text-sm' : ''}`} style={{ minWidth: `${maxCountyLength}ch` }}>{county}</span>
-                    <div className="flex gap-2">
-                      <a
-                        href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
-                      >
-                        <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
-                        <div className="relative flex items-center justify-center h-full gap-1">
-                          <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
-                          <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-sm'} font-normal`}>Extreme Heat</span>
-                          <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
-                        </div>
-                      </a>
-                      <a
-                        href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
-                      >
-                        <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
-                        <div className="relative flex items-center justify-center h-full gap-1">
-                          <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
-                          <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-sm'} font-normal`}>Air Pollution</span>
-                          <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
-                        </div>
-                      </a>
-                    </div>
+                    {!isMobile && (
+                      <div className="flex gap-2">
+                        <a
+                          href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
+                        >
+                          <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                          <div className="relative flex items-center justify-center h-full gap-1">
+                            <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
+                            <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-sm'} font-normal`}>Extreme Heat</span>
+                            <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                          </div>
+                        </a>
+                        <a
+                          href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
+                        >
+                          <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                          <div className="relative flex items-center justify-center h-full gap-1">
+                            <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
+                            <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-sm'} font-normal`}>Air Pollution</span>
+                            <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                          </div>
+                        </a>
+                      </div>
+                    )}
                   </div>
+                  {/* For mobile, show buttons below county name with a line break */}
                 </div>
+                {isMobile && (
+                  <div className="flex gap-2 justify-center items-center mb-2">
+                    <a
+                      href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative h-8 px-4"
+                    >
+                      <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                      <div className="relative flex items-center justify-center h-full gap-1">
+                        <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
+                        <span className="text-primary text-[10px] font-normal">Extreme Heat</span>
+                        <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                      </div>
+                    </a>
+                    <a
+                      href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative h-8 px-4"
+                    >
+                      <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                      <div className="relative flex items-center justify-center h-full gap-1">
+                        <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
+                        <span className="text-primary text-[10px] font-normal">Air Pollution</span>
+                        <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                      </div>
+                    </a>
+                  </div>
+                )}
                  {idx < filtered.length - 1 && <Divider />}
                </React.Fragment>
              ))}

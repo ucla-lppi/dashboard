@@ -8,6 +8,9 @@ import './styles/globals.css';
 import { DataProvider } from './context/DataContext';
 import "@fontsource/montserrat/400.css"; // Regular
 
+const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
+
+
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
@@ -45,7 +48,7 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 540);
+      setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -93,7 +96,7 @@ export default function RootLayout({ children }) {
 			</button>
 			<a href="/" className="flex items-center">
 			<img
-				src="/images/ucla_lppi_dashboard_logo.svg"
+				src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
 				alt="LPPI Dashboard Logo"
 				className="h-8 pointer-events-none"
 			/>
