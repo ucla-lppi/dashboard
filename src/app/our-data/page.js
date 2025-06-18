@@ -220,7 +220,7 @@ export default function OurDataPage() {
         </div>  {/* end filters row */}
         {/* selected category pills */}
         {selectedCats.length > 0 && (
-          <div className="flex flex-wrap space-x-2 mb-4 pl-4">
+          <div className="flex flex-wrap gap-x-2 gap-y-2 mb-4 pl-4">
             {selectedCats.map(cat => (
               <button
                 key={cat}
@@ -340,9 +340,9 @@ export default function OurDataPage() {
                     )
                   })}
                 </div>
-                <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong>Description:</strong> ${parseCsvLinks(item.desc)}`}} />
+                <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong class="underline">Description:</strong> ${parseCsvLinks(item.desc)}`}} />
                 {item.source && (
-                  <div dangerouslySetInnerHTML={{__html: `<strong>Source:</strong> ${parseCsvLinks(item.source)}`}} />
+                  <div dangerouslySetInnerHTML={{__html: `<strong class="underline">Source:</strong> ${parseCsvLinks(item.source)}`}} />
                 )}
                </article>
              ))}
