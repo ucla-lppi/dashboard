@@ -1,4 +1,6 @@
-# pip install locust && curl -o locustfile.py https://gist.githubusercontent.com/yourusername/yourgistid/raw/locustfile.py && locust
+# pip install locust && curl -o locustfile.py  locustfile.py && locust
+# locust -f locustfile.py --host==https://latinoclimatehealth.org
+
 
 import random
 from locust import HttpUser, task, between
