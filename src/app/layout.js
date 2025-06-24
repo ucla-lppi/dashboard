@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Lexend_Deca, Lexend_Zetta, La_Belle_Aurore } from 'next/font/google';
 import { ThemeModeScript } from 'flowbite-react';
+import Script from 'next/script';                  // ← add Script import
 import Footer from './components/Footer';
 import SidebarNavigation from './components/SidebarNavigation';
 import './styles/globals.css';
@@ -9,7 +10,8 @@ import { DataProvider } from './context/DataContext';
 import "@fontsource/montserrat/400.css"; // Regular
 
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
-
+// Google Analytics Measurement ID
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-LDM5HW00R6';
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
@@ -82,6 +84,21 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body className={`${lexendDeca.className}`}>
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
         <DataProvider>
         <div className="flex flex-col">
           {/* Mobile Header: only rendered when device width is less than 540px */}
