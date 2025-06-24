@@ -112,7 +112,7 @@ export default function Footer() {
             <div>
               <p className="font-bold">Contact</p>
               <p className="font-light">
-                3250 Public Affairs Building<br />Los Angeles, CA 90065
+                3250 Public Affairs Building<br />Los Angeles, CA 90065<br />
 				<a
 				href="mailto:latino@luskin.ucla.edu"
 				className="underline break-words"
