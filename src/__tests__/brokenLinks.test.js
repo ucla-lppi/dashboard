@@ -1,20 +1,25 @@
 const axios = require('axios');
 
-// List of URLs to check
+// pick up a base URL from an env var, default to prod
+const BASE = process.env.LINKS_BASE_URL || 'https://latinoclimatehealth.org';
+
+// only run link-checks when you explicitly opt in
+const runLiveTests = process.env.RUN_LIVE_LINK_TESTS === 'true';
+const describeFn = runLiveTests ? describe : describe.skip;
+
 const links = [
-  'https://latinoclimatehealth.org/',
-  'https://latinoclimatehealth.org/impact/newsroom',
-  'https://latinoclimatehealth.org/about/our-team',
-  'https://latinoclimatehealth.org/resource-directory',
-  'https://latinoclimatehealth.org/faqs',
-  // Add more URLs or automate extraction if needed
+  `${BASE}/`,
+  `${BASE}/impact/newsroom`,
+  `${BASE}/about/our-team`,
+  `${BASE}/resource-directory`,
+  `${BASE}/faqs`,
 ];
 
-describe('All main site links should return 200', () => {
+describeFn('All main site links should return 200', () => {
   links.forEach(link => {
     test(`GET ${link}`, async () => {
-      const response = await axios.get(link, { validateStatus: () => true });
-      expect(response.status).toBe(200);
-    });
+      const res = await axios.get(link, { validateStatus: () => true });
+      expect(res.status).toBe(200);
+    }, 15000); // you can also bump timeout here
   });
 });

@@ -22,13 +22,16 @@ jobs:
         run: yarn install
 
       - name: Check for missing urls
+        env:
+          RUN_LIVE_LINK_TESTS: 'true'
+          LINKS_BASE_URL: 'https://ucla-lppi.github.io/dashboard/'
         run: yarn test
 
       - name: Build the project for GitHub Pages
         env:
-          BASE_PATH: dashboard           # GitHub Pages subpath (no leading slash)
-          ASSET_PREFIX: /dashboard       # Asset prefix for images and static files
-          NEXT_PUBLIC_ASSET_PREFIX: /dashboard # Ensures client-side code uses correct asset prefix
+          BASE_PATH: dashboard
+          ASSET_PREFIX: /dashboard
+          NEXT_PUBLIC_ASSET_PREFIX: /dashboard
         run: yarn build
 
       - name: Deploy to GitHub Pages
