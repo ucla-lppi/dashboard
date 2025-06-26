@@ -21,11 +21,10 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Check for missing urls
+      - name: Check for broken internal links
         env:
-          RUN_LIVE_LINK_TESTS: 'true'
           LINKS_BASE_URL: 'https://ucla-lppi.github.io/dashboard/'
-        run: yarn test
+        run: yarn check:links
 
       - name: Build the project for GitHub Pages
         env:

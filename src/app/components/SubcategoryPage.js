@@ -12,8 +12,6 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
   const [filteredItems, setFilteredItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
-  const [activeKeyword, setActiveKeyword] = useState(null);
   const [sortAsc, setSortAsc] = useState(false);
   const { getDataForUrl, setDataForUrl } = useDataContext();
 
@@ -73,9 +71,8 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
   useEffect(() => {
     const q = search.toLowerCase();
     let result = items.filter(i => i.title.toLowerCase().includes(q));
-    if (activeKeyword) result = result.filter(i => i.keywords.includes(activeKeyword));
     setFilteredItems(result);
-  }, [search, items, activeKeyword]);
+  }, [search, items]);
 
   const displayItems = filteredItems;
 
@@ -117,13 +114,15 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
               </span>
             </div>
           </div>
-          {/* Filter cell */}
-          <div className="flex justify-end relative">
+          {/* Sort toggle cell */}
+          <div className="flex justify-end">
             <button
-              onClick={() => setShowFilters(!showFilters)}
+              onClick={() => setSortAsc(prev => !prev)}
               className="flex items-center bg-white text-[#005587] rounded-full border border-primary w-full max-w-[12rem]"
             >
-              <span className="flex-1 px-4 py-2 text-base font-normal text-center">Filter</span>
+              <span className="flex-1 px-4 py-2 text-base font-normal text-center">
+                Sort
+              </span>
               <span className="flex items-center justify-center w-10 h-10 bg-[#005587] rounded-r-full">
                 <img
                   src={`${prefix}/images/descending.svg`}
@@ -132,19 +131,6 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                 />
               </span>
             </button>
-            {showFilters && (
-              <div className="absolute right-0 mt-2 bg-white border rounded-lg shadow-lg p-4 w-48 z-50">
-                {allKeywords.map(kw => (
-                  <button
-                    key={kw}
-                    onClick={() => { setActiveKeyword(activeKeyword === kw ? null : kw); setShowFilters(false); }}
-                    className="block w-full text-left text-base px-2 py-1 hover:bg-gray-100 z-50"
-                  >
-                    {'#' + kw}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         </div>
 
