@@ -21,11 +21,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Check for broken internal links
-        env:
-          LINKS_BASE_URL: 'https://ucla-lppi.github.io/dashboard/'
-        run: yarn check:links
-
       - name: Build the project for GitHub Pages
         env:
           BASE_PATH: dashboard

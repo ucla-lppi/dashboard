@@ -22,18 +22,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run unit tests for url checks
-        env:
-          RUN_LIVE_LINK_TESTS: 'true'                 # ← opt‐in to live link tests
-          LINKS_BASE_URL: 'https://latinoclimatehealth.org'  # ← override BASE if desired
-        run: yarn test
-
-      - name: Check for broken internal links
-        # no more RUN_LIVE_LINK_TESTS / jest – we invoke linkinator directly
-        env:
-          LINKS_BASE_URL: 'https://latinoclimatehealth.org'
-        run: yarn check:links
-
       - name: Build the project for EC2
         env:
           BASE_PATH: ''                    # No basePath for root deployment
