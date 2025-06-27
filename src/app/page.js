@@ -3,7 +3,6 @@ import { Lexend_Deca } from 'next/font/google';
 import HomePage from './components/HomePage';
 import { Card } from 'flowbite-react';
 import CaliforniaCountyProfiles from './components/CaliforniaCountyProfiles';
-import Meta from './components/Meta';
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
@@ -14,12 +13,6 @@ const lexendDeca = Lexend_Deca({
 export default function Home() {
   return (
     <>
-      {/* Page metadata */}
-      <Meta
-        title="California Dashboard"
-        description="Explore California county data"
-        ogImage="/images/ca-og-image.png"
-      />
       <main className={`${lexendDeca.className} flex flex-col space-y-6 min-h-screen`}>      
         <Card className="flex-grow bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-full border-0">
           <HomePage />

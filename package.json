@@ -27,6 +27,7 @@
 		"gray-matter": "^4.0.3",
 		"maplibre-gl": "^4.7.0",
 		"next": "^15.2.4",
+		"next-seo": "^6.8.0",
 		"papaparse": "^5.4.1",
 		"react": "^18",
 		"react-dom": "^18",
