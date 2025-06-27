@@ -1,47 +1,30 @@
 "use client";
-import Head from 'next/head';
 import { Lexend_Deca } from 'next/font/google';
 import HomePage from './components/HomePage';
 import { Card } from 'flowbite-react';
 import CaliforniaCountyProfiles from './components/CaliforniaCountyProfiles';
+import Meta from './components/Meta';
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
   variable: '--font-lexend-deca',
 });
-const prefix   = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
-const origin   = (typeof window !== 'undefined' && window.location.origin) || 'https://latinoclimatehealth.org';
-const imageUrl = `${origin}${prefix}/images/LCHD-fb-linkedin.png`;
 
-export default function Home({ children }) {
+export default function Home() {
   return (
     <>
-      <Head>
-        <title>Latino Climate and Health Dashboard</title>
-        <meta
-          name="description"
-          content="Interactive map and county factsheets for California’s Latino communities’ climate & health statistics."
-        />
-        {/* Open Graph */}
-        <meta property="og:title"       content="Latino Climate and Health Dashboard" />
-        <meta property="og:description" content="Interactive map and county factsheets…" />
-        <meta property="og:image"       content={imageUrl} />
-        <meta property="og:image:alt"   content="Latino Climate and Health Dashboard preview" />
-        <meta property="og:image:width"  content="1200" />
-        <meta property="og:image:height" content="630" />
-        {/* Twitter Card */}
-        <meta name="twitter:card"        content="summary_large_image" />
-        <meta name="twitter:title"       content="Latino Climate and Health Dashboard" />
-        <meta name="twitter:description" content="Interactive map and county factsheets…" />
-        <meta name="twitter:image"       content={imageUrl} />
-        <meta name="twitter:image:alt"   content="Latino Climate and Health Dashboard preview" />
-      </Head>
+      {/* Page metadata */}
+      <Meta
+        title="California Dashboard"
+        description="Explore California county data"
+        ogImage="/images/ca-og-image.png"
+      />
       <main className={`${lexendDeca.className} flex flex-col space-y-6 min-h-screen`}>      
         <Card className="flex-grow bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-full border-0">
           <HomePage />
-
         </Card>
+
         <Card
           className="flex-grow bg-[#fcfcfc] dark:bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-full border-0"
           id="county-profiles"
