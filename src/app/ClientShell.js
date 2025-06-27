@@ -58,7 +58,9 @@ export default function ClientShell({ children }) {
         `}
       </Script>
       <DataProvider>
-        <div className="flex flex-col" ref={mainContentRef}>
+        <div className="relative flex flex-col" ref={mainContentRef}>
+          {/* Background gradient layer */}
+          <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#004266] to-[#002E45] overflow-hidden pointer-events-none" />
           {isMobile && (
             <header className="flex items-center justify-between p-4 bg-white shadow">
               <button
