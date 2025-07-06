@@ -15,7 +15,7 @@ export default function Head() {
       <meta httpEquiv="content-language" content="en-us" />
       <meta name="robots" content="index, follow" />
       {/* Open Graph */}
-      <meta property="og:title" content="UCLA LPPI Latino Data Hub" />
+      <meta property="og:title" content="UCLA LPPI Latino Climate and Health Dashboard" />
       <meta property="og:description" content="Explore data on Latino health and climate disparities in California" />
       <meta property="og:url" content="https://latinoclimatehealth.org/" />
       <meta property="og:image" content={imageUrl} />
@@ -24,7 +24,7 @@ export default function Head() {
       <meta property="og:image:alt"    content="Latino Climate and Health Dashboard preview" />
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="UCLA LPPI Latino Data Hub" />
+      <meta name="twitter:title" content="UCLA LPPI Latino Climate and Health Dashboard" />
       <meta name="twitter:description" content="Explore data on Latino health and climate disparities in California" />
       <meta name="twitter:image"     content={imageUrl} />
       <meta name="twitter:image:alt" content="Latino Climate and Health Dashboard preview" />
