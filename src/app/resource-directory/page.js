@@ -28,7 +28,7 @@ export default function ResourceDirectoryPage() {
           abbreviation: row.Abbreviation || '',
           name: row.Organization || '',
           description: row.Description || '',
-          url: row.URL || '',
+          url: row.Link || '',
         }))
       );
       setLoading(false);
