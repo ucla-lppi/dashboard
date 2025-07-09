@@ -8,6 +8,7 @@ export default function Head() {
   return (
     <>
       <base href={href} />
+      <link rel="icon" href={`${href}images/ucla_lppi_dashboard_logo.svg`} />
       {/* SEO Meta Tags */}
       <title>UCLA LPPI: Latino Health and Climate Data for California - Insights for Equity</title>
       <meta name="description" content="Access comprehensive data on Latino health disparities and climate issues in California. Explore insights to support research, policymaking, and community health initiatives." />
