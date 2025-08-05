@@ -119,7 +119,7 @@ export default function CaliforniaCountyProfiles() {
                         </div>
                       </a>
                       <a
-                        href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
+                        href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
