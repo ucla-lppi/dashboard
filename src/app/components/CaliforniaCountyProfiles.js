@@ -67,9 +67,7 @@ export default function CaliforniaCountyProfiles() {
           </p>
 		  <Divider />
 			<div className="flex flex-col gap-4 mb-4 p-4">
-			  {/* <button className="bg-white font-bold  text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]">
-				STATE FACT SHEET
-			  </button> */}
+
 			  <button
           onClick={() => router.push('/faqs')}
           className="bg-white font-bold text-primary px-4 py-2 rounded-[15px] shadow-[2px_2px_0px_#00000040]"
@@ -82,12 +80,12 @@ export default function CaliforniaCountyProfiles() {
         {!isMobile && <div className="w-px bg-[#333333] self-stretch"></div>}
         {/* Right Column (75% on desktop, full width on mobile) */}
         <div className={isMobile ? 'w-full' : 'w-[75%]'}>
-          <h2 className="text-xl font-bold text-[28px] text-gray-900 mb-4">List of California County Factsheets</h2>
+          <h2 className="text-xl font-bold text-[28px] text-gray-900 mb-4">List of California Factsheets</h2>
           {/* Search Bar */}
           <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-md mb-4">
             <input
               type="text"
-              placeholder="Search for a county"
+              placeholder="Search for a location"
               value={search}
               onChange={e => setSearch(e.target.value)}
               className="flex-1 px-4 py-2 font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none rounded-l-full"
@@ -99,7 +97,76 @@ export default function CaliforniaCountyProfiles() {
 
           {/* Counties List */}
           <SimpleBar autoHide={false} forceVisible="y" className="rounded w-full max-h-[275px] county-scrollbar overflow-x-hidden" scrollableNodeProps={{ className: 'px-4' }} style={{ maxHeight: 275 }}>
-             <Divider />
+            <Divider />
+            {/* California State Fact Sheets (always shown at top) */}
+            <React.Fragment key="California State">
+              <div className="flex justify-center items-center px-4 py-2">
+                <div className="flex justify-between items-center w-full gap-6">
+                  <span className={`text-gray-900 pl-1 font-bold whitespace-nowrap ${isMobile ? 'text-sm' : ''}`} style={{ minWidth: `${maxCountyLength}ch` }}>California</span>
+                  {!isMobile && (
+                    <div className="flex gap-2">
+                      <a
+                        href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
+                      >
+                        <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                        <div className="relative flex items-center justify-center h-full gap-1">
+                          <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
+                          <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-sm'} font-normal`}>Extreme Heat</span>
+                          <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                        </div>
+                      </a>
+                      <a
+                        href={`${prefix}/factsheets/extremeheat/California_state_airpollution_2025.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`relative ${isMobile ? 'h-8 px-4' : 'h-6 px-3'}`}
+                      >
+                        <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                        <div className="relative flex items-center justify-center h-full gap-1">
+                          <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
+                          <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-sm'} font-normal`}>Air Pollution</span>
+                          <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                        </div>
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+              {isMobile && (
+                <div className="flex gap-2 justify-center items-center mb-2">
+                  <a
+                    href={`${prefix}/factsheets/extremeheat/california_state_extremeheat_2025.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative h-8 px-4"
+                  >
+                    <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                    <div className="relative flex items-center justify-center h-full gap-1">
+                      <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
+                      <span className="text-primary text-[10px] font-normal">Extreme Heat</span>
+                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                    </div>
+                  </a>
+                  <a
+                    href={`${prefix}/factsheets/extremeheat/california_state_airpollution_2025.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative h-8 px-4"
+                  >
+                    <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
+                    <div className="relative flex items-center justify-center h-full gap-1">
+                      <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
+                      <span className="text-primary text-[10px] font-normal">Air Pollution</span>
+                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                    </div>
+                  </a>
+                </div>
+              )}
+              <Divider />
+            </React.Fragment>
              {filtered.map((county, idx) => (
                <React.Fragment key={county}>
                 <div className="flex justify-center items-center px-4 py-2">
