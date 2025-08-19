@@ -50,7 +50,7 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
         </div>
       ) : (
         <div className="flex flex-col items-center w-full mt-1">
-          <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">Refer to California factsheet</div>
+          <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">N/A. See <a href={`${prefix}/faqs`} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">FAQ</a>. <br></br>See California Factsheets.</div>
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
           <a href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
