@@ -100,7 +100,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
                     <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                   </div>
                   {item.outlet && (
-                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mb-2 whitespace-nowrap">{item.outlet}</span>
+                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mb-2 whitespace-nowrap w-auto max-w-max">{item.outlet}</span>
                   )}
                 </div>
               </Link>
@@ -128,7 +128,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
                   <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                 </div>
                 {item.outlet && (
-                  <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mb-2 whitespace-nowrap">{item.outlet}</span>
+                  <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mb-2 whitespace-nowrap w-auto max-w-max">{item.outlet}</span>
                 )}
               </div>
             </Link>
