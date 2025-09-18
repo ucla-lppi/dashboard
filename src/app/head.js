@@ -3,7 +3,7 @@ export default function Head() {
   const raw = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const basePath = raw.replace(/^\/+|\/+$/g, '');
   const href = basePath ? `/${basePath}/` : '/';
-  const imageUrl = `${href}images/LCHD-fb-linkedin.png`;   // ← point at your public/images file
+  const imageUrl = 'https://latinoclimatehealth.org/images/LCHD-fb-linkedin.png';
 
   return (
     <>
@@ -19,15 +19,15 @@ export default function Head() {
       <meta property="og:title" content="UCLA LPPI Latino Climate and Health Dashboard" />
       <meta property="og:description" content="Explore data on Latino health and climate disparities in California" />
       <meta property="og:url" content="https://latinoclimatehealth.org/" />
-      <meta property="og:image" content={imageUrl} />
-      <meta property="og:image:width"  content="1200" />
-      <meta property="og:image:height" content="630" />
+  <meta property="og:image" content={imageUrl} />
+  <meta property="og:image:width"  content="1080" />
+  <meta property="og:image:height" content="1080" />
       <meta property="og:image:alt"    content="Latino Climate and Health Dashboard preview" />
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="UCLA LPPI Latino Climate and Health Dashboard" />
       <meta name="twitter:description" content="Explore data on Latino health and climate disparities in California" />
-      <meta name="twitter:image"     content={imageUrl} />
+  <meta name="twitter:image"     content={imageUrl} />
       <meta name="twitter:image:alt" content="Latino Climate and Health Dashboard preview" />
       {/* Fallback hack: rewrite any img[src="./images/..."] at runtime */}
       <script

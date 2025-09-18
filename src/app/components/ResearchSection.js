@@ -36,7 +36,8 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             date: item.date ? new Date(item.date) : new Date(),
             subcategory: item.subcategory || item.Subcategory || '',
             link: item.link || item.Link || '#',
-            readTime: item.readTime || item['Read time'] || item.ReadTime || ''
+            readTime: item.readTime || item['Read time'] || item.ReadTime || '',
+            outlet: item.outlet || item.Outlet || item['outlet'] || ''
           }))
           .filter(item => item.title && item.image_link)
           .sort((a, b) => b.date - a.date);
@@ -98,6 +99,9 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
                     <h4 className="text-lg text-gray-900 break-words pr-6">{item.title}</h4>
                     <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                   </div>
+                  {item.outlet && (
+                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mb-2">{item.outlet}</span>
+                  )}
                 </div>
               </Link>
             ))}
@@ -123,6 +127,9 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
                   <h4 className="text-lg font-bold text-gray-900 break-words pr-6">{item.title}</h4>
                   <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
                 </div>
+                {item.outlet && (
+                  <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mb-2">{item.outlet}</span>
+                )}
               </div>
             </Link>
           ))}
