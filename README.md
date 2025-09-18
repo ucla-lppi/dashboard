@@ -42,17 +42,34 @@ yarn dev
 
 Build & export
 
-The project uses `next export` to generate a static `out/` directory suitable for simple static hosting (e.g., GitHub Pages):
+
 
 ```bash
 yarn build
-yarn export
 ```
+Pull changes into the `dev` branch for development testing on github pages. When ready for production, make a pull request on GitHub to `main` and merge. This will trigger a GitHub Action to build and deploy the updated site on the Amazon Web Services S3 bucket.
 
-Project structure (relevant parts)
+
+Project structure
 
 ```
 /project-root
+  ├── /app
+  │   ├── /components
+  │   │   └── FancyBoxes.js
+  │   ├── /pages
+  │   │   └── index.js
+  │   └── page.js
+  ├── /public
+  │   └── /images
+  │       └── lppi-bg.svg
+  ├── /styles
+  │   └── globals.css
+  ├── /data
+  │   └── ca_counties_simplified.geojson
+  ├── /content
+  │   └── example.md
+  ├── .gitignore
   ├── src/app                # Next.js app dir (components, pages, layout)
   ├── public                # Static assets: images, factsheets, data geojson
   │   ├── factsheets/
@@ -61,14 +78,38 @@ Project structure (relevant parts)
   ├── src/utils             # helper scripts (small python/js helpers)
   ├── next.config.mjs
   ├── package.json
-  └── MAINTENANCE.md        # Non-technical maintenance checklist
-```
+  ├── README.md
+  └── yarn.lock
+  ```
+
+- `/app` - Contains the Next.js application.
+- `/app/components` - Contains React components used in the application.
+- `/app/pages` - Contains the Next.js pages.
+- `/public` - Contains static files like images and JSON data.
+- `/styles` - Contains global styles.
+- `/data` - Contains data files like GeoJSON.
+- `/content` - Contains markdown files for content.
+- `.gitignore` - Specifies intentionally untracked files to ignore.
+- `package.json` - Contains project metadata and dependencies.
+- `README.md` - Contains project documentation.
+- `yarn.lock` - Contains exact versions of dependencies for reproducible builds.
+
+## Technology Stack
+
+- [Next.js](https://nextjs.org/) - A React framework with hybrid static & server rendering, and more.
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for quickly building custom designs.
+- [MapLibre GL](https://maplibre.org/) - A free, open-source mapping library that's compatible with Mapbox GL JS.
+- [D3.js](https://d3js.org/) - A JavaScript library for producing dynamic, interactive data visualizations in web browsers.
+- [Axios](https://axios-http.com/) - A promise-based HTTP client for the browser and Node.js.
+- [Internationalization](https://nextjs.org/docs/advanced-features/i18n-routing) - Built-in support for internationalized routing in Next.js.
+
+
 
 Key developer commands
 
 - `yarn dev` — run development server with HMR
 - `yarn build` — build for production
-- `yarn export` — export a static site into `out/` (used for gh-pages deploy)
+
 
 Important implementation notes
 
@@ -80,5 +121,5 @@ Dependencies
 
 Primary libraries used by the app include Next.js, React, Tailwind CSS, D3.js, and PapaParse for CSV parsing. See `package.json` for exact versions.
 
-If you need a hand updating the deployment or making structural changes, open an issue or contact the repository maintainers.
+If you need a hand updating the deployment or making structural changes, open an issue or contact the team developer.
 
