@@ -33,7 +33,8 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
               subcategory: normalizeKey(rawSub),
               link: item.link || item.Link || '#',
               readTime: item.readTime || item['Read time'] || item.ReadTime || '',
-              keywords: (item.keywords || item.Keywords || '').split(',').map(k=>k.trim()).filter(Boolean)
+              keywords: (item.keywords || item.Keywords || '').split(',').map(k=>k.trim()).filter(Boolean),
+              outlet: item.outlet || item.Outlet || item['outlet'] || ''
             });
           })
           .filter(i => i.title && i.image_link && normalizeKey(subcategory) === i.subcategory)
@@ -154,8 +155,11 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                 {/* Content */}
                 <div className="flex-1">
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
-                    <div className="flex items-center mb-6 pr-16">
-                      <h3 className="flex-1 text-base font-bold text-gray-900">{item.title}</h3>
+                    <div className="flex flex-col items-start mb-6 pr-16">
+                      <h3 className="text-base font-bold text-gray-900">{item.title}</h3>
+                      {item.outlet && (
+                        <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mt-2">{item.outlet}</span>
+                      )}
                     </div>
                     {item.summary && <p className="text-base font-normal text-gray-700 mt-4">{item.summary}</p>}
                   </a>
