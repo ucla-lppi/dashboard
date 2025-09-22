@@ -6,6 +6,23 @@ import Link from 'next/link';
 
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
+// Parse date strings from CSV/Google Sheets into a local Date (avoid UTC parsing of YYYY-MM-DD)
+function parseDateLocal(raw) {
+  if (!raw) return new Date();
+  if (raw instanceof Date) return raw;
+  const s = String(raw).trim();
+  // YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS
+  const iso = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (iso) return new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+  // MM/DD/YYYY
+  const md = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (md) return new Date(Number(md[3]), Number(md[1]) - 1, Number(md[2]));
+  // Fallback: try native parse but convert to local-date-only
+  const d = new Date(s);
+  if (isNaN(d)) return new Date();
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
 export default function ResearchSection({ csvUrl, mainHeading = 'Research', initialCategory = 'data_for_action', showInitialHeading = true }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,7 +50,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             title: item.Title || item.title || '',
             description: item.Description || item.description || '',
             image_link: item.File || item.file || item.image_link || item.Image || '',
-            date: item.date ? new Date(item.date) : new Date(),
+            date: item.date ? parseDateLocal(item.date) : new Date(),
             subcategory: item.subcategory || item.Subcategory || '',
             link: item.link || item.Link || '#',
             readTime: item.readTime || item['Read time'] || item.ReadTime || '',
