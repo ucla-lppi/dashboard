@@ -10,13 +10,13 @@ export const metadata = {
 	  description: 'The California Latino Dashboard by UCLA LPPI showcases climate change and health equity data for Latino neighborhoods in California.',
 	  type: 'website',
 	  url: 'https://latinoclimatehealth.org/',
-	  images: [
-		{
-		  url: '/images/LCHD-fb-linkedin.png',
-		  width: 1200,
-		  height: 630,
-		  alt: 'Latino Climate and Health Dashboard preview',
-		},
-	  ],
+			images: [
+				{
+					url: 'https://latinoclimatehealth.org/images/LCHD-fb-linkedin.png',
+					width: 1200,
+					height: 630,
+					alt: 'Latino Climate and Health Dashboard preview',
+				},
+			],
 	},
   };

@@ -5,7 +5,7 @@ import Head from "next/head";
 export default function Meta({
   title = "My Dashboard",
   description = "Some description",
-  ogImage = "/og-default.png",
+  ogImage = "https://latinoclimatehealth.org/images/LCHD-fb-linkedin.png",
 }) {
   return (
     <Head>
