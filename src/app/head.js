@@ -20,9 +20,12 @@ export default function Head() {
       <meta property="og:description" content="Explore data on Latino health and climate disparities in California" />
       <meta property="og:url" content="https://latinoclimatehealth.org/" />
   <meta property="og:image" content={imageUrl} />
+  <meta property="og:image:secure_url" content={imageUrl} />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width"  content="1080" />
   <meta property="og:image:height" content="1080" />
       <meta property="og:image:alt"    content="Latino Climate and Health Dashboard preview" />
+  <link rel="image_src" href={imageUrl} />
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="UCLA LPPI Latino Climate and Health Dashboard" />
