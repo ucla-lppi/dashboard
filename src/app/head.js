@@ -22,8 +22,8 @@ export default function Head() {
       <meta property="og:image" content="https://latinoclimatehealth.org/images/LCHD-fb-linkedin.png" />
       <meta property="og:image:secure_url" content="https://latinoclimatehealth.org/images/LCHD-fb-linkedin.png" />
       <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="628" />
       <meta property="og:image:alt" content="Latino Climate and Health Dashboard preview" />
       <link rel="image_src" href="https://latinoclimatehealth.org/images/LCHD-fb-linkedin.png" />
       {/* Twitter Cards */}
