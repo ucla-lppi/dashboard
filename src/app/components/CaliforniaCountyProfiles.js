@@ -102,7 +102,7 @@ export default function CaliforniaCountyProfiles() {
             <React.Fragment key="California State">
               <div className="flex justify-center items-center px-4 py-2">
                 <div className="flex justify-between items-center w-full gap-6">
-                  <span className="text-gray-900 pl-1 font-bold whitespace-nowrap text-sm" style={{ minWidth: `${maxCountyLength}ch` }}>California</span>
+                  <span className="text-gray-900 pl-1 font-bold whitespace-nowrap" style={{ minWidth: `${maxCountyLength}ch` }}>California</span>
                   {!isMobile && (
                     <div className="flex gap-2">
                       <a
