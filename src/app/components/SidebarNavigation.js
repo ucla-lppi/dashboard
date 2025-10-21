@@ -103,8 +103,8 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                   </Link>
                 </li>
                 <li>
-                  <Link href="/policy-toolkit" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'policy-toolkit' ? styles.submenuItemActive : ''}`}>
-                    POLICY TOOLKIT
+                  <Link href="/policy-toolkits" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'policy-toolkit' ? styles.submenuItemActive : ''}`}>
+                    POLICY TOOLKITS
                   </Link>
                 </li>
               </ul>
