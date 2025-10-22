@@ -102,11 +102,11 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
                     Partners
                   </Link>
                 </li>
-                {/* <li>
-                  <Link href="/policy-toolkit" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'policy-toolkit' ? styles.submenuItemActive : ''}`}>
-                    POLICY TOOLKIT
-                  </Link>
-                </li> */}
+                <li>
+                  {/* <Link href="/policy-toolkits" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'policy-toolkit' ? styles.submenuItemActive : ''}`}>
+                    POLICY TOOLKITS
+                  </Link> */}
+                </li>
               </ul>
             </div>
           </li>

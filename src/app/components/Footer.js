@@ -93,7 +93,7 @@ export default function Footer() {
                 <a href={`${prefix}/impact/research`}>Research</a><br />
                 <a href={`${prefix}/impact/newsroom`}>Newsroom</a><br />
                 <a href={`${prefix}/impact/partners`}>Partners</a><br />
-                {/* <a href={`${prefix}/policy-toolkit`}>Policy Toolkit</a> */}
+                {/* <a href={`${prefix}/policy-toolkits`}>Policy Toolkits</a> */}
               </p>
             </div>
             {/* Site Map SubColumn 2 */}
