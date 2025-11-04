@@ -47,7 +47,10 @@ jobs:
           # Copy build files to temporary directory
           scp -o StrictHostKeyChecking=no -i private_key -r out/* ${USER}@${HOST}:$TEMP_DIR
 
-          # Move files to the target directory with proper ownership
+          # Copy .htaccess file separately to temporary directory
+          scp -o StrictHostKeyChecking=no -i private_key .htaccess ${USER}@${HOST}:$TEMP_DIR
+
+          # Move files and .htaccess to the target directory with proper ownership
           ssh -o StrictHostKeyChecking=no -i private_key ${USER}@${HOST} "
             sudo rm -rf /var/www/lppi-dashboard/*
             sudo cp -r $TEMP_DIR/* /var/www/lppi-dashboard/
