@@ -62,13 +62,33 @@ export default function ClientShell({ children }) {
           {/* Background gradient layer */}
           <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#004266] to-[#002E45] overflow-hidden pointer-events-none" />
           {isMobile && (
-            <header className="flex items-center justify-between p-4 bg-white shadow">
+            <header className="sticky top-0 z-50 flex items-center justify-between p-4 bg-tertiary shadow">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="p-2 bg-transparent border-none cursor-pointer text-3xl text-gray-800"
+                className="p-2 bg-transparent border-none cursor-pointer flex flex-col justify-center items-center w-10 h-10 relative"
                 aria-label="Toggle sidebar"
               >
-                &#9776;
+                <span
+                  aria-hidden="true"
+                  className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
+                    sidebarOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-1'
+                  }`}
+                  style={{ backgroundColor: '#333333' }}
+                ></span>
+                <span
+                  aria-hidden="true"
+                  className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
+                    sidebarOpen ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  style={{ backgroundColor: '#333333' }}
+                ></span>
+                <span
+                  aria-hidden="true"
+                  className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
+                    sidebarOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-1'
+                  }`}
+                  style={{ backgroundColor: '#333333' }}
+                ></span>
               </button>
               <a href="/" className="flex items-center">
                 <img
@@ -88,7 +108,7 @@ export default function ClientShell({ children }) {
             />
             {isMobile && (
               <div
-                className={`fixed inset-0 bg-black z-30 transition-opacity duration-200 ease-in-out ${
+                className={`fixed inset-0 bg-black z-[50000] transition-opacity duration-200 ease-in-out ${
                   sidebarOpen ? 'opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
                 }`}
                 onClick={() => setSidebarOpen(false)}

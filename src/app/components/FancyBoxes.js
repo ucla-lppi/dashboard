@@ -5,7 +5,7 @@ import Papa from 'papaparse';
 // Configuration flag to switch between Google Sheets and local CSV
 const USE_GOOGLE_SHEETS = true; // Set to true to use Google Sheets
 
-function FancyBoxItem({ item }) {
+function FancyBoxItem({ item, isMobile }) {
   const [displayNumber, setDisplayNumber] = useState(item.number_comparison);
   useEffect(() => {
     // Extract number and suffix (e.g., '2x' => 2, 'x')
@@ -55,31 +55,58 @@ function FancyBoxItem({ item }) {
   }
 
   return (
-    <div className="flex flex-row items-stretch w-full max-w-2xl">
-      {/* Left: Gradient box */}
-      <div className="flex flex-col items-center justify-center rounded-l-[10px] border-2 border-[#aec8c3] bg-gradient-to-b from-primary to-accents min-w-[120px] max-w-[180px] w-2/5 py-4 px-2 relative">
-        {/* White circle with number */}
-        <div className="flex flex-col items-center">
-          <div className="flex items-center justify-center w-[68px] h-[68px] bg-[#f2f2f2] rounded-full shadow-[0px_4px_4px_#00000040] mb-2">
-            <span className="font-bold text-primary text-3xl text-center font-Lexend_Deca">{displayNumber}</span>
-          </div>
-          {/* Label below */}
-          <div className="w-full">
-            <div className="font-semibold text-white text-base text-center leading-tight font-Lexend_Deca">
-              {item.label1 || item.label}
-              {item.label2 && <><br />{item.label2}</>}
+    <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} items-stretch w-full max-w-2xl`}>
+      {isMobile ? (
+        /* Mobile: Circle with number and label side by side, detail below */
+        <>
+          <div className="flex items-center justify-center bg-gradient-to-b from-primary to-accents rounded-t-[10px] border-2 border-[#aec8c3] py-4 px-4">
+            <div className="flex items-center gap-3">
+              {/* Circle with number */}
+              <div className="flex items-center justify-center w-[56px] h-[56px] bg-[#f2f2f2] rounded-full shadow-[0px_4px_4px_#00000040] flex-shrink-0">
+                <span className="font-bold text-primary text-2xl text-center font-Lexend_Deca">{displayNumber}</span>
+              </div>
+              {/* Label next to circle */}
+              <div className="font-semibold text-white text-sm text-left leading-tight font-Lexend_Deca">
+                {item.label1 || item.label}
+                {item.label2 && <><br />{item.label2}</>}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      {/* Gap */}
-      <div style={{ width: 5, minWidth: 5, background: 'white' }} />
-      {/* Right: White box with border */}
-      <div className="flex-1 bg-[#fcfcfc] rounded-r-[10px] border-2 border-[#aec8c3] flex items-center px-6 py-4">
-        <div className="w-full text-[#002e45] text-base text-center font-Lexend_Deca">
-          {renderDetail(item.detail)}
-        </div>
-      </div>
+          {/* Detail section below */}
+          <div className="flex-1 bg-[#fcfcfc] rounded-b-[10px] border-2 border-t-0 border-[#aec8c3] flex items-center px-4 py-4">
+            <div className="w-full text-[#002e45] text-sm text-center font-Lexend_Deca">
+              {renderDetail(item.detail)}
+            </div>
+          </div>
+        </>
+      ) : (
+        /* Desktop: Original side-by-side layout */
+        <>
+          <div className="flex flex-col items-center justify-center rounded-l-[10px] border-2 border-[#aec8c3] bg-gradient-to-b from-primary to-accents min-w-[120px] max-w-[180px] w-2/5 py-4 px-2 relative">
+            {/* White circle with number */}
+            <div className="flex flex-col items-center">
+              <div className="flex items-center justify-center w-[68px] h-[68px] bg-[#f2f2f2] rounded-full shadow-[0px_4px_4px_#00000040] mb-2">
+                <span className="font-bold text-primary text-3xl text-center font-Lexend_Deca">{displayNumber}</span>
+              </div>
+              {/* Label below */}
+              <div className="w-full">
+                <div className="font-semibold text-white text-base text-center leading-tight font-Lexend_Deca">
+                  {item.label1 || item.label}
+                  {item.label2 && <><br />{item.label2}</>}
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Gap */}
+          <div style={{ width: 5, minWidth: 5, background: 'white' }} />
+          {/* Right: White box with border */}
+          <div className="flex-1 bg-[#fcfcfc] rounded-r-[10px] border-2 border-[#aec8c3] flex items-center px-6 py-4">
+            <div className="w-full text-[#002e45] text-base text-center font-Lexend_Deca">
+              {renderDetail(item.detail)}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -90,6 +117,17 @@ export default function FancyBoxes({ onLoaded }) {
   const [themeClass, setThemeClass] = useState('');
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [boxHeights, setBoxHeights] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Mobile device check via user agent or window width
+    const checkMobile = () => {
+      setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     // Check for dark mode and set the theme class
@@ -255,12 +293,12 @@ export default function FancyBoxes({ onLoaded }) {
   );
 
   return (
-    <div ref={containerRef} className="py-8">
-      <div className="flex flex-col items-center space-y-6">
+    <div ref={containerRef} className={isMobile ? 'py-4' : 'py-8'}>
+      <div className={`flex flex-col items-center ${isMobile ? 'space-y-4' : 'space-y-6'}`}>
         {!isDataLoaded
           ? Array.from({ length: 3 }).map((_, i) => <FancyBoxSkeleton key={i} />)
           : data.map((item, index) => (
-              <FancyBoxItem key={index} item={item} />
+              <FancyBoxItem key={index} item={item} isMobile={isMobile} />
             ))}
       </div>
     </div>

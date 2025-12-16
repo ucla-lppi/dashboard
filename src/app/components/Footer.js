@@ -32,43 +32,45 @@ export default function Footer() {
             <p className="text-left font-semibold text-[20px] leading-normal mb-6">
               THERE IS NO AMERICAN AGENDA<br />WITHOUT A LATINO AGENDA
             </p>
-            <div className="flex justify-start items-center space-x-4">
-              {/* <img
-                src={`${prefix}/images/fb_footer.svg`}
-                alt="Facebook"
-                className="w-[12px] h-[20px]"
-              />
-              <img
-                src={`${prefix}/images/yt_footer.svg`}
-                alt="YouTube"
-                className="w-[21px] h-[14px]"
-              />
-              <img
-                src={`${prefix}/images/ig_footer.svg`}
-                alt="Instagram"
-                className="w-[21px] h-[20px]"
-              />
-              <img
-                src={`${prefix}/images/twitter_footer.svg`}
-                alt="X"
-                className="w-[21px] h-[19px]"
-              />
-              <img
-                src={`${prefix}/images/linkedin_footer.svg`}
-                alt="LinkedIn"
-                className="w-[21px] h-[21px]"
-              />
-              <img
-                src={`${prefix}/images/email_footer.svg`}
-                alt="Email"
-                className="w-[21px] h-[14px]"
-              /> */}
-            </div>
+            {isMobile && (
+              <div className="flex justify-start items-center space-x-4">
+                <img
+                  src={`${prefix}/images/fb_footer.svg`}
+                  alt="Facebook"
+                  className="w-[12px] h-[20px]"
+                />
+                <img
+                  src={`${prefix}/images/yt_footer.svg`}
+                  alt="YouTube"
+                  className="w-[21px] h-[14px]"
+                />
+                <img
+                  src={`${prefix}/images/ig_footer.svg`}
+                  alt="Instagram"
+                  className="w-[21px] h-[20px]"
+                />
+                <img
+                  src={`${prefix}/images/twitter_footer.svg`}
+                  alt="X"
+                  className="w-[21px] h-[19px]"
+                />
+                <img
+                  src={`${prefix}/images/linkedin_footer.svg`}
+                  alt="LinkedIn"
+                  className="w-[21px] h-[21px]"
+                />
+                <img
+                  src={`${prefix}/images/email_footer.svg`}
+                  alt="Email"
+                  className="w-[21px] h-[14px]"
+                />
+              </div>
+            )}
           </div>
         
           {/* Divider: image on desktop, hr on mobile */}
           {isMobile ? (
-            <span></span>
+            <hr className="border-t border-gray-400 my-4" />
           ) : (
             <div className="h-full flex items-center justify-center mx-2 md:mx-4 justify-self-center">
               <img
@@ -79,48 +81,96 @@ export default function Footer() {
             </div>
           )}
 
-          {/* Site Map Section (Column 3) */}
-          <div className="grid grid-cols-3 gap-x-6 md:gap-x-4 text-left text-[16px] max-w-screen-md mx-auto">
-            {/* Site Map SubColumn 1 */}
-            <div>
-              <p className="font-bold underline mb-2">
-                <a href={`${prefix}/`} className="block">Home</a>
-              </p>
-              <p className="font-bold mt-2">
-                Impact
-              </p>
-              <p className="underline font-light">
-                <a href={`${prefix}/impact/research`}>Research</a><br />
-                <a href={`${prefix}/impact/newsroom`}>Newsroom</a><br />
-                <a href={`${prefix}/impact/partners`}>Partners</a><br />
-                <a href={`${prefix}/policy-toolkits`}>Policy Toolkits</a>
-              </p>
-            </div>
-            {/* Site Map SubColumn 2 */}
-            <div>
-              <p className="font-bold">About</p>
-              <p className="underline font-light">
-                <a href={`${prefix}/faqs`}>FAQ</a><br />
-                <a href={`${prefix}/our-data`}>Our Data</a><br />
-                <a href={`${prefix}/about/our-team`}>Our Team</a>
-              </p>
-              <p className="font-bold mt-2">
-                <a href={`${prefix}/resource-directory`}>Resource Directory</a>
-              </p>
-            </div>
-            {/* Site Map SubColumn 3 */}
-            <div>
-              <p className="font-bold">Contact</p>
-              <p className="font-light">
-                3250 Public Affairs Building<br />Los Angeles, CA 90065<br />
-				<a
-				href="mailto:latino@luskin.ucla.edu"
-				className="underline break-words"
-				>
-				latino@luskin.ucla.edu
-				</a>
-              </p>
-            </div>
+          {/* Site Map Section - single column on mobile, 3 columns on desktop */}
+          <div className={isMobile ? 'flex flex-col gap-4 text-left text-[16px]' : 'grid grid-cols-3 gap-x-6 md:gap-x-4 text-left text-[16px] max-w-screen-md mx-auto'}>
+            {isMobile ? (
+              /* Mobile: Single column with specific order and formatting */
+              <>
+                <div>
+                  <p className="font-bold mb-2">Contact</p>
+                  <p className="font-light">
+                    <a
+                      href="mailto:latino@luskin.ucla.edu"
+                      className="underline break-words"
+                    >
+                      latino@luskin.ucla.edu
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p className="font-bold mb-2">About</p>
+                  <p className="underline font-light">
+                    <a href={`${prefix}/faqs`}>FAQ</a><br />
+                    <a href={`${prefix}/our-data`}>Our Data</a><br />
+                    <a href={`${prefix}/about/our-team`}>Our Team</a><br />
+                    <a href={`${prefix}/resource-directory`}>Contact</a>
+                  </p>
+                </div>
+                <div>
+                  <p className="font-bold underline mb-2">
+                    <a href={`${prefix}/resource-directory`}>Additional Resources</a>
+                  </p>
+                </div>
+                <div>
+                  <p className="font-bold underline mb-2">
+                    <a href={`${prefix}/`}>Home</a>
+                  </p>
+                </div>
+                <div>
+                  <p className="font-bold mb-2">Impact</p>
+                  <p className="underline font-light">
+                    <a href={`${prefix}/impact/research`}>Research</a><br />
+                    <a href={`${prefix}/impact/newsroom`}>Press Coverage</a><br />
+                    <a href={`${prefix}/impact/partners`}>Partners</a><br />
+                    <a href={`${prefix}/policy-toolkits`}>Policy Toolkit</a>
+                  </p>
+                </div>
+              </>
+            ) : (
+              /* Desktop: 3 columns with original layout */
+              <>
+                {/* Site Map SubColumn 1 */}
+                <div>
+                  <p className="font-bold underline mb-2">
+                    <a href={`${prefix}/`} className="block">Home</a>
+                  </p>
+                  <p className="font-bold mt-2">
+                    Impact
+                  </p>
+                  <p className="underline font-light">
+                    <a href={`${prefix}/impact/research`}>Research</a><br />
+                    <a href={`${prefix}/impact/newsroom`}>Newsroom</a><br />
+                    <a href={`${prefix}/impact/partners`}>Partners</a><br />
+                    <a href={`${prefix}/policy-toolkits`}>Policy Toolkits</a>
+                  </p>
+                </div>
+                {/* Site Map SubColumn 2 */}
+                <div>
+                  <p className="font-bold">About</p>
+                  <p className="underline font-light">
+                    <a href={`${prefix}/faqs`}>FAQ</a><br />
+                    <a href={`${prefix}/our-data`}>Our Data</a><br />
+                    <a href={`${prefix}/about/our-team`}>Our Team</a>
+                  </p>
+                  <p className="font-bold mt-2">
+                    <a href={`${prefix}/resource-directory`}>Resource Directory</a>
+                  </p>
+                </div>
+                {/* Site Map SubColumn 3 */}
+                <div>
+                  <p className="font-bold">Contact</p>
+                  <p className="font-light">
+                    3250 Public Affairs Building<br />Los Angeles, CA 90065<br />
+                    <a
+                      href="mailto:latino@luskin.ucla.edu"
+                      className="underline break-words"
+                    >
+                      latino@luskin.ucla.edu
+                    </a>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
 
         </div>
