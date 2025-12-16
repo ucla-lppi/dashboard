@@ -32,7 +32,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
     >
       <div className="px-3 py-4 bg-white">
         {isMobile && (
-          <div className="flex items-center justify-between mb-4 bg-tertiary px-3 py-4 -mx-3 -mt-4">
+          <div className="flex items-center gap-3 mb-4 bg-tertiary px-3 py-4 -mx-3 -mt-4">
             <button
               onClick={() => setSidebarOpen(false)}
               className="p-2 text-3xl font-bold leading-none"
@@ -44,9 +44,8 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
             <img
               src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
               alt="UCLA Luskin"
-              className="h-8 pointer-events-none"
+              className="h-8 pointer-events-none ml-auto"
             />
-            <div className="w-10"></div> {/* Spacer for centering */}
           </div>
         )}
         {!isMobile && (

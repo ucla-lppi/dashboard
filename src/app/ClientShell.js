@@ -45,6 +45,19 @@ export default function ClientShell({ children }) {
     return () => window.removeEventListener('resize', adjustHeight);
   }, []);
 
+  useEffect(() => {
+    const initialLoader = document.getElementById('initial-loader');
+    if (initialLoader) {
+      initialLoader.style.transition = 'opacity 350ms ease-out';
+      // Allow a longer window post-hydration for CSS/layout and sidebar slide to settle before reveal
+      const revealDelay = 900; // ms
+      setTimeout(() => {
+        initialLoader.style.opacity = '0';
+        setTimeout(() => initialLoader.remove(), 380);
+      }, revealDelay);
+    }
+  }, []);
+
   return (
     <>
       {/* Google Analytics */}
@@ -90,7 +103,7 @@ export default function ClientShell({ children }) {
                   style={{ backgroundColor: '#333333' }}
                 ></span>
               </button>
-              <a href="/" className="flex items-center">
+              <a href="/" className="flex items-center ml-auto">
                 <img
                   src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
                   alt="LPPI Dashboard Logo"
