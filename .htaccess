@@ -1,3 +1,4 @@
 RewriteEngine On
-RewriteCond %{HTTP_REFERER} wake-up-network\.com [NC]
+RewriteCond %{HTTP_REFERER} wake-up-network\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} public-usa\.mkt\.dynamics\.com [NC]
 RewriteRule .* - [F,L]

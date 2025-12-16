@@ -1,14 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import Papa from 'papaparse';
-import Link from 'next/link';
-
 // Determine asset prefix (e.g. '/dashboard')
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 const geoJsonUrl = `${prefix}/data/ca_counties.geojson`;
-const options = {
-	mapHeight: '551'
-};
+const DEFAULT_MAP_HEIGHT = 551;
 // helper to build fact-sheet filenames
 const slugCounty = name => name.replace(/\s+/g, '_');
 
@@ -67,7 +63,7 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
   );
 }
 
-export default function CaliforniaMap() {
+export default function CaliforniaMap({ mapHeightOverride }) {
   const mapRef = useRef(null);
   const svgRef = useRef(null); // Keep a reference to the SVG element
   const tooltipRef = useRef(null); // Keep a reference to the tooltip
@@ -91,6 +87,8 @@ export default function CaliforniaMap() {
       }
     });
   }, []);
+
+  const mapHeightValue = Number(mapHeightOverride ?? DEFAULT_MAP_HEIGHT);
 
   useEffect(() => {
     // Append the SVG element only once
@@ -119,7 +117,7 @@ export default function CaliforniaMap() {
     const renderMap = () => {
       const container = mapRef.current.getBoundingClientRect();
       const width = container.width;
-      const height = options.mapHeight; // Fixed height to match the FancyBoxes column
+      const height = mapHeightValue; // Fixed height to match the FancyBoxes column
 
       d3.json(geoJsonUrl).then((geojson) => {
         // Configure the projection
@@ -208,7 +206,7 @@ export default function CaliforniaMap() {
         tooltipRef.current = null;
       }
     };
-  }, [countiesWithFactSheets, tooltipHovered]);
+  }, [countiesWithFactSheets, tooltipHovered, mapHeightValue]);
 
   // Tooltip close on leave logic
   useEffect(() => {
@@ -218,10 +216,10 @@ export default function CaliforniaMap() {
   }, [hovered, tooltipHovered]);
 
   return (
-    <div
-      className="relative w-full sm:mt-4 md:mt-8 lg:mt-0"
-      style={{ height: `${options.mapHeight}px` }}
-    >
+        <div
+          className="relative w-full sm:mt-4 md:mt-8 lg:mt-0"
+          style={{ height: `${mapHeightValue}px` }}
+        >
       {/* Map Container */}
       <div ref={mapRef} className="w-full h-full relative">
         {tooltip.show && (

@@ -48,6 +48,8 @@ export default function OurDataPage() {
           indicator,
           cats,
           desc: row.Description || '',
+          geography: row.Geography || '',
+          sampleInterpretation: row['Sample Interpretation'] || '',
           source: row.Source || ''
         };
       });
@@ -119,27 +121,60 @@ export default function OurDataPage() {
       <div className="container mx-auto px-4 max-w-7xl">
         <h2 className="pl-4 text-3xl font-bold text-primary mb-6">Our Data</h2>
         <hr className="pl-4 border-gray-200 mb-4" />
-        <p className="pl-4 mb-6 text-base text-black">
-          This section and our{" "}
-          <Link href="/faqs" className="text-primary underline">
-            Frequently Asked Questions
-          </Link>{" "}
-          answer many common questions about the methods and indicators we used to develop the Latino Climate and Health Dashboard. Please refer to the{" "}
-          <Link
-            href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"
-            className="text-primary underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Technical Report
-            <img
-              src={`${prefix}/images/external_link_blue.svg`}
-              alt="(external link)"
-              className="inline ml-1 w-4 h-4 align-text-bottom"
-            />
-          </Link>{" "}
-          for more information.
-        </p>
+        <div className="pl-4 mb-6 space-y-3 text-base text-black">
+          <p>
+            This section, along with our {" "}
+            <a
+              href="https://latinoclimatehealth.org/faqs/"
+              className="text-primary underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Frequently Asked Questions
+            </a>
+            , addresses many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard. This section also provides examples of how to interpret indicators using data from the California factsheets.
+          </p>
+          <p>In our factsheets, we present data at both the population level and the neighborhood level.</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              In our county-level and state-level indicators, we report statistics comparing outcomes for Latino and non-Latino white populations. These comparisons focus on population-level characteristics disaggregated by race and ethnicity.
+            </li>
+            <li>
+              At the neighborhood level, we report statistics representing residents, households, and workers within neighborhoods, and report data by neighborhood types (e.g., Latino neighborhoods). For example, although a neighborhood may be made up of mostly Latino residents, it also includes individuals from other racial and ethnic backgrounds.
+              <ul className="list-disc pl-5 space-y-1">
+                <li>
+                  For more information on how we define neighborhoods, please visit our {" "}
+                  <a
+                    href="https://latinoclimatehealth.org/faqs/#neighborhoods"
+                    className="text-primary underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    FAQ
+                  </a>
+                  .
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            Please refer to the {" "}
+            <Link
+              href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"
+              className="text-primary underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              technical report
+              <img
+                src={`${prefix}/images/external_link_blue.svg`}
+                alt="(external link)"
+                className="inline ml-1 w-4 h-4 align-text-bottom"
+              />
+            </Link>{" "}
+            for more information.
+          </p>
+        </div>
         {/* Line divider */}
         <hr className="border-[#AEC8C3] mb-4 ml-4" />
         {/* filters row */}
@@ -341,6 +376,12 @@ export default function OurDataPage() {
                   })}
                 </div>
                 <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong class="underline">Description:</strong> ${parseCsvLinks(item.desc)}`}} />
+                {item.geography && (
+                  <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong class="underline">Geography:</strong> ${parseCsvLinks(item.geography)}`}} />
+                )}
+                {item.sampleInterpretation && (
+                  <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong class="underline">Sample Interpretation:</strong> ${parseCsvLinks(item.sampleInterpretation)}`}} />
+                )}
                 {item.source && (
                   <div dangerouslySetInnerHTML={{__html: `<strong class="underline">Source:</strong> ${parseCsvLinks(item.source)}`}} />
                 )}

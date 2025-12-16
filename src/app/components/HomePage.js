@@ -43,14 +43,14 @@ export default function HomePage() {
               {isMobile ? 'Climate and Health Dashboard' : 'California County Factsheets'}
             </h1>
             {isMobile ? (
-              <div className="flex items-center justify-center w-full mt-4 mb-4">
+              <div className="flex items-center justify-center w-full mt-4 mb-2">
                 <button
                   onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })}
                   className="shadow-[0px_4px_8px_#0002] rounded-lg w-full min-h-[48px]"
                 >
                   <div className="relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-3">
                     <span className="text-white text-lg font-semibold text-center leading-tight font-Lexend_Deca">
-                      Jump to County Factsheets
+                      Jump to Factsheets
                     </span>
                   </div>
                 </button>
@@ -63,13 +63,14 @@ export default function HomePage() {
           </div>
         </div>
         {/* Stats and Map Section: nested layout */}
-        <div className={isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-[1fr_400px] gap-x-8'}>
+        <div className={isMobile ? 'flex flex-col space-y-1' : 'grid grid-cols-[1fr_400px] gap-x-8'}>
           {/* Map Section */}
-          <div className="relative flex flex-col">
-            <div className="flex flex-col sm:justify-start lg:justify-center h-full">
-              <CaliforniaMap />
+          <div className={`relative flex flex-col ${isMobile ? 'gap-1 pb-2' : ''}`}>
+            <div className={`flex flex-col ${isMobile ? 'justify-start' : 'sm:justify-start lg:justify-center'} h-full`}
+            >
+              <CaliforniaMap mapHeight={isMobile ? '520' : undefined} />
             </div>
-            <div className="flex flex-col items-start space-y-2">
+            <div className={`flex flex-col items-start ${isMobile ? 'space-y-1' : 'space-y-2'}`}>
               <div className="flex flex-col items-center">
                 {/* Hide both buttons on mobile view */}
                 {!isMobile && (

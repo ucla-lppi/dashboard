@@ -117,14 +117,51 @@ export default function CaliforniaCountyProfiles() {
 
               {/* Darker factsheet type buttons */}
               <div className="flex flex-col gap-3 mb-4">
-                <button className="bg-[#2C2C2C] text-white rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold">
+                <button className="bg-[#2C2C2C] text-white rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold text-[12px]">
                   <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5" />
-                  Extreme Heat Fact Sheet
+                  Extreme Heat Factsheet
                 </button>
-                <button className="bg-[#2C2C2C] text-white rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold">
+                <button className="bg-[#2C2C2C] text-white rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold text-[12px]">
                   <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5" />
-                  Air Pollution Fact Sheet
+                  Air Pollution Factsheet
                 </button>
+              </div>
+
+              {/* California entry at top of the list */}
+              <div className="flex justify-between items-center py-3 border-b border-gray-200 mb-2">
+                <span className="text-gray-900 font-bold text-base">California</span>
+                <div className="flex gap-2">
+                  <a
+                    href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
+                    style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
+                  >
+                    <img
+                      src={`${prefix}/images/extremeheaticon-primary.svg`}
+                      alt="Extreme Heat"
+                      className="w-4 h-4"
+                      style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
+                    />
+                    <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
+                  </a>
+                  <a
+                    href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
+                    style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
+                  >
+                    <img
+                      src={`${prefix}/images/airpollutionicon-primary.svg`}
+                      alt="Air Pollution"
+                      className="w-4 h-4"
+                      style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
+                    />
+                    <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
+                  </a>
+                </div>
               </div>
 
               {/* Counties List - icons only */}
@@ -237,9 +274,8 @@ export default function CaliforniaCountyProfiles() {
                   >
                     <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                     <div className="relative flex items-center justify-center h-full gap-1">
-                      <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
-                      <span className="text-primary text-[10px] font-normal">Extreme Heat</span>
-                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                      <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }} />
+                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
                     </div>
                   </a>
                   <a
@@ -250,9 +286,8 @@ export default function CaliforniaCountyProfiles() {
                   >
                     <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                     <div className="relative flex items-center justify-center h-full gap-1">
-                      <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
-                      <span className="text-primary text-[10px] font-normal">Air Pollution</span>
-                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
+                      <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }} />
+                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
                     </div>
                   </a>
                 </div>
