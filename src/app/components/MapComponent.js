@@ -128,8 +128,42 @@ export function MapComponent() {
 
               popup.innerHTML = popupContent;
               popup.style.display = 'block';
-              popup.style.left = `${e.point.x + 10}px`;
-              popup.style.top = `${e.point.y + 10}px`;
+              
+              // Calculate popup position with viewport boundary checks
+              const offset = 10;
+              let left = e.point.x + offset;
+              let top = e.point.y + offset;
+              
+              // Get viewport dimensions
+              const viewportWidth = window.innerWidth;
+              const viewportHeight = window.innerHeight;
+              
+              // Get popup dimensions (need to temporarily show it to measure)
+              const popupWidth = popup.offsetWidth;
+              const popupHeight = popup.offsetHeight;
+              
+              // Check right boundary
+              if (left + popupWidth > viewportWidth) {
+                left = e.point.x - popupWidth - offset;
+              }
+              
+              // Check bottom boundary
+              if (top + popupHeight > viewportHeight) {
+                top = e.point.y - popupHeight - offset;
+              }
+              
+              // Check left boundary (in case we shifted it too far left)
+              if (left < 0) {
+                left = offset;
+              }
+              
+              // Check top boundary (in case we shifted it too far up)
+              if (top < 0) {
+                top = offset;
+              }
+              
+              popup.style.left = `${left}px`;
+              popup.style.top = `${top}px`;
             }
           });
 

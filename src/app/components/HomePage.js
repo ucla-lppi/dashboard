@@ -35,21 +35,21 @@ export default function HomePage() {
           content="Interactive map and county factsheets for California’s Latino communities’ climate & health statistics."
         />
       </Head>
-      <div className="flex flex-col p-6 space-y-8">
+      <div className={`flex flex-col space-y-8 ${isMobile ? 'p-4' : 'p-6'}`}>
         {/* Title and Instruction spanning both columns */}
         <div className={`${!isMobile ? 'max-w-max mx-0' : ''}`}> 
           <div className="flex flex-col items-start">
-            <h1 className="text-3xl font-bold text-primary">
+            <h1 className={`font-bold text-primary ${isMobile ? 'text-2xl' : 'text-3xl'}`}>
               {isMobile ? 'Climate and Health Dashboard' : 'California County Factsheets'}
             </h1>
             {isMobile ? (
-              <div className="flex items-center justify-center w-full mt-6 mb-6">
+              <div className="flex items-center justify-center w-full mt-4 mb-4">
                 <button
                   onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })}
-                  className="shadow-[0px_4px_8px_#0002] rounded-lg w-full"
+                  className="shadow-[0px_4px_8px_#0002] rounded-lg w-full min-h-[48px]"
                 >
-                  <div className="relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-4">
-                    <span className="text-white text-xl font-semibold text-center leading-tight font-Lexend_Deca">
+                  <div className="relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-3">
+                    <span className="text-white text-lg font-semibold text-center leading-tight font-Lexend_Deca">
                       Jump to County Factsheets
                     </span>
                   </div>
@@ -63,7 +63,7 @@ export default function HomePage() {
           </div>
         </div>
         {/* Stats and Map Section: nested layout */}
-        <div className={isMobile ? 'flex flex-col space-y-8' : 'grid grid-cols-[1fr_400px] gap-x-8'}>
+        <div className={isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-[1fr_400px] gap-x-8'}>
           {/* Map Section */}
           <div className="relative flex flex-col">
             <div className="flex flex-col sm:justify-start lg:justify-center h-full">
@@ -86,11 +86,11 @@ export default function HomePage() {
             </div>
           </div>
           {/* Stats and FancyBoxes Section */}
-          <div className="flex flex-col text-right justify-start max-w-[400px]">
-            <div className={`flex items-center ${isMobile ? 'justify-center w-full' : 'justify-center'} mb-6 mt-0`}>
-              <div className="shadow-[0px_4px_8px_#0002] rounded-lg">
-                <div className={`relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-4 ${isMobile ? 'w-full' : 'min-w-[220px]'}`}>
-                  <div className="text-white text-xl font-semibold text-center leading-tight font-Lexend_Deca">
+          <div className={`flex flex-col text-right justify-start ${isMobile ? 'w-full' : 'max-w-[400px]'}`}>
+            <div className={`flex items-center ${isMobile ? 'justify-center w-full mb-4' : 'justify-center mb-6'} mt-0`}>
+              <div className="shadow-[0px_4px_8px_#0002] rounded-lg w-full">
+                <div className={`relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-3 ${isMobile ? 'w-full min-h-[48px]' : 'min-w-[220px]'}`}>
+                  <div className={`text-white font-semibold text-center leading-tight font-Lexend_Deca ${isMobile ? 'text-lg' : 'text-xl'}`}>
                     California Latino<br />Neighborhood Statistics
                   </div>
                 </div>
