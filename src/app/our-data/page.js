@@ -177,15 +177,15 @@ export default function OurDataPage() {
         </div>
         {/* Line divider */}
         <hr className="border-[#AEC8C3] mb-4 ml-4" />
-        {/* filters row */}
-        <div className="flex items-center space-x-2 mb-4 pl-4">
+        {/* filters row - stack on mobile, horizontal on desktop */}
+        <div className="flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-2 mb-4 pl-4">
           {/* Topical Area */}
-          <div className="relative" ref={catFilterRef}>
+          <div className="relative w-full md:w-auto" ref={catFilterRef}>
             <button
               onClick={() => setShowCatFilters(!showCatFilters)}
               className="
                 flex items-center justify-between
-                w-[250px] h-[30px]
+                w-full md:w-[250px] h-[30px]
                 bg-white text-[#1B3F60]
                 rounded-full border border-[#1b3f60]
                 pl-6 pr-0
@@ -203,7 +203,7 @@ export default function OurDataPage() {
               </span>
             </button>
             {showCatFilters && (
-              <div className="absolute left-0 mt-2 w-[300px] bg-white border rounded-lg shadow-lg p-4 max-h-48 overflow-y-auto z-50">
+              <div className="absolute left-0 mt-2 w-full md:w-[300px] bg-white border rounded-lg shadow-lg p-4 max-h-48 overflow-y-auto z-50">
                 <div className="flex flex-wrap gap-2">
                   {allCats.map(cat => {
                     const bg = categoryColorDict[cat] || '#ccc'
@@ -234,7 +234,7 @@ export default function OurDataPage() {
           </div>
 
           {/* Search */}
-          <div className={`flex items-center bg-white border border-[#1b3f60] rounded-full ${isMobile ? 'w-full max-w-[12rem] h-[28px]' : 'w-[450px] h-[30px]'}`}>
+          <div className="flex items-center bg-white border border-[#1b3f60] rounded-full w-full md:w-[450px] h-[30px]">
             <input
               type="text"
               placeholder="Search for title, tag, or keyword"
