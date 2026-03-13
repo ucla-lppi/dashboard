@@ -16,7 +16,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
   const researchSubs = ['data-for-action','community-research','policy-focused'];
   const isResearchSub = researchSubs.includes(section);
 
-  const [impactOpen, setImpactOpen] = useState(section === 'impact' || isResearchSub);
+  const [impactOpen, setImpactOpen] = useState(section === 'impact' || isResearchSub || section === 'policy-toolkits');
   const [aboutOpen, setAboutOpen] = useState(
     ['faq','our-data','our-team','technical-documentation','resource-bank'].includes(section)
   );
@@ -62,7 +62,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
           <li>
             <Link
               href="/"
-              onClick={() => { setAboutOpen(false); setImpactOpen(false); }}
+              onClick={() => { setAboutOpen(false); setImpactOpen(false); if (isMobile) setSidebarOpen(false); }}
               className={`${styles.menuItem} ${(!section || section === 'home') ? styles.menuItemActive : ''} text-xl font-bold uppercase flex items-center w-full p-2`}
             >
               HOME
@@ -98,22 +98,22 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
               <div className="absolute left-3 top-4 bottom-2 w-px bg-primary" aria-hidden="true" />
               <ul className="space-y-2">  
                 <li>
-                  <Link href="/impact/research" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${(subSection === 'research' || isResearchSub) ? styles.submenuItemActive : ''}`}>
+                  <Link href="/impact/research" onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${(subSection === 'research' || isResearchSub) ? styles.submenuItemActive : ''}`}>
                     Research
                   </Link>
                 </li>
                 <li>
-                  <Link href="/impact/newsroom" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${subSection === 'newsroom' ? styles.submenuItemActive : ''}`}>
+                  <Link href="/impact/newsroom" onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${subSection === 'newsroom' ? styles.submenuItemActive : ''}`}>
                     Newsroom
                   </Link>
                 </li>
                 <li>
-                  <Link href="/impact/partners" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${subSection === 'partners' ? styles.submenuItemActive : ''}`}>
+                  <Link href="/impact/partners" onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${subSection === 'partners' ? styles.submenuItemActive : ''}`}>
                     Partners
                   </Link>
                 </li>
                 <li>
-                  <Link href="/policy-toolkits" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'policy-toolkit' ? styles.submenuItemActive : ''}`}>
+                  <Link href="/policy-toolkits" onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'policy-toolkits' ? styles.submenuItemActive : ''}`}>
                     POLICY TOOLKITS
                   </Link>
                 </li>
@@ -150,17 +150,17 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
               <div className="absolute left-3 top-4 bottom-2 w-px bg-primary" aria-hidden="true" />
               <ul className="space-y-2">
                 <li>
-                  <Link href="/faqs" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'faq' ? styles.submenuItemActive : ''}`}>
+                  <Link href="/faqs" onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'faq' ? styles.submenuItemActive : ''}`}>
                     FAQ
                   </Link>
                 </li>
                 <li>
-                  <Link href={`/our-data`} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'our-data' ? styles.submenuItemActive : ''}`}>
+                  <Link href={`/our-data`} onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${section === 'our-data' ? styles.submenuItemActive : ''}`}>
                     OUR DATA
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about/our-team" className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${(section === 'about' && subSection === 'our-team') ? styles.submenuItemActive : ''}`}>
+                  <Link href="/about/our-team" onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} text-xl font-bold uppercase block w-full p-2 ${(section === 'about' && subSection === 'our-team') ? styles.submenuItemActive : ''}`}>
                     OUR TEAM
                   </Link>
                 </li>
@@ -184,7 +184,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
           </li>
           {/* RESOURCE DIRECTORY */}
           <li>
-            <Link href="/resource-directory" className={`${styles.menuItem} ${section === 'resource-directory' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
+            <Link href="/resource-directory" onClick={isMobile ? () => setSidebarOpen(false) : undefined} className={`${styles.menuItem} ${section === 'resource-directory' ? styles.menuItemActive : ''} text-xl font-bold uppercase block w-full p-2`}>
               RESOURCE DIRECTORY
             </Link>
           </li>

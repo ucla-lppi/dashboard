@@ -117,7 +117,7 @@ export default function OurDataPage() {
   }, [showCatFilters]);
 
   return (
-    <section className="py-8 bg-white">
+    <section className="py-8 bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)]">
       <div className="container mx-auto px-4 max-w-7xl">
         <h2 className="pl-4 text-3xl font-bold text-primary mb-6">Our Data</h2>
         <hr className="pl-4 border-gray-200 mb-4" />
@@ -270,7 +270,7 @@ export default function OurDataPage() {
           </div>
         )}
          {/* condition buttons */}
-         <div className="flex space-x-4 mb-6 pl-4">
+         <div className="flex flex-wrap gap-2 mb-6 pl-4">
   {/** base pill style **/}
   {['heat', 'pollution'].map((type, i) => {
     const isHeat = type === 'heat';
@@ -285,18 +285,19 @@ export default function OurDataPage() {
         key={type}
         onClick={() => toggleCond(type)}
         className={`
-          flex items-center justify-center
-          w-[192px] h-[29px]
+          inline-flex items-center justify-center
+          px-4 py-[5px]
           rounded-full
           border border-[#1b3f60]
+          shrink-0
           ${active
             ? 'bg-primary text-white shadow-none'
             : 'bg-[#fcfcfc] text-[#1b3f60] shadow-[0_2px_0_#1b3f60]'
           }
         `}
       >
-        <img src={`${prefix}${icon}`} alt={label} className="w-5 h-5 mr-2" />
-        {label}
+        <img src={`${prefix}${icon}`} alt={label} className="w-5 h-5 mr-2 shrink-0" />
+        <span className="whitespace-nowrap">{label}</span>
       </button>
     )
   })}
@@ -304,10 +305,13 @@ export default function OurDataPage() {
         {/* cards */}
         {loading ? <p>Loading...</p> : (
           <div className="space-y-6">
+            {filtered.length === 0 && (
+              <p className="text-lg font-medium text-gray-700 py-8 text-center">No Search Results Found</p>
+            )}
             {filtered.map(item=>(
                <article key={item.id} className="border rounded p-6 shadow-sm">
-                <h3 className="text-xl font-bold flex items-center mb-4">
-                  <span className="mr-2">
+                <h3 className="text-xl font-bold flex items-start mb-4">
+                  <span className="mr-2 leading-snug">
                     {item.indicator.replace(/🔥|💨/g,'').trim()}
                   </span>
 
@@ -317,10 +321,10 @@ export default function OurDataPage() {
                       onClick={() => toggleCond('heat')}
                       className={`
                         inline-flex items-center justify-center
-                        w-[47px] h-[25px]
+                        w-[36px] h-[36px]
                         border border-[#1B3F60]
                         rounded-full
-                        mr-1 cursor-pointer
+                        mr-1 shrink-0 cursor-pointer
                         ${filters.heat 
                           ? 'bg-primary text-white' 
                           : 'bg-white text-[#1B3F60]'}
@@ -330,7 +334,7 @@ export default function OurDataPage() {
                       <img
                         src={`${prefix}/images/extremeheaticon-${filters.heat ? 'white' : 'primary'}.svg`}
                         alt="Heat"
-                        className="w-5 h-5"
+                        className="w-5 h-5 shrink-0"
                       />
                     </button>
                   )}
@@ -341,10 +345,10 @@ export default function OurDataPage() {
                       onClick={() => toggleCond('pollution')}
                       className={`
                         inline-flex items-center justify-center
-                        w-[47px] h-[25px]
+                        w-[36px] h-[36px]
                         border border-[#1B3F60]
                         rounded-full
-                        cursor-pointer
+                        shrink-0 cursor-pointer
                         ${filters.pollution 
                           ? 'bg-primary text-white' 
                           : 'bg-white text-[#1B3F60]'}
@@ -354,7 +358,7 @@ export default function OurDataPage() {
                       <img
                         src={`${prefix}/images/airpollutionicon-${filters.pollution ? 'white' : 'primary'}.svg`}
                         alt="Pollution"
-                        className="w-5 h-5"
+                        className="w-5 h-5 shrink-0"
                       />
                     </button>
                   )}

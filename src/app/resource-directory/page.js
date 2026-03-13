@@ -97,11 +97,11 @@ export default function ResourceDirectoryPage() {
           <p className="pl-4">Loading...</p>
         ) : (
           
-           <div className="flex gap-x-12">
+           <div className="flex flex-col md:flex-row gap-x-12">
 
-             {/* left‐side tree nav */}
+             {/* left‐side tree nav — hidden on mobile */}
             {/* increase nav width to one-third */}
-            <nav className="w-1/3 pr-6 pl-6">
+            <nav className="hidden md:block w-1/3 pr-6 pl-6">
                <ul className="space-y-2 sticky top-28 border-l-2 border-[#C8E0D7] pl-4">
                  {Object.keys(grouped).map(cat => {
                    const id = slugify(cat);
@@ -126,7 +126,7 @@ export default function ResourceDirectoryPage() {
              </nav>
 
              {/* right‐side content */}
-             <div className="flex-1 px-4">
+             <div className="w-full md:flex-1 px-4 min-w-0">
               {Object.entries(grouped).map(([cat, entries]) => {
                 const id = slugify(cat);
                 return (
@@ -138,7 +138,7 @@ export default function ResourceDirectoryPage() {
                       {entries.map(item => (
                         <div
                           key={item.id}
-                          className="border rounded p-4 hover:shadow-md"
+                          className="border rounded p-4 hover:shadow-md break-words"
                         >
                           {item.abbreviation && (
                             <span className="inline-block bg-gray-200 text-xs font-semibold px-2 py-1 rounded">

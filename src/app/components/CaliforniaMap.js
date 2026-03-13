@@ -234,7 +234,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
       </div>
       {/* Legend (real, only if loaded) */}
       {isMapLoaded && (
-        <div className="absolute top-4 right-1 bg-white p-4 rounded-lg border-2 border-primary">
+        <div className="hidden sm:block absolute top-4 right-1 bg-white p-4 rounded-lg border-2 border-primary pointer-events-none">
           <div className="flex items-center mb-2">
             <div className="flex items-center justify-center bg-primary rounded-full w-[60px] h-7 min-w-[48px] min-h-[28px] mr-2">
               <img

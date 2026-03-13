@@ -181,7 +181,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
   }
 
   return (
-    <aside className="py-8 bg-white">
+    <aside className="pb-8 bg-white">
       <div className="container px-4 max-w-7xl">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
@@ -261,7 +261,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
 
         {!loading && !error && filteredArticles.length === 0 && (
           <div className="py-12 text-center">
-            <p className="text-lg font-medium text-gray-700">Coming Soon</p>
+            <p className="text-lg font-medium text-gray-700">No Search Results Found</p>
           </div>
         )}
 

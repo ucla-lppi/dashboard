@@ -127,7 +127,8 @@ export default function CaliforniaCountyProfiles() {
                 </button>
               </div>
 
-              {/* California entry at top of the list */}
+              {/* California entry at top of the list — hidden when search doesn't match */}
+              {'california'.includes(search.toLowerCase()) && (
               <div className="flex justify-between items-center py-3 border-b border-gray-200 mb-2">
                 <span className="text-gray-900 font-bold text-base">California</span>
                 <div className="flex gap-2">
@@ -163,6 +164,7 @@ export default function CaliforniaCountyProfiles() {
                   </a>
                 </div>
               </div>
+              )}
 
               {/* Counties List - icons only */}
               <div>
@@ -227,7 +229,8 @@ export default function CaliforniaCountyProfiles() {
               {/* Counties List */}
               <SimpleBar autoHide={false} forceVisible="y" className="rounded w-full max-h-[275px] county-scrollbar overflow-x-hidden" scrollableNodeProps={{ className: 'px-4' }} style={{ maxHeight: 275 }}>
             <Divider />
-            {/* California State Fact Sheets (always shown at top) */}
+            {/* California State Fact Sheets — shown only when search matches */}
+            {'california'.includes(search.toLowerCase()) && (
             <React.Fragment key="California State">
               <div className="flex justify-center items-center px-4 py-2">
                 <div className="flex justify-between items-center w-full gap-6">
@@ -294,6 +297,7 @@ export default function CaliforniaCountyProfiles() {
               )}
               <Divider />
             </React.Fragment>
+            )}
              {filtered.map((county, idx) => (
                <React.Fragment key={county}>
                 <div className="flex justify-center items-center px-4 py-2">
