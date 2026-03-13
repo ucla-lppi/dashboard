@@ -111,6 +111,31 @@ function FancyBoxItem({ item, isMobile }) {
   );
 }
 
+// Skeleton loader for Fancy Boxes — defined at module scope to keep its reference stable
+function FancyBoxSkeleton() {
+  return (
+    <div className="flex flex-row items-stretch w-full max-w-2xl animate-pulse">
+      {/* Left: Gradient box skeleton */}
+      <div className="flex flex-col items-center justify-center rounded-l-[10px] border-2 border-[#aec8c3] bg-gradient-to-b from-primary to-accents min-w-[120px] max-w-[180px] w-2/5 py-4 px-2 relative">
+        <div className="flex flex-col items-center">
+          <div className="flex items-center justify-center w-[68px] h-[68px] bg-[#e5e7eb] rounded-full mb-2" />
+          <div className="w-full h-4 bg-[#e5e7eb] rounded mt-2" />
+          <div className="w-2/3 h-3 bg-[#e5e7eb] rounded mt-1" />
+        </div>
+      </div>
+      {/* Gap */}
+      <div style={{ width: 5, minWidth: 5, background: 'white' }} />
+      {/* Right: White box skeleton */}
+      <div className="flex-1 bg-[#fcfcfc] rounded-r-[10px] border-2 border-[#aec8c3] flex items-center px-6 py-4">
+        <div className="w-full">
+          <div className="h-4 bg-[#e5e7eb] rounded w-3/4 mx-auto mb-2" />
+          <div className="h-3 bg-[#e5e7eb] rounded w-1/2 mx-auto" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function FancyBoxes({ onLoaded }) {
   const containerRef = useRef(null);
   const [data, setData] = useState([]);
@@ -268,29 +293,6 @@ export default function FancyBoxes({ onLoaded }) {
       </span>
     );
   };
-
-  // Skeleton loader for Fancy Boxes
-  const FancyBoxSkeleton = () => (
-    <div className="flex flex-row items-stretch w-full max-w-2xl animate-pulse">
-      {/* Left: Gradient box skeleton */}
-      <div className="flex flex-col items-center justify-center rounded-l-[10px] border-2 border-[#aec8c3] bg-gradient-to-b from-primary to-accents min-w-[120px] max-w-[180px] w-2/5 py-4 px-2 relative">
-        <div className="flex flex-col items-center">
-          <div className="flex items-center justify-center w-[68px] h-[68px] bg-[#e5e7eb] rounded-full mb-2" />
-          <div className="w-full h-4 bg-[#e5e7eb] rounded mt-2" />
-          <div className="w-2/3 h-3 bg-[#e5e7eb] rounded mt-1" />
-        </div>
-      </div>
-      {/* Gap */}
-      <div style={{ width: 5, minWidth: 5, background: 'white' }} />
-      {/* Right: White box skeleton */}
-      <div className="flex-1 bg-[#fcfcfc] rounded-r-[10px] border-2 border-[#aec8c3] flex items-center px-6 py-4">
-        <div className="w-full">
-          <div className="h-4 bg-[#e5e7eb] rounded w-3/4 mx-auto mb-2" />
-          <div className="h-3 bg-[#e5e7eb] rounded w-1/2 mx-auto" />
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div ref={containerRef} className={isMobile ? 'py-4' : 'py-8'}>

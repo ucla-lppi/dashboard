@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import styles from "./SidebarNavigation.module.css";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import ResearchSection from './ResearchSection';
 
 export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobile }) {
   // Determine asset prefix (e.g. '/dashboard')
