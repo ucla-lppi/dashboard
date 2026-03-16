@@ -13,6 +13,14 @@ const slugify = str =>
 
 export default function ResourceDirectoryPage() {
   const [activeId, setActiveId] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
   const { getDataForUrl, setDataForUrl } = useDataContext();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -79,7 +87,7 @@ export default function ResourceDirectoryPage() {
   }, [grouped]);
 
   return (
-    <section className="py-8 bg-white">
+    <main className="bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0 p-4 sm:p-6 max-w-screen-xl mx-auto px-4 py-8">
       <div className="container mx-auto px-4 max-w-7xl">
         <h2 className="pl-4 text-3xl font-bold text-primary mb-6">
           Resource Directory
@@ -96,12 +104,31 @@ export default function ResourceDirectoryPage() {
         {loading ? (
           <p className="pl-4">Loading...</p>
         ) : (
-          
-           <div className="flex flex-col md:flex-row gap-x-12">
+          <>
+           {/* mobile-only jump TOC */}
+          {isMobile && <div className="mb-6 px-4">
+            <p className="text-base font-bold text-primary mb-3">Jump to section</p>
+            <div className="border-l-2 border-[#C8E0D7] pl-4 space-y-2">
+              {Object.keys(grouped).map(cat => {
+                const id = slugify(cat);
+                return (
+                  <a
+                    key={cat}
+                    href={`#${id}`}
+                    className="block text-base font-medium text-black hover:underline"
+                  >
+                    {cat}
+                  </a>
+                );
+              })}
+            </div>
+          </div>}
+
+          <div className={isMobile ? 'flex flex-col' : 'flex flex-row gap-x-12'}>
 
              {/* left‐side tree nav — hidden on mobile */}
             {/* increase nav width to one-third */}
-            <nav className="hidden md:block w-1/3 pr-6 pl-6">
+            {!isMobile && <nav className="w-1/3 pr-6 pl-6">
                <ul className="space-y-2 sticky top-28 border-l-2 border-[#C8E0D7] pl-4">
                  {Object.keys(grouped).map(cat => {
                    const id = slugify(cat);
@@ -123,10 +150,10 @@ export default function ResourceDirectoryPage() {
                    );
                  })}
                </ul>
-             </nav>
+             </nav>}
 
              {/* right‐side content */}
-             <div className="w-full md:flex-1 px-4 min-w-0">
+             <div className={isMobile ? 'w-full px-4 min-w-0' : 'flex-1 px-4 min-w-0'}>
               {Object.entries(grouped).map(([cat, entries]) => {
                 const id = slugify(cat);
                 return (
@@ -168,8 +195,9 @@ export default function ResourceDirectoryPage() {
               })}
             </div>
           </div>
+          </>
         )}  {/* end loading */}
         </div>  {/* closes the .container div */}
-      </section>
+      </main>
     );  // closes the return
 }  // closes ResourceDirectoryPage
