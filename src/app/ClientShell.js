@@ -53,7 +53,10 @@ export default function ClientShell({ children }) {
       const revealDelay = 900; // ms
       setTimeout(() => {
         initialLoader.style.opacity = '0';
-        setTimeout(() => initialLoader.remove(), 380);
+        setTimeout(() => {
+          initialLoader.style.display = 'none';
+          initialLoader.style.pointerEvents = 'none';
+        }, 380);
       }, revealDelay);
     }
   }, []);
