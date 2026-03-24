@@ -63,7 +63,7 @@ export default function HomePage() {
           </div>
         </div>
         {/* Stats and Map Section: nested layout */}
-        <div className={isMobile ? 'flex flex-col space-y-4' : 'grid grid-cols-[1fr_400px] gap-x-8'}>
+        <div className={isMobile ? 'flex flex-col space-y-2' : 'grid grid-cols-[1fr_400px] gap-x-8'}>
           {/* Map Section */}
           <div className={`relative flex flex-col ${isMobile ? 'gap-0 pb-0' : ''}`}>
             <div className={`flex flex-col ${isMobile ? 'justify-start' : 'sm:justify-start lg:justify-center'} h-full`}

@@ -164,8 +164,14 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             // Adjust these values as needed for best visual alignment
             const arrowOffsetX = 0; // px right from centroid
             const arrowOffsetY = 0; // px down from centroid
-            const x = centroid[0] * scaleX + (svgRect.left - containerRect.left) + arrowOffsetX;
+            let x = centroid[0] * scaleX + (svgRect.left - containerRect.left) + arrowOffsetX;
             const y = centroid[1] * scaleY + (svgRect.top - containerRect.top) + arrowOffsetY;
+            // On mobile, center the tooltip horizontally within the map container
+            const isMobileView = window.innerWidth < 540;
+            if (isMobileView) {
+              const tooltipWidth = 257;
+              x = (containerRect.width - tooltipWidth) / 2;
+            }
             setTooltip({
               show: true,
               county: countyName,

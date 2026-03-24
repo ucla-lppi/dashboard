@@ -21,7 +21,7 @@ function CategorySection({ label, items, slugKey }) {
     return () => window.removeEventListener('resize', handle);
   }, [items]);
   return (
-    <div className="mb-8 pb-8">
+    <div className="mb-4 pb-4">
       {/* Mobile single-column list */}
       <div className="block md:hidden space-y-4">
         {displayItemsMobile.map(item => (
@@ -180,7 +180,7 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
   }, [search, articles, showSearchFilters]);
 
   return (
-    <aside className="pb-8 bg-white">
+    <aside className="pb-2 bg-white">
       <div className="container px-4 max-w-7xl">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
