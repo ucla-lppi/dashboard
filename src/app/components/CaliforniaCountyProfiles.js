@@ -130,7 +130,7 @@ export default function CaliforniaCountyProfiles() {
               {/* California entry at top of the list — hidden when search doesn't match */}
               {'california'.includes(search.toLowerCase()) && (
               <div className="flex justify-between items-center py-3 border-b border-gray-200 mb-2">
-                <span className="text-gray-900 font-bold text-base">California</span>
+                <span className="text-gray-900 font-bold text-sm min-w-[8ch] truncate">California</span>
                 <div className="flex gap-2">
                   <a
                     href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
@@ -170,7 +170,7 @@ export default function CaliforniaCountyProfiles() {
               <div>
                 {filtered.map((county, idx) => (
                   <div key={county} className="flex justify-between items-center py-3 border-b border-gray-200">
-                    <span className="text-gray-900 font-bold text-base">{county}</span>
+                    <span className="text-gray-900 font-bold text-sm min-w-[8ch] truncate">{county}</span>
                     <div className="flex gap-2">
                       <a
                         href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
