@@ -204,9 +204,26 @@ export default function CaliforniaMap({ mapHeightOverride }) {
     // Re-render on window resize
     window.addEventListener("resize", renderMap);
 
+    // On mobile, orientation changes can cause stale getBoundingClientRect values.
+    // Re-render after a brief delay to allow the browser to reflow, and dismiss
+    // any open tooltip so it doesn't appear at a position from the previous orientation.
+    const handleOrientationChange = () => {
+      setTooltip((tt) => ({ ...tt, show: false }));
+      setHovered(false);
+      setTimeout(renderMap, 150);
+    };
+    window.addEventListener("orientationchange", handleOrientationChange);
+    if (typeof screen !== "undefined" && screen.orientation) {
+      screen.orientation.addEventListener("change", handleOrientationChange);
+    }
+
     // Cleanup to prevent duplicate maps and tooltips
     return () => {
       window.removeEventListener("resize", renderMap);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+      if (typeof screen !== "undefined" && screen.orientation) {
+        screen.orientation.removeEventListener("change", handleOrientationChange);
+      }
       if (tooltipRef.current) {
         tooltipRef.current.remove();
         tooltipRef.current = null;
