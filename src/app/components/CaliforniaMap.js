@@ -160,18 +160,30 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             // Calculate scale factors (SVG may be scaled to fit container)
             const scaleX = svgRect.width / +svgNode.getAttribute('width');
             const scaleY = svgRect.height / +svgNode.getAttribute('height');
-            // Offset so the arrow (top left) points to the centroid
-            // Adjust these values as needed for best visual alignment
-            const arrowOffsetX = 0; // px right from centroid
-            const arrowOffsetY = 0; // px down from centroid
-            let x = centroid[0] * scaleX + (svgRect.left - containerRect.left) + arrowOffsetX;
-            const y = centroid[1] * scaleY + (svgRect.top - containerRect.top) + arrowOffsetY;
-            // On mobile, center the tooltip horizontally within the map container
+
+            const tooltipWidth = 257;
+            const tooltipHeight = 96;
+            const tooltipPadding = 8;
+
+            const baseX = centroid[0] * scaleX + (svgRect.left - containerRect.left);
+            const baseY = centroid[1] * scaleY + (svgRect.top - containerRect.top);
+
             const isMobileView = window.innerWidth < 540;
-            if (isMobileView) {
-              const tooltipWidth = 257;
-              x = (containerRect.width - tooltipWidth) / 2;
+            let x = isMobileView
+              ? (containerRect.width - tooltipWidth) / 2
+              : baseX - tooltipWidth / 2;
+
+            let y = isMobileView
+              ? Math.min(Math.max(baseY + 12, tooltipPadding), containerRect.height - tooltipHeight - tooltipPadding)
+              : baseY - tooltipHeight - 12;
+
+            if (!isMobileView && y < tooltipPadding) {
+              y = baseY + 12;
             }
+
+            x = Math.max(tooltipPadding, Math.min(x, containerRect.width - tooltipWidth - tooltipPadding));
+            y = Math.max(tooltipPadding, Math.min(y, containerRect.height - tooltipHeight - tooltipPadding));
+
             setTooltip({
               show: true,
               county: countyName,
@@ -185,7 +197,18 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
           })
           .on("mousemove", (event) => {
-            // Do not update tooltip position on mousemove
+            const tooltipWidth = 257;
+            const tooltipHeight = 96;
+            const padding = 8;
+            const containerRect = mapRef.current.getBoundingClientRect();
+
+            let x = event.offsetX + 12;
+            let y = event.offsetY + 12;
+
+            x = Math.max(padding, Math.min(x, containerRect.width - tooltipWidth - padding));
+            y = Math.max(padding, Math.min(y, containerRect.height - tooltipHeight - padding));
+
+            setTooltip((tt) => ({ ...tt, x, y, fixedX: x, fixedY: y }));
           })
           .on("mouseleave", (event, d) => {
             setHovered(false);
