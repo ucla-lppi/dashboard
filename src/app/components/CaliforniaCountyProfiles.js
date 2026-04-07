@@ -40,7 +40,6 @@ export default function CaliforniaCountyProfiles() {
   const router = useRouter();
   const [search, setSearch] = useState('');
   const [isMobile, setIsMobile] = useState(false);
-  const [filters, setFilters] = useState({ heat: true, pollution: true });
   
   const filtered = useMemo(() =>
     allCounties.filter(c => c.toLowerCase().includes(search.toLowerCase())), [search]
@@ -116,30 +115,14 @@ export default function CaliforniaCountyProfiles() {
                 </span>
               </div>
 
-              {/* Darker factsheet type buttons */}
+              {/* Transparent factsheet type buttons */}
               <div className="flex flex-col gap-3 mb-4">
-                <button
-                  type="button"
-                  onClick={() => setFilters(prev => ({ ...prev, heat: !prev.heat }))}
-                  className={`${filters.heat ? 'bg-[#2C2C2C] text-white' : 'bg-white text-[#303030] border border-[#303030]/10'} rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold text-[12px] transition-colors`}
-                >
-                  <img
-                    src={`${prefix}/images/${filters.heat ? 'extremeheaticon-white' : 'extremeheaticon-primary'}.svg`}
-                    alt="Extreme Heat"
-                    className="w-5 h-5"
-                  />
+                <button className="bg-transparent text-[#303030] rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold text-[12px] cursor-default">
+                  <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-5 h-5" />
                   Extreme Heat Factsheet
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setFilters(prev => ({ ...prev, pollution: !prev.pollution }))}
-                  className={`${filters.pollution ? 'bg-[#2C2C2C] text-white' : 'bg-white text-[#303030] border border-[#303030]/10'} rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold text-[12px] transition-colors`}
-                >
-                  <img
-                    src={`${prefix}/images/${filters.pollution ? 'airpollutionicon-white' : 'airpollutionicon-primary'}.svg`}
-                    alt="Air Pollution"
-                    className="w-5 h-5"
-                  />
+                <button className="bg-transparent text-[#303030] rounded-full px-6 py-3 flex items-center justify-center gap-2 font-semibold text-[12px] cursor-default">
+                  <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-5 h-5" />
                   Air Pollution Factsheet
                 </button>
               </div>
@@ -149,93 +132,79 @@ export default function CaliforniaCountyProfiles() {
               <div className="flex justify-between items-center py-3 border-b border-gray-200 mb-2">
                 <span className="text-gray-900 font-bold text-sm min-w-[8ch] truncate">California</span>
                 <div className="flex gap-2">
-                  {filters.heat && (
-                    <a
-                      href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
-                      style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
-                    >
-                      <img
-                        src={`${prefix}/images/extremeheaticon-primary.svg`}
-                        alt="Extreme Heat"
-                        className="w-4 h-4"
-                        style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
-                      />
-                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
-                    </a>
-                  )}
-                  {filters.pollution && (
-                    <a
-                      href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
-                      style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
-                    >
-                      <img
-                        src={`${prefix}/images/airpollutionicon-primary.svg`}
-                        alt="Air Pollution"
-                        className="w-4 h-4"
-                        style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
-                      />
-                      <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
-                    </a>
-                  )}
+                  <a
+                    href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
+                    style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
+                  >
+                    <img
+                      src={`${prefix}/images/extremeheaticon-primary.svg`}
+                      alt="Extreme Heat"
+                      className="w-4 h-4"
+                      style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
+                    />
+                    <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
+                  </a>
+                  <a
+                    href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
+                    style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
+                  >
+                    <img
+                      src={`${prefix}/images/airpollutionicon-primary.svg`}
+                      alt="Air Pollution"
+                      className="w-4 h-4"
+                      style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
+                    />
+                    <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
+                  </a>
                 </div>
               </div>
               )}
 
               {/* Counties List - icons only */}
               <div>
-                {filtered.length === 0 ? (
-                  <div className="text-center text-sm text-gray-600 py-6">No counties match your search.</div>
-                ) : !filters.heat && !filters.pollution ? (
-                  <div className="text-center text-sm text-gray-600 py-6">Turn on a factsheet type to view county buttons.</div>
-                ) : (
-                  filtered.map((county) => (
-                    <div key={county} className="flex justify-between items-center py-3 border-b border-gray-200">
-                      <span className="text-gray-900 font-bold text-sm min-w-[8ch] truncate">{county}</span>
-                      <div className="flex gap-2">
-                        {filters.heat && (
-                          <a
-                            href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
-                            style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
-                          >
-                            <img
-                              src={`${prefix}/images/extremeheaticon-primary.svg`}
-                              alt="Extreme Heat"
-                              className="w-4 h-4"
-                              style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
-                            />
-                            <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
-                          </a>
-                        )}
-                        {filters.pollution && (
-                          <a
-                            href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
-                            style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
-                          >
-                            <img
-                              src={`${prefix}/images/airpollutionicon-primary.svg`}
-                              alt="Air Pollution"
-                              className="w-4 h-4"
-                              style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
-                            />
-                            <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
-                          </a>
-                        )}
-                      </div>
+                {filtered.map((county, idx) => (
+                  <div key={county} className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <span className="text-gray-900 font-bold text-sm min-w-[8ch] truncate">{county}</span>
+                    <div className="flex gap-2">
+                      <a
+                        href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
+                        style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
+                      >
+                        <img 
+                          src={`${prefix}/images/extremeheaticon-primary.svg`} 
+                          alt="Extreme Heat" 
+                          className="w-4 h-4"
+                          style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
+                        />
+                        <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
+                      </a>
+                      <a
+                        href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white rounded-full flex items-center gap-1 shadow-[2px_2px_4px_rgba(0,0,0,0.25)] hover:shadow-lg transition-shadow"
+                        style={{ width: '3.5rem', height: '2rem', justifyContent: 'center', padding: '0 0.5rem' }}
+                      >
+                        <img 
+                          src={`${prefix}/images/airpollutionicon-primary.svg`} 
+                          alt="Air Pollution" 
+                          className="w-4 h-4"
+                          style={{ filter: 'brightness(0) saturate(100%) opacity(1)' }}
+                        />
+                        <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] ml-0.5" style={{ borderLeftColor: '#303030' }}></div>
+                      </a>
                     </div>
-                  ))
-                )}
+                  </div>
+                ))}
               </div>
             </div>
           )}
