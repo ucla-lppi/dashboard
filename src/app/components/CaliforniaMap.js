@@ -1,14 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import Papa from 'papaparse';
-import Link from 'next/link';
-
 // Determine asset prefix (e.g. '/dashboard')
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 const geoJsonUrl = `${prefix}/data/ca_counties.geojson`;
-const options = {
-	mapHeight: '551'
-};
+const DEFAULT_MAP_HEIGHT = 551;
 // helper to build fact-sheet filenames
 const slugCounty = name => name.replace(/\s+/g, '_');
 
@@ -67,7 +63,7 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
   );
 }
 
-export default function CaliforniaMap() {
+export default function CaliforniaMap({ mapHeightOverride }) {
   const mapRef = useRef(null);
   const svgRef = useRef(null); // Keep a reference to the SVG element
   const tooltipRef = useRef(null); // Keep a reference to the tooltip
@@ -91,6 +87,8 @@ export default function CaliforniaMap() {
       }
     });
   }, []);
+
+  const mapHeightValue = Number(mapHeightOverride ?? DEFAULT_MAP_HEIGHT);
 
   useEffect(() => {
     // Append the SVG element only once
@@ -119,7 +117,7 @@ export default function CaliforniaMap() {
     const renderMap = () => {
       const container = mapRef.current.getBoundingClientRect();
       const width = container.width;
-      const height = options.mapHeight; // Fixed height to match the FancyBoxes column
+      const height = mapHeightValue; // Fixed height to match the FancyBoxes column
 
       d3.json(geoJsonUrl).then((geojson) => {
         // Configure the projection
@@ -162,12 +160,30 @@ export default function CaliforniaMap() {
             // Calculate scale factors (SVG may be scaled to fit container)
             const scaleX = svgRect.width / +svgNode.getAttribute('width');
             const scaleY = svgRect.height / +svgNode.getAttribute('height');
-            // Offset so the arrow (top left) points to the centroid
-            // Adjust these values as needed for best visual alignment
-            const arrowOffsetX = 0; // px right from centroid
-            const arrowOffsetY = 0; // px down from centroid
-            const x = centroid[0] * scaleX + (svgRect.left - containerRect.left) + arrowOffsetX;
-            const y = centroid[1] * scaleY + (svgRect.top - containerRect.top) + arrowOffsetY;
+
+            const tooltipWidth = 257;
+            const tooltipHeight = 96;
+            const tooltipPadding = 8;
+
+            const baseX = centroid[0] * scaleX + (svgRect.left - containerRect.left);
+            const baseY = centroid[1] * scaleY + (svgRect.top - containerRect.top);
+
+            const isMobileView = window.innerWidth < 540;
+            let x = isMobileView
+              ? (containerRect.width - tooltipWidth) / 2
+              : baseX - tooltipWidth / 2;
+
+            let y = isMobileView
+              ? Math.min(Math.max(baseY + 12, tooltipPadding), containerRect.height - tooltipHeight - tooltipPadding)
+              : baseY - tooltipHeight - 12;
+
+            if (!isMobileView && y < tooltipPadding) {
+              y = baseY + 12;
+            }
+
+            x = Math.max(tooltipPadding, Math.min(x, containerRect.width - tooltipWidth - tooltipPadding));
+            y = Math.max(tooltipPadding, Math.min(y, containerRect.height - tooltipHeight - tooltipPadding));
+
             setTooltip({
               show: true,
               county: countyName,
@@ -181,7 +197,18 @@ export default function CaliforniaMap() {
             d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
           })
           .on("mousemove", (event) => {
-            // Do not update tooltip position on mousemove
+            const tooltipWidth = 257;
+            const tooltipHeight = 96;
+            const padding = 8;
+            const containerRect = mapRef.current.getBoundingClientRect();
+
+            let x = event.offsetX + 12;
+            let y = event.offsetY + 12;
+
+            x = Math.max(padding, Math.min(x, containerRect.width - tooltipWidth - padding));
+            y = Math.max(padding, Math.min(y, containerRect.height - tooltipHeight - padding));
+
+            setTooltip((tt) => ({ ...tt, x, y, fixedX: x, fixedY: y }));
           })
           .on("mouseleave", (event, d) => {
             setHovered(false);
@@ -200,15 +227,32 @@ export default function CaliforniaMap() {
     // Re-render on window resize
     window.addEventListener("resize", renderMap);
 
+    // On mobile, orientation changes can cause stale getBoundingClientRect values.
+    // Re-render after a brief delay to allow the browser to reflow, and dismiss
+    // any open tooltip so it doesn't appear at a position from the previous orientation.
+    const handleOrientationChange = () => {
+      setTooltip((tt) => ({ ...tt, show: false }));
+      setHovered(false);
+      setTimeout(renderMap, 150);
+    };
+    window.addEventListener("orientationchange", handleOrientationChange);
+    if (typeof screen !== "undefined" && screen.orientation) {
+      screen.orientation.addEventListener("change", handleOrientationChange);
+    }
+
     // Cleanup to prevent duplicate maps and tooltips
     return () => {
       window.removeEventListener("resize", renderMap);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+      if (typeof screen !== "undefined" && screen.orientation) {
+        screen.orientation.removeEventListener("change", handleOrientationChange);
+      }
       if (tooltipRef.current) {
         tooltipRef.current.remove();
         tooltipRef.current = null;
       }
     };
-  }, [countiesWithFactSheets, tooltipHovered]);
+  }, [countiesWithFactSheets, tooltipHovered, mapHeightValue]);
 
   // Tooltip close on leave logic
   useEffect(() => {
@@ -218,10 +262,10 @@ export default function CaliforniaMap() {
   }, [hovered, tooltipHovered]);
 
   return (
-    <div
-      className="relative w-full sm:mt-4 md:mt-8 lg:mt-0"
-      style={{ height: `${options.mapHeight}px` }}
-    >
+        <div
+          className="relative w-full sm:mt-4 md:mt-8 lg:mt-0"
+          style={{ height: `${mapHeightValue}px` }}
+        >
       {/* Map Container */}
       <div ref={mapRef} className="w-full h-full relative">
         {tooltip.show && (
@@ -236,7 +280,7 @@ export default function CaliforniaMap() {
       </div>
       {/* Legend (real, only if loaded) */}
       {isMapLoaded && (
-        <div className="absolute top-4 right-1 bg-white p-4 rounded-lg border-2 border-primary">
+        <div className="hidden sm:block absolute top-4 right-1 bg-white p-4 rounded-lg border-2 border-primary pointer-events-none">
           <div className="flex items-center mb-2">
             <div className="flex items-center justify-center bg-primary rounded-full w-[60px] h-7 min-w-[48px] min-h-[28px] mr-2">
               <img

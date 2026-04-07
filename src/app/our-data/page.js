@@ -48,6 +48,8 @@ export default function OurDataPage() {
           indicator,
           cats,
           desc: row.Description || '',
+          geography: row.Geography || '',
+          sampleInterpretation: row['Sample Interpretation'] || '',
           source: row.Source || ''
         };
       });
@@ -115,42 +117,75 @@ export default function OurDataPage() {
   }, [showCatFilters]);
 
   return (
-    <section className="py-8 bg-white">
+    <section className="py-8 bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)]">
       <div className="container mx-auto px-4 max-w-7xl">
         <h2 className="pl-4 text-3xl font-bold text-primary mb-6">Our Data</h2>
         <hr className="pl-4 border-gray-200 mb-4" />
-        <p className="pl-4 mb-6 text-base text-black">
-          This section and our{" "}
-          <Link href="/faqs" className="text-primary underline">
-            Frequently Asked Questions
-          </Link>{" "}
-          answer many common questions about the methods and indicators we used to develop the Latino Climate and Health Dashboard. Please refer to the{" "}
-          <Link
-            href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"
-            className="text-primary underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Technical Report
-            <img
-              src={`${prefix}/images/external_link_blue.svg`}
-              alt="(external link)"
-              className="inline ml-1 w-4 h-4 align-text-bottom"
-            />
-          </Link>{" "}
-          for more information.
-        </p>
+        <div className="pl-4 mb-6 space-y-3 text-base text-black">
+          <p>
+            This section, along with our {" "}
+            <a
+              href="https://latinoclimatehealth.org/faqs/"
+              className="text-primary underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Frequently Asked Questions
+            </a>
+            , addresses many common questions about the methods and indicators used to develop the Latino Climate and Health Dashboard. This section also provides examples of how to interpret indicators using data from the California factsheets.
+          </p>
+          <p>In our factsheets, we present data at both the population level and the neighborhood level.</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              In our county-level and state-level indicators, we report statistics comparing outcomes for Latino and non-Latino white populations. These comparisons focus on population-level characteristics disaggregated by race and ethnicity.
+            </li>
+            <li>
+              At the neighborhood level, we report statistics representing residents, households, and workers within neighborhoods, and report data by neighborhood types (e.g., Latino neighborhoods). For example, although a neighborhood may be made up of mostly Latino residents, it also includes individuals from other racial and ethnic backgrounds.
+              <ul className="list-disc pl-5 space-y-1">
+                <li>
+                  For more information on how we define neighborhoods, please visit our {" "}
+                  <a
+                    href="https://latinoclimatehealth.org/faqs/#neighborhoods"
+                    className="text-primary underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    FAQ
+                  </a>
+                  .
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            Please refer to the {" "}
+            <Link
+              href="https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/"
+              className="text-primary underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              technical report
+              <img
+                src={`${prefix}/images/external_link_blue.svg`}
+                alt="(external link)"
+                className="inline ml-1 w-4 h-4 align-text-bottom"
+              />
+            </Link>{" "}
+            for more information.
+          </p>
+        </div>
         {/* Line divider */}
         <hr className="border-[#AEC8C3] mb-4 ml-4" />
-        {/* filters row */}
-        <div className="flex items-center space-x-2 mb-4 pl-4">
+        {/* filters row - stack on mobile, horizontal on desktop */}
+        <div className="flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-2 mb-4 pl-4">
           {/* Topical Area */}
-          <div className="relative" ref={catFilterRef}>
+          <div className="relative w-full md:w-auto" ref={catFilterRef}>
             <button
               onClick={() => setShowCatFilters(!showCatFilters)}
               className="
                 flex items-center justify-between
-                w-[250px] h-[30px]
+                w-full md:w-[250px] h-[30px]
                 bg-white text-[#1B3F60]
                 rounded-full border border-[#1b3f60]
                 pl-6 pr-0
@@ -168,7 +203,7 @@ export default function OurDataPage() {
               </span>
             </button>
             {showCatFilters && (
-              <div className="absolute left-0 mt-2 w-[300px] bg-white border rounded-lg shadow-lg p-4 max-h-48 overflow-y-auto z-50">
+              <div className="absolute left-0 mt-2 w-full md:w-[300px] bg-white border rounded-lg shadow-lg p-4 max-h-48 overflow-y-auto z-50">
                 <div className="flex flex-wrap gap-2">
                   {allCats.map(cat => {
                     const bg = categoryColorDict[cat] || '#ccc'
@@ -199,7 +234,7 @@ export default function OurDataPage() {
           </div>
 
           {/* Search */}
-          <div className={`flex items-center bg-white border border-[#1b3f60] rounded-full ${isMobile ? 'w-full max-w-[12rem] h-[28px]' : 'w-[450px] h-[30px]'}`}>
+          <div className="flex items-center bg-white border border-[#1b3f60] rounded-full w-full md:w-[450px] h-[30px]">
             <input
               type="text"
               placeholder="Search for title, tag, or keyword"
@@ -235,7 +270,7 @@ export default function OurDataPage() {
           </div>
         )}
          {/* condition buttons */}
-         <div className="flex space-x-4 mb-6 pl-4">
+         <div className="flex flex-wrap gap-2 mb-6 pl-4">
   {/** base pill style **/}
   {['heat', 'pollution'].map((type, i) => {
     const isHeat = type === 'heat';
@@ -250,18 +285,19 @@ export default function OurDataPage() {
         key={type}
         onClick={() => toggleCond(type)}
         className={`
-          flex items-center justify-center
-          w-[192px] h-[29px]
+          inline-flex items-center justify-center
+          px-4 py-[5px]
           rounded-full
           border border-[#1b3f60]
+          shrink-0
           ${active
             ? 'bg-primary text-white shadow-none'
             : 'bg-[#fcfcfc] text-[#1b3f60] shadow-[0_2px_0_#1b3f60]'
           }
         `}
       >
-        <img src={`${prefix}${icon}`} alt={label} className="w-5 h-5 mr-2" />
-        {label}
+        <img src={`${prefix}${icon}`} alt={label} className="w-5 h-5 mr-2 shrink-0" />
+        <span className="whitespace-nowrap">{label}</span>
       </button>
     )
   })}
@@ -269,10 +305,13 @@ export default function OurDataPage() {
         {/* cards */}
         {loading ? <p>Loading...</p> : (
           <div className="space-y-6">
+            {filtered.length === 0 && (
+              <p className="text-lg font-medium text-gray-700 py-8 text-center">No Search Results Found</p>
+            )}
             {filtered.map(item=>(
                <article key={item.id} className="border rounded p-6 shadow-sm">
-                <h3 className="text-xl font-bold flex items-center mb-4">
-                  <span className="mr-2">
+                <h3 className="text-xl font-bold flex items-start mb-4">
+                  <span className="mr-2 leading-snug">
                     {item.indicator.replace(/🔥|💨/g,'').trim()}
                   </span>
 
@@ -282,10 +321,10 @@ export default function OurDataPage() {
                       onClick={() => toggleCond('heat')}
                       className={`
                         inline-flex items-center justify-center
-                        w-[47px] h-[25px]
+                        w-[36px] h-[36px]
                         border border-[#1B3F60]
                         rounded-full
-                        mr-1 cursor-pointer
+                        mr-1 shrink-0 cursor-pointer
                         ${filters.heat 
                           ? 'bg-primary text-white' 
                           : 'bg-white text-[#1B3F60]'}
@@ -295,7 +334,7 @@ export default function OurDataPage() {
                       <img
                         src={`${prefix}/images/extremeheaticon-${filters.heat ? 'white' : 'primary'}.svg`}
                         alt="Heat"
-                        className="w-5 h-5"
+                        className="w-5 h-5 shrink-0"
                       />
                     </button>
                   )}
@@ -306,10 +345,10 @@ export default function OurDataPage() {
                       onClick={() => toggleCond('pollution')}
                       className={`
                         inline-flex items-center justify-center
-                        w-[47px] h-[25px]
+                        w-[36px] h-[36px]
                         border border-[#1B3F60]
                         rounded-full
-                        cursor-pointer
+                        shrink-0 cursor-pointer
                         ${filters.pollution 
                           ? 'bg-primary text-white' 
                           : 'bg-white text-[#1B3F60]'}
@@ -319,7 +358,7 @@ export default function OurDataPage() {
                       <img
                         src={`${prefix}/images/airpollutionicon-${filters.pollution ? 'white' : 'primary'}.svg`}
                         alt="Pollution"
-                        className="w-5 h-5"
+                        className="w-5 h-5 shrink-0"
                       />
                     </button>
                   )}
@@ -341,6 +380,12 @@ export default function OurDataPage() {
                   })}
                 </div>
                 <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong class="underline">Description:</strong> ${parseCsvLinks(item.desc)}`}} />
+                {item.geography && (
+                  <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong class="underline">Geography:</strong> ${parseCsvLinks(item.geography)}`}} />
+                )}
+                {item.sampleInterpretation && (
+                  <div className="mb-2" dangerouslySetInnerHTML={{__html: `<strong class="underline">Sample Interpretation:</strong> ${parseCsvLinks(item.sampleInterpretation)}`}} />
+                )}
                 {item.source && (
                   <div dangerouslySetInnerHTML={{__html: `<strong class="underline">Source:</strong> ${parseCsvLinks(item.source)}`}} />
                 )}

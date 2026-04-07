@@ -33,8 +33,8 @@ export default function OurTeamPage() {
             <h2 className="text-3xl font-bold text-primary">Our Team</h2>
           </div>
         </div>
-        <div className="py-8 px-4 max-w-screen-xl text-center lg:py-16 lg:px-6">
-          <div className="mb-8 max-w-screen-sm lg:mb-16"></div>
+        <div className="py-4 px-4 max-w-screen-xl text-center lg:py-16 lg:px-6">
+          <div className="mb-4 max-w-screen-sm lg:mb-16"></div>
           <div className="flex flex-wrap justify-center gap-12 bg-white">
             {members.map((m,i) => (
               <div key={i} className="w-[220px] text-center text-gray-900">

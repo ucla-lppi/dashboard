@@ -14,6 +14,7 @@ export default function ImpactNewsroomPage() {
         mainHeading="Newsroom"
         initialCategory="press_coverage"
         showInitialHeading={false}
+        showSearchFilters={true}
       />
     </main>
   );

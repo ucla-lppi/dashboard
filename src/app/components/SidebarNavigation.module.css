@@ -6,7 +6,7 @@
   .menuItem:hover {
 	@apply bg-primary text-white;
 	background: none !important;
-	color: inherit !important;
+	color: black !important;
   }
   
   .menuItemActive {

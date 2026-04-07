@@ -36,8 +36,8 @@ export default function ImpactPartnersPage() {
           <h3 className="text-xl font-semibold mb-6 text-gray-900">Advisory Committee</h3>
         )}
 	  </div>
-	  <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
-        <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
+	  <div className="py-4 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
+        <div className="mx-auto mb-4 max-w-screen-sm lg:mb-16">
         </div>
         <div className="flex flex-wrap justify-center gap-12 bg-white mx-auto max-w-[1024px]">
           {members.map((m,i) => (
