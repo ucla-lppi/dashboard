@@ -6,74 +6,101 @@ import Link from 'next/link';
 
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
-// Subcomponent defined at module scope so its reference is stable across renders
+// Format date as MM/DD/YY
+function formatDate(date) {
+  if (!date) return '';
+  const d = date instanceof Date ? date : new Date(date);
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${mm}/${dd}/${yy}`;
+}
+
+// Grid-style CategorySection for Policy Toolkit layout
 function CategorySection({ label, items, slugKey }) {
-  // Display only first 3 items on mobile, 4 on desktop
-  const displayItemsMobile = items.slice(0, 3);
-  const displayItemsDesktop = items.slice(0, 4);
-  const carouselRef = useRef(null);
-  const [overflow, setOverflow] = useState(false);
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (el) setOverflow(el.scrollWidth > el.clientWidth);
-    const handle = () => el && setOverflow(el.scrollWidth > el.clientWidth);
-    window.addEventListener('resize', handle);
-    return () => window.removeEventListener('resize', handle);
-  }, [items]);
+  const displayItems = items.slice(0, 4);
+  
   return (
-    <div className="mb-4 pb-4">
-      {/* Mobile single-column list */}
-      <div className="block md:hidden space-y-4">
-        {displayItemsMobile.map(item => (
-          <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="flex gap-4 bg-white p-4 rounded-lg shadow-sm">
-            {/* Image on the left */}
-            <div className="flex-shrink-0 w-24 h-24">
-              <img src={item.image_link} alt={item.title} className="w-full h-full object-cover rounded" />
-            </div>
-            {/* Content on the right */}
-            <div className="flex-1 flex flex-col justify-between min-w-0">
-              <div>
-                <p className="text-sm text-gray-900 font-medium line-clamp-3 mb-2">{item.title}</p>
-                {item.outlet && (
-                  <span className="inline-block text-gray-700 text-xs font-medium rounded-full px-3 py-1" style={{backgroundColor: '#aec8c3'}}>{item.outlet}</span>
+    <div className="mb-8 pb-4">
+      {/* Horizontal grid with see all button */}
+      <div className="flex items-start gap-4">
+        <div className="flex flex-wrap gap-6 flex-1">
+          {displayItems.map(item => (
+            <Link 
+              key={item.id} 
+              href={item.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex w-[calc(50%-12px)] sm:w-[220px] max-w-[220px] flex-col transform transition duration-200 ease-in-out hover:-translate-y-1"
+            >
+              {/* Image container with date badge */}
+              <div className="relative w-full aspect-[220/163] bg-gray-200 mb-1">
+                <img src={item.image_link} alt={item.title} className="w-full h-full object-cover" />
+                {item.date && (
+                  <span className="absolute top-2 right-0 bg-[#1B3F60] text-white text-xs font-medium px-2 py-1">
+                    {formatDate(item.date)}
+                  </span>
                 )}
               </div>
-              <div className="flex justify-end mt-2">
-                <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4" />
+              {/* Blue underline */}
+              <div className="border-t-4 border-[#1B3F60] mb-2"></div>
+              {/* Title with external link */}
+              <div className="flex items-start gap-1">
+                <p className="text-sm font-medium text-gray-900 line-clamp-3 flex-1">{item.title}</p>
+                <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 flex-shrink-0 mt-0.5" />
               </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-      {/* Desktop grid */}
-      <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
-        {displayItemsDesktop.map(item => (
-          <Link key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col min-h-[269px] transform transition duration-200 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_5px_0_#c5c5c5]">
-            <img src={item.image_link} alt={item.title} className="w-full h-48 object-cover" />
-            <div className="p-4 flex-1 flex flex-col">
-              <div className="relative mb-2">
-                <h4 className="text-lg font-bold text-gray-900 break-words pr-6">{item.title}</h4>
-                <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute top-0 right-0" />
-              </div>
-              {item.outlet && (
-                <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-3 py-1 mb-2 whitespace-nowrap w-auto max-w-max">{item.outlet}</span>
-              )}
-            </div>
-          </Link>
-        ))}
-      </div>
-      {/* See all button - shown on mobile when more than 3 items, desktop when more than 4 */}
-      {items.length > 3 && (
-        <div className="mt-6 flex justify-center md:justify-end items-center">
-          <Link href={`/${slugKey}`} aria-label={`View all ${label} items`} className="inline-flex items-center gap-2 bg-primary text-white font-medium px-6 py-3 rounded-full hover:bg-primary/90 focus:outline-none focus:ring transition-all">
-            <span>see all</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </Link>
+            </Link>
+          ))}
         </div>
-      )}
+        
+        {/* See all button on the right */}
+        {items.length > 4 && (
+          <div className="flex flex-col items-end justify-center self-center">
+            <span className="text-sm text-gray-600 mb-2">see all</span>
+            <Link 
+              href={`/${slugKey}`} 
+              aria-label={`View all ${label} items`} 
+              className="w-10 h-10 bg-[#1B3F60] rounded-full flex items-center justify-center hover:bg-[#1B3F60]/90 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
+  );
+}
+
+// List-style item for Research page layout
+function ListItem({ item }) {
+  return (
+    <Link 
+      href={item.link} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="flex gap-4 md:gap-6 py-4 border-b border-gray-200 hover:bg-gray-50 transition-colors"
+    >
+      {/* Image thumbnail */}
+      <div className="flex-shrink-0 w-24 h-24 md:w-32 md:h-24 bg-gray-200">
+        <img src={item.image_link} alt={item.title} className="w-full h-full object-cover" />
+      </div>
+      
+      {/* Content */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Title */}
+        <h3 className="text-base md:text-lg font-bold text-[#1B3F60] mb-2">{item.title}</h3>
+        
+        {/* Spacer to push external link to bottom */}
+        <div className="flex-1"></div>
+        
+        {/* External link in bottom right */}
+        <div className="flex justify-end">
+          <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4" />
+        </div>
+      </div>
+    </Link>
   );
 }
 
@@ -94,7 +121,19 @@ function parseDateLocal(raw) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
-export default function ResearchSection({ csvUrl, mainHeading = 'Research', initialCategory = 'data_for_action', showInitialHeading = true, showSearchFilters = false }) {
+// Parse tags from comma-separated string
+function parseTags(raw) {
+  if (!raw) return [];
+  return String(raw).split(',').map(t => t.trim()).filter(Boolean);
+}
+
+export default function ResearchSection({ 
+  csvUrl, 
+  mainHeading = 'Research', 
+  initialCategory = 'data_for_action', 
+  showInitialHeading = true, 
+  layout = 'grid' // 'grid' for Policy Toolkit style, 'list' for Research style
+}) {
   const [articles, setArticles] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -124,11 +163,12 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
             title: item.Title || item.title || '',
             description: item.Description || item.description || '',
             image_link: item.File || item.file || item.image_link || item.Image || '',
-            date: item.date ? parseDateLocal(item.date) : new Date(),
+            date: item.date && String(item.date).trim() ? parseDateLocal(item.date) : null,
             subcategory: item.subcategory || item.Subcategory || '',
             link: item.link || item.Link || '#',
             readTime: item.readTime || item['Read time'] || item.ReadTime || '',
-            outlet: item.outlet || item.Outlet || item['outlet'] || ''
+            outlet: item.outlet || item.Outlet || item['outlet'] || '',
+            tags: parseTags(item.tags || item.Tags || '')
           }))
           .filter(item => item.title && item.image_link)
           .sort((a, b) => sortAsc ? a.date - b.date : b.date - a.date);
@@ -164,9 +204,9 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
     loadData();
   }, [csvUrl, sortAsc]);
 
-  // Real-time search filtering
+  // Real-time search filtering (only for list layout)
   useEffect(() => {
-    if (!showSearchFilters) {
+    if (layout !== 'list') {
       setFilteredArticles(articles);
       return;
     }
@@ -174,123 +214,172 @@ export default function ResearchSection({ csvUrl, mainHeading = 'Research', init
     let result = articles.filter(i => 
       i.title.toLowerCase().includes(q) || 
       (i.description && i.description.toLowerCase().includes(q)) ||
-      (i.outlet && i.outlet.toLowerCase().includes(q))
+      (i.outlet && i.outlet.toLowerCase().includes(q)) ||
+      (i.tags && i.tags.some(tag => tag.toLowerCase().includes(q)))
     );
     setFilteredArticles(result);
-  }, [search, articles, showSearchFilters]);
+  }, [search, articles, layout]);
+
+  // Filter items for the initial category
+  const initialCategoryItems = filteredArticles.filter(item => item.subcategory === initialCategory);
 
   return (
     <aside className="pb-2 bg-white">
       <div className="container px-4 max-w-7xl">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
+        {/* Header row with title and search/sort for list layout */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+          <div>
+            <h2 className="text-3xl font-bold text-[#1B3F60]">{mainHeading}</h2>
+            {layout === 'list' && showInitialHeading && (
+              <h3 className="text-lg font-medium text-gray-700 mt-1">{labelMap[initialCategory]}</h3>
+            )}
+          </div>
+          
+          {/* Search and Sort controls for list layout */}
+          {layout === 'list' && (
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+              {/* Search input */}
+              <div className="flex items-center bg-white border border-[#1b3f60] rounded-full h-10 min-w-0 sm:min-w-[300px]">
+                <input
+                  type="text"
+                  placeholder="Search for title, tag, or keyword"
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  className="flex-1 h-full pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none"
+                />
+                <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                  </svg>
+                </span>
+              </div>
+              
+              {/* Sort dropdown */}
+              <button
+                onClick={() => setSortAsc(prev => !prev)}
+                className="flex items-center bg-white text-[#1b3f60] rounded-full border border-[#1b3f60] h-10 min-w-[120px]"
+              >
+                <span className="flex-1 px-4 text-sm font-medium text-center">
+                  {sortAsc ? 'Oldest' : 'Newest'}
+                </span>
+                <span className="flex items-center justify-center w-10 h-full bg-[#1b3f60] rounded-r-full">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    fill="none" 
+                    stroke="white" 
+                    strokeWidth="2" 
+                    viewBox="0 0 24 24"
+                    className={`transform ${sortAsc ? 'rotate-180' : ''}`}
+                  >
+                    <path d="M4 8h16M4 16h10" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Search and Sort controls - mobile only when showSearchFilters is true */}
-        {showSearchFilters && (
-          <div className="block md:hidden mb-6 space-y-3">
-            {/* Search */}
-            <div className="flex items-center bg-white border border-[#1b3f60] rounded-full h-[30px]">
-              <input
-                type="text"
-                placeholder="Search for title, tag, or keyword"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                className="flex-1 h-full pl-6 pr-2 text-sm font-lexend-lite text-[#1B3F60] placeholder-[#1B3F60]/80 bg-transparent rounded-l-full focus:outline-none"
-              />
-              <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">
-                <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
-              </span>
-            </div>
-            {/* Sort */}
-            <button
-              onClick={() => setSortAsc(prev => !prev)}
-              className="flex items-center bg-white text-[#1b3f60] rounded-full border border-[#1b3f60] w-full h-[30px]"
-            >
-              <span className="flex-1 px-4 text-sm font-normal text-center">
-                {sortAsc ? 'Oldest' : 'Newest'}
-              </span>
-              <span className="flex items-center justify-center w-10 h-full bg-[#1b3f60] rounded-r-full">
-                <img
-                  src={`${prefix}/images/descending.svg`}
-                  alt="Sort"
-                  className={`w-4 h-4 transform ${sortAsc ? 'rotate-180' : ''}`}
-                />
-              </span>
-            </button>
-          </div>
+        {/* Category heading for grid layout */}
+        {layout === 'grid' && showInitialHeading && (
+          <h3 className="text-xl font-semibold mb-6 text-gray-900">{labelMap[initialCategory]}</h3>
         )}
 
-        {/* Initial category section */}
-        {showInitialHeading && (
-          <h3 className="text-xl font-semibold mb-8 text-gray-900">{labelMap[initialCategory]}</h3>
-        )}
+        {/* Loading state */}
         {loading && (
           <>
-            {/* Mobile skeleton list */}
-            <div className="block md:hidden space-y-4">
-              {[...Array(3)].map((_, idx) => (
-                <div key={idx} className="flex gap-4 bg-white p-4 rounded-lg shadow-sm animate-pulse">
-                  <div className="flex-shrink-0 w-24 h-24 bg-gray-300 rounded"></div>
-                  <div className="flex-1 flex flex-col justify-between min-w-0">
-                    <div>
-                      <div className="h-4 bg-gray-200 rounded mb-2 w-full"></div>
-                      <div className="h-4 bg-gray-200 rounded mb-2 w-3/4"></div>
-                      <div className="h-6 bg-gray-200 rounded w-24 mt-2"></div>
+            {layout === 'list' ? (
+              <div className="space-y-4">
+                {[...Array(4)].map((_, idx) => (
+                  <div key={idx} className="flex gap-4 py-4 animate-pulse">
+                    <div className="w-32 h-24 bg-gray-200 flex-shrink-0"></div>
+                    <div className="flex-1">
+                      <div className="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded w-full mb-1"></div>
+                      <div className="h-4 bg-gray-200 rounded w-2/3 mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded w-1/4"></div>
                     </div>
                   </div>
+                ))}
+              </div>
+            ) : (
+              <>
+                {/* Mobile skeleton */}
+                <div className="block md:hidden space-y-4">
+                  {[...Array(3)].map((_, idx) => (
+                    <div key={idx} className="flex gap-4 bg-white p-4 rounded-lg shadow-sm animate-pulse">
+                      <div className="flex-shrink-0 w-24 h-24 bg-gray-300 rounded"></div>
+                      <div className="flex-1">
+                        <div className="h-4 bg-gray-200 rounded mb-2 w-full"></div>
+                        <div className="h-4 bg-gray-200 rounded mb-2 w-3/4"></div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            {/* Desktop skeleton grid */}
-            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
-              {[...Array(4)].map((_, idx) => (
-                <article key={idx} className="w-72 bg-white shadow-[0_3px_0_#c5c5c5] relative flex flex-col animate-pulse min-h-[269px]">
-                  <div className="w-full h-48 bg-gray-300"></div>
-                  <div className="p-4 flex-1 flex flex-col">
-                    <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2 w-1/2"></div>
-                    <div className="h-4 bg-gray-200 rounded"></div>
-                  </div>
-                </article>
-              ))}
-            </div>
+                {/* Desktop skeleton */}
+                <div className="hidden md:flex gap-6">
+                  {[...Array(4)].map((_, idx) => (
+                    <div key={idx} className="w-48 animate-pulse">
+                      <div className="w-full h-32 bg-gray-200 mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded w-full mb-1"></div>
+                      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </>
         )}
 
+        {/* No results state */}
         {!loading && !error && filteredArticles.length === 0 && (
           <div className="py-12 text-center">
             <p className="text-lg font-medium text-gray-700">No Search Results Found</p>
           </div>
         )}
 
-        {/* Initial category content */}
+        {/* Content based on layout */}
         {!loading && !error && filteredArticles.length > 0 && (
-          <CategorySection
-            label={labelMap[initialCategory]}
-            items={filteredArticles.filter(item => item.subcategory === initialCategory)}
-            slugKey={initialCategory.replace(/_/g, '-')}
-          />
-        )}
+          <>
+            {layout === 'list' ? (
+              /* List layout for Research page */
+              <div className="divide-y divide-gray-200">
+                {initialCategoryItems.map(item => (
+                  <ListItem key={item.id} item={item} />
+                ))}
+              </div>
+            ) : (
+              /* Grid layout for Policy Toolkit */
+              <>
+                {/* Initial category */}
+                <CategorySection
+                  label={labelMap[initialCategory]}
+                  items={initialCategoryItems}
+                  slugKey={initialCategory.replace(/_/g, '-')}
+                />
 
-        {/* Other categories */}
-        {!loading && !error && filteredArticles.length > 0 &&
-          Object.entries(
-            filteredArticles.reduce((acc, item) => {
-              if (item.subcategory !== initialCategory) (acc[item.subcategory] ||= []).push(item);
-              return acc;
-            }, {})
-          ).map(([key, items]) => (
-            <div key={key}>
-              <h3 className="text-xl font-semibold mb-8 text-gray-900">{labelMap[key] || key}</h3>
-              <CategorySection
-                label={labelMap[key] || key}
-                items={items}
-                slugKey={key.replace(/_/g, '-')}
-              />
-            </div>
-          ))
-        }
+                {/* Other categories */}
+                {Object.entries(
+                  filteredArticles.reduce((acc, item) => {
+                    if (item.subcategory !== initialCategory) (acc[item.subcategory] ||= []).push(item);
+                    return acc;
+                  }, {})
+                ).map(([key, items]) => (
+                  <div key={key}>
+                    <h3 className="text-xl font-semibold mb-6 text-gray-900">{labelMap[key] || key}</h3>
+                    <CategorySection
+                      label={labelMap[key] || key}
+                      items={items}
+                      slugKey={key.replace(/_/g, '-')}
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+          </>
+        )}
       </div>
     </aside>
   );

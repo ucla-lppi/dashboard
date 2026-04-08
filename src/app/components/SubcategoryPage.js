@@ -106,60 +106,54 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
     <aside className="py-8 bg-white">
       <div className="container px-4 max-w-7xl">
         {/* Main page heading with back button */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
             <button onClick={() => window.history.back()} className="block md:hidden text-primary hover:text-primary/80">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
             </button>
-            <h2 className="text-3xl font-bold text-primary">{mainHeading}</h2>
+            <div>
+              <h2 className="text-3xl font-bold text-[#1B3F60]">{mainHeading}</h2>
+              <p className="text-base text-gray-700 mt-0.5">{displaySub}</p>
+            </div>
           </div>
-        </div>
-        
-        {/* Desktop: Subcategory and controls row: 25%/1fr/15% */}
-        <div className="hidden md:grid grid-cols-[25%_1fr_15%] items-center gap-x-6 mb-6">
-          <h3 className="text-xl font-semibold mb-6 text-gray-900">{displaySub}</h3>
 
-          {/* Search cell */}
-          <div className="flex justify-end">
-            <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-[22rem]">
+          {/* Desktop search + sort inline with heading */}
+          <div className="hidden md:flex items-center gap-3 flex-shrink-0">
+            <div className="flex items-center bg-white rounded-full border border-[#1b3f60] h-10 w-[300px]">
               <input
                 type="text"
                 placeholder="Search for title, tag, or keyword"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="flex-1 pl-4 pr-2 py-2 text-base font-lexend-lite placeholder-[#005587]/80 text-[#005587] bg-transparent rounded-l-full focus:outline-none"
+                className="flex-1 pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none"
               />
-              <span className="flex items-center justify-center w-10 h-10 bg-primary rounded-r-full">
-                <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
+              <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="M21 21l-4.35-4.35" />
+                </svg>
               </span>
             </div>
-          </div>
-          {/* Sort toggle cell */}
-          <div className="flex justify-end">
             <button
               onClick={() => setSortAsc(prev => !prev)}
-              className="flex items-center bg-white text-[#005587] rounded-full border border-primary w-full max-w-[12rem]"
+              className="flex items-center bg-white text-[#1b3f60] rounded-full border border-[#1b3f60] h-10 min-w-[130px]"
             >
-              <span className="flex-1 px-4 py-2 text-base font-normal text-center">
-                Sort
+              <span className="flex-1 px-4 text-sm font-medium text-center">
+                {sortAsc ? 'Oldest' : 'Newest'}
               </span>
-              <span className="flex items-center justify-center w-10 h-10 bg-[#005587] rounded-r-full">
-                <img
-                  src={`${prefix}/images/descending.svg`}
-                  alt="Sort"
-                  className={`w-4 h-4 transform ${sortAsc ? 'rotate-180' : ''}`}
-                />
+              <span className="flex items-center justify-center w-10 h-full bg-[#1b3f60] rounded-r-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24" className={`transform ${sortAsc ? 'rotate-180' : ''}`}>
+                  <path d="M4 8h16M4 16h10" />
+                </svg>
               </span>
             </button>
           </div>
         </div>
 
-        {/* Mobile: Subcategory heading and controls */}
-        <div className="block md:hidden mb-6">
-          <h3 className="text-xl font-semibold mb-4 text-gray-900">{displaySub}</h3>
-          <div className="space-y-3">
+        {/* Mobile: search and sort controls */}
+        <div className="block md:hidden mb-6 space-y-3">
             {/* Search */}
             <div className="flex items-center bg-white border border-[#1b3f60] rounded-full h-[30px]">
               <input
@@ -221,49 +215,55 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
               ))}
             </div>
             
-            {/* Desktop horizontal rows */}
-            <div className="hidden md:block space-y-6">
+            {/* Desktop list rows */}
+            <div className="hidden md:block divide-y divide-gray-200">
               {displayItems.map(item => (
-                <article key={item.id} className="relative shadow border border-gray-200 pt-4 pb-8 pl-4 pr-12 flex items-start transform transition-transform duration-200 hover:-translate-y-[5px]">
-                  {/* Date badge absolute top-right */}
-                  <span className="absolute top-0 right-0 bg-primary text-white px-2 py-1 text-base font-normal">
-                    {`${item.date.getMonth() + 1}/${item.date.getDate()}/${item.date.getFullYear()}`}
-                  </span>
+                <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer"
+                  className="flex gap-6 py-5 hover:bg-gray-50 transition-colors"
+                >
                   {/* Image */}
-                  <img
-                    src={item.image_link || '/images/placeholder.png'}
-                    alt={item.title || 'Image'}
-                    className="w-[200px] h-[150px] object-cover mr-4 flex-shrink-0"
-                  />
-                  {/* Content */}
-                  <div className="flex-1">
-                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
-                      <div className="flex flex-col items-start mb-6 pr-16">
-                        <h3 className="text-base font-bold text-gray-900">{item.title}</h3>
-                        {item.outlet && (
-                          <span className="inline-block text-gray-700 text-xs font-medium rounded-full px-3 py-1 mt-2" style={{backgroundColor: '#aec8c3'}}>{item.outlet}</span>
-                        )}
-                      </div>
-                      {item.summary && <p className="text-base font-normal text-gray-700 mt-4">{item.summary}</p>}
-                    </a>
-                    {/* Keyword tags as text links */}
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {item.keywords.sort().map(kw => (
-                        <a
-                          key={kw}
-                          onClick={() => setActiveKeyword(activeKeyword === kw ? null : kw)}
-                          className={`text-base font-normal text-primary hover:underline cursor-pointer${
-                            activeKeyword === kw ? ' font-bold' : ''
-                          }`}
-                        >
-                          {'#' + kw}
-                        </a>
-                      ))}
-                    </div>
-                  {/* External link icon */}
-                  <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4 absolute bottom-2 right-2" />
+                  <div className="flex-shrink-0 w-[160px] h-[120px] bg-gray-200">
+                    <img
+                      src={item.image_link || '/images/placeholder.png'}
+                      alt={item.title || 'Image'}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                </article>
+                  {/* Content */}
+                  <div className="flex-1 min-w-0 flex flex-col">
+                    {/* Title + date badge */}
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                      <h3 className="text-base font-bold text-[#1B3F60] leading-snug">{item.title}</h3>
+                      {item.date && !isNaN(item.date) && (
+                        <span className="flex-shrink-0 bg-[#1B3F60] text-white text-xs font-medium px-2 py-1">
+                          {`${String(item.date.getMonth()+1).padStart(2,'0')}/${String(item.date.getDate()).padStart(2,'0')}/${String(item.date.getFullYear()).slice(-2)}`}
+                        </span>
+                      )}
+                    </div>
+                    {/* Summary */}
+                    {item.summary && (
+                      <p className="text-sm text-gray-700 line-clamp-3 mb-2">{item.summary}</p>
+                    )}
+                    {/* Keywords as hashtags */}
+                    {item.keywords.length > 0 && (
+                      <div className="flex flex-wrap gap-x-2 mb-2">
+                        {item.keywords.sort().map(kw => (
+                          <span key={kw} className="text-sm text-[#1B3F60] font-medium">#{kw}</span>
+                        ))}
+                      </div>
+                    )}
+                    {/* Outlet pill */}
+                    {item.outlet && (
+                      <div className="mb-auto">
+                        <span className="inline-block text-gray-700 text-xs font-medium rounded-full px-3 py-1" style={{backgroundColor: '#aec8c3'}}>{item.outlet}</span>
+                      </div>
+                    )}
+                    {/* External link bottom-right */}
+                    <div className="flex justify-end mt-auto pt-2">
+                      <img src={`${prefix}/images/external_link.svg`} alt="External link" className="w-4 h-4" />
+                    </div>
+                  </div>
+                </a>
               ))}
             </div>
           </>

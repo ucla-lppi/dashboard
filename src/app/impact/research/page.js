@@ -12,6 +12,7 @@ export default function ImpactResearchPage() {
         mainHeading="Research"
         initialCategory="data_for_action"
         showInitialHeading={true}
+        layout="list"
       />
     </main>
   );
