@@ -183,7 +183,6 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
                 />
               </span>
             </button>
-          </div>
         </div>
 
         {/* Cards list */}
