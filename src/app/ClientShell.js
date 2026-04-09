@@ -13,7 +13,6 @@ export default function ClientShell({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const mainContentRef = useRef(null);
-  const sidebarRef = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -27,23 +26,6 @@ export default function ClientShell({ children }) {
   useEffect(() => {
     setSidebarOpen(!isMobile);
   }, [isMobile]);
-
-  useEffect(() => {
-    const adjustHeight = () => {
-      if (mainContentRef.current && sidebarRef.current) {
-        const sidebarHeight = sidebarRef.current.offsetHeight;
-        const mainContentHeight = mainContentRef.current.offsetHeight;
-        if (mainContentHeight < sidebarHeight) {
-          mainContentRef.current.style.height = `${sidebarHeight}px`;
-        } else {
-          mainContentRef.current.style.height = 'auto';
-        }
-      }
-    };
-    adjustHeight();
-    window.addEventListener('resize', adjustHeight);
-    return () => window.removeEventListener('resize', adjustHeight);
-  }, []);
 
   useEffect(() => {
     const initialLoader = document.getElementById('initial-loader');
@@ -74,7 +56,7 @@ export default function ClientShell({ children }) {
         `}
       </Script>
       <DataProvider>
-        <div className="relative flex flex-col" ref={mainContentRef}>
+        <div className="relative flex flex-col min-h-screen" ref={mainContentRef}>
           {/* Background gradient layer */}
           <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#004266] to-[#002E45] overflow-hidden pointer-events-none" />
           {isMobile && (
@@ -120,7 +102,6 @@ export default function ClientShell({ children }) {
               sidebarOpen={sidebarOpen}
               setSidebarOpen={setSidebarOpen}
               isMobile={isMobile}
-              ref={sidebarRef}
             />
             {isMobile && (
               <div

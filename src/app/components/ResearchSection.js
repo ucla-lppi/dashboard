@@ -19,19 +19,29 @@ function formatDate(date) {
 // Grid-style CategorySection for Policy Toolkit layout
 function CategorySection({ label, items, slugKey }) {
   const displayItems = items.slice(0, 4);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth < 540);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   return (
     <div className="mb-8 pb-4">
       {/* Horizontal grid with see all button */}
       <div className="flex items-start gap-4">
-        <div className="flex flex-wrap gap-6 flex-1">
+        <div className={`flex gap-6 flex-1 ${isMobile ? 'flex-col' : 'flex-wrap'}`}>
           {displayItems.map(item => (
             <Link 
               key={item.id} 
               href={item.link} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex w-[calc(50%-12px)] sm:w-[220px] max-w-[220px] flex-col transform transition duration-200 ease-in-out hover:-translate-y-1"
+              className={`flex flex-col transform transition duration-200 ease-in-out hover:-translate-y-1 ${isMobile ? '' : 'w-[220px] max-w-[220px]'}`}
             >
               {/* Image container with date badge */}
               <div className="relative w-full aspect-[220/163] bg-gray-200 mb-1">
