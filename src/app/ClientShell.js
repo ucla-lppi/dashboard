@@ -56,72 +56,74 @@ export default function ClientShell({ children }) {
         `}
       </Script>
       <DataProvider>
-        <div className="relative flex flex-col min-h-screen" ref={mainContentRef}>
-          {/* Background gradient layer */}
-          <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#004266] to-[#002E45] overflow-hidden pointer-events-none" />
-          {isMobile && (
-            <header className="sticky top-0 z-50 flex items-center justify-between p-4 bg-tertiary shadow">
-              <button
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="p-2 bg-transparent border-none cursor-pointer flex flex-col justify-center items-center w-10 h-10 relative"
-                aria-label="Toggle sidebar"
-              >
-                <span
-                  aria-hidden="true"
-                  className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
-                    sidebarOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-1'
-                  }`}
-                  style={{ backgroundColor: '#333333' }}
-                ></span>
-                <span
-                  aria-hidden="true"
-                  className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
-                    sidebarOpen ? 'opacity-0' : 'opacity-100'
-                  }`}
-                  style={{ backgroundColor: '#333333' }}
-                ></span>
-                <span
-                  aria-hidden="true"
-                  className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
-                    sidebarOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-1'
-                  }`}
-                  style={{ backgroundColor: '#333333' }}
-                ></span>
-              </button>
-              <a href="/" className="flex items-center ml-auto">
-                <img
-                  src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
-                  alt="LPPI Dashboard Logo"
-                  className="h-8 pointer-events-none"
-                />
-              </a>
-            </header>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-[auto] flex-grow h-full">
-            <SidebarNavigation
-              sidebarOpen={sidebarOpen}
-              setSidebarOpen={setSidebarOpen}
-              isMobile={isMobile}
-            />
+        <div className="relative flex min-h-screen flex-col">
+          <div className="relative flex flex-1 flex-col" ref={mainContentRef}>
+            {/* Background gradient layer */}
+            <div className="absolute inset-0 z-[-10] bg-gradient-to-b from-[#004266] to-[#002E45] overflow-hidden pointer-events-none" />
             {isMobile && (
-              <div
-                className={`fixed inset-0 bg-black z-[50000] transition-opacity duration-200 ease-in-out ${
-                  sidebarOpen ? 'opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                }`}
-                onClick={() => setSidebarOpen(false)}
-              />
+              <header className="sticky top-0 z-50 flex items-center justify-between p-4 bg-tertiary shadow">
+                <button
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className="p-2 bg-transparent border-none cursor-pointer flex flex-col justify-center items-center w-10 h-10 relative"
+                  aria-label="Toggle sidebar"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
+                      sidebarOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-1'
+                    }`}
+                    style={{ backgroundColor: '#333333' }}
+                  ></span>
+                  <span
+                    aria-hidden="true"
+                    className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
+                      sidebarOpen ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    style={{ backgroundColor: '#333333' }}
+                  ></span>
+                  <span
+                    aria-hidden="true"
+                    className={`block w-6 h-1 transition-all duration-300 ease-in-out ${
+                      sidebarOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-1'
+                    }`}
+                    style={{ backgroundColor: '#333333' }}
+                  ></span>
+                </button>
+                <a href="/" className="flex items-center ml-auto">
+                  <img
+                    src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
+                    alt="LPPI Dashboard Logo"
+                    className="h-8 pointer-events-none"
+                  />
+                </a>
+              </header>
             )}
-            <div
-              className={`relative p-4 transition-all duration-300 ${
-                !isMobile && sidebarOpen ? 'ml-64' : 'ml-0'
-              } sm:ml-0 flex-grow`}
-            >
-              {/* Main content placeholder */}
-              {children}
+            <div className="grid grid-cols-1 sm:grid-cols-[auto] flex-grow h-full">
+              <SidebarNavigation
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+                isMobile={isMobile}
+              />
+              {isMobile && (
+                <div
+                  className={`fixed inset-0 bg-black z-[50000] transition-opacity duration-200 ease-in-out ${
+                    sidebarOpen ? 'opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                  }`}
+                  onClick={() => setSidebarOpen(false)}
+                />
+              )}
+              <div
+                className={`relative p-4 transition-all duration-300 ${
+                  !isMobile && sidebarOpen ? 'ml-64' : 'ml-0'
+                } sm:ml-0 flex-grow`}
+              >
+                {/* Main content placeholder */}
+                {children}
+              </div>
             </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
       </DataProvider>
     </>
   );
