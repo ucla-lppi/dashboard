@@ -51,9 +51,10 @@ content:
     path: content/data/team
     filename: '{primary}.md'
     view:
-      fields: [first_name, last_name, role]
+      fields: [first_name, last_name, role, organization]
       primary: last_name
     fields:
+      - { name: order, label: Display order, type: number }
       - { name: title, label: Title (Dr., etc.), type: string }
       - { name: first_name, label: First name, type: string, required: true }
       - { name: last_name, label: Last name, type: string }
@@ -70,11 +71,12 @@ content:
       fields: [first_name, last_name, organization]
       primary: last_name
     fields:
+      - { name: order, label: Display order, type: number }
       - { name: first_name, label: First name, type: string, required: true }
       - { name: last_name, label: Last name, type: string }
-      - { name: position, label: Position / Role, type: string }
+      - { name: role, label: Role / Position, type: string }
       - { name: organization, label: Organization, type: string }
-      - { name: subcategory, label: Subcategory, type: string, default: partners }
+      - { name: subcategory, label: Subcategory, type: string, default: advisory_committee }
       - { name: link, label: Profile link, type: string }
       - { name: image_link, label: Image, type: image }
 
@@ -84,15 +86,15 @@ content:
     path: content/data/resources
     filename: '{primary}.md'
     view:
-      fields: [name, category]
-      primary: name
+      fields: [organization, category]
+      primary: organization
     fields:
-      - { name: id, label: ID, type: number }
+      - { name: order, label: Display order, type: number }
       - { name: category, label: Category, type: string, required: true }
-      - { name: name, label: Organization name, type: string, required: true }
+      - { name: organization, label: Organization name, type: string, required: true }
       - { name: abbreviation, label: Abbreviation, type: string }
       - { name: thumbnail, label: Thumbnail, type: image }
-      - { name: url, label: URL, type: string }
+      - { name: link, label: URL, type: string }
       - { name: body, label: Description, type: rich-text }
 
   - name: indicators
@@ -101,15 +103,15 @@ content:
     path: content/data/indicators
     filename: '{primary}.md'
     view:
-      fields: [indicator, cats]
+      fields: [indicator, geography]
       primary: indicator
     fields:
-      - { name: id, label: ID, type: number }
+      - { name: order, label: Display order, type: number }
       - { name: indicator, label: Indicator, type: string, required: true }
-      - { name: cats, label: Categories, type: string, list: true }
+      - { name: categories, label: Categories, type: string, list: true }
       - { name: geography, label: Geography, type: string }
       - { name: source, label: Source, type: string }
-      - { name: sampleInterpretation, label: Sample interpretation, type: text }
+      - { name: sample_interpretation, label: Sample interpretation, type: text }
       - { name: body, label: Description, type: rich-text }
 
   - name: counties
