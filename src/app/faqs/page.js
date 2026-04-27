@@ -1,41 +1,15 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import Papa from 'papaparse';
 import Link from 'next/link';
 import { Card } from 'flowbite-react';
+import faqsData from '@/generated/faqs.json';
 
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
-// Hardcoded FAQ CSV URL
-const FAQ_CSV_URL =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1166232289&single=true&output=csv';
-
 export default function FAQsPage() {
-  const [faqs, setFaqs] = useState([]);
+  const [faqs] = useState(faqsData);
   const [openIdxs, setOpenIdxs] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    Papa.parse(FAQ_CSV_URL, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: ({ data }) => {
-        const filtered = data
-          .map(item => ({
-            question: item.question?.trim() || item.Question?.trim() || item.Title?.trim() || '',
-            answer: item.answer?.trim() || item.Answer?.trim() || item.File?.trim() || '',
-            draft: item.draft?.trim() || item.Draft?.trim() || '',
-            id: item.id?.trim() || item.ID?.trim() || '',
-          }))
-          .filter(item => item.draft?.toLowerCase() !== 'yes' && item.question && item.answer)
-          .sort((a, b) => Number(a.id) - Number(b.id));
-        setFaqs(filtered);
-        setLoading(false);
-      },
-      error: (err) => { console.error('Error parsing CSV:', err); setLoading(false); },
-    });
-  }, []);
+  const loading = false;
 
   useEffect(() => {
     if (!faqs.length) return;

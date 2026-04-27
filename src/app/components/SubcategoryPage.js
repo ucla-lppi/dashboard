@@ -1,92 +1,64 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import Papa from 'papaparse';
-import { useDataContext } from '@/app/context/DataContext';
+import researchData from '@/generated/research.json';
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
 // Helper to normalize keys for comparison
 const normalizeKey = str => str?.toString().toLowerCase().replace(/[-\s]/g, '_');
 
-export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
-  const [items, setItems] = useState([]);
+export default function SubcategoryPage({ csvUrl, items, subcategory, mainHeading }) {
+  const [allItems, setAllItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [sortAsc, setSortAsc] = useState(false);
-  const { getDataForUrl, setDataForUrl } = useDataContext();
 
-  // Load and cache CSV data, reuse if available
   useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
-      const cached = getDataForUrl(csvUrl);
-      function parseDateLocal(raw) {
-        if (!raw) return new Date();
-        if (raw instanceof Date) return raw;
-        const s = String(raw).trim();
-        const iso = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-        if (iso) return new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
-        const md = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-        if (md) return new Date(Number(md[3]), Number(md[1]) - 1, Number(md[2]));
-        const d = new Date(s);
-        if (isNaN(d)) return new Date();
-        return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-      }
-
-      const process = (data) => {
-        const mapped = data
-          .map((item, idx) => {
-            const rawSub = item.subcategory || item.Subcategory || '';
-            return ({
-              id: item.id || item.ID || idx,
-              title: item.Title || item.title || '',
-              summary: item.summary || item.Summary || item.Description || item.description || '',
-              image_link: item.File || item.file || item.image_link || item.Image || '',
-              date: item.date ? parseDateLocal(item.date) : new Date(),
-              subcategory: normalizeKey(rawSub),
-              link: item.link || item.Link || '#',
-              readTime: item.readTime || item['Read time'] || item.ReadTime || '',
-              keywords: (item.keywords || item.Keywords || '').split(',').map(k=>k.trim()).filter(Boolean),
-              outlet: item.outlet || item.Outlet || item['outlet'] || ''
-            });
-          })
-          .filter(i => i.title && i.image_link && normalizeKey(subcategory) === i.subcategory)
-          .sort((a, b) => sortAsc ? a.date - b.date : b.date - a.date);
-        setItems(mapped);
-        setFilteredItems(mapped);
-        setLoading(false);
-      };
-      if (cached) {
-        process(cached);
-      } else {
-        try {
-          const res = await fetch(csvUrl);
-          const text = await res.text();
-          Papa.parse(text, {
-            header: true,
-            complete: ({ data, errors }) => {
-              if (errors.length) { setLoading(false); return; }
-              setDataForUrl(csvUrl, data);
-              process(data);
-            }
-          });
-        } catch {
-          setLoading(false);
-        }
-      }
-    };
-    loadData();
-  }, [csvUrl, subcategory, sortAsc]);
+    function parseDateLocal(raw) {
+      if (!raw) return new Date();
+      if (raw instanceof Date) return raw;
+      const s = String(raw).trim();
+      const iso = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+      if (iso) return new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+      const md = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+      if (md) return new Date(Number(md[3]), Number(md[1]) - 1, Number(md[2]));
+      const d = new Date(s);
+      if (isNaN(d)) return new Date();
+      return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    }
+    const source = items && items.length ? items : researchData;
+    const mapped = source
+      .map((item, idx) => {
+        const rawSub = item.subcategory || '';
+        return {
+          id: item.id || idx,
+          title: item.title || '',
+          summary: item.summary || item.description || '',
+          image_link: item.image_link || '',
+          date: item.date ? parseDateLocal(item.date) : new Date(),
+          subcategory: normalizeKey(rawSub),
+          link: item.link || '#',
+          readTime: item.readTime || item.read_time || '',
+          keywords: Array.isArray(item.keywords) ? item.keywords : (Array.isArray(item.tags) ? item.tags : []),
+          outlet: item.outlet || '',
+        };
+      })
+      .filter(i => i.title && i.image_link && normalizeKey(subcategory) === i.subcategory)
+      .sort((a, b) => sortAsc ? a.date - b.date : b.date - a.date);
+    setAllItems(mapped);
+    setFilteredItems(mapped);
+    setLoading(false);
+  }, [items, subcategory, sortAsc]);
 
   // Compute list of all keywords
-  const allKeywords = Array.from(new Set(items.flatMap(i => i.keywords))).sort();
+  const allKeywords = Array.from(new Set(allItems.flatMap(i => i.keywords))).sort();
 
   // Real-time search filtering
   useEffect(() => {
     const q = search.toLowerCase();
-    let result = items.filter(i => i.title.toLowerCase().includes(q));
+    let result = allItems.filter(i => i.title.toLowerCase().includes(q));
     setFilteredItems(result);
-  }, [search, items]);
+  }, [search, allItems]);
 
   const displayItems = filteredItems;
 

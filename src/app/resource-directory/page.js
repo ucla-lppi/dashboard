@@ -2,12 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRef } from 'react';
-import Papa from 'papaparse';
-import { useDataContext } from '@/app/context/DataContext';
 import Link from 'next/link';
+import resourcesData from '@/generated/resources.json';
 
-const CSV_URL =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=494687510&single=true&output=csv';
 const slugify = str =>
   str.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 
@@ -21,44 +18,16 @@ export default function ResourceDirectoryPage() {
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
-  const { getDataForUrl, setDataForUrl } = useDataContext();
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  // fetch & cache CSV
-  useEffect(() => {
-    const cached = getDataForUrl(CSV_URL);
-    const process = data => {
-      setItems(
-        data.map((row, i) => ({
-          id: i,
-          category: row.Category || '',
-          abbreviation: row.Abbreviation || '',
-          name: row.Organization || '',
-          description: row.Description || '',
-          url: row.Link || '',
-        }))
-      );
-      setLoading(false);
-    };
-
-    if (cached) {
-      process(cached);
-    } else {
-      fetch(CSV_URL)
-        .then(r => r.text())
-        .then(txt =>
-          Papa.parse(txt, {
-            header: true,
-            complete: ({ data }) => {
-              setDataForUrl(CSV_URL, data);
-              process(data);
-            },
-          })
-        )
-        .catch(() => setLoading(false));
-    }
-  }, [getDataForUrl, setDataForUrl]);
+  const items = resourcesData.map((row, i) => ({
+    id: row.id ?? i,
+    category: row.category || '',
+    abbreviation: row.abbreviation || '',
+    name: row.name || '',
+    description: row.description || '',
+    url: row.url || '',
+  }));
+  const loading = false;
 
   // group by category
   const grouped = items.reduce((acc, item) => {

@@ -3,11 +3,15 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
+		"predev": "node scripts/build-content.mjs",
 		"dev": "next dev",
 		"test": "jest",
+		"prebuild": "node scripts/build-content.mjs",
 		"build": "next build",
 		"export": "next export",
 		"start": "next start",
+		"content:build": "node scripts/build-content.mjs",
+		"content:import": "node scripts/import-from-sheets.mjs",
 		"deploy": "cross-env NODE_ENV=production NEXT_PUBLIC_BASE_PATH='lppi-dashboard' NEXT_PUBLIC_ASSET_PREFIX='/lppi-dashboard/' yarn build && gh-pages -d out",
 		"check:links": "linkinator http://localhost:3000 --recursive --skipExternal --maxConcurrency 10 --silent=false"
 	},

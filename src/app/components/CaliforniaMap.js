@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import Papa from 'papaparse';
+import countiesWithFactSheetsData from '@/generated/counties-with-factsheets.json';
 // Determine asset prefix (e.g. '/dashboard')
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 const geoJsonUrl = `${prefix}/data/ca_counties.geojson`;
@@ -69,23 +69,13 @@ export default function CaliforniaMap({ mapHeightOverride }) {
   const tooltipRef = useRef(null); // Keep a reference to the tooltip
   const [isMapLoaded, setIsMapLoaded] = React.useState(false);
   const [tooltip, setTooltip] = React.useState({ show: false, county: '', x: 0, y: 0, hasFactSheet: false });
-  const [countiesWithFactSheets, setCountiesWithFactSheets] = React.useState([]);
+  const [countiesWithFactSheets, setCountiesWithFactSheets] = React.useState(countiesWithFactSheetsData);
   const [hovered, setHovered] = React.useState(false); // Track if mouse is over map or tooltip
   const [tooltipHovered, setTooltipHovered] = React.useState(false); // Track if mouse is over tooltip
 
   // Fetch and parse the CSV on mount
   useEffect(() => {
-    Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1862778319&single=true&output=csv', {
-      download: true,
-      header: true,
-      complete: (results) => {
-        // The CSV only has a 'county' column; all non-empty values are counties with fact sheets
-        const counties = results.data
-          .map(row => row['county'] && row['county'].trim())
-          .filter(Boolean);
-        setCountiesWithFactSheets(counties);
-      }
-    });
+    // Data is loaded statically from generated JSON; no runtime fetch needed.
   }, []);
 
   const mapHeightValue = Number(mapHeightOverride ?? DEFAULT_MAP_HEIGHT);

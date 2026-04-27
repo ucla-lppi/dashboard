@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import Papa from 'papaparse';
-import { useDataContext } from '@/app/context/DataContext';
-import Link from 'next/link';  // ← add this at the top
+import Link from 'next/link';
+import indicatorsData from '@/generated/indicators.json';
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
 const categoryColorDict = {
@@ -25,50 +24,22 @@ function parseCsvLinks(text) {
 
 export default function OurDataPage() {
   const [isMobile, setIsMobile] = useState(false);
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1408499517&single=true&output=csv';
-  const [items, setItems] = useState([]);
+  const items = indicatorsData.map((row, idx) => ({
+    id: row.id ?? idx,
+    indicator: row.indicator || '',
+    cats: Array.isArray(row.cats) ? row.cats : (row.cats || '').split(',').map(c => c.trim()).filter(Boolean),
+    desc: row.desc || row.description || '',
+    geography: row.geography || '',
+    sampleInterpretation: row.sampleInterpretation || row.sample_interpretation || '',
+    source: row.source || '',
+  }));
   const [filtered, setFiltered] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const loading = false;
   const [search, setSearch] = useState('');
   const [selectedCats, setSelectedCats] = useState([]);
   const [filters, setFilters] = useState({ heat: false, pollution: false });
   const [showCatFilters, setShowCatFilters] = useState(false);
   const catFilterRef = useRef(null);
-  const { getDataForUrl, setDataForUrl } = useDataContext();
-
-  useEffect(() => {
-    setLoading(true);
-    const cached = getDataForUrl(csvUrl);
-    const process = data => {
-      const mapped = data.map((row, idx) => {
-        const indicator = row.Indicator || '';
-        const cats = (row.Category || '').split(',').map(c=>c.trim()).filter(Boolean);
-        return {
-          id: idx,
-          indicator,
-          cats,
-          desc: row.Description || '',
-          geography: row.Geography || '',
-          sampleInterpretation: row['Sample Interpretation'] || '',
-          source: row.Source || ''
-        };
-      });
-      setItems(mapped);
-      setLoading(false);
-    };
-    if (cached) {
-      process(cached);
-    } else {
-      fetch(csvUrl)
-        .then(res => res.text())
-        .then(txt => {
-          Papa.parse(txt, { header: true, complete: ({ data }) => {
-            setDataForUrl(csvUrl, data);
-            process(data);
-          }});
-        });
-    }
-  }, []);
 
   // detect mobile devices
   useEffect(() => {

@@ -1,0 +1,13 @@
+rows:
+  - label1: "Extreme Heat"
+    label2: "Days"
+    number_comparison: "60"
+    detail: "Latino neighborhoods endure *60 extreme heat days a year — 23 more* than non-Latino white neighborhoods."
+  - label1: "PM2.5"
+    label2: "Exposure"
+    number_comparison: "2x"
+    detail: "*Twice the share* of Latino neighborhoods are exposed to *poor air quality* compared to non-Latino white neighborhoods."
+  - label1: "Asthma"
+    label2: "ER Visits"
+    number_comparison: "2x"
+    detail: "Latino neighborhoods have *twice* as many *asthma-related ER visits* as non-Latino white neighborhoods."

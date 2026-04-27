@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getAssetUrl } from '../utils'; // Adjust the path as necessary
-import Papa from 'papaparse';
-
-// Configuration flag to switch between Google Sheets and local CSV
-const USE_GOOGLE_SHEETS = true; // Set to true to use Google Sheets
+import summaryStatsData from '@/generated/summary-stats.json';
 
 function FancyBoxItem({ item, isMobile }) {
   const [displayNumber, setDisplayNumber] = useState(item.number_comparison);
@@ -138,9 +135,9 @@ function FancyBoxSkeleton() {
 
 export default function FancyBoxes({ onLoaded }) {
   const containerRef = useRef(null);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(summaryStatsData);
   const [themeClass, setThemeClass] = useState('');
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(true);
   const [boxHeights, setBoxHeights] = useState({});
   const [isMobile, setIsMobile] = useState(false);
 
@@ -158,30 +155,7 @@ export default function FancyBoxes({ onLoaded }) {
     // Check for dark mode and set the theme class
     const isDarkMode = document.body.classList.contains('dark-mode');
     setThemeClass(isDarkMode ? 'dark-mode' : '');
-
-    // Fetch and parse CSV data
-    const fetchData = async () => {
-      let csvText;
-      if (USE_GOOGLE_SHEETS) {
-        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=360206538&single=true&output=csv');
-        csvText = await response.text();
-      } else {
-        const response = await fetch(getAssetUrl('/data/summaryData.csv')); // Use getAssetUrl to fetch local CSV
-        csvText = await response.text();
-      }
-      Papa.parse(csvText, {
-        header: true,
-        complete: (results) => {
-          setData(results.data);
-          setIsDataLoaded(true); // Set data loaded flag to true
-          if (onLoaded) {
-            onLoaded(); // Notify parent that FancyBoxes has finished loading
-          }
-        },
-      });
-    };
-
-    fetchData();
+    if (onLoaded) onLoaded();
   }, [onLoaded]);
 
   // Define the top-level categories and their subcategories

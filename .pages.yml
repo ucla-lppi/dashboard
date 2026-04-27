@@ -1,0 +1,138 @@
+# Pages CMS schema (https://pagescms.org/docs/configuration)
+# Defines how Pages CMS renders the editing UI for content under content/data/.
+# Source of truth: markdown / YAML files committed to this branch.
+# Build pipeline: scripts/build-content.mjs aggregates these into src/generated/*.json.
+media: public/images
+content:
+  - name: faqs
+    label: FAQs
+    type: collection
+    path: content/data/faqs
+    filename: '{primary}.md'
+    view:
+      fields: [id, question]
+      primary: question
+    fields:
+      - { name: id, label: ID, type: number }
+      - { name: question, label: Question, type: string, required: true }
+      - { name: draft, label: Draft, type: boolean, default: false }
+      - { name: body, label: Answer, type: rich-text }
+
+  - name: research
+    label: Research / Newsroom / Toolkits
+    type: collection
+    path: content/data/research
+    filename: '{year}-{month}-{day}-{primary}.md'
+    view:
+      fields: [title, subcategory, date]
+      primary: title
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - name: subcategory
+        label: Category
+        type: select
+        options:
+          values:
+            - { value: data_for_action, label: Data for Action }
+            - { value: community_research, label: Community Research }
+            - { value: policy_recommendations, label: Policy Recommendations }
+            - { value: press_coverage, label: Press Coverage }
+            - { value: talking_points_messaging, label: Talking Points & Messaging Guides }
+      - { name: date, label: Date, type: date }
+      - { name: link, label: External link, type: string }
+      - { name: image_link, label: Image URL, type: image }
+      - { name: outlet, label: Outlet (newsroom only), type: string }
+      - { name: keywords, label: Keywords, type: string, list: true }
+      - { name: body, label: Summary / description, type: rich-text }
+
+  - name: team
+    label: Our Team
+    type: collection
+    path: content/data/team
+    filename: '{primary}.md'
+    view:
+      fields: [first_name, last_name, role]
+      primary: last_name
+    fields:
+      - { name: title, label: Title (Dr., etc.), type: string }
+      - { name: first_name, label: First name, type: string, required: true }
+      - { name: last_name, label: Last name, type: string }
+      - { name: role, label: Role, type: string }
+      - { name: organization, label: Organization, type: string }
+      - { name: image_link, label: Image, type: image }
+
+  - name: partners
+    label: Partners / Advisory Committee
+    type: collection
+    path: content/data/partners
+    filename: '{primary}.md'
+    view:
+      fields: [first_name, last_name, organization]
+      primary: last_name
+    fields:
+      - { name: first_name, label: First name, type: string, required: true }
+      - { name: last_name, label: Last name, type: string }
+      - { name: position, label: Position / Role, type: string }
+      - { name: organization, label: Organization, type: string }
+      - { name: subcategory, label: Subcategory, type: string, default: partners }
+      - { name: link, label: Profile link, type: string }
+      - { name: image_link, label: Image, type: image }
+
+  - name: resources
+    label: Resource Directory
+    type: collection
+    path: content/data/resources
+    filename: '{primary}.md'
+    view:
+      fields: [name, category]
+      primary: name
+    fields:
+      - { name: id, label: ID, type: number }
+      - { name: category, label: Category, type: string, required: true }
+      - { name: name, label: Organization name, type: string, required: true }
+      - { name: abbreviation, label: Abbreviation, type: string }
+      - { name: thumbnail, label: Thumbnail, type: image }
+      - { name: url, label: URL, type: string }
+      - { name: body, label: Description, type: rich-text }
+
+  - name: indicators
+    label: Indicators (Our Data)
+    type: collection
+    path: content/data/indicators
+    filename: '{primary}.md'
+    view:
+      fields: [indicator, cats]
+      primary: indicator
+    fields:
+      - { name: id, label: ID, type: number }
+      - { name: indicator, label: Indicator, type: string, required: true }
+      - { name: cats, label: Categories, type: string, list: true }
+      - { name: geography, label: Geography, type: string }
+      - { name: source, label: Source, type: string }
+      - { name: sampleInterpretation, label: Sample interpretation, type: text }
+      - { name: body, label: Description, type: rich-text }
+
+  - name: counties
+    label: Counties with factsheets
+    type: file
+    path: content/data/counties-with-factsheets.yml
+    fields:
+      - name: counties
+        label: County names
+        type: string
+        list: true
+
+  - name: summary
+    label: Homepage summary stats
+    type: file
+    path: content/data/summary-stats.yml
+    fields:
+      - name: rows
+        label: Stats
+        type: object
+        list: true
+        fields:
+          - { name: label1, label: Label (line 1), type: string, required: true }
+          - { name: label2, label: Label (line 2), type: string }
+          - { name: number_comparison, label: Number / comparison, type: string, required: true }
+          - { name: detail, label: Detail (use *word* for underline/bold), type: text }

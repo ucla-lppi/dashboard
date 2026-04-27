@@ -1,30 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Papa from 'papaparse';
+import React from 'react';
+import teamData from '@/generated/team.json';
 import CircleImage from '../../components/CircleImage';
 
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
-const teamCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQj-jsVttYyQfv02E_FWiPvoNXz1Yeq7lVCKJymnxkEz9cyF5Mak9T8NFaL__5J_EsxTOgZaEcsa7Qw/pub?gid=1698110171&single=true&output=csv';
-
 export default function OurTeamPage() {
-  const [members, setMembers] = useState([]);
-  useEffect(() => {
-    fetch(teamCsvUrl)
-      .then(res => res.text())
-      .then(text => {
-        Papa.parse(text, { header: true, complete: ({ data }) => {
-          setMembers(
-            data.filter(r => {
-              // Only include rows with at least one name field and an image
-              const hasName = (r.first_name && r.first_name.trim()) || (r.last_name && r.last_name.trim());
-              return hasName && r.image_link && r.image_link.trim();
-            })
-          );
-        }});
-      });
-  }, []);
+  const members = teamData.filter(r => {
+    const hasName = (r.first_name && r.first_name.trim()) || (r.last_name && r.last_name.trim());
+    return hasName && r.image_link && r.image_link.trim();
+  });
   return (
     <main className="bg-[#fcfcfc] rounded-[10px] shadow-[6px_6px_0px_var(--quaternary-color)] h-auto border-0 p-4 sm:p-6 max-w-screen-xl mx-auto px-4 py-8">
       <aside className="py-8 bg-white">

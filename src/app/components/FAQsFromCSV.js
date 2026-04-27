@@ -1,44 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import Papa from 'papaparse';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import faqsData from '@/generated/faqs.json';
 
-
-const FAQsFromCSV = ({ csvUrl, initialData = [] }) => {
-  const [faqs, setFaqs] = useState(initialData);
+const FAQsFromCSV = ({ csvUrl, initialData }) => {
+  // csvUrl is kept as an accepted prop for backwards compatibility but unused —
+  // FAQs now ship with the build via src/generated/faqs.json.
+  const initialFaqs = initialData && initialData.length > 0
+    ? [...initialData].sort((a, b) => Number(a.id) - Number(b.id))
+    : faqsData;
+  const [faqs] = useState(initialFaqs);
   const [openIdxs, setOpenIdxs] = useState([]); // allow multiple open
-
-  useEffect(() => {
-    // Always fetch latest FAQs data from CSV
-    Papa.parse(csvUrl, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const filtered = results.data
-          .map(item => ({
-            question: item.question?.trim() || item.Question?.trim() || item.Title?.trim() || "",
-            answer: item.answer?.trim() || item.Answer?.trim() || item.File?.trim() || "",
-            draft: item.draft?.trim() || item.Draft?.trim() || "",
-            id: item.id?.trim() || item.ID?.trim() || "",
-          }))
-          .filter(item => item.draft?.toLowerCase() !== 'yes' && item.question && item.answer);
-        // Sort by numeric id ascending
-        filtered.sort((a, b) => Number(a.id) - Number(b.id));
-        setFaqs(filtered);
-      },
-      error: (error) => console.error('Error parsing CSV:', error),
-    });
-  }, [csvUrl]);
-
-  // If initialData provided, sort and set them immediately
-  useEffect(() => {
-    if (initialData.length > 0) {
-      setFaqs([...initialData].sort((a, b) => Number(a.id) - Number(b.id)));
-    }
-  }, [initialData]);
 
   useEffect(() => {
     // If faqs loaded and there's a hash, open that item

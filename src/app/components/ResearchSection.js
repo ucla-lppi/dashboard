@@ -1,8 +1,7 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react';
-import Papa from 'papaparse';
-import { useDataContext } from '@/app/context/DataContext';
 import Link from 'next/link';
+import researchData from '@/generated/research.json';
 
 const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
@@ -139,6 +138,7 @@ function parseTags(raw) {
 
 export default function ResearchSection({ 
   csvUrl, 
+  items, 
   mainHeading = 'Research', 
   initialCategory = 'data_for_action', 
   showInitialHeading = true, 
@@ -150,7 +150,6 @@ export default function ResearchSection({
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [sortAsc, setSortAsc] = useState(false);
-  const { getDataForUrl, setDataForUrl } = useDataContext();
 
   // Category labels
   const labelMap = {
@@ -162,57 +161,30 @@ export default function ResearchSection({
   };
 
   useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
-      const cached = getDataForUrl(csvUrl);
-      const process = (data) => {
-        if (!data) { setLoading(false); return; }
-        const mapped = data
-          .map((item, idx) => ({
-            id: item.id || item.ID || idx,
-            title: item.Title || item.title || '',
-            description: item.Description || item.description || '',
-            image_link: item.File || item.file || item.image_link || item.Image || '',
-            date: item.date && String(item.date).trim() ? parseDateLocal(item.date) : null,
-            subcategory: item.subcategory || item.Subcategory || '',
-            link: item.link || item.Link || '#',
-            readTime: item.readTime || item['Read time'] || item.ReadTime || '',
-            outlet: item.outlet || item.Outlet || item['outlet'] || '',
-            tags: parseTags(item.tags || item.Tags || '')
-          }))
-          .filter(item => item.title && item.image_link)
-          .sort((a, b) => sortAsc ? a.date - b.date : b.date - a.date);
-        setArticles(mapped);
-        setFilteredArticles(mapped);
-        setLoading(false);
-      };
-      if (cached) {
-        process(cached);
-      } else {
-        try {
-          const res = await fetch(csvUrl);
-          if (!res.ok) throw new Error(`Failed to load CSV (${res.status})`);
-          const text = await res.text();
-          Papa.parse(text, {
-            header: true,
-            complete: ({ data, errors }) => {
-              if (errors.length) {
-                setError('Error parsing data');
-                setLoading(false);
-                return;
-              }
-              setDataForUrl(csvUrl, data);
-              process(data);
-            }
-          });
-        } catch (err) {
-          setError(err.message);
-          setLoading(false);
-        }
-      }
-    };
-    loadData();
-  }, [csvUrl, sortAsc]);
+    const source = items && items.length ? items : researchData;
+    const mapped = source
+      .map((item, idx) => ({
+        id: item.id || idx,
+        title: item.title || '',
+        description: item.description || item.summary || '',
+        image_link: item.image_link || '',
+        date: item.date && String(item.date).trim() ? parseDateLocal(item.date) : null,
+        subcategory: item.subcategory || '',
+        link: item.link || '#',
+        readTime: item.readTime || item.read_time || '',
+        outlet: item.outlet || '',
+        tags: Array.isArray(item.tags) ? item.tags : (Array.isArray(item.keywords) ? item.keywords : []),
+      }))
+      .filter((item) => item.title && item.image_link)
+      .sort((a, b) => {
+        const ad = a.date ? a.date.getTime() : 0;
+        const bd = b.date ? b.date.getTime() : 0;
+        return sortAsc ? ad - bd : bd - ad;
+      });
+    setArticles(mapped);
+    setFilteredArticles(mapped);
+    setLoading(false);
+  }, [items, sortAsc]);
 
   // Real-time search filtering (only for list layout)
   useEffect(() => {

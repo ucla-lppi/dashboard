@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages (testing repo)
+
+# Runs in the albertkun/ucla-lppi-dashboard-testing fork.
+# Source of truth lives there during the Pages CMS pilot. If the team
+# decides to adopt, the changes get merged back into ucla-lppi/dashboard.
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        env:
+          BASE_PATH: ucla-lppi-dashboard-testing
+          ASSET_PREFIX: /ucla-lppi-dashboard-testing
+          NEXT_PUBLIC_ASSET_PREFIX: /ucla-lppi-dashboard-testing
+        run: yarn build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
