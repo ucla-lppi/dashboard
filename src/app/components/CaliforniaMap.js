@@ -9,7 +9,19 @@ const DEFAULT_MAP_HEIGHT = 551;
 const slugCounty = name => name.replace(/\s+/g, '_');
 
 // Tooltip component for displaying county information
-function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave }) {
+function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave, arrowPosition = 'top-left' }) {
+  const arrowPositionClass = {
+    'top-left': 'left-0 top-0',
+    'top-right': 'right-0 top-0',
+    'top-center': 'left-1/2 top-0 transform -translate-x-1/2'
+  }[arrowPosition] || 'left-0 top-0';
+
+  const arrowSVG = {
+    'top-left': <polygon points="0,0 39,0 0,12" fill="#005587" />,
+    'top-right': <polygon points="39,0 0,0 39,12" fill="#005587" />,
+    'top-center': <polygon points="0,0 39,0 19.5,12" fill="#005587" />
+  }[arrowPosition] || <polygon points="0,0 39,0 0,12" fill="#005587" />;
+
   return (
     <div
       className={
@@ -21,10 +33,10 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       onMouseEnter={onTooltipEnter}
       onMouseLeave={onTooltipLeave}
     >
-      {/* Blue triangle accent (SVG or CSS) */}
-      <div className="absolute left-0 top-0 w-10 h-3 pointer-events-none">
+      {/* Blue triangle accent */}
+      <div className={`absolute w-10 h-3 pointer-events-none ${arrowPositionClass}`}>
         <svg width="39" height="12" viewBox="0 0 39 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="0,0 39,0 0,12" fill="#005587" />
+          {arrowSVG}
         </svg>
       </div>
       {/* County name row */}
@@ -67,11 +79,14 @@ export default function CaliforniaMap({ mapHeightOverride }) {
   const mapRef = useRef(null);
   const svgRef = useRef(null); // Keep a reference to the SVG element
   const tooltipRef = useRef(null); // Keep a reference to the tooltip
+  const stickyRef = useRef(false); // Ref for sticky state (avoids stale closures in D3 handlers)
+  const stickyCountyRef = useRef(null); // Tracks which county is currently sticky
   const [isMapLoaded, setIsMapLoaded] = React.useState(false);
-  const [tooltip, setTooltip] = React.useState({ show: false, county: '', x: 0, y: 0, hasFactSheet: false });
+  const [tooltip, setTooltip] = React.useState({ show: false, county: '', x: 0, y: 0, hasFactSheet: false, arrowPosition: 'top-left' });
   const [countiesWithFactSheets, setCountiesWithFactSheets] = React.useState([]);
   const [hovered, setHovered] = React.useState(false); // Track if mouse is over map or tooltip
   const [tooltipHovered, setTooltipHovered] = React.useState(false); // Track if mouse is over tooltip
+  const [sticky, setSticky] = React.useState(false); // Whether tooltip is pinned by a click
 
   // Fetch and parse the CSV on mount
   useEffect(() => {
@@ -146,77 +161,111 @@ export default function CaliforniaMap({ mapHeightOverride }) {
           // Color counties with fact sheets green, others gray
           .attr("fill", d => countiesWithFactSheets.includes(d.properties.name) ? "#338f87" : "#ccc")
           .attr("stroke", "white")
-          .attr("stroke-width", 0.5)
+          .attr("stroke-width", 0.5);
+
+        // Helper: position tooltip and determine arrow direction
+        const tooltipPos = (feature) => {
+          const bounds = path.bounds(feature);
+          const centroid = path.centroid(feature);
+          const svgNode = svgRef.current.node();
+          const svgRect = svgNode.getBoundingClientRect();
+          const containerRect = mapRef.current.getBoundingClientRect();
+          const scaleX = svgRect.width  / +svgNode.getAttribute('width');
+          const scaleY = svgRect.height / +svgNode.getAttribute('height');
+          const tooltipWidth = 257;
+          const tooltipHeight = 96;
+          const pad = 8;
+          const isMobileView = window.innerWidth < 540;
+          
+          let x, y, arrowPosition = 'top-left';
+          if (isMobileView) {
+            // On mobile, center horizontally on the map
+            x = (containerRect.width - tooltipWidth) / 2;
+            // Position below the centroid
+            const centroidScreenX = centroid[0] * scaleX + (svgRect.left - containerRect.left);
+            const cy = centroid[1] * scaleY + (svgRect.top - containerRect.top);
+            y = cy + 12;
+            y = Math.max(pad, Math.min(y, containerRect.height - tooltipHeight - pad));
+            
+            // Determine arrow position based on centroid relative to tooltip center
+            const tooltipCenterX = x + tooltipWidth / 2;
+            if (centroidScreenX < tooltipCenterX) {
+              arrowPosition = 'top-left';
+            } else {
+              arrowPosition = 'top-right';
+            }
+          } else {
+            // On desktop, position near centroid with offset
+            const cx = centroid[0] * scaleX + (svgRect.left - containerRect.left);
+            const cy = centroid[1] * scaleY + (svgRect.top - containerRect.top);
+            const leftEdge = bounds[0][0] * scaleX + (svgRect.left - containerRect.left);
+            x = cx + 4;
+            y = cy;
+            // If it overflows the right edge, flip to the left of the centroid
+            if (x + tooltipWidth > containerRect.width - pad) {
+              x = leftEdge - tooltipWidth - pad;
+              arrowPosition = 'top-right';
+            } else {
+              arrowPosition = 'top-left';
+            }
+            x = Math.max(pad, Math.min(x, containerRect.width  - tooltipWidth  - pad));
+            y = Math.max(pad, y); // Allow y to extend beyond containerHeight - tooltipHeight
+          }
+          return { x, y, arrowPosition };
+        };
+
+        svgRef.current.selectAll("path")
+          .on("click", (event, d) => {
+            event.stopPropagation();
+            const countyName = d.properties.name;
+            const hasFactSheet = countiesWithFactSheets.includes(countyName);
+            // Toggle off if clicking the already-sticky county
+            if (stickyRef.current && stickyCountyRef.current === countyName) {
+              stickyRef.current = false;
+              stickyCountyRef.current = null;
+              setSticky(false);
+              setHovered(false);
+              setTooltip(tt => ({ ...tt, show: false }));
+              d3.select(event.target).attr("fill", hasFactSheet ? "#338f87" : "#ccc");
+              return;
+            }
+            const { x, y, arrowPosition } = tooltipPos(d);
+            // Reset all counties then highlight the clicked one
+            svgRef.current.selectAll("path").each(function(pd) {
+              const has = countiesWithFactSheets.includes(pd.properties.name);
+              d3.select(this).attr("fill", has ? "#338f87" : "#ccc");
+            });
+            d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
+            stickyRef.current = true;
+            stickyCountyRef.current = countyName;
+            setSticky(true);
+            setHovered(true);
+            setTooltip({ show: true, county: countyName, x, y, hasFactSheet, fixedX: x, fixedY: y, arrowPosition });
+          })
           .on("mouseenter", (event, d) => {
+            if (stickyRef.current) return; // Ignore hover when sticky
             setHovered(true);
             const countyName = d.properties.name;
             const hasFactSheet = countiesWithFactSheets.includes(countyName);
-            // Get centroid in SVG coordinates
-            const centroid = path.centroid(d);
-            // Get SVG and map container bounding rects
-            const svgNode = svgRef.current.node();
-            const svgRect = svgNode.getBoundingClientRect();
-            const containerRect = mapRef.current.getBoundingClientRect();
-            // Calculate scale factors (SVG may be scaled to fit container)
-            const scaleX = svgRect.width / +svgNode.getAttribute('width');
-            const scaleY = svgRect.height / +svgNode.getAttribute('height');
-
-            const tooltipWidth = 257;
-            const tooltipHeight = 96;
-            const tooltipPadding = 8;
-
-            const baseX = centroid[0] * scaleX + (svgRect.left - containerRect.left);
-            const baseY = centroid[1] * scaleY + (svgRect.top - containerRect.top);
-
-            const isMobileView = window.innerWidth < 540;
-            let x = isMobileView
-              ? (containerRect.width - tooltipWidth) / 2
-              : baseX - tooltipWidth / 2;
-
-            let y = isMobileView
-              ? Math.min(Math.max(baseY + 12, tooltipPadding), containerRect.height - tooltipHeight - tooltipPadding)
-              : baseY - tooltipHeight - 12;
-
-            if (!isMobileView && y < tooltipPadding) {
-              y = baseY + 12;
-            }
-
-            x = Math.max(tooltipPadding, Math.min(x, containerRect.width - tooltipWidth - tooltipPadding));
-            y = Math.max(tooltipPadding, Math.min(y, containerRect.height - tooltipHeight - tooltipPadding));
-
-            setTooltip({
-              show: true,
-              county: countyName,
-              x,
-              y,
-              hasFactSheet,
-              fixedX: x,
-              fixedY: y
-            });
+            const { x, y, arrowPosition } = tooltipPos(d);
+            setTooltip({ show: true, county: countyName, x, y, hasFactSheet, fixedX: x, fixedY: y, arrowPosition });
             // On hover, darken the base color
             d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
           })
-          .on("mousemove", (event) => {
-            const tooltipWidth = 257;
-            const tooltipHeight = 96;
-            const padding = 8;
-            const containerRect = mapRef.current.getBoundingClientRect();
-
-            let x = event.offsetX + 12;
-            let y = event.offsetY + 12;
-
-            x = Math.max(padding, Math.min(x, containerRect.width - tooltipWidth - padding));
-            y = Math.max(padding, Math.min(y, containerRect.height - tooltipHeight - padding));
-
-            setTooltip((tt) => ({ ...tt, x, y, fixedX: x, fixedY: y }));
-          })
           .on("mouseleave", (event, d) => {
+            if (stickyRef.current) return; // Keep highlight and tooltip when sticky
             setHovered(false);
             // Restore base fill
             const countyName = d.properties.name;
             const has = countiesWithFactSheets.includes(countyName);
             d3.select(event.target).attr("fill", has ? "#338f87" : "#ccc");
           });
+        // If a county is currently sticky, re-apply its highlight after redraw
+        if (stickyRef.current && stickyCountyRef.current) {
+          svgRef.current.selectAll("path")
+            .filter(d => d.properties.name === stickyCountyRef.current)
+            .attr("fill", countiesWithFactSheets.includes(stickyCountyRef.current) ? "#2a6e67" : "#aaa");
+        }
         setIsMapLoaded(true); // Set map loaded after rendering
       });
     };
@@ -252,14 +301,30 @@ export default function CaliforniaMap({ mapHeightOverride }) {
         tooltipRef.current = null;
       }
     };
-  }, [countiesWithFactSheets, tooltipHovered, mapHeightValue]);
+  }, [countiesWithFactSheets, mapHeightValue]);
+
+  // Close handler called by the sticky tooltip's × button
+  const handleClose = React.useCallback(() => {
+    stickyRef.current = false;
+    stickyCountyRef.current = null;
+    setSticky(false);
+    setHovered(false);
+    setTooltipHovered(false);
+    setTooltip(tt => ({ ...tt, show: false }));
+    if (svgRef.current) {
+      svgRef.current.selectAll("path").each(function(pd) {
+        const has = countiesWithFactSheets.includes(pd.properties.name);
+        d3.select(this).attr("fill", has ? "#338f87" : "#ccc");
+      });
+    }
+  }, [countiesWithFactSheets]);
 
   // Tooltip close on leave logic
   useEffect(() => {
-    if (!hovered && !tooltipHovered) {
+    if (!hovered && !tooltipHovered && !sticky) {
       setTooltip((tt) => ({ ...tt, show: false }));
     }
-  }, [hovered, tooltipHovered]);
+  }, [hovered, tooltipHovered, sticky]);
 
   return (
         <div
@@ -273,6 +338,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             {...tooltip}
             x={tooltip.fixedX}
             y={tooltip.fixedY}
+            arrowPosition={tooltip.arrowPosition}
             onTooltipEnter={() => setTooltipHovered(true)}
             onTooltipLeave={() => setTooltipHovered(false)}
           />
