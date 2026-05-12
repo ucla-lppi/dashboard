@@ -114,20 +114,6 @@ export default function CaliforniaMap({ mapHeightOverride }) {
         .classed("w-full h-full", true); // Make the SVG responsive
     }
 
-    // Append the tooltip only once
-    if (!tooltipRef.current) {
-      tooltipRef.current = d3
-        .select("body")
-        .append("div")
-        .style("position", "absolute")
-        .style("background", "white")
-        .style("padding", "5px")
-        .style("border-radius", "5px")
-        .style("pointer-events", "none")
-        .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)")
-        .style("opacity", 0);
-    }
-
     const renderMap = () => {
       const container = mapRef.current.getBoundingClientRect();
       const width = container.width;
@@ -294,10 +280,6 @@ export default function CaliforniaMap({ mapHeightOverride }) {
       window.removeEventListener("orientationchange", handleOrientationChange);
       if (typeof screen !== "undefined" && screen.orientation) {
         screen.orientation.removeEventListener("change", handleOrientationChange);
-      }
-      if (tooltipRef.current) {
-        tooltipRef.current.remove();
-        tooltipRef.current = null;
       }
     };
   }, [countiesWithFactSheets, mapHeightValue]);
