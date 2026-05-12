@@ -78,7 +78,6 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
 export default function CaliforniaMap({ mapHeightOverride }) {
   const mapRef = useRef(null);
   const svgRef = useRef(null); // Keep a reference to the SVG element
-  const tooltipRef = useRef(null); // Keep a reference to the tooltip
   const stickyRef = useRef(false); // Ref for sticky state (avoids stale closures in D3 handlers)
   const stickyCountyRef = useRef(null); // Tracks which county is currently sticky
   const [isMapLoaded, setIsMapLoaded] = React.useState(false);
