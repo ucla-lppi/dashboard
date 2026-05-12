@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Dr.",
+    "first_name": "Arturo",
+    "last_name": "Vargas Bustamante",
+    "role": "Faculty Director of Research",
+    "organization": "UCLA LPPI",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2020/05/arturo_bustamante.jpg",
+    "order": 1
+  },
+  {
+    "title": "Dr.",
+    "first_name": "Silvia",
+    "last_name": "González",
+    "role": "Research Director",
+    "organization": "UCLA LPPI",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2020/05/UCLA-LPPI_Portraits_C_016-2-1-1-scaled.jpg",
+    "order": 2
+  },
+  {
+    "title": "",
+    "first_name": "Julia",
+    "last_name": "Silver",
+    "role": "Senior Research Analyst",
+    "organization": "UCLA LPPI",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2022/11/julia-2.png",
+    "order": 3
+  },
+  {
+    "title": "",
+    "first_name": "Rosario",
+    "last_name": "Majano",
+    "role": "Research Analyst",
+    "organization": "UCLA LPPI",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2022/11/rosario.png",
+    "order": 4
+  },
+  {
+    "title": "",
+    "first_name": "Samantha",
+    "last_name": "Alejandre",
+    "role": "Research Assistant",
+    "organization": "UCLA LPPI",
+    "image_link": "https://ucla-lppi.github.io/dashboard/images/samy.jpg",
+    "order": 5
+  },
+  {
+    "title": "",
+    "first_name": "Chhandara",
+    "last_name": "Pech",
+    "role": "Deputy Director",
+    "organization": "UCLA CNK",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2023/10/Image-from-iOS.jpg",
+    "order": 6
+  },
+  {
+    "title": "",
+    "first_name": "Albert",
+    "last_name": "Kochaphum",
+    "role": "Developer",
+    "organization": "UCLA LPPI",
+    "image_link": "https://ucla-lppi.github.io/dashboard/static/img/akp2.png",
+    "order": 7
+  },
+  {
+    "title": "",
+    "first_name": "Lindsey",
+    "last_name": "Mardona",
+    "role": "Designer",
+    "organization": "",
+    "image_link": "https://ucla-lppi.github.io/dashboard/static/img/dscf0521.png",
+    "order": 8
+  }
+]

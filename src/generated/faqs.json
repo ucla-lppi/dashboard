@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "question": "How is “Latino” defined, and what groups does the term include?",
+    "answer": "The Latino Climate and Health Dashboard follows the U.S. Office of Management and Budget’s (OMB) [definition](https://www.census.gov/topics/population/hispanic-origin/about.html) of “Latino” to ensure consistency with government data sources. According to the OMB, Hispanic or Latino refers to “a person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race.” This includes 20 Spanish-speaking countries in the Americas and Spain. While we follow the federal definition, we recognize that Latino identity is diverse and evolving, and terms like “Latino” or “Hispanic” may not reflect everyone’s identity."
+  },
+  {
+    "id": 2,
+    "question": "How is non-Latino white defined?",
+    "answer": "“Non-Latino white” (NL white) refers to individuals who identify as white but not Hispanic or Latino. According to the U.S. Census Bureau and the American Community Survey (ACS), [white](https://www.census.gov/topics/population/race/about.html?utm_source) is defined as “a person having origins in any of the original peoples of Europe, the Middle East, or North Africa.\""
+  },
+  {
+    "id": 3,
+    "question": "Why are there only factsheets for 23 counties in California?",
+    "answer": "We analyzed 23 counties that satisfied at least one of the following criteria: \n\n1) Number of Latino-majority census tracts. We ranked counties by the number of census tracts where Latinos make up more than 70% of the population. We included the 20 counties with the largest number of Latino-majority census tracts. \n\n2) Total Latino Population. We ranked counties by their total Latino population. We included the 20 counties with the highest Latino populations.\n\nCombining the two lists results in 23 counties that represent 93% of California’s Latino population, providing comprehensive coverage of the state’s Latino population. \n\nPlease refer to our [technical report](https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/) for more information on how we selected the 23 counties included in the dashboard and for a full list of the counties."
+  },
+  {
+    "id": 4,
+    "question": "What is an indicator?",
+    "answer": "An indicator is a data-driven measure used to describe conditions. Our dashboard highlights environmental, health, and socioeconomic indicators to identify patterns, disparities, and areas in need of policy intervention."
+  },
+  {
+    "id": 5,
+    "question": "What is a neighborhood?",
+    "answer": "In our factsheets, a neighborhood refers to a census tract. The U.S. Census Bureau defines census tracts as geographic areas with populations ranging from 2,500 to 8,000 people."
+  },
+  {
+    "id": 6,
+    "question": "How are Latino, non-Latino white, and non-Latino neighborhoods defined?",
+    "answer": "- Latino neighborhoods: More than 70% of residents identify as Latino. \nSacramento County has no neighborhoods with a Latino population greater than 70%. Therefore, we define Latino neighborhoods in Sacramento County as census tracts where more than 50% of residents are Latino. \n\n- Non-Latino white neighborhoods: More than 70% of residents identify as NL white.\nWe also define NL white neighborhoods in Sacramento County using a 50% threshold for consistency between comparison groups. \n\n- Non-Latino neighborhoods: These neighborhoods do not meet the 70% population threshold for Latino or NL white neighborhoods. In other words, less than 70% of residents identify as either Latino or NL white. This definition applies to neighborhoods in Imperial, Kings, and Merced counties.\nNo neighborhoods in Imperial, Kings, or Merced Counties have NL white populations greater than 70%."
+  },
+  {
+    "id": 7,
+    "question": "How is each indicator calculated, and where are the indicators sourced from?",
+    "answer": "Each indicator is sourced from free, publicly available datasets. Common data sources include:\n\n- The Census Bureau’s [American Community Survey (ACS)](https://www.census.gov/programs-surveys/acs) for demographic and socioeconomic data.\n- The State of California's [CalEnviroScreen 4.0](https://oehha.ca.gov/calenviroscreen/report/calenviroscreen-40) for environmental indicators.\n- The U.S. [Centers for Disease Control and Prevention (CDC)](https://www.cdc.gov) for public health data.\n\nSee the [Our Data section](https://latinoclimatehealth.org/our-data) or our [technical report](https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/) for more information on our methods and data sources."
+  },
+  {
+    "id": 8,
+    "question": "How were the indicators selected?",
+    "answer": "Indicators were selected based on data accessibility, geographic precision, and timeliness. We prioritized:\n- Census tract-level data for neighborhood-level insights.\n- Data sources with consistent census tract boundaries (i.e., 2010 or 2020).\n- Datasets with the most up-to-date reporting year to reflect current environmental and health conditions."
+  },
+  {
+    "id": 9,
+    "question": "How can I access the raw data?",
+    "answer": "The Latino Climate and Health Dashboard provides key insights through county factsheets, but users seeking raw data can access: \n- Our [GitHub repository](https://github.com/ucla-lppi/report-generator), where we share the datasets used in our analysis.\n- Official data sources listed in the [technical report](https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/)."
+  },
+  {
+    "id": 10,
+    "question": "Will more factsheets or geographic areas be added to the dashboard?",
+    "answer": "The Latino Climate and Health Dashboard currently includes factsheets for 23 California counties. We may update the dashboard over time by adding new environmental and health indicators."
+  },
+  {
+    "id": 11,
+    "question": "How should I cite the Latino Climate and Health Dashboard?",
+    "answer": "Follow the guidelines for citing a website in your preferred citation style, using the information below:\n\n- Organization/Author: UCLA LPPI  \n- Title: Title of the factsheet  \n- Website Name: Latino Climate and Health Dashboard  \n- Date: June 2025  \n- URL: https://latinoclimatehealth.org/\n\nExample (Chicago Style): \nUCLA LPPI. “Climate Change and Health Factsheets, Los Angeles County, Air Pollution.” Latino Climate and Health Dashboard. June 2025. latinoclimatehealth.org."
+  }
+]

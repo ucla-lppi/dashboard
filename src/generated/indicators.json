@@ -1,0 +1,431 @@
+[
+  {
+    "id": 1,
+    "indicator": "Age 🔥💨",
+    "cats": [
+      "Demographic Indicators",
+      "Vulnerable Populations"
+    ],
+    "desc": "The average percentage of individuals under the age of 18 and over the age of 65 (Extreme Heat factsheet). The average percentage of children under 5 and adults over 65 (Air Pollution factsheet). See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 28% of residents in California’s Latino neighborhoods are under the age of 18.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 2,
+    "indicator": "Annual Number of Extreme Heat Days (2018-2022) 🔥",
+    "cats": [
+      "Heat Exposure",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average number of days in a calendar year when the daily temperature reached a minimum of 90°F. We averaged data across 5 years, from 2018 to 2022. See detailed information [online](https://ephtracking.cdc.gov), and for more information on how we constructed this indicator, please refer to our [technical report](https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, Latino neighborhoods in California experience 60 extreme heat days per year.",
+    "source": "Centers for Disease Control and Prevention: National Environmental Public Health Tracking Network, 2023"
+  },
+  {
+    "id": 3,
+    "indicator": "Asthma 🔥💨",
+    "cats": [
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average percentage of adults over 18 who report that a doctor, nurse, or other health professional told them they have asthma. The 2023 release of PLACES reflects data from 2021. See more detailed information [online](https://www.cdc.gov/places/measure-definitions/health-outcomes.html).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 10% of adults in California’s Latino neighborhoods have asthma.",
+    "source": "Centers for Disease Control and Prevention: PLACES: Local Data for Better Health, 2023"
+  },
+  {
+    "id": 4,
+    "indicator": "Cleanup Sites 💨",
+    "cats": [
+      "Social Determinants of Health",
+      "Environmental Hazards"
+    ],
+    "desc": "The average exposure score to cleanup sites. Exposure scores consider the number of sites and facilities and their neighborhood proximity. Higher scores indicate greater exposure to cleanup sites. Data on cleanup sites are from 2020. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "Latino neighborhoods in California have an average exposure score of 12 to cleanup sites.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 5,
+    "indicator": "Clunker Vehicles 💨",
+    "cats": [
+      "Social Determinants of Health",
+      "Environmental Hazards"
+    ],
+    "desc": "The average percentage of registered “clunker” vehicles. Clunker vehicles, or vehicles 20 years or older, emit pollutants at higher levels because they typically lack advanced emission-control equipment. Data are from 2017 and reflect vehicles with model years from 1997 or earlier. See more detailed information [online](https://escholarship.org/uc/item/3mn6q0zm).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 12% of vehicles in California’s Latino neighborhoods are “clunker” vehicles (20 years or older).",
+    "source": "California Neighborhood Knowledge - California Air Resources Board Transportation Disparity Tool, 2022"
+  },
+  {
+    "id": 6,
+    "indicator": "Coronary Heart Disease 💨",
+    "cats": [
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average percentage of adults over 18 who report that a doctor, nurse, or other health professional told them they have coronary heart disease. The 2023 release of PLACES reflects data from 2021. See more detailed information [online](https://www.cdc.gov/places/measure-definitions/health-outcomes.html).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 5% of adults in California’s Latino neighborhoods have coronary heart disease.",
+    "source": "Centers for Disease Control and Prevention: PLACES: Local Data for Better Health, 2023"
+  },
+  {
+    "id": 7,
+    "indicator": "Diabetes 🔥💨",
+    "cats": [
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average percentage of adults over 18 who report that a doctor, nurse, or other health professional told them they have diabetes. The 2023 release of PLACES reflects data from 2021. See more detailed information [online](https://www.cdc.gov/places/measure-definitions/health-outcomes.html).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 13% of adults in California’s Latino neighborhoods have diabetes.",
+    "source": "Centers for Disease Control and Prevention: PLACES: Local Data for Better Health, 2023"
+  },
+  {
+    "id": 8,
+    "indicator": "Diesel PM 💨",
+    "cats": [
+      "Air Pollutants",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average annual diesel particulate matter emissions in tons. Data are from 2016. Diesel PM is the particle phase of exhaust, commonly known as “soot,” and is produced by diesel engines commonly used to power trucks, buses, cars, ships, trains, and heavy-duty equipment. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "Latino neighborhoods in California are exposed to an average of 0.27 tons of diesel particulate matter emissions per year.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 9,
+    "indicator": "Disadvantaged Communities 🔥💨",
+    "cats": [
+      "Vulnerable Populations",
+      "Social Determinants of Health"
+    ],
+    "desc": "The percentage of census tracts classified as “disadvantaged communities” under California’s Senate Bill (SB 535). Disadvantaged communities, as defined by the California Environmental Protection Agency, are identified based on a combination of environmental pollution burden and population characteristics. Under SB 535, California’s Cap-and-Trade Program revenue is partly directed toward these communities through the California Climate Investments program to reduce pollution, enhance climate resilience, and improve health and economic well-being. The state most recently updated the list of disadvantaged communities in 2022. See more detailed information [online](https://oehha.ca.gov/calenviroscreen/sb535).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "Approximately 76% of Latino neighborhoods in California are designated as disadvantaged communities under SB 535.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 10,
+    "indicator": "Emergency Department Visits for Asthma Attacks 🔥💨",
+    "cats": [
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average rate of emergency department visits per 10,000 people for asthma attacks. Data on emergency department visits reflect a 3-year average from 2015-2017. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "The average rate of emergency department visits for asthma attacks in California’s Latino neighborhoods is 66 visits per 10,000 people.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 11,
+    "indicator": "Emergency Department Visits for Heart Attacks 🔥💨",
+    "cats": [
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average percentage rate of emergency department visits per 10,000 people for heart attacks. Data on emergency department visits reflect a 3-year average from 2015-2017. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "The average rate of emergency department visits for heart attacks in California’s Latino neighborhoods is 17 visits per 10,000 people.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 12,
+    "indicator": "Fair/Poor Health Status 🔥💨",
+    "cats": [
+      "Social Determinants of Health",
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The percentage of individuals who report their health as “fair” or “poor”. Data for fair or poor health status is self-reported and reflects individuals’ perceptions of their overall health. For this indicator, we pooled data over the 2018-2022 period to align with the 5-year American Community Survey methodology. See more detailed information [online](https://healthpolicy.ucla.edu/our-work/california-health-interview-survey-chis).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, 17% of Latinos report their health as \"fair\" or \"poor\".",
+    "source": "California Health Interview Survey, 2024"
+  },
+  {
+    "id": 13,
+    "indicator": "Food Insecurity 🔥💨",
+    "cats": [
+      "Social Determinants of Health"
+    ],
+    "desc": "The percentage of households that lack consistent access to enough food for an active, healthy life. This measure draws from multiple data sources to account for economic and social conditions at the household level that limit food access. See more detailed information [online](https://map.feedingamerica.org/).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, 19% of Latinos experience food insecurity.",
+    "source": "Feeding America, 2022"
+  },
+  {
+    "id": 14,
+    "indicator": "Hazardous Waste Facilities 💨",
+    "cats": [
+      "Social Determinants of Health",
+      "Environmental Hazards"
+    ],
+    "desc": "The average exposure score to hazardous waste facilities. Exposure scores consider the number of sites and facilities and their neighborhood proximity. Higher scores indicate greater exposure to hazardous waste facilities. Data on hazardous waste facilities are from 2018 to 2020. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf). Hazardous waste facilities include treatment, storage, and disposal sites, which can release toxic substances such as carcinogens, mercury, and asbestos into the air, water, and soil.",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "Latino neighborhoods in California have an average hazardous waste facility exposure score of 0.9.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 15,
+    "indicator": "Heat-Related Emergency Department Visits 🔥",
+    "cats": [
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average rate of emergency visits per 10,000 persons related to extreme heat. Note: at the time of our data analysis, the rate of heat-related emergency department visits covered the period from 2009 through 2018. The latest iteration of this data source now covers the period from 2008 to 2018. See more detailed information [online](https://experience.arcgis.com/experience/4c158842b5c94857a06c3a85c7aa02de/page/Instructions).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "The average rate of heat-related emergency department visits in California’s Latino neighborhoods is 3 visits per 10,000 people.",
+    "source": "UCLA Heat Maps, 2022"
+  },
+  {
+    "id": 16,
+    "indicator": "Impervious Surfaces 🔥",
+    "cats": [
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percent of land covered by impervious surfaces in 2021. These include man-made surfaces, such as roads, sidewalks, and buildings. See more detailed information [online](https://ephtracking.cdc.gov/).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 56% of land in California’s Latino neighborhoods is covered by heat-absorbing, impervious surfaces, such as pavement and concrete.",
+    "source": "Centers for Disease Control and Prevention: National Environmental Public Health Tracking Network, 2023"
+  },
+  {
+    "id": 17,
+    "indicator": "Latino, Non-Latino White, and Other 🔥💨",
+    "cats": [
+      "Demographic Indicators"
+    ],
+    "desc": "The number and percentage of individuals in a county who identify as Latino and non-Latino white. In this analysis, data for Latinos include individuals of any race, while data for white populations are limited to non-Latino white people. The “Other” category represents individuals who identify as a racial or ethnic background other than Latino or non-Latino white. For more information on how “Latino” and “non-Latino white” are defined, please visit our [FAQ](https://latinoclimatehealth.org/faqs/) page.",
+    "geography": "County/State",
+    "sampleInterpretation": "Latinos represent approximately 40% (15.6 million residents) of California’s population.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 18,
+    "indicator": "Life Expectancy 🔥💨",
+    "cats": [
+      "Health Outcomes & Conditions",
+      "Demographic Indicators"
+    ],
+    "desc": "The average number of years an individual is expected to live from birth based on current mortality rates. Life expectancy is an age-adjusted indicator, ensuring fair comparisons across counties with differing age structures. Data for this indicator reflects a 3-year average (2019-2021) produced by County Health Rankings & Roadmaps. See more detailed information [online](https://www.countyhealthrankings.org/health-data/health-outcomes/length-of-life/life-expectancy?year=2024&county=06025).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, the average life expectancy for Latinos is 82 years.",
+    "source": "County Health Rankings & Roadmaps, 2024"
+  },
+  {
+    "id": 19,
+    "indicator": "Limited English Proficiency 🔥💨",
+    "cats": [
+      "Demographic Indicators",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percentage of individuals ages 5 and over with Limited English Proficiency (LEP). LEP refers to persons who speak English less than very well. See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, 28% of Latinos report limited English proficiency.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 20,
+    "indicator": "Longest Period of Consecutive Extreme Heat Days (2022) 🔥",
+    "cats": [
+      "Heat Exposure",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average number of consecutive days where the daily temperature reached a minimum of 90°F in 2022. See more detailed information [online](https://www.census.gov/data/experimental-data-products/cre-heat.html).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "Latino neighborhoods in California experience heat waves that last an average of 27 consecutive days with temperatures at or above 90°F.",
+    "source": "U.S. Census Bureau, Community Resilience Estimates for Heat, 2022"
+  },
+  {
+    "id": 21,
+    "indicator": "Low Birth Weight Babies 💨",
+    "cats": [
+      "Vulnerable Populations",
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average percentage of babies born weighing less than 5.5 pounds. LBW increases the risk of infant mortality, developmental delays, and chronic health conditions. Data on LBW reflect a 7-year average from 2009 to 2015. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 5% of infants in California’s Latino neighborhoods are low birth weight babies.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 22,
+    "indicator": "Lower-emission Vehicles 💨",
+    "cats": [
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percent of registered lower-emission vehicles. These include battery electric, plug-in hybrid, or hybrid technology vehicles. Data are from 2017 and reflect model years 2013–2017. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 3% of vehicles in California’s Latino neighborhoods are low-emission vehicles.",
+    "source": "California Neighborhood Knowledge - California Air Resources Board Transportation Disparity Tool, 2022"
+  },
+  {
+    "id": 23,
+    "indicator": "Median Age 🔥💨",
+    "cats": [
+      "Demographic Indicators"
+    ],
+    "desc": "The median population age in years. See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "County/State",
+    "sampleInterpretation": "The median age of Latinos in California is 31 years old.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 24,
+    "indicator": "Median Income (Household) 🔥💨",
+    "cats": [
+      "Demographic Indicators",
+      "Social Determinants of Health"
+    ],
+    "desc": "The combined money income of all household members ages 15 and over during the previous year. All amounts are reported in 2022 dollar values. See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "County/State",
+    "sampleInterpretation": "The median household income of Latinos in California is $75,000.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 25,
+    "indicator": "Noncitizen Population 🔥💨",
+    "cats": [
+      "Demographic Indicators",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percentage of individuals residing in the U.S. who were not citizens at birth and were not citizens at the time of the population survey. The noncitizen population includes lawful permanent immigrants (or green-card holders), refugees and asylees, certain legal nonimmigrants (including those on student, work, or some other temporary visas), and persons residing in the country without authorization. See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "County/State",
+    "sampleInterpretation": "Noncitizens make up 19% of the Latino population in California.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 26,
+    "indicator": "Obesity 🔥",
+    "cats": [
+      "Health Outcomes & Conditions"
+    ],
+    "desc": "The average percentage of adults over 18 classified as obese. Obesity is defined as having a body mass index (BMI) greater than or equal to 30.0 kg/m² and is calculated using self-reported weight and height. The 2023 release of PLACES reflects data from 2021. See more detailed information [online](https://www.cdc.gov/places/measure-definitions/health-outcomes.html).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 35% of adults in California’s Latino neighborhoods are classified as obese.",
+    "source": "Centers for Disease Control and Prevention: PLACES: Local Data for Better Health, 2023"
+  },
+  {
+    "id": 27,
+    "indicator": "Older Housing Units 🔥",
+    "cats": [
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percentage of housing units built before 1970. These units often lack modern features that mitigate heat exposure, such as central air conditioning, adequate insulation, and energy-efficient windows. See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 51% of homes in California’s Latino neighborhoods were built before 1970.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 28,
+    "indicator": "PM2.5 💨",
+    "cats": [
+      "Air Pollutants",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average annual concentration of PM2.5 in micrograms per cubic meter (µg/m³). This measure represents data averaged over 3 years, from 2015 to 2017. \nParticulate matter is a mixture of aerosolized solid and liquid particles, including organic chemicals, dust, allergens, and metals. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "The average annual concentration of PM2.5 in California’s Latino neighborhoods is 11 µg/m³.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 29,
+    "indicator": "Poverty Rate 🔥💨",
+    "cats": [
+      "Demographic Indicators",
+      "Social Determinants of Health"
+    ],
+    "desc": "The number and average percentage of individuals living in poverty. The Census Bureau’s poverty threshold for a given year varies depending on the number of adults and children in a family and is adjusted annually for inflation. For example, the average poverty threshold for a family of four with two children under 18 was $29,678 in 2022. See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, 15% of Latinos live in poverty.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 30,
+    "indicator": "Projected Number of Extreme Heat Days by Mid-Century (2035-2064) 🔥",
+    "cats": [
+      "Heat Exposure",
+      "Social Determinants of Health"
+    ],
+    "desc": "The projected average number of days that will exceed 90°F in a calendar year during the mid-21st century (2035-2064). These projections are based on global climate models. See more detailed information [online](https://cal-adapt.org/data/download/?utm_source=chatgpt.com).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "By mid-century, Latino neighborhoods in California are projected to experience an average of 92 extreme heat days per year.",
+    "source": "California Healthy Places Index 3.0, 2022"
+  },
+  {
+    "id": 31,
+    "indicator": "Renter Households 🔥💨",
+    "cats": [
+      "Demographic Indicators",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percentage of occupied housing units that are rented rather than owned. These units include units leased under traditional renter agreements or life care arrangements and units occupied without payment, such as those provided by friends or relatives or in exchange for services (e.g., resident manager, caretaker). See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, 54% of Latino households are renter households.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 32,
+    "indicator": "RMP Facilities 💨",
+    "cats": [
+      "Social Determinants of Health",
+      "Environmental Hazards"
+    ],
+    "desc": "The average proximity score to RMP facilities. Proximity scores consider the number of facilities and their proximity to neighborhoods. Proximity scores range from 0 to 10, with higher scores representing closer proximity. Information on active RMP facilities is pulled and updated for each new iteration of the Environmental Protection Agency Environmental Justice Screening Tool from the RMP National Program System. See more detailed information [online](https://www.epa.gov/system/files/documents/2024-07/ejscreen-tech-doc-version-2-3.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "Latino neighborhoods in California have an average proximity score of 1.9 to hazardous RMP facilities.",
+    "source": "Environmental Protection Agency Environmental Justice Screening Tool 2.3, 2024"
+  },
+  {
+    "id": 33,
+    "indicator": "SNAP Benefits 🔥💨",
+    "cats": [
+      "Demographic Indicators",
+      "Social Determinants of Health"
+    ],
+    "desc": "The percentage of individuals in a household receiving Supplemental Nutrition Assistance Program (SNAP) benefits. SNAP, also known as food stamps, provides nutritional benefits to supplement the food budget of families in need. To be eligible for SNAP, a household’s income and assets must fall below a certain amount. See more detailed information about benefits and eligibility [online](https://www.cbpp.org/research/food-assistance/a-quick-guide-to-snap-eligibility-and-benefits).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, 16% of Latino households receive SNAP benefits.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 34,
+    "indicator": "Traffic Density 💨",
+    "cats": [
+      "Social Determinants of Health",
+      "Environmental Hazards"
+    ],
+    "desc": "The average traffic density in vehicle kilometers per hour in 2017. Traffic density measures the concentration of vehicles on roads within an area. See more detailed information [online](https://oehha.ca.gov/media/downloads/calenviroscreen/report/calenviroscreen40reportf2021.pdf).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "Latino neighborhoods in California have an average traffic density of 1,167 vehicle kilometers per hour.",
+    "source": "CalEnviroScreen 4.0, 2021"
+  },
+  {
+    "id": 35,
+    "indicator": "Tree Canopy 🔥",
+    "cats": [
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percent of land covered by tree canopy in 2011. See more detailed information [online](http://www.healthyplacesindex.org).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 4% of land in California’s Latino neighborhoods is covered by tree canopy.",
+    "source": "California Healthy Places Index (HPI) 3.0, 2022"
+  },
+  {
+    "id": 36,
+    "indicator": "Uninsured Rate 🔥💨",
+    "cats": [
+      "Social Determinants of Health"
+    ],
+    "desc": "The percentage of individuals not covered by any type of health insurance (i.e., public and private). See more detailed information [online](https://www.census.gov/programs-surveys/acs/technical-documentation/code-lists.2022.html#list-tab-155790978).",
+    "geography": "County/State",
+    "sampleInterpretation": "In California, 12% of Latinos are uninsured.",
+    "source": "U.S. Census Bureau, American Community Survey (ACS), 2018-2022 5-year Estimates"
+  },
+  {
+    "id": 37,
+    "indicator": "Workers in Heat-Exposed Industries 🔥",
+    "cats": [
+      "Vulnerable Populations",
+      "Social Determinants of Health"
+    ],
+    "desc": "The average percent of workers, aged 16 years and older, in industries with a high exposure to extreme heat. According to the Bureau of Labor Statistics, these include agriculture, construction, waste management, and warehousing. For more information on how we constructed this indicator, please refer to our [technical report](https://latino.ucla.edu/research/climate-health-dashboard-technical-doc/).",
+    "geography": "Neighborhood",
+    "sampleInterpretation": "On average, 30% of employed workers in California’s Latino neighborhoods work in heat-exposed industries.",
+    "source": "U.S. Census Bureau, American Community Survey, 2018-2022 5-year Estimates"
+  }
+]

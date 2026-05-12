@@ -1,0 +1,308 @@
+[
+  {
+    "id": 1,
+    "category": "Climate & Health Equity",
+    "abbreviation": "",
+    "name": "Climate Resolve",
+    "description": "Designs and implements climate adaptation projects that directly protect public health—such as urban greening, cool roofs, and climate-resilient housing. Collaborates with public agencies and community-based groups to advance heat resilience.",
+    "url": "https://www.climateresolve.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 2,
+    "category": "Climate & Health Equity",
+    "abbreviation": "EHC",
+    "name": "Environmental Health Coalition",
+    "description": "Connects climate change to public health through its work on clean air, climate resilience, and housing justice. Emphasizes bilingual outreach in working-class communities near ports, freeways, and industrial zones.",
+    "url": "https://www.environmentalhealth.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 3,
+    "category": "Climate & Health Equity",
+    "abbreviation": "",
+    "name": "Esperanza Community Housing Corporation – Healthy Breathing Program",
+    "description": "Offers free, home‑based asthma remediation services in South Los Angeles, combining community health promoter visits, culturally tailored asthma education, and the distribution of materials like mattress covers, inhaler spacers, air purifiers, and green cleaning kits to reduce triggers and decrease emergency visits.",
+    "url": "https://www.esperanzacommunityhousing.org/healthy-breathing",
+    "thumbnail": ""
+  },
+  {
+    "id": 4,
+    "category": "Climate & Health Equity",
+    "abbreviation": "PHI",
+    "name": "Public Health Institute",
+    "description": "Through its Center for Climate Change and Health, PHI advances policies and practices that protect health and build resilience in the face of climate change. It supports local governments, health departments, and frontline communities with data, training, and cross-sector collaboration.",
+    "url": "https://www.phi.org",
+    "thumbnail": ""
+  },
+  {
+    "id": 5,
+    "category": "Climate & Health Equity",
+    "abbreviation": "RAMP",
+    "name": "Regional Asthma Management and Prevention",
+    "description": "Works to reduce asthma disparities by addressing environmental triggers, especially in low-income communities of color. Advocates for healthy housing, cleaner air, and climate solutions that improve respiratory health outcomes.",
+    "url": "https://www.rampasthma.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 6,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "APEN",
+    "name": "Asian Pacific Environmental Network",
+    "description": "Organizes Asian immigrant and refugee communities in Oakland, Richmond, and Los Angeles to advance environmental, economic, and social justice. Develops long-term, community-led solutions rooted in lived experience and intergenerational leadership.",
+    "url": "https://apen4ej.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 7,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "CEJA",
+    "name": "California Environmental Justice Alliance",
+    "description": "Organizes communities most impacted by environmental racism to fight for statewide policy change. Builds momentum for a just transition away from fossil fuels and toward a sustainable, care-based economy. Mobilizes Californians to hold polluters and policymakers accountable.",
+    "url": "https://caleja.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 8,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "CCEJN",
+    "name": "Central California Environmental Justice Network",
+    "description": "Supports rural communities in tracking environmental exposures and advocating for regulatory change. Focuses on climate-related health issues, especially in areas near oil and gas operations.",
+    "url": "https://www.ccejn.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 9,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "CBE",
+    "name": "Communities for a Better Environment",
+    "description": "Supports residents in heavily polluted urban areas with organizing, legal, and scientific tools to fight environmental injustice. Works to transform toxic communities into Green Zones that are healthy and sustainable.",
+    "url": "https://www.cbecal.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 10,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "",
+    "name": "GreenLatinos – Climate Justice and Clean Air Program",
+    "description": "Leads national advocacy to address air pollution and climate injustice in Latino communities. The program focuses on federal and state policy solutions that center environmental equity and public health in frontline communities.",
+    "url": "https://www.greenlatinos.org/our-causes/climate-justice-clean-air/",
+    "thumbnail": ""
+  },
+  {
+    "id": 11,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "LCHC",
+    "name": "Latino Coalition for a Healthy California",
+    "description": "Dedicated to advancing Latino health equity by integrating climate, health, and justice in its advocacy work to protect the well-being of Latino communities across California.",
+    "url": "https://lchc.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 12,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "LDH",
+    "name": "Latino Data Hub",
+    "description": "Presents free, bilingual data on U.S. Latino communities with customizable, disaggregated indicators on health, education, employment, housing, and more. Provides reliable insights at national, state, county, and congressional-district levels to equip advocates, policymakers, journalists, and researchers.",
+    "url": "https://latinodatahub.org",
+    "thumbnail": ""
+  },
+  {
+    "id": 13,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "",
+    "name": "Leadership Counsel for Justice and Accountability",
+    "description": "Works with communities in the San Joaquin and Eastern Coachella Valleys to secure safe housing, clean air and water, and climate investments. Advocates for policy and planning centered on historically excluded communities.",
+    "url": "https://leadershipcounsel.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 14,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "LARC",
+    "name": "Los Angeles Regional Collaborative for Climate Action and Sustainability",
+    "description": "Provides community-focused heat education, outreach campaigns, and resources to help residents and local agencies reduce heat-related illness. Currently gathering user feedback on CA's new CalHeatScore tool, which helps users understand daily heat risk and access cooling options.",
+    "url": "https://www.laregionalcollaborative.com",
+    "thumbnail": ""
+  },
+  {
+    "id": 15,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "MFN",
+    "name": "Moving Forward Network",
+    "description": "A national network of over 50 member organizations that centers grassroots, frontline-community knowledge, expertise, and engagement from communities across the US that bear the negative impacts of the global freight transportation system.",
+    "url": "https://movingforwardnetwork.org",
+    "thumbnail": ""
+  },
+  {
+    "id": 16,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "",
+    "name": "PODER (SF)",
+    "description": "Empowers Latinx immigrant communities in San Francisco through leadership development and grassroots organizing. Uses the Promotora model to build trust, share climate and health information, and connect neighbors to services.",
+    "url": "https://www.podersf.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 17,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "CCAEJ",
+    "name": "The Center for Community Action and Environmental Justice",
+    "description": "Advocates for clean air, safe neighborhoods, and environmental health in the Inland Valley. Protects frontline communities from industrial pollution and land use injustice.",
+    "url": "https://www.ccaej.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 18,
+    "category": "Environmental Justice & Community Power",
+    "abbreviation": "CRPE",
+    "name": "The Center on Race, Poverty & the Environment",
+    "description": "Provides legal advocacy and organizing support to build power in low-income communities and communities of color. Focuses on the San Joaquin Valley and supports residents fighting for clean air, water, and equitable climate investments.",
+    "url": "https://crpe-ej.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 19,
+    "category": "Language Access & Climate Justice",
+    "abbreviation": "",
+    "name": "Alianza Coachella Valley",
+    "description": "Improves infrastructure and environmental conditions for rural, low-income Latino communities. Ensures language access and community input are central to climate and planning decisions.",
+    "url": "https://www.alianzacv.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 20,
+    "category": "Language Access & Climate Justice",
+    "abbreviation": "",
+    "name": "CAUSE (Central Coast Alliance United for a Sustainable Economy)",
+    "description": "Advances economic and environmental justice. Emphasizes language access, youth organizing, and policy advocacy around climate, transportation, and worker protections.",
+    "url": "https://causenow.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 21,
+    "category": "Language Access & Climate Justice",
+    "abbreviation": "CRLA",
+    "name": "California Rural Legal Assistance, Inc.",
+    "description": "Provides multilingual legal services to farmworkers and rural communities across California. Advocates for workplace protections, including heat illness prevention, and environmental health in Spanish and Indigenous languages.",
+    "url": "https://crla.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 22,
+    "category": "Language Access & Climate Justice",
+    "abbreviation": "CIELO",
+    "name": "Comunidades Indígenas en Liderazgo",
+    "description": "Supports Indigenous migrants. Promotes language justice, environmental health, and climate resilience grounded in Indigenous identity.",
+    "url": "https://www.mycielo.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 23,
+    "category": "Language Access & Climate Justice",
+    "abbreviation": "",
+    "name": "Pacoima Beautiful",
+    "description": "Leads bilingual community engagement on air quality, heat resilience, urban planning, and climate adaptation.",
+    "url": "https://www.pacoimabeautiful.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 24,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "",
+    "name": "Cal-Adapt",
+    "description": "Provides localized climate projections and planning tools for communities, researchers, and planners. Its Extreme Heat Days & Warm Nights tool helps users understand how temperature extremes are expected to change under different climate scenarios.",
+    "url": "https://cal-adapt.org/",
+    "thumbnail": ""
+  },
+  {
+    "id": 25,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "CARB",
+    "name": "California Air Resources Board",
+    "description": "Leads efforts to reduce air pollution and fight climate change in partnership with local air districts. Prioritizes public health, environmental justice, and zero-emission transportation.",
+    "url": "https://ww2.arb.ca.gov/",
+    "thumbnail": ""
+  },
+  {
+    "id": 26,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "",
+    "name": "California Climate Investments",
+    "description": "Uses Cap-and-Trade revenues to reduce greenhouse gas emissions and improve public health and economic resilience. Invests in projects that benefit disadvantaged and low-income communities, including programs for clean transportation, urban greening, and climate-smart infrastructure.",
+    "url": "https://www.caclimateinvestments.ca.gov/",
+    "thumbnail": ""
+  },
+  {
+    "id": 27,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "HCD",
+    "name": "California Department of Housing and Community Development",
+    "description": "Promotes climate-resilient housing policies for low-income communities. Supports Low Income Home Energy Assistance Program utility assistance and updates building codes to improve natural cooling and energy efficiency.",
+    "url": "https://www.hcd.ca.gov/",
+    "thumbnail": ""
+  },
+  {
+    "id": 28,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "CEH",
+    "name": "California Department of Public Health – Center for Environmental Health",
+    "description": "Regulates public health threats such as food safety, medical waste, and radiation. Supports clean drinking water and product safety through laboratory services.",
+    "url": "https://www.cdph.ca.gov/Programs/CEH/Pages/CEH.aspx",
+    "thumbnail": ""
+  },
+  {
+    "id": 29,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "",
+    "name": "California Department of Public Health – CalBRACE Project",
+    "description": "Helps local health departments prepare for the health impacts of climate change, such as extreme heat and poor air quality. It builds public health capacity through planning tools, guidance, and partnerships.",
+    "url": "https://www.cdph.ca.gov/Programs/OHE/Pages/CalBRACE.aspx",
+    "thumbnail": ""
+  },
+  {
+    "id": 30,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "CalEPA",
+    "name": "California Environmental Protection Agency",
+    "description": "Oversees the state’s environmental regulatory framework, including programs related to air quality, climate adaptation, and environmental justice. CalEPA coordinates with agencies like CARB and OEHHA to support science-based policies and direct investments to communities most burdened by pollution.",
+    "url": "https://calepa.ca.gov/",
+    "thumbnail": ""
+  },
+  {
+    "id": 31,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "OEHHA",
+    "name": "California Office of Environmental Health Hazard Assessment",
+    "description": "Provides the scientific foundation for CalEPA’s work. Administers Proposition 65, and developed CalHeatScore and CalEnviroScreen.",
+    "url": "https://oehha.ca.gov/",
+    "thumbnail": ""
+  },
+  {
+    "id": 32,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "CVA",
+    "name": "Los Angeles City Planning Climate Vulnerability Assessment",
+    "description": "Evaluates physical and social vulnerabilities across Los Angeles—such as extreme heat, flooding, drought, wildfires, and sea-level rise—and identifies the most at-risk communities. Incorporates community-driven engagement and data-informed recommendations to guide equitable mitigation and resilience strategies citywide.",
+    "url": "https://cso.lacounty.gov/the-plan/cso-current-initiatives/climate-vulnerability-assessment/",
+    "thumbnail": ""
+  },
+  {
+    "id": 33,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "DOSH",
+    "name": "The Division of Occupational Safety and Health – Cal/OSHA",
+    "description": "Enforces workplace safety standards to protect workers from extreme heat. Requires employers to monitor indoor temperatures and provide rest breaks, water, and cooling in places like warehouses, kitchens, and factories.",
+    "url": "https://www.dir.ca.gov/dosh/",
+    "thumbnail": ""
+  },
+  {
+    "id": 34,
+    "category": "Government Tools & State Agencies",
+    "abbreviation": "EPA",
+    "name": "U.S. Environmental Protection Agency – Region 9 – Pacific Southwest",
+    "description": "Implements and enforces the Clean Air Act and other environmental laws. Supports air quality improvements through monitoring tools like AirNow and community resources like the Smoke-Ready Toolbox.",
+    "url": "https://www.epa.gov/aboutepa/epa-region-9-pacific-southwest",
+    "thumbnail": ""
+  }
+]
