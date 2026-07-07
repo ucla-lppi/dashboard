@@ -45,6 +45,13 @@ export default function ClientShell({ children }) {
 
   return (
     <>
+      {/* Skip link: first focusable element, visually hidden until focused */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100000] focus:bg-white focus:text-[#005587] focus:px-4 focus:py-2 focus:rounded focus:font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]"
+      >
+        Skip to main content
+      </a>
       {/* Google Analytics */}
       <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
       <Script id="gtag-init" strategy="afterInteractive">
@@ -113,9 +120,11 @@ export default function ClientShell({ children }) {
                 />
               )}
               <div
+                id="main-content"
+                tabIndex={-1}
                 className={`relative p-4 transition-all duration-300 ${
                   !isMobile && sidebarOpen ? 'ml-64' : 'ml-0'
-                } sm:ml-0 flex-grow`}
+                } sm:ml-0 flex-grow focus:outline-none`}
               >
                 {/* Main content placeholder */}
                 {children}

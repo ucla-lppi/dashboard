@@ -252,10 +252,11 @@ export default function ResearchSection({
               <div className="flex items-center bg-white border border-[#1b3f60] rounded-full h-10 min-w-0 sm:min-w-[300px]">
                 <input
                   type="text"
+                  aria-label="Search for title, tag, or keyword"
                   placeholder="Search for title, tag, or keyword"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="flex-1 h-full pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none"
+                  className="flex-1 h-full pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]"
                 />
                 <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
