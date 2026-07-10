@@ -9,7 +9,7 @@ const DEFAULT_MAP_HEIGHT = 551;
 const slugCounty = name => name.replace(/\s+/g, '_');
 
 // Tooltip component for displaying county information
-function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave, arrowPosition = 'top-left' }) {
+function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave, onEscape, arrowPosition = 'top-left' }) {
   const arrowPositionClass = {
     'top-left': 'left-0 top-0',
     'top-right': 'right-0 top-0',
@@ -152,7 +152,96 @@ export default function CaliforniaMap({ mapHeightOverride }) {
           .attr("fill", d => countiesWithFactSheets.includes(d.properties.name) ? "#338f87" : "#ccc")
           .attr("stroke", "white")
           .attr("stroke-width", 0.5)
-          .on("mouseenter", (event, d) => {
+          // Keyboard accessibility: make each county focusable/operable like a button,
+          // with an accessible name announcing fact-sheet availability.
+          .attr("tabindex", 0)
+          .attr("role", "button")
+          .attr("aria-label", d => {
+            const has = countiesWithFactSheets.includes(d.properties.name);
+            return `${d.properties.name} County. ${has ? 'Fact sheets available. Press Enter to view links.' : 'No fact sheet available for this county.'}`;
+          });
+
+        // Helper: position tooltip and determine arrow direction
+        const tooltipPos = (feature) => {
+          const bounds = path.bounds(feature);
+          const centroid = path.centroid(feature);
+          const svgNode = svgRef.current.node();
+          const svgRect = svgNode.getBoundingClientRect();
+          const containerRect = mapRef.current.getBoundingClientRect();
+          const scaleX = svgRect.width  / +svgNode.getAttribute('width');
+          const scaleY = svgRect.height / +svgNode.getAttribute('height');
+          const tooltipWidth = 257;
+          const tooltipHeight = 96;
+          const pad = 8;
+          const isMobileView = window.innerWidth < 540;
+
+          let x, y, arrowPosition = 'top-left';
+          if (isMobileView) {
+            // On mobile, center horizontally on the map
+            x = (containerRect.width - tooltipWidth) / 2;
+            // Position below the centroid
+            const centroidScreenX = centroid[0] * scaleX + (svgRect.left - containerRect.left);
+            const cy = centroid[1] * scaleY + (svgRect.top - containerRect.top);
+            y = cy + 12;
+            y = Math.max(pad, Math.min(y, containerRect.height - tooltipHeight - pad));
+
+            // Determine arrow position based on centroid relative to tooltip center
+            const tooltipCenterX = x + tooltipWidth / 2;
+            if (centroidScreenX < tooltipCenterX) {
+              arrowPosition = 'top-left';
+            } else {
+              arrowPosition = 'top-right';
+            }
+          } else {
+            // On desktop, position near centroid with offset
+            const cx = centroid[0] * scaleX + (svgRect.left - containerRect.left);
+            const cy = centroid[1] * scaleY + (svgRect.top - containerRect.top);
+            const leftEdge = bounds[0][0] * scaleX + (svgRect.left - containerRect.left);
+            x = cx + 4;
+            y = cy;
+            // If it overflows the right edge, flip to the left of the centroid
+            if (x + tooltipWidth > containerRect.width - pad) {
+              x = leftEdge - tooltipWidth - pad;
+              arrowPosition = 'top-right';
+            } else {
+              arrowPosition = 'top-left';
+            }
+            x = Math.max(pad, Math.min(x, containerRect.width  - tooltipWidth  - pad));
+            y = Math.max(pad, y); // Allow y to extend beyond containerHeight - tooltipHeight
+          }
+          return { x, y, arrowPosition };
+        };
+
+        svgRef.current.selectAll("path")
+          .on("click", (event, d) => {
+            event.stopPropagation();
+            const countyName = d.properties.name;
+            const hasFactSheet = countiesWithFactSheets.includes(countyName);
+            // Toggle off if clicking the already-sticky county
+            if (stickyRef.current && stickyCountyRef.current === countyName) {
+              stickyRef.current = false;
+              stickyCountyRef.current = null;
+              setSticky(false);
+              setHovered(false);
+              setTooltip(tt => ({ ...tt, show: false }));
+              d3.select(event.target).attr("fill", hasFactSheet ? "#338f87" : "#ccc");
+              return;
+            }
+            const { x, y, arrowPosition } = tooltipPos(d);
+            // Reset all counties then highlight the clicked one
+            svgRef.current.selectAll("path").each(function(pd) {
+              const has = countiesWithFactSheets.includes(pd.properties.name);
+              d3.select(this).attr("fill", has ? "#338f87" : "#ccc");
+            });
+            d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
+            stickyRef.current = true;
+            stickyCountyRef.current = countyName;
+            setSticky(true);
+            setHovered(true);
+            setTooltip({ show: true, county: countyName, x, y, hasFactSheet, fixedX: x, fixedY: y, arrowPosition });
+          })
+          .on("mouseenter focus", (event, d) => {
+            if (stickyRef.current) return; // Ignore hover when sticky
             setHovered(true);
             const countyName = d.properties.name;
             const hasFactSheet = countiesWithFactSheets.includes(countyName);
@@ -161,21 +250,8 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             // On hover, darken the base color
             d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
           })
-          .on("mousemove", (event) => {
-            const tooltipWidth = 257;
-            const tooltipHeight = 96;
-            const padding = 8;
-            const containerRect = mapRef.current.getBoundingClientRect();
-
-            let x = event.offsetX + 12;
-            let y = event.offsetY + 12;
-
-            x = Math.max(padding, Math.min(x, containerRect.width - tooltipWidth - padding));
-            y = Math.max(padding, Math.min(y, containerRect.height - tooltipHeight - padding));
-
-            setTooltip((tt) => ({ ...tt, x, y, fixedX: x, fixedY: y }));
-          })
-          .on("mouseleave", (event, d) => {
+          .on("mouseleave blur", (event, d) => {
+            if (stickyRef.current) return; // Keep highlight and tooltip when sticky
             setHovered(false);
             // Restore base fill
             const countyName = d.properties.name;
@@ -237,7 +313,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
     };
   }, [countiesWithFactSheets, mapHeightValue]);
 
-  // Close handler called by the sticky tooltip's × button
+  // Fully close the tooltip and clear any sticky selection (Escape inside the tooltip)
   const handleClose = React.useCallback(() => {
     stickyRef.current = false;
     stickyCountyRef.current = null;
@@ -275,11 +351,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             arrowPosition={tooltip.arrowPosition}
             onTooltipEnter={() => setTooltipHovered(true)}
             onTooltipLeave={() => setTooltipHovered(false)}
-            onEscape={() => {
-              setTooltip((tt) => ({ ...tt, show: false }));
-              setTooltipHovered(false);
-              setHovered(false);
-            }}
+            onEscape={handleClose}
           />
         )}
       </div>
