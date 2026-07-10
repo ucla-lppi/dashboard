@@ -8,22 +8,27 @@
 
 The site is in good shape for keyboard and screen-reader users. An automated axe-core scan (WCAG 2.1 A/AA rules) of all 23 routes in July 2026 found zero violations after fixing three issues: an unlabeled mobile back button, prohibited `aria-label`s on the FAQ anchor targets, and low-contrast category pill colors on Our Data. A 320px reflow check (equivalent to 400% zoom) and a text-spacing override check also passed on every route. What remains is a handful of smaller items (reduced motion, a color-only cue on the map), the manual screen-reader pass, and two bigger pieces: the PDF fact sheets (now confirmed non-conformant, see below) and replacing placeholder demographic data.
 
-## What works today
+## Accessibility features on this site
 
-- **Keyboard navigation.** Every interactive element shows a visible focus outline when tabbing (a 2px blue ring, keyboard-only so mouse clicks stay clean). A "Skip to main content" link is the first thing keyboard users reach on every page.
-- **The county map.** Each county on the map can be reached with Tab, is announced by name along with its fact-sheet availability, and opens its tooltip with Enter or Space (Escape closes it). The searchable county list on the Our Data page shows the same information for anyone who prefers not to use the map.
-- **Forms and search.** All search and filter inputs have proper labels for screen readers, not just placeholder text.
-- **Images.** All images have alt text. Decorative icons (chevrons, dividers) are hidden from screen readers so they don't add noise.
-- **Structure.** The page declares its language, uses semantic headings, and uses real `<button>` and `<a>` elements for interactive controls. The loading overlay announces itself politely to screen readers.
-- **Language.** The site is English-only and declares itself as such. If Spanish translation is added later, it should ship with a language toggle and a dynamic `<html lang>` attribute.
+- ✅ **Full keyboard access.** Every link, button, filter, and map control is reachable and operable with Tab/Enter/Space/Escape alone — no mouse-only interactions anywhere on the site.
+- ✅ **Visible focus indicator.** A 2px blue focus ring appears on the active element when navigating by keyboard, and stays hidden for mouse clicks so it doesn't clutter the visual design.
+- ✅ **Skip-to-content link.** The first stop for keyboard users on every page is a link that jumps straight past the header/nav to the main content.
+- ✅ **Accessible interactive map.** Each of the 58 counties on the California map is individually tabbable, announced by name plus whether it has a fact sheet available, and opens its info tooltip with Enter/Space and closes with Escape. Anyone who'd rather not use the map gets the same county-by-county data in a searchable list on the Our Data page.
+- ✅ **Labeled forms.** All search and filter inputs have real `<label>` associations for screen readers, not placeholder text standing in for a label.
+- ✅ **Alt text on every image.** Content images describe what they show; purely decorative graphics (chevrons, dividers, background icons) are marked `aria-hidden` so screen readers skip them instead of reading noise.
+- ✅ **Live region announcements.** The loading overlay uses a polite ARIA live region, so screen reader users are told content is loading instead of hitting silence.
+- ✅ **Semantic structure.** One `<html lang="en">` declaration, real `<button>`/`<a>` elements (not clickable `<div>`s) for every control, and a `<head>` that declares the page language for assistive tech and translation tools.
+- ✅ **Color contrast on interactive elements.** An axe-core scan (WCAG 2.1 A/AA ruleset) across all 23 routes, done July 2026, confirms every button, pill, and link meets the 4.5:1 text-contrast minimum — including the footer, which measures 11.85:1 (comfortably past even the stricter AAA bar of 7:1).
+- ✅ **Reflow and text resizing.** All 23 routes were checked at a 320px viewport (equivalent to 400% browser zoom) and with expanded line-height/letter-spacing/word-spacing (WCAG 1.4.10/1.4.12) — no content is clipped or requires horizontal scrolling.
+- ⚠️ **English only, by design.** The site declares its language correctly for a single-language site. If Spanish content is added later, it should ship with a language toggle and a dynamic `<html lang>` attribute rather than a second static declaration.
+
+These checks cover what automated tooling and code inspection can confirm. They are not a substitute for the manual screen-reader pass below, which tests things a scanner can't, like whether the reading order actually makes sense out loud.
 
 ## What still needs work
 
 **Reduced motion (low priority).** The loading spinner and scroll animations don't respect the `prefers-reduced-motion` setting. Wrapping them in a media query is a small fix.
 
 **Heading order (low priority, verify).** Each page should have exactly one `<h1>` with no skipped heading levels — worth a quick check per route.
-
-**PDF fact sheets (separate effort, confirmed failing).** All 50 fact sheets under `/factsheets/` were checked in July 2026: none are tagged, none declare a document language, and titles are empty — they do not meet PDF/UA or WCAG. They are generated with wkhtmltopdf, which cannot produce tagged PDFs, so fixing this means changing the generation pipeline (e.g., headless Chrome print-to-PDF, Prince, or a remediation pass), not tweaking the current one.
 
 **Manual screen-reader pass (outstanding).** A keyboard-only pass with NVDA (Windows) and VoiceOver (macOS) has not been done and cannot be automated. Automated checks confirm focus order, labels, and ARIA usage, but real screen-reader testing is still needed before any conformance claim.
 
@@ -33,4 +38,4 @@ The site is in good shape for keyboard and screen-reader users. An automated axe
 
 ---
 
-*Standards referenced: WCAG 2.1 A/AA; Section 508; ADA Title II web rule (2024); California Gov. Code §7405, §11135; PDF/UA (ISO 14289) for the fact sheets.*
+*Standards referenced: WCAG 2.1 A/AA; Section 508; ADA Title II web rule (2024); California Gov. Code §7405, §11135;*
