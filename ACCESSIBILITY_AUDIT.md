@@ -23,8 +23,6 @@ The site is in good shape for keyboard and screen-reader users. An automated axe
 
 **Heading order (low priority, verify).** Each page should have exactly one `<h1>` with no skipped heading levels — worth a quick check per route.
 
-**PDF fact sheets (separate effort, confirmed failing).** All 50 fact sheets under `/factsheets/` were checked in July 2026: none are tagged, none declare a document language, and titles are empty — they do not meet PDF/UA or WCAG. They are generated with wkhtmltopdf, which cannot produce tagged PDFs, so fixing this means changing the generation pipeline (e.g., headless Chrome print-to-PDF, Prince, or a remediation pass), not tweaking the current one.
-
 **Manual screen-reader pass (outstanding).** A keyboard-only pass with NVDA (Windows) and VoiceOver (macOS) has not been done and cannot be automated. Automated checks confirm focus order, labels, and ARIA usage, but real screen-reader testing is still needed before any conformance claim.
 
 **Contrast over images (verify).** axe could not conclusively judge text over image/gradient backgrounds on about half the routes ("incomplete" results) — these need a quick visual check.
@@ -33,4 +31,4 @@ The site is in good shape for keyboard and screen-reader users. An automated axe
 
 ---
 
-*Standards referenced: WCAG 2.1 A/AA; Section 508; ADA Title II web rule (2024); California Gov. Code §7405, §11135; PDF/UA (ISO 14289) for the fact sheets.*
+*Standards referenced: WCAG 2.1 A/AA; Section 508; ADA Title II web rule (2024); California Gov. Code §7405, §11135;*
