@@ -1,0 +1,72 @@
+[
+  {
+    "first_name": "Mar",
+    "last_name": "Velez",
+    "role": "Director of Policy,",
+    "organization": "Latino Coalition for a Healthy California",
+    "subcategory": "advisory_committee",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2025/05/Mar-LCHC-Sweater-e1692220194841.png",
+    "link": "",
+    "order": 1
+  },
+  {
+    "first_name": "Michael",
+    "last_name": "Mendez",
+    "role": "Assistant Professor,",
+    "organization": "UC Irvine School of Social Ecology",
+    "subcategory": "advisory_committee",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2025/05/photo-michael-mendez-2024.jpg",
+    "link": "",
+    "order": 2
+  },
+  {
+    "first_name": "Leticia",
+    "last_name": "Classen-Rodriguez",
+    "role": "Director of Policy,",
+    "organization": "SocioEnvironmental and Education Network (SEEN)",
+    "subcategory": "advisory_committee",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2025/05/Leticia-Classen-Rodriguez.jpeg",
+    "link": "",
+    "order": 3
+  },
+  {
+    "first_name": "Irene",
+    "last_name": "Burga",
+    "role": "Director of the Climate Justice and Clean Air Program,",
+    "organization": "GreenLatinos",
+    "subcategory": "advisory_committee",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2025/05/Irene-Burga.jpg",
+    "link": "",
+    "order": 4
+  },
+  {
+    "first_name": "Colleen",
+    "last_name": "Callahan",
+    "role": "Co-executive Director,",
+    "organization": "UCLA Luskin Center for Innovation",
+    "subcategory": "advisory_committee",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2025/05/ColleenCallahan_1c245b02-f248-4a35-b29e-6a731205295e-prv.jpg",
+    "link": "",
+    "order": 5
+  },
+  {
+    "first_name": "Laura",
+    "last_name": "August",
+    "role": "Environmental Program Manager,",
+    "organization": "Office of Environmental Health Hazard Assessment",
+    "subcategory": "advisory_committee",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2025/05/Laura-August.jpeg",
+    "link": "",
+    "order": 6
+  },
+  {
+    "first_name": "Paul",
+    "last_name": "Ong",
+    "role": "Director,",
+    "organization": "UCLA Center for Neighborhood Knowledge",
+    "subcategory": "advisory_committee",
+    "image_link": "http://latino.ucla.edu/wp-content/uploads/2025/06/PMOngImage1.jpg",
+    "link": "",
+    "order": 7
+  }
+]
