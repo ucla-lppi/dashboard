@@ -7,8 +7,8 @@ const prefix = process.env.NEXT_PUBLIC_ASSET_PREFIX || '';
 
 const categoryColorDict = {
   'Air Pollutants': '#2C483E',
-  'Demographic Indicators': '#3c87c3',
-  'Heat Exposure': '#338F87',
+  'Demographic Indicators': '#3679af', // darkened from #3c87c3 to meet 4.5:1 contrast with white text
+  'Heat Exposure': '#2e8079', // darkened from #338F87 to meet 4.5:1 contrast with white text
   'Social Determinants of Health': '#005587',
   'Vulnerable Populations': '#226961',
   'Health Outcomes & Conditions': '#005587',

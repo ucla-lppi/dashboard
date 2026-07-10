@@ -108,8 +108,8 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
         {/* Main page heading with back button */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
-            <button onClick={() => window.history.back()} className="block md:hidden text-primary hover:text-primary/80">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <button onClick={() => window.history.back()} aria-label="Go back" className="block md:hidden text-primary hover:text-primary/80">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
             </button>

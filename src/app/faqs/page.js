@@ -135,7 +135,7 @@ export default function FAQsPage() {
              const open = openIdxs.includes(idx);
             return (
               <div key={faq.id || idx} className="border-b border-[#84BAA6]">
-                 <a id={slug} tabIndex={-1} aria-label={faq.question}></a>
+                 <a id={slug} tabIndex={-1}></a>
                  <button
                    type="button"
                    className={`flex justify-between items-center w-full py-4 px-4 text-lg font-medium text-left text-gray-900 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587] transition-colors ${open ? 'bg-primary-50 text-primary-700' : 'hover:bg-gray-50'}`}
