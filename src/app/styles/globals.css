@@ -45,6 +45,16 @@ body {
   box-sizing: border-box;
 }
 
+/* Minimal, global keyboard focus indicator. Only shown for keyboard/switch
+   focus (not mouse clicks), and acts as a safety-net for any interactive
+   element that isn't otherwise given an explicit focus-visible style. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid #005587;
+    outline-offset: 2px;
+  }
+}
+
 @media (min-width: 540px) {
   .mobile-header {
     display: none !important;

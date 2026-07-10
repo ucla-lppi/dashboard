@@ -105,10 +105,11 @@ export default function CaliforniaCountyProfiles() {
               <div className="flex items-center bg-white rounded-full border border-primary w-full mb-4">
                 <input
                   type="text"
+                  aria-label="Search for a location"
                   placeholder="Search for a location"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="flex-1 px-3 py-2 text-sm font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none rounded-l-full"
+                  className="flex-1 px-3 py-2 text-sm font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587] rounded-l-full"
                 />
                 <span className="flex items-center justify-center w-9 h-9 bg-primary rounded-r-full">
                   <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
@@ -216,10 +217,11 @@ export default function CaliforniaCountyProfiles() {
               <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-md mb-4">
                 <input
                   type="text"
+                  aria-label="Search for a location"
                   placeholder="Search for a location"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="flex-1 px-4 py-2 font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none rounded-l-full"
+                  className="flex-1 px-4 py-2 font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587] rounded-l-full"
                 />
                 <span className="flex items-center justify-center w-10 h-10 bg-primary rounded-r-full">
                   <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />

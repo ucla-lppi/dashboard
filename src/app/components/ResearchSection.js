@@ -18,8 +18,9 @@ function formatDate(date) {
 
 // Grid-style CategorySection for Policy Toolkit layout
 function CategorySection({ label, items, slugKey }) {
-  const displayItems = items.slice(0, 4);
   const [isMobile, setIsMobile] = useState(false);
+  const [columns, setColumns] = useState(4);
+  const gridRef = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -29,19 +30,40 @@ function CategorySection({ label, items, slugKey }) {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  
+
+  // Track how many grid columns actually fit so rows are always filled completely
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el || isMobile) return;
+    const updateColumns = () => {
+      const cols = getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length;
+      if (cols > 0) setColumns(cols);
+    };
+    updateColumns();
+    const observer = new ResizeObserver(updateColumns);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  // Show at least 4 items, rounded up to a multiple of the column count so no row is left partially empty
+  const visibleCount = isMobile ? 4 : columns * Math.ceil(4 / columns);
+  const displayItems = items.slice(0, visibleCount);
+
   return (
     <div className="mb-8 pb-4">
       {/* Horizontal grid with see all button */}
       <div className="flex items-start gap-4">
-        <div className={`flex gap-6 flex-1 ${isMobile ? 'flex-col' : 'flex-wrap'}`}>
+        <div
+          ref={gridRef}
+          className={`gap-6 flex-1 ${isMobile ? 'flex flex-col' : 'grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))]'}`}
+        >
           {displayItems.map(item => (
-            <Link 
-              key={item.id} 
-              href={item.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={`flex flex-col transform transition duration-200 ease-in-out hover:-translate-y-1 ${isMobile ? '' : 'w-[220px] max-w-[220px]'}`}
+            <Link
+              key={item.id}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col transform transition duration-200 ease-in-out hover:-translate-y-1"
             >
               {/* Image container with date badge */}
               <div className="relative w-full aspect-[220/163] bg-gray-200 mb-1">
@@ -252,10 +274,11 @@ export default function ResearchSection({
               <div className="flex items-center bg-white border border-[#1b3f60] rounded-full h-10 min-w-0 sm:min-w-[300px]">
                 <input
                   type="text"
+                  aria-label="Search for title, tag, or keyword"
                   placeholder="Search for title, tag, or keyword"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="flex-1 h-full pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none"
+                  className="flex-1 h-full pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]"
                 />
                 <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
@@ -329,9 +352,9 @@ export default function ResearchSection({
                   ))}
                 </div>
                 {/* Desktop skeleton */}
-                <div className="hidden md:flex gap-6">
+                <div className="hidden md:grid gap-6 grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
                   {[...Array(4)].map((_, idx) => (
-                    <div key={idx} className="w-48 animate-pulse">
+                    <div key={idx} className="animate-pulse">
                       <div className="w-full h-32 bg-gray-200 mb-2"></div>
                       <div className="h-4 bg-gray-200 rounded w-full mb-1"></div>
                       <div className="h-4 bg-gray-200 rounded w-3/4"></div>

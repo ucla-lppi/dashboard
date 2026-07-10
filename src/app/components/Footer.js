@@ -51,7 +51,7 @@ export default function Footer() {
                 />
                 <img
                   src={`${prefix}/images/twitter_footer.svg`}
-                  alt="X"
+                  alt="X (formerly Twitter)"
                   className="w-[21px] h-[19px]"
                 />
                 <img
@@ -75,7 +75,8 @@ export default function Footer() {
             <div className="h-full flex items-center justify-center mx-2 md:mx-4 justify-self-center">
               <img
                 src={`${prefix}/images/line-31.svg`}
-                alt="Divider"
+                alt=""
+                aria-hidden="true"
                 className="w-[1px] h-[141px] object-cover"
               />
             </div>

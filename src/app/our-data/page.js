@@ -197,7 +197,8 @@ export default function OurDataPage() {
               <span className="flex items-center justify-center w-[30px] h-full bg-[#1B3F60] rounded-r-full">
                 <img
                   src={`${prefix}/images/descending.svg`}
-                  alt="Toggle"
+                  alt=""
+                  aria-hidden="true"
                   className={`w-4 h-4 transform ${showCatFilters ? 'rotate-180' : ''}`}
                 />
               </span>
@@ -237,6 +238,7 @@ export default function OurDataPage() {
           <div className="flex items-center bg-white border border-[#1b3f60] rounded-full w-full md:w-[450px] h-[30px]">
             <input
               type="text"
+              aria-label="Search for title, tag, or keyword"
               placeholder="Search for title, tag, or keyword"
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -245,7 +247,7 @@ export default function OurDataPage() {
                 pl-6 pr-2
                 text-base font-lexend-lite text-[#1B3F60]
                 placeholder-[#1B3F60]/80
-                bg-transparent rounded-l-full focus:outline-none
+                bg-transparent rounded-l-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]
               "
             />
             <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">

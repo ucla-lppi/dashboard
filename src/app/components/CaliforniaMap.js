@@ -32,6 +32,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       style={{ left: x, top: y, pointerEvents: 'auto', position: 'absolute' }}
       onMouseEnter={onTooltipEnter}
       onMouseLeave={onTooltipLeave}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          onEscape?.();
+        }
+      }}
     >
       {/* Blue triangle accent */}
       <div className={`absolute w-10 h-3 pointer-events-none ${arrowPositionClass}`}>
@@ -47,11 +52,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       </div>
       {hasFactSheet ? (
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
-          <a href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a data-tooltip-first-link href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -60,11 +65,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
         <div className="flex flex-col items-center w-full mt-1">
           <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">N/A. See <a href={`${prefix}/faqs`} target="_blank" rel="noopener noreferrer" className="text-[#005587] underline">FAQ</a>. <br></br>See California Factsheets.</div>
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
-          <a href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a data-tooltip-first-link href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -146,89 +151,8 @@ export default function CaliforniaMap({ mapHeightOverride }) {
           // Color counties with fact sheets green, others gray
           .attr("fill", d => countiesWithFactSheets.includes(d.properties.name) ? "#338f87" : "#ccc")
           .attr("stroke", "white")
-          .attr("stroke-width", 0.5);
-
-        // Helper: position tooltip and determine arrow direction
-        const tooltipPos = (feature) => {
-          const bounds = path.bounds(feature);
-          const centroid = path.centroid(feature);
-          const svgNode = svgRef.current.node();
-          const svgRect = svgNode.getBoundingClientRect();
-          const containerRect = mapRef.current.getBoundingClientRect();
-          const scaleX = svgRect.width  / +svgNode.getAttribute('width');
-          const scaleY = svgRect.height / +svgNode.getAttribute('height');
-          const tooltipWidth = 257;
-          const tooltipHeight = 96;
-          const pad = 8;
-          const isMobileView = window.innerWidth < 540;
-          
-          let x, y, arrowPosition = 'top-left';
-          if (isMobileView) {
-            // On mobile, center horizontally on the map
-            x = (containerRect.width - tooltipWidth) / 2;
-            // Position below the centroid
-            const centroidScreenX = centroid[0] * scaleX + (svgRect.left - containerRect.left);
-            const cy = centroid[1] * scaleY + (svgRect.top - containerRect.top);
-            y = cy + 12;
-            y = Math.max(pad, Math.min(y, containerRect.height - tooltipHeight - pad));
-            
-            // Determine arrow position based on centroid relative to tooltip center
-            const tooltipCenterX = x + tooltipWidth / 2;
-            if (centroidScreenX < tooltipCenterX) {
-              arrowPosition = 'top-left';
-            } else {
-              arrowPosition = 'top-right';
-            }
-          } else {
-            // On desktop, position near centroid with offset
-            const cx = centroid[0] * scaleX + (svgRect.left - containerRect.left);
-            const cy = centroid[1] * scaleY + (svgRect.top - containerRect.top);
-            const leftEdge = bounds[0][0] * scaleX + (svgRect.left - containerRect.left);
-            x = cx + 4;
-            y = cy;
-            // If it overflows the right edge, flip to the left of the centroid
-            if (x + tooltipWidth > containerRect.width - pad) {
-              x = leftEdge - tooltipWidth - pad;
-              arrowPosition = 'top-right';
-            } else {
-              arrowPosition = 'top-left';
-            }
-            x = Math.max(pad, Math.min(x, containerRect.width  - tooltipWidth  - pad));
-            y = Math.max(pad, y); // Allow y to extend beyond containerHeight - tooltipHeight
-          }
-          return { x, y, arrowPosition };
-        };
-
-        svgRef.current.selectAll("path")
-          .on("click", (event, d) => {
-            event.stopPropagation();
-            const countyName = d.properties.name;
-            const hasFactSheet = countiesWithFactSheets.includes(countyName);
-            // Toggle off if clicking the already-sticky county
-            if (stickyRef.current && stickyCountyRef.current === countyName) {
-              stickyRef.current = false;
-              stickyCountyRef.current = null;
-              setSticky(false);
-              setHovered(false);
-              setTooltip(tt => ({ ...tt, show: false }));
-              d3.select(event.target).attr("fill", hasFactSheet ? "#338f87" : "#ccc");
-              return;
-            }
-            const { x, y, arrowPosition } = tooltipPos(d);
-            // Reset all counties then highlight the clicked one
-            svgRef.current.selectAll("path").each(function(pd) {
-              const has = countiesWithFactSheets.includes(pd.properties.name);
-              d3.select(this).attr("fill", has ? "#338f87" : "#ccc");
-            });
-            d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
-            stickyRef.current = true;
-            stickyCountyRef.current = countyName;
-            setSticky(true);
-            setHovered(true);
-            setTooltip({ show: true, county: countyName, x, y, hasFactSheet, fixedX: x, fixedY: y, arrowPosition });
-          })
+          .attr("stroke-width", 0.5)
           .on("mouseenter", (event, d) => {
-            if (stickyRef.current) return; // Ignore hover when sticky
             setHovered(true);
             const countyName = d.properties.name;
             const hasFactSheet = countiesWithFactSheets.includes(countyName);
@@ -237,13 +161,42 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             // On hover, darken the base color
             d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
           })
+          .on("mousemove", (event) => {
+            const tooltipWidth = 257;
+            const tooltipHeight = 96;
+            const padding = 8;
+            const containerRect = mapRef.current.getBoundingClientRect();
+
+            let x = event.offsetX + 12;
+            let y = event.offsetY + 12;
+
+            x = Math.max(padding, Math.min(x, containerRect.width - tooltipWidth - padding));
+            y = Math.max(padding, Math.min(y, containerRect.height - tooltipHeight - padding));
+
+            setTooltip((tt) => ({ ...tt, x, y, fixedX: x, fixedY: y }));
+          })
           .on("mouseleave", (event, d) => {
-            if (stickyRef.current) return; // Keep highlight and tooltip when sticky
             setHovered(false);
             // Restore base fill
             const countyName = d.properties.name;
             const has = countiesWithFactSheets.includes(countyName);
             d3.select(event.target).attr("fill", has ? "#338f87" : "#ccc");
+          })
+          .on("keydown", (event) => {
+            if (event.key === "Escape") {
+              // Dismiss the tooltip and return focus behavior to the county itself.
+              event.currentTarget.blur();
+              return;
+            }
+            if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+              // The tooltip is already shown via the focus handler above; move
+              // keyboard focus into it so the fact-sheet links can be reached.
+              event.preventDefault();
+              requestAnimationFrame(() => {
+                const firstLink = mapRef.current && mapRef.current.querySelector('[data-tooltip-first-link]');
+                if (firstLink) firstLink.focus();
+              });
+            }
           });
         // If a county is currently sticky, re-apply its highlight after redraw
         if (stickyRef.current && stickyCountyRef.current) {
@@ -322,6 +275,11 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             arrowPosition={tooltip.arrowPosition}
             onTooltipEnter={() => setTooltipHovered(true)}
             onTooltipLeave={() => setTooltipHovered(false)}
+            onEscape={() => {
+              setTooltip((tt) => ({ ...tt, show: false }));
+              setTooltipHovered(false);
+              setHovered(false);
+            }}
           />
         )}
       </div>
