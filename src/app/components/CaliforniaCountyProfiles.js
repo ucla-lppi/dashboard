@@ -57,9 +57,9 @@ export default function CaliforniaCountyProfiles() {
 
   return (
     <div className={`${isMobile ? 'bg-white p-4' : 'bg-tertiary p-6'} rounded`}>
-      <div id="county-profiles" className={`flex ${isMobile ? 'flex-col' : 'gap-6'}`}>
+      <div id="county-profiles" className={`flex ${isMobile ? 'flex-col' : 'flex-col gap-6 xl:flex-row'}`}>
         {/* Left Column (35% on desktop, full width on mobile) */}
-        <div className={isMobile ? 'w-full mb-6' : 'w-[35%]'}>
+        <div className={isMobile ? 'w-full mb-6' : 'w-full xl:w-[35%]'}>
           {isMobile ? (
             /* Mobile: bubble design */
             <div className="bg-tertiary rounded-[20px] p-6 mb-6">
@@ -93,9 +93,9 @@ export default function CaliforniaCountyProfiles() {
           )}
         </div>
         {/* Divider - hidden on mobile */}
-        {!isMobile && <div className="w-px bg-[#333333] self-stretch"></div>}
+        {!isMobile && <div className="hidden xl:block w-px bg-[#333333] self-stretch"></div>}
         {/* Right Column (75% on desktop, full width on mobile) */}
-        <div className={isMobile ? 'w-full' : 'w-[75%]'}>
+        <div className={isMobile ? 'w-full' : 'w-full xl:w-[75%]'}>
           {isMobile && (
             /* Mobile: bubble design for this section too */
             <div className="bg-tertiary rounded-[20px] p-6">
@@ -235,10 +235,10 @@ export default function CaliforniaCountyProfiles() {
             {'california'.includes(search.toLowerCase()) && (
             <React.Fragment key="California State">
               <div className="flex justify-center items-center px-4 py-2">
-                <div className="flex justify-between items-center w-full gap-6">
+                <div className="flex flex-wrap justify-between items-center w-full gap-x-6 gap-y-1">
                   <span className="text-gray-900 pl-1 font-bold whitespace-nowrap" style={{ minWidth: `${maxCountyLength}ch` }}>California</span>
                   {!isMobile && (
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 ml-auto">
                       <a
                         href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
                         target="_blank"
@@ -303,10 +303,10 @@ export default function CaliforniaCountyProfiles() {
              {filtered.map((county, idx) => (
                <React.Fragment key={county}>
                 <div className="flex justify-center items-center px-4 py-2">
-                  <div className="flex justify-between items-center w-full gap-6">
+                  <div className="flex flex-wrap justify-between items-center w-full gap-x-6 gap-y-1">
                     <span className={`text-gray-900 pl-1 font-bold whitespace-nowrap ${isMobile ? 'text-sm' : ''}`} style={{ minWidth: `${maxCountyLength}ch` }}>{county}</span>
                     {!isMobile && (
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 ml-auto">
                         <a
                           href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
                           target="_blank"

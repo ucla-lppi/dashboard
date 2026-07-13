@@ -63,12 +63,12 @@ export default function HomePage() {
           </div>
         </div>
         {/* Stats and Map Section: nested layout */}
-        <div className={isMobile ? 'flex flex-col space-y-1' : 'grid grid-cols-[1fr_400px] gap-x-8'}>
+        <div className={isMobile ? 'flex flex-col space-y-1' : 'grid grid-cols-1 gap-y-8 xl:grid-cols-[1fr_400px] xl:gap-x-8 xl:gap-y-0'}>
           {/* Map Section */}
           <div className={`relative flex flex-col ${isMobile ? 'gap-0 pb-0' : ''}`}>
             <div className={`flex flex-col ${isMobile ? 'justify-start' : 'sm:justify-start lg:justify-center'} h-full`}
             >
-              <CaliforniaMap mapHeight={isMobile ? '520' : undefined} />
+              <CaliforniaMap mapHeightOverride={isMobile ? '520' : undefined} />
             </div>
             <div className={`flex flex-col items-start ${isMobile ? 'space-y-1' : 'space-y-2'}`}>
               <div className="flex flex-col items-center">
@@ -87,7 +87,7 @@ export default function HomePage() {
             </div>
           </div>
           {/* Stats and FancyBoxes Section */}
-          <div className={`flex flex-col text-right justify-start ${isMobile ? 'w-full' : 'max-w-[400px]'}`}>
+          <div className={`flex flex-col text-right justify-start ${isMobile ? 'w-full' : 'w-full max-w-2xl mx-auto xl:max-w-[400px] xl:mx-0'}`}>
             <div className={`flex items-center ${isMobile ? 'justify-center w-full mb-3' : 'justify-center mb-6'} mt-0`}>
               <div className="shadow-[0px_4px_8px_#0002] rounded-lg w-full">
                 <div className={`relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-3 ${isMobile ? 'w-full min-h-[48px]' : 'min-w-[220px]'}`}>
