@@ -124,7 +124,7 @@ export default function ClientShell({ children }) {
                 tabIndex={-1}
                 className={`relative p-4 transition-all duration-300 ${
                   !isMobile && sidebarOpen ? 'ml-64' : 'ml-0'
-                } sm:ml-0 flex-grow focus:outline-none`}
+                } flex-grow focus:outline-none`}
               >
                 {/* Main content placeholder */}
                 {children}

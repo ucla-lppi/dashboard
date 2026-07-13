@@ -17,17 +17,17 @@ export default function Footer() {
 
   return (
     <footer className="relative z-10 bg-tertiary text-black">
-      <div className="mx-auto max-w-screen-lg py-8 px-4">
-        <div className={isMobile ? 'flex flex-col gap-8' : 'grid grid-cols-[16rem_auto_auto_auto] gap-x-8 items-stretch'}>
+      <div className="mx-auto max-w-screen-xl py-8 px-4">
+        <div className={isMobile ? 'flex flex-col gap-8' : 'flex flex-col gap-8 ml-64 xl:ml-0 xl:grid xl:grid-cols-[16rem_auto_auto_auto] xl:gap-x-8 xl:gap-y-0 items-stretch'}>
           {/* Spacer column matching sidebar (w-64 = 16rem) */}
-          {!isMobile && <div></div> /* Spacer column hidden on mobile */}
+          {!isMobile && <div className="hidden xl:block"></div> /* Spacer column hidden on mobile */}
           
           {/* Column 1: UCLA Logo, Quote, Social Icons */}
           <div className="flex flex-col items-start justify-self-center">
             <img
               src={`${prefix}/images/ucla_lppi_dashboard_logo.svg`}
               alt="UCLA Climate and Health Dashboard"
-              className="w-[350px] sm:w-[400px] md:w-[450px] lg:w-[600px] xl:w-[789px] h-auto object-cover mb-4"
+              className="w-[350px] max-w-full h-auto object-cover mb-4"
             />
             <p className="text-left font-semibold text-[20px] leading-normal mb-6">
               THERE IS NO AMERICAN AGENDA<br />WITHOUT A LATINO AGENDA
@@ -72,7 +72,7 @@ export default function Footer() {
           {isMobile ? (
             <hr className="border-t border-gray-400 my-4" />
           ) : (
-            <div className="h-full flex items-center justify-center mx-2 md:mx-4 justify-self-center">
+            <div className="hidden xl:flex h-full items-center justify-center mx-2 md:mx-4 justify-self-center">
               <img
                 src={`${prefix}/images/line-31.svg`}
                 alt=""
@@ -83,7 +83,7 @@ export default function Footer() {
           )}
 
           {/* Site Map Section - single column on mobile, 3 columns on desktop */}
-          <div className={isMobile ? 'flex flex-col gap-4 text-left text-[16px]' : 'grid grid-cols-3 gap-x-6 md:gap-x-4 text-left text-[16px] max-w-screen-md mx-auto'}>
+          <div className={isMobile ? 'flex flex-col gap-4 text-left text-[16px]' : 'grid grid-cols-[auto_auto_auto] gap-x-6 text-left text-[16px] max-w-screen-md mx-auto'}>
             {isMobile ? (
               /* Mobile: Single column with specific order and formatting */
               <>

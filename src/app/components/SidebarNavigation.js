@@ -26,7 +26,7 @@ export default function SidebarNavigation({ sidebarOpen, setSidebarOpen, isMobil
       className={`fixed top-0 left-0 z-[99999] ${isMobile ? 'w-full' : 'w-64'} min-h-screen bg-white shadow-[4px_0px_0px_rgba(25,73,88,0.50)]
         flex flex-col justify-between transition-transform duration-300 ease-in-out overflow-hidden ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:translate-x-0`}
+        }`}
       aria-label="Sidebar"
     >
       <div className="px-3 py-4 bg-white">
