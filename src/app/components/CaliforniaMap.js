@@ -9,7 +9,7 @@ const DEFAULT_MAP_HEIGHT = 551;
 const slugCounty = name => name.replace(/\s+/g, '_');
 
 // Tooltip component for displaying county information
-function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave, arrowPosition = 'top-left' }) {
+function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave, onEscape, arrowPosition = 'top-left' }) {
   const arrowPositionClass = {
     'top-left': 'left-0 top-0',
     'top-right': 'right-0 top-0',
@@ -32,6 +32,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       style={{ left: x, top: y, pointerEvents: 'auto', position: 'absolute' }}
       onMouseEnter={onTooltipEnter}
       onMouseLeave={onTooltipLeave}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          onEscape?.();
+        }
+      }}
     >
       {/* Blue triangle accent */}
       <div className={`absolute w-10 h-3 pointer-events-none ${arrowPositionClass}`}>
@@ -47,11 +52,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       </div>
       {hasFactSheet ? (
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
-          <a href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a data-tooltip-first-link href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -60,11 +65,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
         <div className="flex flex-col items-center w-full mt-1">
           <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">N/A. See <a href={`${prefix}/faqs`} target="_blank" rel="noopener noreferrer" className="text-[#005587] underline">FAQ</a>. <br></br>See California Factsheets.</div>
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
-          <a href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a data-tooltip-first-link href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none">
+          <a href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
             <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -146,7 +151,15 @@ export default function CaliforniaMap({ mapHeightOverride }) {
           // Color counties with fact sheets green, others gray
           .attr("fill", d => countiesWithFactSheets.includes(d.properties.name) ? "#338f87" : "#ccc")
           .attr("stroke", "white")
-          .attr("stroke-width", 0.5);
+          .attr("stroke-width", 0.5)
+          // Keyboard accessibility: make each county focusable/operable like a button,
+          // with an accessible name announcing fact-sheet availability.
+          .attr("tabindex", 0)
+          .attr("role", "button")
+          .attr("aria-label", d => {
+            const has = countiesWithFactSheets.includes(d.properties.name);
+            return `${d.properties.name} County. ${has ? 'Fact sheets available. Press Enter to view links.' : 'No fact sheet available for this county.'}`;
+          });
 
         // Helper: position tooltip and determine arrow direction
         const tooltipPos = (feature) => {
@@ -161,7 +174,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
           const tooltipHeight = 96;
           const pad = 8;
           const isMobileView = window.innerWidth < 540;
-          
+
           let x, y, arrowPosition = 'top-left';
           if (isMobileView) {
             // On mobile, center horizontally on the map
@@ -171,7 +184,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             const cy = centroid[1] * scaleY + (svgRect.top - containerRect.top);
             y = cy + 12;
             y = Math.max(pad, Math.min(y, containerRect.height - tooltipHeight - pad));
-            
+
             // Determine arrow position based on centroid relative to tooltip center
             const tooltipCenterX = x + tooltipWidth / 2;
             if (centroidScreenX < tooltipCenterX) {
@@ -227,7 +240,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             setHovered(true);
             setTooltip({ show: true, county: countyName, x, y, hasFactSheet, fixedX: x, fixedY: y, arrowPosition });
           })
-          .on("mouseenter", (event, d) => {
+          .on("mouseenter focus", (event, d) => {
             if (stickyRef.current) return; // Ignore hover when sticky
             setHovered(true);
             const countyName = d.properties.name;
@@ -237,13 +250,29 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             // On hover, darken the base color
             d3.select(event.target).attr("fill", hasFactSheet ? "#2a6e67" : "#aaa");
           })
-          .on("mouseleave", (event, d) => {
+          .on("mouseleave blur", (event, d) => {
             if (stickyRef.current) return; // Keep highlight and tooltip when sticky
             setHovered(false);
             // Restore base fill
             const countyName = d.properties.name;
             const has = countiesWithFactSheets.includes(countyName);
             d3.select(event.target).attr("fill", has ? "#338f87" : "#ccc");
+          })
+          .on("keydown", (event) => {
+            if (event.key === "Escape") {
+              // Dismiss the tooltip and return focus behavior to the county itself.
+              event.currentTarget.blur();
+              return;
+            }
+            if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+              // The tooltip is already shown via the focus handler above; move
+              // keyboard focus into it so the fact-sheet links can be reached.
+              event.preventDefault();
+              requestAnimationFrame(() => {
+                const firstLink = mapRef.current && mapRef.current.querySelector('[data-tooltip-first-link]');
+                if (firstLink) firstLink.focus();
+              });
+            }
           });
         // If a county is currently sticky, re-apply its highlight after redraw
         if (stickyRef.current && stickyCountyRef.current) {
@@ -284,7 +313,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
     };
   }, [countiesWithFactSheets, mapHeightValue]);
 
-  // Close handler called by the sticky tooltip's × button
+  // Fully close the tooltip and clear any sticky selection (Escape inside the tooltip)
   const handleClose = React.useCallback(() => {
     stickyRef.current = false;
     stickyCountyRef.current = null;
@@ -322,6 +351,7 @@ export default function CaliforniaMap({ mapHeightOverride }) {
             arrowPosition={tooltip.arrowPosition}
             onTooltipEnter={() => setTooltipHovered(true)}
             onTooltipLeave={() => setTooltipHovered(false)}
+            onEscape={handleClose}
           />
         )}
       </div>

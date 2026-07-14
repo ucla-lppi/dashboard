@@ -57,9 +57,9 @@ export default function CaliforniaCountyProfiles() {
 
   return (
     <div className={`${isMobile ? 'bg-white p-4' : 'bg-tertiary p-6'} rounded`}>
-      <div id="county-profiles" className={`flex ${isMobile ? 'flex-col' : 'gap-6'}`}>
+      <div id="county-profiles" className={`flex ${isMobile ? 'flex-col' : 'flex-col gap-6 xl:flex-row'}`}>
         {/* Left Column (35% on desktop, full width on mobile) */}
-        <div className={isMobile ? 'w-full mb-6' : 'w-[35%]'}>
+        <div className={isMobile ? 'w-full mb-6' : 'w-full xl:w-[35%]'}>
           {isMobile ? (
             /* Mobile: bubble design */
             <div className="bg-tertiary rounded-[20px] p-6 mb-6">
@@ -93,9 +93,9 @@ export default function CaliforniaCountyProfiles() {
           )}
         </div>
         {/* Divider - hidden on mobile */}
-        {!isMobile && <div className="w-px bg-[#333333] self-stretch"></div>}
+        {!isMobile && <div className="hidden xl:block w-px bg-[#333333] self-stretch"></div>}
         {/* Right Column (75% on desktop, full width on mobile) */}
-        <div className={isMobile ? 'w-full' : 'w-[75%]'}>
+        <div className={isMobile ? 'w-full' : 'w-full xl:w-[75%]'}>
           {isMobile && (
             /* Mobile: bubble design for this section too */
             <div className="bg-tertiary rounded-[20px] p-6">
@@ -105,10 +105,11 @@ export default function CaliforniaCountyProfiles() {
               <div className="flex items-center bg-white rounded-full border border-primary w-full mb-4">
                 <input
                   type="text"
+                  aria-label="Search for a location"
                   placeholder="Search for a location"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="flex-1 px-3 py-2 text-sm font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none rounded-l-full"
+                  className="flex-1 px-3 py-2 text-sm font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587] rounded-l-full"
                 />
                 <span className="flex items-center justify-center w-9 h-9 bg-primary rounded-r-full">
                   <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
@@ -216,10 +217,11 @@ export default function CaliforniaCountyProfiles() {
               <div className="flex items-center bg-white rounded-full border border-primary w-full max-w-md mb-4">
                 <input
                   type="text"
+                  aria-label="Search for a location"
                   placeholder="Search for a location"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="flex-1 px-4 py-2 font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none rounded-l-full"
+                  className="flex-1 px-4 py-2 font-lexendExtraLight font-extralight placeholder-gray-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587] rounded-l-full"
                 />
                 <span className="flex items-center justify-center w-10 h-10 bg-primary rounded-r-full">
                   <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
@@ -233,10 +235,10 @@ export default function CaliforniaCountyProfiles() {
             {'california'.includes(search.toLowerCase()) && (
             <React.Fragment key="California State">
               <div className="flex justify-center items-center px-4 py-2">
-                <div className="flex justify-between items-center w-full gap-6">
+                <div className="flex flex-wrap justify-between items-center w-full gap-x-6 gap-y-1">
                   <span className="text-gray-900 pl-1 font-bold whitespace-nowrap" style={{ minWidth: `${maxCountyLength}ch` }}>California</span>
                   {!isMobile && (
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 ml-auto">
                       <a
                         href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`}
                         target="_blank"
@@ -301,10 +303,10 @@ export default function CaliforniaCountyProfiles() {
              {filtered.map((county, idx) => (
                <React.Fragment key={county}>
                 <div className="flex justify-center items-center px-4 py-2">
-                  <div className="flex justify-between items-center w-full gap-6">
+                  <div className="flex flex-wrap justify-between items-center w-full gap-x-6 gap-y-1">
                     <span className={`text-gray-900 pl-1 font-bold whitespace-nowrap ${isMobile ? 'text-sm' : ''}`} style={{ minWidth: `${maxCountyLength}ch` }}>{county}</span>
                     {!isMobile && (
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 ml-auto">
                         <a
                           href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`}
                           target="_blank"

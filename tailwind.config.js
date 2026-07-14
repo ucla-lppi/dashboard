@@ -52,10 +52,10 @@ module.exports = {
         }),
 		boxShadow: {
 			'social': '2px 2px 4px #749199'
-		}
-      },
-      screens: {
-        "max-h-620": { raw: "(max-height: 620px)" },
+		},
+        screens: {
+          "max-h-620": { raw: "(max-height: 620px)" },
+        },
       },
     },
     plugins: [

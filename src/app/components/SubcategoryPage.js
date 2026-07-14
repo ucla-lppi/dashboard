@@ -108,8 +108,8 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
         {/* Main page heading with back button */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
-            <button onClick={() => window.history.back()} className="block md:hidden text-primary hover:text-primary/80">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <button onClick={() => window.history.back()} aria-label="Go back" className="block md:hidden text-primary hover:text-primary/80">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
             </button>
@@ -124,10 +124,11 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
             <div className="flex items-center bg-white rounded-full border border-[#1b3f60] h-10 w-[300px]">
               <input
                 type="text"
+                aria-label="Search for title, tag, or keyword"
                 placeholder="Search for title, tag, or keyword"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="flex-1 pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none"
+                className="flex-1 pl-4 pr-2 text-sm text-[#1B3F60] placeholder-[#1B3F60]/60 bg-transparent rounded-l-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]"
               />
               <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
@@ -158,10 +159,11 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
             <div className="flex items-center bg-white border border-[#1b3f60] rounded-full h-[30px]">
               <input
                 type="text"
+                aria-label="Search for title, tag, or keyword"
                 placeholder="Search for title, tag, or keyword"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="flex-1 h-full pl-6 pr-2 text-sm font-lexend-lite text-[#1B3F60] placeholder-[#1B3F60]/80 bg-transparent rounded-l-full focus:outline-none"
+                className="flex-1 h-full pl-6 pr-2 text-sm font-lexend-lite text-[#1B3F60] placeholder-[#1B3F60]/80 bg-transparent rounded-l-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]"
               />
               <span className="flex items-center justify-center w-10 h-full bg-[#1B3F60] rounded-r-full">
                 <img src={`${prefix}/images/search_icon.svg`} alt="Search" className="w-4 h-4" />
@@ -178,7 +180,8 @@ export default function SubcategoryPage({ csvUrl, subcategory, mainHeading }) {
               <span className="flex items-center justify-center w-10 h-full bg-[#1b3f60] rounded-r-full">
                 <img
                   src={`${prefix}/images/descending.svg`}
-                  alt="Sort"
+                  alt=""
+                  aria-hidden="true"
                   className={`w-4 h-4 transform ${sortAsc ? 'rotate-180' : ''}`}
                 />
               </span>
