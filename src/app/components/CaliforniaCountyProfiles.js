@@ -248,7 +248,7 @@ export default function CaliforniaCountyProfiles() {
                         <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                         <div className="relative flex items-center justify-center h-full gap-1 whitespace-nowrap">
                           <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
-                          <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Extreme Heat</span>
+                          <span className={`text-[#003d57] ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Extreme Heat</span>
                           <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                         </div>
                       </a>
@@ -261,7 +261,7 @@ export default function CaliforniaCountyProfiles() {
                         <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                         <div className="relative flex items-center justify-center h-full gap-1 whitespace-nowrap">
                           <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
-                          <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Air Pollution</span>
+                          <span className={`text-[#003d57] ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Air Pollution</span>
                           <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                         </div>
                       </a>
@@ -316,7 +316,7 @@ export default function CaliforniaCountyProfiles() {
                           <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                           <div className="relative flex items-center justify-center h-full gap-1 whitespace-nowrap">
                             <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
-                            <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Extreme Heat</span>
+                            <span className={`text-[#003d57] ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Extreme Heat</span>
                             <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                           </div>
                         </a>
@@ -329,7 +329,7 @@ export default function CaliforniaCountyProfiles() {
                           <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                           <div className="relative flex items-center justify-center h-full gap-1 whitespace-nowrap">
                             <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
-                            <span className={`text-primary ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Air Pollution</span>
+                            <span className={`text-[#003d57] ${isMobile ? 'text-[10px]' : 'text-[13px]'} font-normal whitespace-nowrap`}>Air Pollution</span>
                             <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                           </div>
                         </a>
@@ -349,7 +349,7 @@ export default function CaliforniaCountyProfiles() {
                       <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                       <div className="relative flex items-center justify-center h-full gap-1">
                         <img src={`${prefix}/images/extremeheaticon-primary.svg`} alt="Extreme Heat" className="w-4 h-4" />
-                        <span className="text-primary text-[10px] font-normal">Extreme Heat</span>
+                        <span className="text-[#003d57] text-[10px] font-normal">Extreme Heat</span>
                         <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                       </div>
                     </a>
@@ -362,7 +362,7 @@ export default function CaliforniaCountyProfiles() {
                       <div className="absolute inset-0 bg-[#fcfcfc] rounded-[15px] shadow-[2px_2px_0px_#338F87]"></div>
                       <div className="relative flex items-center justify-center h-full gap-1">
                         <img src={`${prefix}/images/airpollutionicon-primary.svg`} alt="Air Pollution" className="w-4 h-4" />
-                        <span className="text-primary text-[10px] font-normal">Air Pollution</span>
+                        <span className="text-[#003d57] text-[10px] font-normal">Air Pollution</span>
                         <div className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-l-[6px] border-l-primary ml-1" />
                       </div>
                     </a>
