@@ -18,7 +18,7 @@ export default function CircleImage({
     >
       {!loaded && !error && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 animate-pulse">
-          <span className="text-gray-300">Loading...</span>
+          <span className="text-gray-700">Loading...</span>
         </div>
       )}
       <img

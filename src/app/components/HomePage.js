@@ -46,13 +46,9 @@ export default function HomePage() {
               <div className="flex items-center justify-center w-full mt-2 mb-0">
                 <button
                   onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })}
-                  className="shadow-[0px_4px_8px_#0002] rounded-lg w-full min-h-[48px]"
+                  className="bg-gradient-to-b from-primary to-accents text-white text-lg font-semibold shadow-[0px_4px_8px_#0002] rounded-lg w-full min-h-[48px] px-6 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all hover:opacity-90 font-Lexend_Deca text-center leading-tight"
                 >
-                  <div className="relative rounded-lg bg-gradient-to-b from-primary to-accents flex items-center justify-center px-6 py-3">
-                    <span className="text-white text-lg font-semibold text-center leading-tight font-Lexend_Deca">
-                      Jump to Factsheets
-                    </span>
-                  </div>
+                  Jump to Factsheets
                 </button>
               </div>
             ) : (
@@ -75,11 +71,11 @@ export default function HomePage() {
                 {/* Hide both buttons on mobile view */}
                 {!isMobile && (
                   <>
-                    <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="text-m font-semibold text-black mb-1 text-center">
+                    <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="text-m font-semibold text-black mb-1 text-center hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                       jump to <br />county factsheets
                     </button>
-                    <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="bg-tertiary text-white p-3 rounded-full shadow-md" aria-label="Go down">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="#000" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" /></svg>
+                    <button onClick={() => document.getElementById('county-profiles').scrollIntoView({ behavior: 'smooth' })} className="bg-primary p-3 rounded-full shadow-md hover:bg-[#004368] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" aria-label="Go down to county profiles">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" /></svg>
                     </button>
                   </>
                 )}

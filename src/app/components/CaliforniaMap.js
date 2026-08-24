@@ -52,11 +52,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
       </div>
       {hasFactSheet ? (
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
-          <a data-tooltip-first-link href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
+          <a href={`${prefix}/factsheets/extremeheat/${slugCounty(county)}_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] text-white rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
+          <a href={`${prefix}/factsheets/airpollution/${slugCounty(county)}_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] text-white rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
             <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
@@ -65,11 +65,11 @@ function MapTooltip({ county, x, y, hasFactSheet, onTooltipEnter, onTooltipLeave
         <div className="flex flex-col items-center w-full mt-1">
           <div className="w-full text-base text-center font-normal font-Lexend_Deca text-black">N/A. See <a href={`${prefix}/faqs`} target="_blank" rel="noopener noreferrer" className="text-[#005587] underline">FAQ</a>. <br></br>See California Factsheets.</div>
         <div className="flex flex-row items-center justify-center gap-4 w-full mt-2">
-          <a data-tooltip-first-link href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
+          <a href={`${prefix}/factsheets/extremeheat/California_state_extremeheat_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] text-white rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
             <img src={`${prefix}/images/extremeheaticon-white.svg`} alt="Extreme Heat" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
-          <a href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005587]">
+          <a href={`${prefix}/factsheets/airpollution/California_state_airpollution_2025.pdf`} target="_blank" rel="noopener noreferrer" className="flex items-center bg-[#005587] text-white rounded-[15px] px-4 py-1 shadow-[2px_2px_0px_#30303080] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
             <img src={`${prefix}/images/airpollutionicon-white.svg`} alt="Air Pollution" className="w-5 h-5 mr-2" />
             <svg className="w-4 h-4 ml-1" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
